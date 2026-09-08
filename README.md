@@ -29,23 +29,7 @@ LimbusLyric 是一款面向 Windows 的桌面歌词显示工具，重点提供�
 
 ## 从源码运行
 
-项目当前以 Python 为主要实现语言。
-
-核心依赖见：
-
-- `requirements_core.txt`
-- `requirements_optional_sync.txt`
-- `requirements_word_timing_optional.txt`
-- `requirements_audio_emphasis_optional.txt`
-- `requirements_netease_native.txt`
-
-Windows 下可参考仓库中的启动与构建脚本。发布构建入口为：
-
-```text
-BUILD_END_USER_INSTALLER.cmd
-```
-
-构建脚本会先执行项目的 release gate 检查，再生成最终安装包。
+项目当前以 Python 为主要实现语言。源码公开后可根据仓库中的 requirements 与启动脚本运行。
 
 ## 问题反馈
 
@@ -53,25 +37,14 @@ BUILD_END_USER_INSTALLER.cmd
 
 **1826555940@qq.com**
 
-反馈时建议附上：
-
-- LimbusLyric 版本
-- Windows 版本
-- 使用的播放器
-- 出现问题的歌曲
-- 问题复现步骤
-- 对应日志
+反馈时建议附上 LimbusLyric 版本、Windows 版本、使用的播放器、问题歌曲、复现步骤和对应日志。
 
 ## 支持开发
 
 LimbusLyric 由个人持续开发和维护。软件内提供“支持开发”入口，支持完全自愿，不会解锁额外功能，也不会影响正常使用。
 
-## 源码与发布包
+## License
 
-源码位于本仓库；面向普通用户的安装包通过 GitHub Releases 发布。
+LimbusLyric 源代码采用 **GNU General Public License v3.0**（`GPL-3.0-only`）开源。
 
-发布包与源码是两个独立入口，请不要直接把构建缓存、日志、虚拟环境或本地用户配置提交到仓库。
-
-## 许可证
-
-开源许可证将在源码公开整理完成后明确标注。
+完整许可证文本会随源码一并放入仓库根目录的 `LICENSE` 文件。

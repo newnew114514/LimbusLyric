@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.build_installer_venv_ascii/
+
+# PyInstaller / build output
+build/
+dist/
+.pyinstaller_work/
+*.spec.bak
+
+# Installer / release output
+Output/
+installer/Output/
+*.exe
+*.msi
+*.zip
+*.7z
+*.sha256.txt
+
+# Logs and crash dumps
+logs/
+*.log
+*.dmp
+*.dump
+faulthandler*.txt
+
+# Local runtime data / caches
+*.cache
+.cache/
+.cache_*/
+.runtime_cache/
+local_state/
+user_data/
+auto_lyric_cache_v1.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+~$*

@@ -1,0 +1,108 @@
+CURRENT H16 — UX RUNTIME WIRING — 2026-08-28
+
+Use the H16 candidate as current. Read UX_RUNTIME_WIRING_H16_NOTE_20260828.md first. H16 fixes font-size input/runtime style wiring, exit-effect lifetime, cover-follow ownership/retry/multi-artist matching, continuous font-weight restart ownership, and clarifies clear-subtitle capacity. It is presentation-only and must not alter player authority. Canonical suite: 74 gates.
+
+------------------------------------------------------------------------
+
+请先不要修改任何代码。
+
+这是 LimbusLyric v1.8.9.133 RC11 / V29 / H14 基线上合入用户 R4 前端并完成 VERIFIED INSTALLER UPDATE H15（2026-08-27）的候选。以下 H15 段落优先于后面的历史 H14/H13/H12 交接。
+
+第一步先阅读：
+- CODEX_FINAL_HANDOFF.md
+- FRONTEND_VERIFIED_UPDATER_H15_NOTE_20260827.md
+- AUTO_PRECISION_DEADLINE_H14_NOTE_20260826.md
+- PROTECTED_BEHAVIOR_MANIFEST.json
+- README_CURRENT_BUILD.txt
+
+然后先做审计：
+1. 运行 installer/RELEASE_GATE_SUITE.tsv 中全部 canonical gates；当前清单应为 73 项。
+2. H15 只整合 R4 presentation 和安全更新交接，不得修改 QQ/网易云/酷狗/Spotify 的时间、Seek、身份 authority。
+3. 自动执行更新必须同时满足 HTTPS 安装器 + SHA-256；没有 digest 只能打开 HTTPS 下载页。
+4. 更新文件必须走有界流式下载、.part、大小/哈希校验和原子发布，再启动现有安装器；主程序禁止直接覆盖自己的 EXE。
+5. 继续保护 H14、H13、H12、H11、22 个 KuGou golden、481 legacy、V28/V29。
+6. 用户 R4 包修改主源码后原 H14 source-lock/manifest 会自然失效；只有完整行为 gate 通过后才允许冻结新的 H15 hash。
+
+这份目录是候选，不是重构起点。
+
+------------------------------------------------------------------------
+以下为 H14 历史交接，仅作 provenance；与 H15 冲突时以上文 H15 为准。
+------------------------------------------------------------------------
+
+请先不要修改任何代码。
+
+这是 LimbusLyric v1.8.9.133 RC11 / V29 / H13 基线上完成的 AUTO PRECISION DEADLINE H14（2026-08-26）。以下 H14 段落优先于后面的历史 H13/H12 交接。
+
+第一步先阅读：
+- CODEX_FINAL_HANDOFF.md
+- AUTO_PRECISION_DEADLINE_H14_NOTE_20260826.md
+- OUTPUT_DIY_SPOTIFY_H13_NOTE_20260826.md
+- POST_RELEASE_RESPONSIVENESS_H11_NOTE_20260825.md
+- PROTECTED_BEHAVIOR_MANIFEST.json
+- README_CURRENT_BUILD.txt
+
+然后先做审计：
+1. 运行 installer/RELEASE_GATE_SUITE.tsv 中全部 canonical gates；当前清单应为 72 项。
+2. H14 只限制“自动酷狗精准增强”的寿命/并发，不得把歌词检索证据升级成酷狗播放时钟或 Seek authority。
+3. 自动精准总预算 22s；自动 MSAA 版本时长证据等待 1.25s。版本证据超时后只能保留已显示普通歌词，不能继续接受同名 KRC。
+4. 手动抓词仍使用 H11 独立异步事务；QQ/网易云、H13 Spotify/OBS/三槽 DIY 不受 H14 包装。
+5. 继续保护 22 个 KuGou golden、481 legacy、QQ Software-2、NetEase native、V28/V29。
+6. 不要自动更新 hash/allow-list 让红灯消失。
+
+这份目录是已收口候选，不是重构起点。
+
+------------------------------------------------------------------------
+以下为 H13 历史交接，仅作 provenance；与 H14 冲突时以上文 H14 为准。
+------------------------------------------------------------------------
+
+请先不要修改任何代码。
+
+这是 LimbusLyric v1.8.9.133 RC11 / V29 / H11 / H12 基线上完成的 OUTPUT / DIY / SPOTIFY H13（2026-08-26）。以下 H13 段落优先于后面的历史 H12 交接。
+
+第一步先阅读：
+- CODEX_FINAL_HANDOFF.md
+- OUTPUT_DIY_SPOTIFY_H13_NOTE_20260826.md
+- UX_EXTENSIONS_H12_NOTE_20260826.md
+- POST_RELEASE_RESPONSIVENESS_H11_NOTE_20260825.md
+- CODEX_REVIEW_CONTRACT.md
+- PROTECTED_BEHAVIOR_MANIFEST.json
+- README_CURRENT_BUILD.txt
+
+然后先做审计：
+1. 运行 installer/RELEASE_GATE_SUITE.tsv 中全部 canonical gates；当前清单应为 71 项。
+2. 三模式歌词槽是精确 song+artist 的用户内容 ownership；不得用旧样式的缺歌手宽松匹配套歌词。
+3. OBS 独立输出只复制 presentation，不得拥有第二套 MediaSync/播放器时钟。
+4. Spotify 只允许 Windows 本地、进程归属正确的 GSMTC；禁止 Spotify Web API/OAuth/token，禁止拿窗口标题/UIA 猜播放身份或时间。
+5. QQ Software-2、KuGou golden、NetEase native、H11/H12、V28/V29 合同不变。
+6. 自动原地覆盖 EXE 仍延期；更新保持 H12 HTTPS 检查 + 用户确认打开下载页。
+7. 不要自动更新 hash/allow-list 让红灯消失。任何 source lock 更新只能发生在完整 diff 审核和全部行为 gate 通过之后。
+
+这份目录是已收口候选，不是重构起点。
+
+------------------------------------------------------------------------
+以下为 H12 历史交接，仅作 provenance；与 H13 冲突时以上文 H13 为准。
+------------------------------------------------------------------------
+
+请先不要修改任何代码。
+
+这是 LimbusLyric v1.8.9.133 RC11 / V29 / H10F4 / H11 基线上完成的 UX EXTENSIONS H12（2026-08-26）。
+
+第一步先阅读：
+- CODEX_FINAL_HANDOFF.md
+- UX_EXTENSIONS_H12_NOTE_20260826.md
+- POST_RELEASE_RESPONSIVENESS_H11_NOTE_20260825.md
+- CODEX_REVIEW_CONTRACT.md
+- PROTECTED_BEHAVIOR_MANIFEST.json
+- README_CURRENT_BUILD.txt
+
+然后先做审计：
+1. 运行 installer/RELEASE_GATE_SUITE.tsv 中全部 canonical gates；当前清单应为 70 项。
+2. H12 只扩展 presentation/control-panel：界面缩放、歌词透明度、字重、micro-jolt、封面跟随色、退场效果、捕获排除、HTTPS 更新检查。不要把它们升级成播放器时间 authority。
+3. 继续保护 H11：QQ/网易云 GUI control path 不得阻塞 snapshot；手动歌词抓取不得阻塞 Qt；liveness/ownership/trans_only/退出等 H11 closure 不得回退。
+4. QQ Software-2、KuGou golden methods、NetEase native 主链、V28/V29 保护合同不变。
+5. 捕获排除只允许 Windows build >=19041 的 WDA_EXCLUDEFROMCAPTURE；禁止 WDA_MONITOR fallback。
+6. 更新检查只允许 HTTPS，第一版禁止主程序自动覆盖运行中的 EXE。
+7. OBS 独立镜像、Spotify、三模式单曲歌词槽、自动原地更新仍是明确延期项，不要以“功能未完成”为由随手塞进当前核心。
+8. 不要自动更新 hash/allow-list 让红灯消失。任何 lock 更新只能发生在完整 diff 审核和全部行为 gate 通过之后。
+
+这份目录是已收口候选，不是重构起点。

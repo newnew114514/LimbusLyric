@@ -1,0 +1,25 @@
+QQ HANDOFF + PHASE FINAL — 2026-08-16
+
+Evidence basis
+- Host log 11:46:32: first track native QRC self-phase remained clean (-5ms / spread 3ms / drift 0), but after formal initial lock the existing QQ edge-PLL had to rebuild three extra near-clock samples before calibration rights. Host GSMTC remained invalid (raw=0/default timestamp), so no second transport clock exists there.
+- Host IF YOU: cross-source full-lyric fallback succeeded (QQ miss -> NetEase 264215ms + verified KuGou KRC). Its first rail seek still required 7453ms stale recovery because QQ published contradictory validated 47s -> 29/30/31/32s -> 45s streams. No unsafe guessed target is added in this build.
+- Sandbox log 11:57:36: after a fresh validated UIA rail commit (for example 128s -> 86.420s), direct GSMTC could remain on the old 128s timeline for several hundred ms and immediately veto the new UIA commit, briefly rendering the old lyric. Similar flash occurred around 90s -> 156s.
+
+Narrow fixes
+1. Rail handoff arbitration
+   - For up to 1800ms after an explicit rail/UIA commit, a conflicting direct GSMTC witness whose latest seek confirmation predates the current physical gesture is treated as pre-gesture evidence and cannot veto/override the fresh commit.
+   - If raw GSMTC proves a new discontinuity after the current gesture, it regains authority immediately. This preserves the healthy "GSMTC moves first" Sandbox cases and genuine restart recovery.
+   - Late async veto results are also blocked by the same handoff gate, preventing one-frame flashbacks.
+2. Initial phase-calibration trust reuse
+   - Formal initial authority remains the exact software-2 merge.
+   - Once the existing initial-anchor FSM has already proven a duration-matched, validated, wall-clock-like advancing QQ Text stream, that same proof seeds the existing phase-calibration trust state instead of requiring three additional near-clock samples.
+   - No fixed time offset is added; the existing source-locked edge-PLL remains the only phase correction mechanism.
+
+Explicitly unchanged
+- MediaSessionSync._merge_uia_position: software-2 exact lock
+- MediaSessionSync._qq_select_public_clock: software-2 exact lock
+- MediaSessionSync._qq_phase_edge_correction: software-2 exact lock
+- QQMusicUiAdapter: old-working/software-2 exact class lock
+- QQ rail geometry: never lyric-time authority; QQ_RAIL_VISUAL_DIRECT default remains 0
+- KuGou 21 golden methods; NetEase Native/non-QQ protected behavior
+- IF YOU first-seek contradictory host stream is not guessed/faked in this build.

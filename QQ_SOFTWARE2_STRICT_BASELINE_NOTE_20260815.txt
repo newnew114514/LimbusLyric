@@ -1,0 +1,27 @@
+HISTORICAL BASELINE NOTE — superseded by QQ_INTERACTION_ANCHOR_FSM_NOTE_20260816.txt
+
+QQ SOFTWARE-2 STRICT BASELINE 20260815
+
+Decision:
+Use the user-provided QQ_CONTINUOUS_CLOCK_20260815 implementation as the QQ behavior authority.
+Software-1 non-QQ improvements remain.
+
+Reverted post-baseline QQ experiments:
+- startup fast/provisional calibration and startup re-anchor
+- cold-start gesture first-anchor bridge
+- release settle / geometry tolerance filters
+- quick post-seek rephase layer
+- delayed lyric-text probe layer
+- rail visual-direct default=1 and extended visual TTL
+- QQ stability runtime state/summary hooks
+- extended QQ QRC wait experiment
+
+Locked identical to software-2:
+- QQMusicUiAdapter methods
+- MediaSessionSync._qq_* methods
+- MediaSessionSync._merge_uia_position
+- LyricSearchEngine.search_qq
+- ControlPanel._on_auto_lyric_result
+- QQ constants/defaults
+
+Non-QQ code, especially NetEase native-log support, remains from software-1.

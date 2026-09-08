@@ -1,0 +1,115 @@
+LimbusLyric — old working build vs RC8 regression audit
+2026-08-15
+
+结论
+====
+这次酷狗回归确实是后续修改造成的，不应继续归因给 Sandbox。
+
+你上传的旧 LimbusLyric.exe：
+- ZIP/BUILD_INFO 构建时间：2026-08-15 01:26
+- PyInstaller CArchive 内主脚本名：
+  LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814
+- 旧 EXE 中酷狗关键函数的函数名、co_names、简单常量与保留的 QQ_CONTINUOUS_CLOCK
+  源码基线一致，因此该源码可作为旧工作版酷狗语义基线。
+
+全量 AST 对比
+============
+旧工作基线函数/方法：606
+RC8 函数/方法：619
+原函数保持完全一致：574
+原函数被修改：32
+新增函数：13
+删除原函数：0
+
+也就是说，不是“整个程序都重写了”，但修改集中在同步核心：
+- 32 个旧函数被改
+- 13 个新函数被加
+- 其中 12 个被修改的旧函数直接或间接碰到酷狗
+- 另外新增了 4 个酷狗专用方法
+
+RC8 中涉及酷狗的旧函数：
+  - ControlPanel.__init__
+  - ControlPanel._refresh_frontend_status
+  - ControlPanel.start
+  - ControlPanel.stop
+  - MediaSessionSync.__init__
+  - MediaSessionSync._guard_auto_local_handoff
+  - MediaSessionSync._kugou_commit_gesture_seek
+  - MediaSessionSync._poll_loop
+  - MediaSessionSync._reset_provider_sync_state
+  - MediaSessionSync.bind_track
+  - PlayerUiPositionReader._try_kugou_numeric_memory_clock
+  - PlayerUiPositionReader.reject_kugou_numeric_anchor
+
+RC8 后新增的酷狗方法：
+  - AsyncPlayerUiPositionReader.reject_kugou_numeric_anchor
+  - MediaSessionSync._reset_kugou_provisional_state
+  - MediaSessionSync.arm_kugou_manual_provisional
+  - MediaSessionSync.disarm_kugou_manual_provisional
+
+确定被我改坏的酷狗决策
+======================
+1. 旧版 numeric-memory 时钟默认允许两条证明：
+   - pause-freeze：候选在暂停后冻结 >= 0.75s
+   - continuous-no-wrap：播放中连续证明 >= 12.5s
+
+   RC7/RC8 把这两条都改成默认关闭，只剩明确进度条 gesture-target 才容易晋升。
+   这会让旧版原本能够证明成功的真实 i32-centisecond 播放时钟长期停留在“候选证明中”。
+
+2. 旧版 _guard_auto_local_handoff 把：
+       kugou-numeric-memory-cs
+   直接列为 strong source。
+
+   RC7/RC8 把它移出 strong_sources，并只允许 proof=gesture-target 时立即强接管；
+   同时禁止 numeric-memory 使用旧版“运行 >15 秒后允许交接”的路径。
+
+3. RC5-RC7 又加了一套旧版不存在的临时时钟生命周期：
+   - arm_kugou_manual_provisional
+   - disarm_kugou_manual_provisional
+   - _reset_kugou_provisional_state
+   - pause witness / TTL
+   - ControlPanel 开始/停止钩子
+   - bind_track 重置
+   - poll_loop 手动许可状态机
+
+   这些是后加的复杂度，不是旧版酷狗能用的原因。
+
+4. RC7 还加了 numeric validator v2，旧 numeric seed 会被主动判旧。
+
+所以：之前把 Sandbox 的一次 numeric 假阳性当成理由，直接全局关闭旧版已验证路径，是错误做法。
+
+RC9 处理
+========
+不再给酷狗继续加 fallback。RC9 直接恢复旧工作版酷狗行为：
+
+精确恢复旧 AST：
+- PlayerUiPositionReader._try_kugou_numeric_memory_clock
+- PlayerUiPositionReader.reject_kugou_numeric_anchor
+- MediaSessionSync._guard_auto_local_handoff
+- MediaSessionSync._kugou_commit_gesture_seek
+
+同时恢复：
+- ControlPanel.start / stop 的旧酷狗行为
+- MediaSessionSync._poll_loop 中旧酷狗 real/provisional 分支
+- 移除 RC5-RC7 manual provisional methods/fields
+- 移除 RC7 pause/continuous proof gates
+- 移除 numeric validator v2
+
+保留的新功能：
+- 网易云 cloudmusic_detector Native
+- RC8 QQ healthy-GSMTC UIA veto
+- tasklist CREATE_NO_WINDOW 黑框修复
+- 日志放在 LimbusLyric.exe 同目录 logs
+- pywin32/MFC frozen smoke 检查
+- build venv 自修复
+- 新安装包不捆 BetterNCM
+
+防止再次改坏
+============
+RC9 新增 installer\CHECK_KUGOU_GOLDEN_BASELINE.py。
+
+Windows 构建时，4 个酷狗核心方法会做 AST SHA256 锁定。
+任何后续修改只要碰到这些旧工作版核心，构建直接 FAIL。
+
+RC9 当前 KuGou 命名方法与旧基线：
+    {len(all_kugou_named)} / {len(all_kugou_named)} AST 一致

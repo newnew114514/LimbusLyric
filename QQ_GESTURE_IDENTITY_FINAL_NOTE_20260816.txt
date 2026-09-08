@@ -1,0 +1,19 @@
+QQ GESTURE + LYRIC IDENTITY FINAL NOTE — 2026-08-16
+
+Evidence from LimbusLyric_20260816-103949_pid13284.log:
+- First rail gesture visual estimate was ~53.6s. After stale live-control reacquire, a 92s qq-time-pair-candidate was incorrectly accepted by generic continuous-stream merge before the QQ gesture FSM rejected the validated 92s stream as an outlier.
+- IF YOU / BIGBANG exposed a 264s QQ UIA duration while lyric search loaded a 148s ordinary LRC. QQ trans payload was empty, so the supported diagnosis is wrong same-title/version lyric identity, not translation-only state leakage.
+
+Fixes:
+1) While a real QQ rail gesture evidence window is active, qq-time-pair-candidate is quarantined at the async reader boundary. It cannot drive generic seek merge. Validated samples still reach the existing QQ gesture FSM.
+2) QQ lyric search receives current player duration evidence and requires conservative title + artist + duration agreement. Auto-cache keys include duration and the final result is duration-checked again before binding.
+
+Protected:
+- Software-two _merge_uia_position unchanged.
+- Software-two _qq_phase_edge_correction unchanged.
+- QQMusicUiAdapter unchanged.
+- KuGou golden methods unchanged.
+- NetEase protected behavior unchanged.
+- Geometry is evidence only, never lyric-time authority.
+
+Startup UIA publication latency is intentionally not backdated from the Limbus Start click because the log does not prove audio playback began at that instant.

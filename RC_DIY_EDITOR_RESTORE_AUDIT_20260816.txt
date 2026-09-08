@@ -1,0 +1,30 @@
+LimbusLyric RC DIY PER-PLAYER + CUSTOM FONT AUDIT 20260816
+
+User model
+- One song identity -> one visible DIY card.
+- No public application mode and no ALL selector.
+- Three independent provider slots: qq / netease / kugou.
+- “编辑播放器” only chooses which provider slot is currently edited.
+- Save/update/quick-font/quick-color-effect may write only rules[current_scope]. They must never seed or overwrite the other two provider slots.
+
+Row / editor UI
+- Row minimum height is 108px and shows QQ / 网易云 / 酷狗 summaries together.
+- Per-provider font can be changed directly from the row.
+- Per-provider color button opens a Chinese “颜色与效果” dialog containing text color plus shadow, outline/stroke width and glow controls.
+- Full editor below still exposes font/color/shadow/outline/glow/entrance fields.
+
+Schema v4
+- Old mode/ALL is migration-only.
+- Old mode=all: copy the visible ALL payload into the three provider slots once, then remove mode/ALL.
+- Otherwise preserve existing provider slots and use legacy ALL only to fill a missing provider slot.
+- After migration the runtime model is provider-specific only.
+
+Custom fonts
+- Subtitle settings expose “导入字体”.
+- Supported files: .ttf / .otf / .ttc.
+- Files are copied to %LOCALAPPDATA%\LimbusLyric\fonts and loaded with QFontDatabase.addApplicationFont.
+- Fonts are application-local; Windows system fonts are not installed/modified.
+- Startup scans the custom font directory before font combo boxes are built.
+
+Playback safety
+- No NetEase/QQ/KuGou clock authority, seek FSM, track identity, lyric parser or provider duration tolerance was changed in this pass.

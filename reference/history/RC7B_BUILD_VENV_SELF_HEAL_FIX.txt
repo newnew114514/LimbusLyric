@@ -1,0 +1,33 @@
+﻿LimbusLyric RC7B — Build venv self-healing hotfix
+2026-08-15
+
+Observed Windows build failure:
+    [1/10] Reusing isolated ASCII-path build environment...
+    ...\Scripts\python.exe: No module named pip
+
+Root cause:
+The RC7 builder considered a build venv reusable when Scripts\python.exe existed.
+A partially-created/interrupted venv can contain python.exe but lack a working pip.
+
+RC7B build behavior:
+1. If the venv does not exist, create it.
+2. If it exists, run:
+       <venv-python> -m pip --version
+3. If pip is missing, attempt:
+       <venv-python> -m ensurepip --upgrade
+4. If repair still fails, automatically remove and recreate the build venv.
+5. Re-check pip and fail with an explicit error only if the rebuilt environment
+   still does not provide pip.
+6. All dependency installation uses:
+       <venv-python> -m pip
+   instead of depending on Scripts\pip.exe.
+
+Player synchronization/runtime behavior is unchanged from RC7.
+
+Also corrected the build banner:
+    Session logs : <installed/portable app folder>\logs
+                   (LOCALAPPDATA fallback)
+
+Expected outputs:
+    LimbusLyric_Setup_1.8.9.133_RC7B.exe
+    LimbusLyric_Portable_1.8.9.133_RC7B.zip

@@ -1,0 +1,36 @@
+LimbusLyric RC7 evidence-driven audit — 2026-08-15
+
+Sandbox RC6 evidence
+--------------------
+QQ: explicit rail release waited for validated UIA. Observed release_age included about 109ms, 203ms and 578ms.
+RC7 keeps visual-direct disabled and instead requests the existing 120~180ms urgent UIA lane on rail down/release/fast-tap.
+
+KuGou: manual provisional really did start. The failure was a false numeric-memory promotion:
+- local/provisional about 34.266s -> pause-freeze numeric 8.400s was promoted at confidence 250;
+- next track auto-local about 29.296s -> pause-freeze numeric 56.900s was promoted.
+Therefore pause-freeze is not sufficient proof of a playback-position field in this Sandbox build.
+
+RC7 policy
+----------
+- Newly discovered numeric memory: gesture-target proof is the default authority path.
+- Pause-freeze proof: default OFF, env opt-in only.
+- Continuous-no-wrap proof: default OFF, env opt-in only.
+- Persistent numeric cache validator bumped to v2, invalidating old false anchors.
+- Rejected numeric anchors clear their matching persistent cache fields.
+- Numeric-memory is no longer a generic strong auto-track handoff unless detail says proof=gesture-target.
+- Generic >15s auto-local bypass does not automatically accept numeric-memory.
+- QQ progress gesture triggers urgent UIA scanning, but no direct geometric final clock.
+- Logs prefer <exe-dir>\logs; LOCALAPPDATA remains fallback.
+
+Static regression results
+-------------------------
+[PASS] Project Python compile: 5 file(s)
+[PASS] Direct-scope duplicate definitions: 0
+[PASS] QQMusicUiAdapter AST == original baseline
+[PASS] KuGou public selector + target geometry == original baseline
+[PASS] KuGou MSAA + Win32 probes == original baseline
+[PASS] KuGou numeric reader intentionally hardened
+[PASS] Pause/continuous-only promotion disabled by default; gesture proof remains
+[PASS] QQ rail gesture requests urgent UIA on down/release/fast-tap; visual-direct remains OFF
+[PASS] exe-dir logs first + fallback policy
+[PASS] release gate + build-venv exclusion + source-pyc rejection

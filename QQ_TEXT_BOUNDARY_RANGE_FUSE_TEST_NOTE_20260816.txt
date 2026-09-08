@@ -1,0 +1,33 @@
+LimbusLyric v1.8.9.133 RC11 — QQ TEXT BOUNDARY + RANGE FUSE TEST — 2026-08-16
+
+Why this build exists
+- Host `TIAN TIAN` test: QQ GSMTC position remained unusable (`raw=0`).
+- QQ did not expose a usable UIA Slider/ProgressBar RangeValue across the entire run.
+- Native QRC timing was internally aligned (self-audit around -5 ms, spread 2 ms, drift 0), so the remaining perceived slow/fast flip was not a lyric-file timing defect.
+- The previous Text fallback could drift within a one-second bucket during ordinary playback, while a seek hard-anchor used the same bucket with `phase_carry=0`; that allowed the perceived phase to change after seek.
+
+QQ Text boundary clock
+- The protected QQMusicUiAdapter remains source-identical.
+- The public Text pair is still treated as whole-second data; no fake RangeValue or geometry timestamp is introduced.
+- A genuine n->n+1 Text transition is bracketed by the last old-bucket UIA sample and the first new-bucket sample. The midpoint is used as the observed publication boundary, reducing stable-poll arrival jitter.
+- Multiple +1s boundaries create a local 1x monotonic boundary clock. Large jumps, hover-like/non-second values and source changes reset the boundary epoch instead of becoming clock evidence.
+- The historical 420 ms within-bucket phase remains only as the neutral prior. This test does not claim Text alone can discover true acoustic latency.
+- Ordinary playback and post-seek recovery now rebuild the same boundary model, so seek no longer switches to a different phase convention.
+- Expected success diagnostic: `QQ Text秒边界连续钟接管`.
+
+RangeV2 session fuse
+- RangeV2 remains available for future QQ client builds, but this host proved the current client has no usable RangeValue.
+- For one QQ process + progress-band geometry, at most 3 full 15-point capability scans are attempted.
+- After the third miss the probe logs `QQ RangeV2会话熔断` and stops scanning.
+- A QQ process restart or changed progress geometry re-enables capability discovery.
+- This removes repeated no-benefit UIA work without changing the Text fallback authority rules.
+
+Performance scope
+- The QQ-only host run showed a few 46–47 ms GUI stalls, while the follow-up NetEase/KuGou host run stayed at `gui_stalls=0`.
+- This build therefore removes the repeated QQ RangeV2 scan pressure first; it does not rewrite the shared renderer or atlas pipeline.
+
+Frozen behavior
+- KuGou `kugou_ui + RangeValue` clock authority is unchanged.
+- NetEase native-log clock/seek/stale-carry behavior is unchanged.
+- QQ independent GSMTC veto, hover quarantine, seek stale-echo, startup authority and track-duration guards remain enabled.
+- Classic paged workbench remains the only public frontend; compact mode stays removed; loop-boundary protection stays forced on.

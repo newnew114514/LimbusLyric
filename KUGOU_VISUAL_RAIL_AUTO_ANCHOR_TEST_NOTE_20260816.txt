@@ -1,0 +1,16 @@
+KUGOU VISUAL RAIL AUTO ANCHOR TEST — 2026-08-16
+
+Purpose
+- Keep the fast KuGou Rail Local Master path.
+- Do not treat GSMTC raw=0 as proof that the real player is at 0:00.
+- Learn KuGou's visible progress rail from screen pixels only. No OCR, injection, memory write, or process memory scan.
+- Require repeated temporal edge motion consistent with 1x playback before any automatic absolute re-anchor.
+- Reuse learned rail endpoints for mouse seek mapping.
+- QQ Music and NetEase paths are unchanged.
+
+Expected diagnostics
+- 酷狗Rail本地主时钟重锚 ... reason=manual-zero-bootstrap / auto-track-bootstrap
+- 酷狗视觉进度条自动校准 ... screen-readonly=1
+- Later manual seeks can re-lock automatically after the rail resumes coherent motion.
+
+If no visual auto-calibration line appears, attach the log; the next diagnostic target is the actual rendered rail geometry/theme, not memory scanning.

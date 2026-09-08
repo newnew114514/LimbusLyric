@@ -1,0 +1,30 @@
+QQ HOST-SAFE FINAL — 2026-08-16
+
+证据来源：宿主机 LimbusLyric_20260816-020106_pid22132.log。
+
+A. rail seek 后迟到旧流
+- 02:01:30 已提交 51.420s。
+- 约 10 秒后本地预测已在 61~62s。
+- QQ UIA 延迟给出 54s、55s 的连续旧流。
+- 旧版 _qq_note_unarmed_far_seek 将 54->55 判为无手势稳定 seek 并提交 55.420s。
+修复：只有最近明确 rail commit 才启用 12.5s backward-unarmed stale veto；新的 rail / lyric-row / nonrail-click 证据不受影响。
+
+B. 自动切歌首锚前临时时钟
+- 《天平》QRC duration=185000ms。
+- UIA 已持续给 38/39/40/41s，但连续首段进度条交互使正式 software-2 initial proof 继续等待。
+- auto-track provisional clock 从 0s 起跑，导致歌词显示开头段落。
+修复：额外使用独立三样本 advancing proof，只允许对 auto-track 临时渲染时钟 rebase；正式 authority 不变。
+
+回放门：
+- validated 38->39->40：provisional proof PASS。
+- static hover 78->78->78：rejected PASS。
+- recent rail 后 54->55 delayed stream：quarantined PASS。
+- rail stale window 外 ordinary unarmed seek：仍可确认 PASS。
+
+未改变：
+- MediaSessionSync._merge_uia_position（software-2 exact）
+- MediaSessionSync._qq_phase_edge_correction（software-2 exact）
+- MediaSessionSync._qq_select_public_clock（software-2 exact）
+- QQMusicUiAdapter（old-working/software-2 class lock）
+- KuGou golden baseline
+- NetEase protected behavior

@@ -1,0 +1,187 @@
+{
+  "project": "LimbusLyric v1.8.9.133 RC11 through LYRIC IDENTITY FIREWALL H81",
+  "policy": "review-first, evidence-driven, no mass refactor",
+  "source_of_truth": "LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py",
+  "hard_protected": {
+    "kugou": {
+      "rule": "Do not modify without explicit user approval and same-environment runtime evidence.",
+      "gate": "installer/CHECK_KUGOU_GOLDEN_BASELINE.py",
+      "locked_methods": 22,
+      "reason": "The 22 currently source-locked KuGou golden methods remain protected. H11 changes are outer recovery/responsiveness closures and must not be used to replace KuGou transport authority."
+    },
+    "qq_adapter": {
+      "class": "QQMusicUiAdapter",
+      "normalized_source_sha256": "18f4d65aad1227143579c745161d349ad03530e89aeb6e6487b849ef79f2f0e7",
+      "rule": "Keep old baseline unless a reproducible QQ UIA parsing bug requires a targeted change."
+    },
+    "legacy_unchanged_functions": {
+      "count": 478,
+      "gate": "installer/CHECK_LEGACY_BASELINE_INTEGRITY.py",
+      "rule": "A failure is a review event. Never auto-regenerate the lock."
+    },
+    "main_candidate": {
+      "gate": "installer/CHECK_MAIN_SOURCE_LOCK.py",
+      "rule": "Exact candidate tripwire. Update only after reviewing and approving an intentional diff."
+    }
+  },
+  "behavior_requirements": [
+    "Keep the 22 KuGou golden methods source-identical; Rail Local Master is the default public KuGou clock and read-only position scanners remain opt-in diagnostics.",
+    "Keep QQ hybrid: healthy GSMTC + UIA/local fallback; do not convert to GSMTC-only.",
+    "Keep QQ continuous-clock behavior aligned with the QQ_CONTINUOUS_CLOCK_20260815 software-2 baseline.",
+    "Do not add GSMTC-veto, cross-bind track-switch hold, or live-duration lyric rejection to QQ without same-machine evidence.",
+    "Keep NetEase native cloudmusic_detector default path.",
+    "Do not bundle/install BetterNCM; dormant opt-in bridge backend may remain.",
+    "Keep logs in the unified per-user %LOCALAPPDATA%\\LimbusLyric\\logs pool (application/TEMP only as runtime fallback); retain at most 5 session logs and keep logging off player/render timing paths.",
+    "Keep tasklist subprocesses CREATE_NO_WINDOW.",
+    "Keep pywin32==311 and frozen dependency smoke test.",
+    "Keep PyInstaller onedir -> Inno Setup build route.",
+    "Keep H15 update execution gated by HTTPS installer + SHA-256; missing digest is manual-download only.",
+    "Keep the R4 frontend and H15 update plumbing presentation/control-only; they must not become player or lyric clock authority.",
+    "Keep H16 presentation runtime wiring outside player authority: font-size/weight, exit lifecycle, cover-follow and clear-subtitle UI must not change clock/seek/provider ownership."
+  ],
+  "files_that_may_look_unused_but_must_not_be_deleted_without_proof": [
+    "limbus_netease_native.py",
+    "RUN_WITH_EXISTING_BETTERNCM_BRIDGE.cmd",
+    "CUSTOM_PLAYER_FOUNDATION.txt",
+    "requirements_optional_sync.txt",
+    "requirements_word_timing_optional.txt",
+    "requirements_audio_emphasis_optional.txt",
+    "installer/CHECK_KUGOU_GOLDEN_BASELINE.py",
+    "installer/CHECK_LEGACY_BASELINE_INTEGRITY.py",
+    "installer/CHECK_MAIN_SOURCE_LOCK.py",
+    "installer/CHECK_RC11_TARGETED_FIXES.py",
+    "installer/CHECK_NO_VISIBLE_SUBPROCESSES.py"
+  ],
+  "forbidden_review_shortcuts": [
+    "Do not delete code solely because static analysis says unused.",
+    "Do not mass-format or mass-refactor the 65k-line monolith.",
+    "Do not simplify provider-specific fallbacks into one generic clock.",
+    "Do not remove broad exception guards in bulk.",
+    "Do not regenerate hashes just to make a failing integrity gate green.",
+    "Do not change dependency versions casually.",
+    "Do not reintroduce BetterNCM installer/plugin payload."
+  ],
+  "qq_policy": "QQ time authority remains locked to the user-provided QQ_CONTINUOUS_CLOCK_20260815 software-2 baseline; recovery/identity guards may quarantine unvalidated gesture samples or reject wrong lyric versions, never replace lyric-time authority.",
+  "qq_interaction_patch": {
+    "policy": "software-2 time authority exact; geometry/evidence may only trigger observation, stale-control reacquisition and delayed-seek recognition",
+    "software2_exact_methods": [
+      "MediaSessionSync._merge_uia_position",
+      "MediaSessionSync._qq_phase_edge_correction"
+    ],
+    "safe_modified_methods": [
+      "LyricSearchEngine.search_qq",
+      "LyricSearchEngine.search",
+      "MediaSessionSync.__init__",
+      "MediaSessionSync._qq_commit_seek_if_ready",
+      "MediaSessionSync._qq_nonrail_seek_click_plausible",
+      "MediaSessionSync._qq_poll_pointer_gesture",
+      "MediaSessionSync._qq_queue_seek",
+      "MediaSessionSync.bind_track",
+      "MediaSessionSync.start",
+      "ControlPanel._request_auto_track",
+      "ControlPanel._start_auto_search_job",
+      "ControlPanel._resolve_qq_auto_track_duration_after_bind",
+      "MediaSessionSync._poll_loop",
+      "MediaSessionSync._reset_provider_sync_state"
+    ],
+    "async_reader_safe_changes": [
+      "QQ soft track reset with epoch discard",
+      "reacquire epoch discards in-flight old-wrapper result",
+      "seek-time stale live-control reacquire on existing COM worker",
+      "wake retry after hwnds=0",
+      "rail-gesture candidate quarantine before generic merge"
+    ],
+    "gate": "installer/CHECK_RC11_TARGETED_FIXES.py",
+    "rail_visual_direct_default": 0,
+    "geometry_drives_lyric_time": false,
+    "stale_seek_recovery": {
+      "geometry_drives_lyric_time": false,
+      "gesture_evidence_ms": 11200,
+      "urgent_scan_seconds": 10.5,
+      "reacquire_after_validated_outliers": 3,
+      "reacquired_pair_revalidation": "2-sample"
+    },
+    "lyric_identity_guard": {
+      "policy": "For QQ auto search, current player duration is evidence for version identity; wrong same-title duration candidates fail closed.",
+      "cache_key_includes_duration": true,
+      "final_bind_duration_recheck": true,
+      "translation_mode_changed": false,
+      "auto_track_duration_source": "post-bind QQ track epoch unless qq-track-switch-hint"
+    }
+  },
+  "kugou_causal_clock_guard": {
+    "policy": "motion-only numeric memory is discovery evidence, not public lyric-time authority",
+    "golden_methods_modified": false,
+    "golden_locked_methods": 22,
+    "outer_guard": "AsyncPlayerUiPositionReader._guard_kugou_numeric_causal_result",
+    "public_trust_requires": [
+      "explicit seek-target match",
+      "observed pause freeze",
+      "protected golden gesture-target/pause-freeze proof"
+    ],
+    "paused_moving_candidate_action": "session-ban + protected anchor reject + matching persisted seed removal",
+    "gate": "installer/CHECK_KUGOU_CAUSAL_CLOCK_GUARD_REPLAY.py"
+  },
+  "h12_policy": {
+    "scope": "presentation/control-panel only",
+    "gate": "installer/CHECK_UX_EXTENSIONS_H12_REPLAY.py",
+    "canonical_gate_count": 70,
+    "deferred": [
+      "dedicated OBS mirror output",
+      "Spotify adapter",
+      "three per-song lyric payload slots",
+      "automatic in-place updater"
+    ],
+    "capture": "WDA_EXCLUDEFROMCAPTURE only on Windows build >=19041; no WDA_MONITOR fallback",
+    "update": "HTTPS check/open only; no self-overwrite"
+  },
+  "h13_policy": {
+    "scope": "outer output / exact per-track lyric-content ownership / strict local-GSMTC Spotify",
+    "gate": "installer/CHECK_OUTPUT_DIY_SPOTIFY_H13_REPLAY.py",
+    "canonical_gate_count": 71,
+    "lyric_slots": [
+      "precise",
+      "classic",
+      "translation"
+    ],
+    "lyric_identity": "exact normalized song+artist; no artist-less style fallback",
+    "obs": "presentation-only mirror; no MediaSync; bounded current-visual-region capture at 20fps",
+    "spotify": "Windows local GSMTC + bounded spotify.exe liveness only; no Web API/OAuth/window-title/UIA authority",
+    "deferred": [
+      "automatic in-place updater",
+      "Spotify per-player visual-style slot"
+    ],
+    "runtime_order": "H13 closures must execute before __main__ startup block"
+  },
+  "h16_policy": {
+    "scope": "presentation runtime wiring only",
+    "gate": "installer/CHECK_UX_RUNTIME_WIRING_H16_REPLAY.py",
+    "canonical_gate_count": 74,
+    "font_size_pt": [
+      6,
+      300
+    ],
+    "exit_min_visible_ms": 520,
+    "exit_pressure_min_ms": 380,
+    "cover_retry_sec": [
+      2,
+      6,
+      18
+    ],
+    "cover_random_color_mutually_exclusive": true,
+    "clear_subtitle_capacity": "current + fully readable history; fading lane separate",
+    "player_authority_changed": false
+  },
+  "h81_policy": {
+    "scope": "outer lyric/provider identity boundary only",
+    "gate": "installer/CHECK_LYRIC_IDENTITY_FIREWALL_H81_REPLAY.py",
+    "canonical_gate_count": 143,
+    "selected_player_duration_owns_transport_scale": true,
+    "unknown_or_fast_hidden_provider_duration_may_bind_transport": false,
+    "qq_track_switch_hint_is_hard_new_track_duration": false,
+    "foreign_lyric_provider_transport_identity_stripped": true,
+    "qq_source_locked_clock_bodies_changed": false,
+    "kugou_netease_core_clock_seek_changed": false,
+    "packaging_commands_changed": false
+  }
+}

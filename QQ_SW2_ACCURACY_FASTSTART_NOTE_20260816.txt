@@ -1,0 +1,25 @@
+LimbusLyric v1.8.9.133 — RC11 non-QQ improvements + QQ software-2 accuracy / safe fast-start
+
+本版以“软件二 / QQ_CONTINUOUS_CLOCK_20260815”为 QQ 时间权威。2026-08-16 00:59 实机日志证明，后续实验中的 rail geometry provisional clock 会与 QQ 真正 Text 时钟出现十几到几十秒差异；同时 phase convergence 层会改变软件二原有的稳态相位策略。为优先解决“词曲经常对不上”，本版撤回这些会直接驱动歌词时间的实验。
+
+准确性策略：
+- MediaSessionSync._merge_uia_position：恢复为软件二原版源码。
+- MediaSessionSync._qq_phase_edge_correction：恢复为软件二原版源码。
+- QQMusicUiAdapter：继续保持软件二 old-working 源码锁。
+- rail geometry 只作为“发生过 seek”的行为证据，不能启动 provisional/local lyric clock，也不能直接推动 renderer。
+- QQ_RAIL_VISUAL_DIRECT 默认 0。
+- 正式首锚、steady-state local monotonic clock、hover quarantine、edge PLL、post-seek authority 全部重新由软件二规则决定。
+
+只保留不会直接改变歌词时间相位的 real-world 改进：
+- QQ QRC PC POST/GET 并行竞速，减少网络串行等待。
+- accessibility wake 若 hwnds=0，仅短冷却后重试；成功 wake 仍维持原保守冷却。
+- QQ 换歌 soft reset 复用同一个 UIA worker / live time controls，但清空新歌样本确认，并使用 track epoch 丢弃跨歌旧结果。
+- 启动 / 换歌 urgent UIA scan。
+- 首锚前普通页面点击不跑昂贵 lyric full-text probe；底部 transport/top/left 区域误点击过滤。
+- rail seek 若 QQ 延迟数秒才发布真实 Text，expected target 随播放时间移动；这只用于识别 delayed seek result，不取代 observed UIA 时间。
+
+测试重点：
+1. 正常播放和 seek 后的词曲贴合度，应更接近软件二。
+2. 不应再出现 qq-rail-provisional-preview、QQ冷启动进度条临时时钟、QQ开局可信样本临时时钟。
+3. rail 操作默认应看到 qq-rail-visual-wait-uia，然后由软件二 seek commit 接管。
+4. 换歌仍可看到 QQ切歌复用活控件软重置；首次/失败 wake 可快速重试。

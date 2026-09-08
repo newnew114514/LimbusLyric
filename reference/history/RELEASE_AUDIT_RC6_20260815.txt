@@ -1,0 +1,33 @@
+LimbusLyric v1.8.9.133 — RC6 repeated regression audit
+2026-08-15
+
+RC5 在交付测试前被静态审计拦下的确定问题
+-----------------------------------------
+1. 酷狗恢复入口不可达：source_combo 错比“酷狗音乐”，RC6 改为 player_combo。
+2. 网易云 track_serial=0 被 `or -1` 吞掉，首个 0->1 切歌保护可能漏掉；RC6 保留合法 0。
+3. 酷狗临时时钟在同播放器切歌/用户停止时没有完整清状态；RC6 集中 reset/disarm。
+4. RC5 SHA256_FILES.txt 陈旧且引用已删除 __pycache__；RC6 完整重建。
+
+RC6 静态/回归检查
+------------------
+[PASS] 主源码 compile + AST
+[PASS] 全部 Python 源码 compile: 5
+[PASS] 直接作用域重复定义: 0
+[PASS] UI combo 枚举比较: 5 个，非法值 0
+[PASS] threading.Thread daemon=True: 18/18
+[PASS] tasklist CREATE_NO_WINDOW: 2/2
+[PASS] QQMusicUiAdapter 与 QQ_CONTINUOUS_CLOCK 基线 AST 完全一致
+[INFO] QQ 专项 MediaSessionSync 与基线差异: _qq_note_unarmed_far_seek, _qq_poll_pointer_gesture
+[PASS] 酷狗核心选择/手势函数基线一致: {"_kugou_select_public_clock": true, "_kugou_poll_pointer_gesture": true, "_kugou_target_from_cursor": true}
+[PASS] 酷狗手动 fallback 必须有暂停见证、等待 >=1500ms、fallback<=4500ms、真实 raw 不可用
+[PASS] 酷狗用户停止/同播放器切歌/进度条重新锚定会清理旧 manual permission
+[PASS] NetEase track_serial sentinel -1/0/1
+[PASS] BetterNCM 安装/plugin payload 不存在
+[PASS] pywin32==311
+[PASS] Release invariant gate
+[PASS] 冻结 EXE packaging smoke gate 保留
+[PASS] LOCALAPPDATA 会话日志 + Inno“打开诊断日志”入口保留
+
+Linux 静态环境无法替代的项目
+------------------------
+Windows 冻结 EXE DLL/import、真实播放器运行和 Sandbox 体验仍需 Windows 构建机执行。BUILD_RELEASE.cmd 会在生成 Setup/Portable 前实际运行冻结 smoke test。

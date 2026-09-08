@@ -1,0 +1,63 @@
+LimbusLyric RC11 UX / SCRIPT / INSTRUMENTAL POLISH AUDIT — 2026-08-17
+
+Baseline
+- Based on the user-tested V7 KuGou GUI-stall fix candidate.
+- The prior KuGou GUI-thread synchronous tasklist regression remains fixed.
+
+User-facing additions
+1. “软件教学” button opens the author's Bilibili tutorial homepage in the system browser.
+2. Current-track status card shows song/artist, selected player, lyric source and DIY status.
+3. DIY live preview for font/text color/shadow/outline/glow.
+4. DIY category resets: font, text color, edge effects, entrance effects.
+5. Imported-font manager for application-private TTF/OTF/TTC files.
+6. Korean precomposed Hangul syllables can use the existing smart intra-token visual cascade.
+7. Provider instrumental boilerplate is replaced in the desktop renderer by a compact title/artist card and auto-hides after 18s.
+8. Observational slow-call diagnostics added for snapshot pre-lock interaction stages and provider position reads.
+
+Script safety
+- Korean change is classification-only. Existing SMART_CASCADE timing constants remain unchanged.
+- No synthetic provider token timestamps are generated.
+- Latin/Greek/Cyrillic existing behavior is retained.
+- Arabic/Hebrew/Indic/Thai-like shaping, decomposed Hangul Jamo, combining-mark sequences and Emoji ZWJ/variation sequences remain provider-atomic.
+
+Instrumental safety
+- Detection is conservative and only accepts payloads consisting of provider-style instrumental notices/credits.
+- A real multi-line lyric that merely contains “纯音乐” is not classified as instrumental.
+- Original provider text is kept for media_sync.set_lyric_click_timeline(); only the renderer receives the title/artist card.
+- Instrumental card timeout is presentation-only and does not become transport/track/clock authority.
+
+Protected behavior
+- NetEase native-log authority production path unchanged.
+- QQ healthy GSMTC veto/Text-boundary/RangeV2/seek/hover/startup/duration authority protections unchanged.
+- KuGou Host V2/RangeValue/rail authority and 21 golden methods unchanged.
+- QRC/YRC/KRC parsing and strict provider-duration matching unchanged.
+- PyInstaller spec unchanged.
+
+New deterministic gate
+- installer/CHECK_UX_SCRIPT_INSTRUMENTAL_REPLAY.py
+  - Hangul positive cases.
+  - Latin/Greek/Cyrillic retained.
+  - Arabic/Hebrew/Thai/Devanagari/Jamo/Emoji-ZWJ negative cases.
+  - Instrumental notice positive/legitimate-lyric negative cases.
+  - Tutorial/status/DIY/font-manager wiring.
+  - Renderer-only instrumental substitution assertion.
+  - Slow-call telemetry wiring assertion.
+
+Full audit result
+- 35/35 CHECK_*.py gates PASS before final packaging.
+- KuGou golden methods: PASS (21 source-locked methods).
+- QQ sandbox dual clock/Text boundary/startup/handoff/cross-source gates: PASS.
+- Legacy baseline: PASS (511 unchanged old functions remain locked; reviewed UX functions separately gated).
+- Release invariant: PASS (18 daemon-thread sites, 39 project Python files compile).
+- No visible subprocess audit: PASS.
+- Packaging contract: PASS.
+
+Known retained diagnostic risks (not modified in production)
+- NetEase stale transition >1.5s synthetic regrant case.
+- QQ same-duration cross-epoch stale GSMTC veto synthetic case.
+- Retired UIA worker generations can accumulate under permanently blocked synthetic workers.
+- QQ Text-boundary does not become ready under 1.2–1.6s sparse sampling and keeps the 420ms prior.
+
+Environment caveat
+- PyQt5 is not installed in this Linux audit environment. New widgets/dialogs were not visually instantiated here.
+- Final Windows GUI test should cover 100/125/150% DPI, two-screen placement, Bilibili browser launch, DIY preview/reset/font-manager, Korean provider-token reveal, and instrumental title-card auto-hide.

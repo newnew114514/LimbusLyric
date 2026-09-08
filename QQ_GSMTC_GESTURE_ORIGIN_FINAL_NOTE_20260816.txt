@@ -1,0 +1,17 @@
+QQ GSMTC GESTURE-ORIGIN FINAL — 2026-08-16
+
+Evidence
+- Sandbox log: fresh rail/UIA commit ~143.420s was briefly overwritten by 78.804s raw GSMTC.
+- The 78s GSMTC discontinuity belonged to the previous seek; only its second confirmation sample arrived after the newer gesture.
+- Later real raw jumps (78->145, 149->214, etc.) remain valid independent authority.
+
+Fix
+- Record seek-confirmed origin at the first large raw GSMTC discontinuity sample.
+- Rail handoff bypass now requires that origin, not just the confirmation timestamp, to be post-gesture.
+- Direct seek authority refuses an older-origin confirmation while a fresh conflicting rail/UIA commit is protected.
+
+Non-goals
+- No fixed QQ timing offset.
+- No geometry time authority.
+- No change to software-2 _merge_uia_position / _qq_phase_edge_correction / _qq_select_public_clock.
+- No QQMusicUiAdapter, NetEase Native, or Kugou changes.

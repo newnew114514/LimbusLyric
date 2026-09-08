@@ -1,0 +1,9 @@
+KuGou HOST RAIL REWORK TEST — 2026-08-16
+
+Hard field evidence addressed:
+- Accessibility wake: kgmusic.exe hwnds=2.
+- Old physical rail resolver: hwnd=0, rect=None.
+- Visual rail: capture-unavailable because rect=None.
+
+This build removes tasklist/PID as the KuGou host-window prerequisite and adds transport-proven UIA RangeValue progress before visual fallback.
+No QQ/NetEase behavior is intentionally changed.

@@ -1,0 +1,17 @@
+SUPERSEDED BY QQ_REALWORLD_LATENCY_FIX_NOTE_20260816.txt
+
+QQ INTERACTION ANCHOR FSM — 2026-08-16
+
+Evidence from LimbusLyric_20260816-000637_pid7224.log:
+- software-2 strict baseline had no formal anchor while UIA jumped 52 -> 17 -> 11 -> 25 -> 71 -> 88s around pre-lock interactions.
+- another track showed 36 -> 37 -> 62 -> 39s, again starving the normal 3-sample startup proof.
+- before progress geometry existed, bottom-control clicks were incorrectly accepted as non-rail lyric-seek evidence and launched expensive lyric-text probes.
+
+Design:
+- software-2 remains default/stable-state authority.
+- real rail release may seed only the temporary local monotonic clock from geometry; formal QQ authority still requires validated evidence.
+- explicit no-lock interaction may use a 2-sample validated proof after the pointer is off the rail.
+- rail proof must remain near the geometry target; non-rail body-click proof has no guessed timestamp.
+- cold non-rail clicks defer heavy lyric-text UIA work until a formal clock exists.
+
+This is intentionally not a general relaxation of QQ Text trust.

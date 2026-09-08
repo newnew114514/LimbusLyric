@@ -1,0 +1,151 @@
+LimbusLyric RC11 — targeted fixes + regression audit
+2026-08-15
+
+LATEST LOG FINDINGS
+===================
+Input log: LimbusLyric_20260815-211718_pid1268.log (RC10)
+
+1. KuGou old working path is restored and actually used.
+   At 21:17:28 the persistent numeric-memory seed is revalidated at ~10.00s -> 10.36s,
+   published as kugou-numeric-memory-cs confidence=250, and takes uia-initial-lock-fast.
+   This is the path that RC7/RC8 had accidentally weakened. RC11 does not change it.
+
+2. QQ “少女A” version switch has a deterministic quarantine-lifecycle bug.
+   RC10 correctly detects duration mismatch 242000 -> 221000 and emits qq-track-switch-hint,
+   setting a 5s _qq_track_switch_hold_until_mono.
+   When title metadata catches up and bind_track() binds the new version, RC10 resets that
+   hold to 0. The old trusted timeline can then flow back through _merge_uia_position as
+   a fallback and the auto-local handoff eventually accepts ~144294ms while the new track
+   local clock is only ~1671ms.
+
+3. Rapid QQ next-track has a stale auto-lyric-result race.
+   During a later switch to TIAN TIAN, transport duration has already become ~248583ms,
+   but the previous 242000ms 少女A search returns before metadata generation catches up.
+   RC10 accepts and briefly launches the old lyrics. RC11 rejects only QQ auto results whose
+   provider duration materially conflicts with the live QQ transport duration.
+
+4. RC8 healthy-GSMTC veto is doing useful containment work.
+   The log records many bogus QQ UIA samples while GSMTC remains coherent; these are vetoed.
+   Do not remove this guard as “noise”.
+
+5. No crash evidence in this session.
+   No Traceback was recorded; final log session closed with async_drop=0. Sandbox display_hz
+   remains 32Hz, so this run is useful for synchronization/compatibility, not final animation quality.
+
+RC10 -> RC11 SOURCE DELTA
+=========================
+Exactly 3 existing functions changed:
+  - ControlPanel._on_auto_lyric_result
+  - MediaSessionSync._merge_uia_position
+  - MediaSessionSync.bind_track
+
+No function was added or removed by RC11.
+
+RC11 FIX 1 — PRESERVE QQ TRACK-SWITCH QUARANTINE
+=================================================
+MediaSessionSync.bind_track:
+- preserves an already-active QQ _qq_track_switch_hold_until_mono across metadata binding;
+- does not create a new hold by itself;
+- does not affect KuGou or NetEase.
+
+MediaSessionSync._merge_uia_position:
+- during that active QQ switch hold, a trusted GSMTC fallback is NOT echoed into `chosen`
+  when no valid current UIA sample exists;
+- therefore auto-local remains public until the quarantine expires / the new clock catches up;
+- ordinary provider switching with no active duration-mismatch hold is unchanged.
+
+RC11 FIX 2 — DROP STALE QQ AUTO-LYRIC RESULT BY LIVE DURATION
+=============================================================
+ControlPanel._on_auto_lyric_result:
+- applies only to source/player QQ音乐;
+- requires both result duration and live transport duration to be >0;
+- requires live transport status playing/paused;
+- tolerance = max(4500ms, 2% of larger duration);
+- a larger mismatch marks the network result stale and does not apply it.
+
+Regression examples:
+- 221000 vs 221626 => ACCEPT
+- 242000 vs 242112 => ACCEPT
+- stale 242000 vs current 248583 => REJECT
+
+This is intentionally an auto-result guard only. Manual lyric search behavior is unchanged.
+
+FULL OLD-WORKING BASELINE INVENTORY
+===================================
+Old baseline functions/methods: 606
+RC11 functions/methods: 615
+Old functions unchanged: 581
+Old functions intentionally modified: 25
+New functions: 9
+Old functions removed: 0
+
+RC10 had 24 modified old functions. RC11 has 25 because
+ControlPanel._on_auto_lyric_result is now an explicit, documented QQ bug-fix delta.
+The other 581 old functions still claimed unchanged remain source-locked.
+
+PROTECTED PROVIDER BASELINES
+============================
+- KuGou named methods: 21/21 source-locked to old working baseline.
+- QQMusicUiAdapter: unchanged from old working baseline.
+- BetterNCM install/plugin payload: must remain absent from the shipped package.
+- NetEase detector route: retained.
+- pywin32==311 packaging pin / frozen dependency smoke: retained.
+- app-folder logs + retention: retained.
+- CREATE_NO_WINDOW tasklist guard: retained.
+
+KNOWN NON-BEHAVIORAL DEBT NOT CHANGED IN RC11
+=============================================
+Some diagnostic labels such as “网易云歌词点击文本索引就绪” are reused even when the selected
+provider is QQ/KuGou. That is misleading wording, not a synchronization failure. It is intentionally
+left untouched in RC11 to avoid mixing cosmetic cleanup with the targeted clock fix.
+
+REMAINING LIMIT
+===============
+If two QQ releases expose literally identical title, artist AND duration to all current transport/UI
+surfaces, text/duration identity cannot distinguish them. A future exact songmid/session identity
+path would be needed. Do not implement that as a broad refactor without a reproducible log.
+
+STATIC GATES
+============
+Expected:
+  RELEASE INVARIANT AUDIT: PASS
+  KUGOU GOLDEN BASELINE: PASS
+  LEGACY BASELINE INTEGRITY: PASS (581 unchanged old functions locked)
+  RC11 QQ TRACK-VERSION GUARD: PASS
+  MAIN SOURCE LOCK: PASS
+
+
+=== 2026-08-16 QQ REAL-WORLD LATENCY ADDENDUM ===
+Evidence: LimbusLyric_20260816-002444_pid29992.log.
+- startup observation was delayed; no formal one-sample relaxation added.
+- rail renderer preview is provisional only.
+- rail expected target now advances after release to tolerate delayed QQ publication.
+- QRC equivalent PC methods now race instead of serial timeout chaining.
+- modified pre-existing functions are exactly: LyricSearchEngine.search_qq, MediaSessionSync.start, MediaSessionSync._qq_queue_seek, MediaSessionSync._merge_uia_position, MediaSessionSync._qq_poll_pointer_gesture.
+- prior _qq_nonrail_seek_click_plausible and new _qq_interaction_anchor_stream_step remain reviewed/locked unchanged from interaction-anchor build.
+
+
+=== 2026-08-16 QQ PHASE CONVERGENCE / FASTSTART ADDENDUM ===
+Evidence: LimbusLyric_20260816-003902_pid30204.log.
+- Prevent a 0.6~1.2s real late-clock error from being learned as QQ UIA publication baseline.
+- Baseline learning is corridor-gated; strong forward mismatch gets bounded catch-up.
+- First genuine post-seek +1s edge may fast-rephase without an existing baseline.
+- Accessibility wake attempts with hwnds=0 retry after 1.15s instead of consuming the successful-wake 8s cooldown.
+- QQ track changes can reuse live UIA controls through a separately reviewed soft reset.
+- Soft reset is protected by a QQ track epoch; crossed-epoch in-flight results are discarded.
+- No global +420ms phase change; no one-sample formal authority; QQMusicUiAdapter remains source-locked.
+
+2026-08-16 FINAL QQ GSMTC/UIA ARBITRATION ADDENDUM
+- Sandbox evidence: QRC 221s / source-affine GSMTC 221.626s while QQ UIA locked unrelated 272s control pair; real seek propagated in GSMTC while wrong UIA stayed >60s away.
+- Added duration-bound source-affine GSMTC identity guard outside software-2 authority functions.
+- Guard quarantines false qq-track-switch-hint, regrabs bad UIA wrappers only on COM worker, and requires two GSMTC samples after a large position jump.
+- True track switch releases guard immediately when GSMTC duration no longer matches loaded lyric.
+- Software-2 _merge_uia_position, _qq_phase_edge_correction, _qq_select_public_clock and QQMusicUiAdapter remain source locked.
+
+2026-08-16 HOST-SAFE FINAL ADDENDUM
+- Host evidence: after explicit 51.420s rail seek, delayed validated QQ Text 54->55s arrived ~10s later while local prediction was ~61-62s; old unarmed trend path falsely re-anchored to 55.420s.
+- Host evidence: auto-track to 天平 had exact 185s QRC and advancing 38->39->40->41s QQ Text while formal initial proof stayed blocked by repeated rail interaction; provisional renderer clock incorrectly remained near 0s.
+- Added recent-explicit-rail backward unarmed stale-stream veto (12.5s); rail, lyric-row and nonrail-click evidence remain available.
+- Added independent three-sample duration-matched validated stream proof for *auto-track provisional renderer only*; formal software-2 authority unchanged.
+- Semantic replay gate CHECK_QQ_HOST_SAFE_REPLAY.py added to one-click build audit.
+- Software-2 _merge_uia_position, _qq_phase_edge_correction, _qq_select_public_clock and QQMusicUiAdapter remain source locked.

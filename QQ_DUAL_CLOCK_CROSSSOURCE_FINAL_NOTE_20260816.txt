@@ -1,0 +1,17 @@
+QQ DUAL-CLOCK + CROSS-SOURCE FINAL — 2026-08-16
+
+Evidence source:
+- Windows Sandbox log LimbusLyric_20260816-112328_pid3160.log
+- Host IF YOU log LimbusLyric_20260816-111702_pid15344.log
+
+Design rule:
+The legacy software-2 estimator is not an independent GSMTC witness because exact `_merge_uia_position` deliberately writes accepted UIA anchors back into `_est_position_ms`. The new QQ direct lane therefore derives position only from the source-affine QQ GSMTC raw Position/LastUpdatedTime/status/duration and keeps its own monotonic state.
+
+Host safety:
+If raw GSMTC/LastUpdatedTime is invalid (the normal host behavior in prior logs), direct witness returns no trusted position and all legacy software-2 UIA authority remains unchanged.
+
+Sandbox authority:
+A duration-matched direct witness can quarantine gross UIA position conflicts outside a live rail gesture. A large direct discontinuity needs a following raw sample before it may terminate stale gesture/recent-rail state and re-anchor lyrics.
+
+Cross-source lyric body fallback:
+Ordinary lyrics now use the selected provider first, then safely try the other two providers. Reliable player duration is a hard identity witness. Borrowed lyric provider metadata is not allowed to become player transport identity.

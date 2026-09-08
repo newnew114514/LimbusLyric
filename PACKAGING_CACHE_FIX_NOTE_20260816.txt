@@ -1,0 +1,29 @@
+LimbusLyric one-click packaging cache fix - 2026-08-16
+
+Scope: packaging only. Runtime/QQ/KuGou/NetEase behavior is unchanged from
+RC11 NON-QQ + QQ STALE SEEK RECOVERY 20260816.
+
+Observed failure:
+  RELEASE INVARIANT AUDIT: FAIL
+  project-source Python cache artifacts: __pycache__/*.pyc
+
+Cause:
+  Running source Python before BUILD_END_USER_INSTALLER.cmd can legitimately
+  create project-root __pycache__ files. The release audit correctly rejects
+  those artifacts, but the one-click builder did not sanitize them first.
+
+Fix:
+  - installer/BUILD_RELEASE.cmd now sets PYTHONDONTWRITEBYTECODE=1 for build
+    validation/import steps.
+  - Before release invariant checks, it runs
+    installer/CLEAN_PROJECT_PYTHON_CACHE.py.
+  - Cleanup uses the same project-source boundary as the release invariant and
+    excludes the build venv, PyInstaller work tree, dist/build output, and
+    installer/release.
+  - The release invariant remains enabled and still fails if cleanup cannot
+    remove project-source Python cache artifacts.
+
+Expected output near step 3:
+  PROJECT PYTHON CACHE CLEAN: PASS (...)
+  VISIBLE SUBPROCESS AUDIT: PASS (...)
+  RELEASE INVARIANT AUDIT: PASS

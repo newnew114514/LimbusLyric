@@ -1,0 +1,17 @@
+KUGOU RESUME-EPOCH FILTER FINAL — 2026-08-16
+
+Host log LimbusLyric_20260816-153250_pid19660.log exposed a bootstrap bug in the new pause->resume causal probe:
+- paused A/B proof succeeded;
+- first playing sample was not read promptly; it arrived about two seconds later;
+- the previous fixed resume-head <=650ms filter therefore discarded the real playback field;
+- 120000 static frozen integers hit the hard cap, then confirm-motion had zero survivors.
+
+Fix:
+1. Keep the pause A/B frozen proof.
+2. When playing is first observed, arm a resume epoch instead of immediately filtering C.
+3. Wait for observable post-resume motion, then read C.
+4. Initial C gate uses the real paused-B -> C wall-clock upper bound and requires positive motion after the observed resume.
+5. Static frozen integers are rejected before hard-cap; cap reduced to 8192.
+6. D/E still require 1x wall-clock progression before authority.
+7. Motion-only continuous-no-wrap remains quarantined; paused-moving false fields remain rejected.
+8. KuGou 21 golden methods are unchanged.

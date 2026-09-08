@@ -1,0 +1,39 @@
+LimbusLyric RC release-hardening audit — 2026-08-16
+
+Scope
+- Freeze the already host/sandbox-validated NetEase, QQ and KuGou sync/seek/authority logic.
+- Harden configuration migration, packaging diagnostics, log retention and user-facing advanced settings.
+- Do not redesign normal playback paths without a reproduced defect.
+
+Changes in this pass
+1. Explicit user-config schema v2.
+   - Retires old frontend/simple/loop UI keys and the hidden legacy pacing knobs.
+   - Preserves visual preferences, perspective X/Y/horizontal compensation, sync offsets,
+     presets, song styles and player profiles.
+   - Migration is atomic and failure is non-fatal.
+2. Log retention made internally consistent: newest 5 sessions are protected; each session
+   is capped at ~12 MB (trim tail ~8 MB); unified LOCALAPPDATA log directory remains preferred.
+3. Frozen packaging smoke now additionally verifies bundled icon availability, writable
+   LOCALAPPDATA config root, and preferred unified log root.
+4. BUILD_INFO / build-console log-path text corrected to the real LOCALAPPDATA-first policy.
+5. Added packaging-contract gate that locks the already-proven PyInstaller .spec byte-for-byte
+   and asserts frozen smoke/Inno/diagnostic-log wiring before a release build proceeds.
+6. Advanced UI gets one short explanatory sentence and a perspective-only reset button.
+   Perspective X, perspective Y and horizontal compensation remain user-adjustable.
+
+Audit-only findings (no normal-path code change required)
+- NetEase: native-log authority and stale-carry protection were already covered by protected
+  replay/source locks; no verified fallback defect found in this pass.
+- QQ: GSMTC/Text-boundary/hover/seek arbitration remains protected; no authority change made.
+- KuGou: Host V2/RangeValue/rail handoff remains protected by the 21-method golden baseline;
+  no authority change made.
+- Background worker creation remains covered by release invariant daemon-thread audit.
+- Render cache sizes, song atlas state and provider stalls are already emitted in periodic
+  performance diagnostics; no evidence justified another runtime monitor/timer.
+
+Windows-only final validation still required by the tester
+- Run BUILD_END_USER_INSTALLER.cmd in a clean Windows copy.
+- Confirm frozen smoke passes and Setup EXE is produced.
+- Install, launch, verify logs under %LOCALAPPDATA%\LimbusLyric\logs.
+- Exercise normal play/seek/track-switch once in each player.
+- Test overwrite install and uninstall/reinstall startup.

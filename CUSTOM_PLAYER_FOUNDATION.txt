@@ -1,0 +1,15 @@
+Custom Player Adapter roadmap (v133 foundation)
+
+Current layer:
+1. User profile: name + process + title regex
+2. Standard GSMTC capability probe
+3. Existing generic MediaSync/UIA fallback remains available
+
+Next layers planned:
+- capability persistence + automatic adapter selection
+- UIA clock/metadata calibration wizard
+- shareable .llplayer profile schema
+- localhost/HTTP/WebSocket/named-pipe external provider bridge
+- optional Python adapter SDK
+
+A custom player is considered fully generic when it exposes stable title/state/position. Seek detection then requires no player-specific control API: a discontinuity in observed position is enough.

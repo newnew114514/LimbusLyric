@@ -1,0 +1,6 @@
+KUGOU POSTSCAN BASELINE FINAL — 2026-08-16
+
+Host regression: 15:45:17 resume epoch -> 15:45:20 moving_candidates=42 -> 15:45:21 play-motion candidates=0 with elapsed=2.985s.
+Root cause: broad 24MiB C scan was timestamped at scan start. Candidate values read near scan end were later compared to D using an inflated elapsed interval.
+Fix: per-block C timestamps, per-block D timestamps, per-address E timestamps. Wide scans discover addresses only; 1x continuity uses actual sample-to-sample timing.
+Protected behavior: motion-only continuous-no-wrap remains non-authoritative; paused-moving false timer remains rejected; KuGou 21 golden methods remain source-identical; QQ/NetEase paths unchanged.

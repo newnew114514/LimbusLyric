@@ -1,0 +1,43 @@
+LimbusLyric RC8 QQ targeted audit — 2026-08-15
+
+Observed RC7 Sandbox failure
+----------------------------
+At ~20:36:15-20:36:18:
+- healthy QQ GSMTC/local clock remained around 33-35s;
+- validated UIA emitted 91s, 92s, 93s;
+- old unarmed advancing-stream logic committed ~93.420s;
+- GSMTC at that commit was ~34.061s (difference ~59.359s);
+- UIA then returned to 34-35s and clocks reconverged.
+
+RC8 rule
+--------
+A far unarmed UIA sample is vetoed when ALL are true:
+- QQ GSMTC preference enabled;
+- fallback timeline is currently trusted;
+- previous QQ GSMTC state is primary;
+- GSMTC good streak >= 2;
+- UIA and GSMTC differ by >= 5000ms;
+- no rail gesture path is active (existing caller condition).
+
+The veto:
+- clears only the unarmed UIA candidate;
+- does NOT clear current QQ clock authority;
+- does NOT commit a seek;
+- preserves original behavior on bad/zero-GSMTC machines;
+- automatically stops vetoing once GSMTC moves near UIA.
+
+KuGou
+-----
+No KuGou runtime logic is intentionally changed in RC8.
+
+Static regression checks
+------------------------
+[PASS] Project Python compile: 5 file(s)
+[PASS] QQMusicUiAdapter AST unchanged from RC7B
+[PASS] KuGou-named method AST unchanged: 19/19
+[PASS] RC7 false 93s vs 34.061s synthetic sample is vetoed
+[PASS] Reconverged 35s samples are not vetoed
+[PASS] Bad/untrusted GSMTC environment does not activate veto
+[PASS] Release invariant gate
+[PASS] RC7B self-healing build venv retained
+[INFO] limbus_netease_native.py SHA256 unchanged-in-package=6b5258b960057483ed3e0234078d571cee4652909a6d5f44fb0b0a3ef39e9510

@@ -1,0 +1,5 @@
+PyQt5==5.15.11
+pywin32==311
+requests>=2.28
+pywinauto==0.6.9
+comtypes==1.4.16

@@ -1,0 +1,28 @@
+LimbusLyric RC SAIKAI + DIY + THEME AUDIT 20260816
+
+1. QQ SAIKAI duration arbitration
+- Sandbox exposed false QQ UIA total 04:25 (265s) while independent identity-matched GSMTC proved ~323.946s.
+- Lyric-version duration evidence now lets that independent current-track transport duration veto a contradictory UIA total.
+- This evidence is selection-only; playback authority and strict provider duration tolerance are unchanged.
+
+2. Single-song DIY current model
+- One song identity = one visible card.
+- Public ALL/application mode is retired in schema v4.
+- Runtime slots are qq / netease / kugou and are independent.
+- Save/update/quick font/quick color-effect write only the selected provider slot.
+- KuGou is a first-class DIY scope.
+- Legacy ALL/mode is migration-only and is removed after normalization.
+
+3. DIY editing
+- Card shows three provider summaries and remains readable.
+- Font can be changed per provider directly on the card.
+- Color shortcut opens a Chinese text-color + shadow + outline/stroke-width + glow editor.
+- Full DIY editor retains the same per-provider effect controls.
+
+4. Theme cleanup
+- Public Limbus theme selector, three old theme asset/import actions and tray theme menu remain removed.
+- Dormant implementation may remain internal until a future theme redesign; standard UI is forced.
+
+5. Custom font follow-up
+- Subtitle settings now expose app-local TTF/OTF/TTC import under %LOCALAPPDATA%\LimbusLyric\fonts.
+- Imported fonts are registered only with LimbusLyric and are reloaded at startup.

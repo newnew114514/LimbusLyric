@@ -1,0 +1,25 @@
+QQ STARTUP AUTHORITY FIX FINAL — 2026-08-16
+
+Evidence: host log LimbusLyric_20260816-135821_pid9180.log.
+
+Root cause confirmed:
+- Manual first bind correctly seeded a paused display-only QQ clock at 156s.
+- After resume, that provisional monotonic clock naturally reached ~183.093s.
+- The ordinary cold-start proof later accepted a self-coherent but stale 156->157s QQ Text stream and formal handoff pulled the public lyric clock backward by ~25.7s.
+- Before formal initial lock, real rail gestures were observed but had no normal seek commit path; once formal lock existed, later gestures committed quickly.
+
+Changes:
+1. Manual first-bind paused seed becomes a protected startup provisional timeline after resume. A later qq-time-pair-validated stream cannot take over if it differs by >4.2s until the streams converge or a real seek establishes a new anchor.
+2. Existing formal software-2 merge still runs unchanged internally. Its stale initial lock can no longer override the protected provisional public timeline, and stale initial phase calibration is not seeded.
+3. Before formal initial lock, an explicit rail gesture may establish a startup anchor only when a qq-time-pair-validated sample has matching duration and lies within a broad plausibility window of that exact recent rail gesture. The committed time comes from UIA, never geometry.
+4. Wrong-duration, far-from-gesture, stale/late, or non-validated samples cannot use the startup rail path.
+5. After this startup bridge establishes a lock, the ordinary software-2 seek/clock FSM owns subsequent playback.
+
+Protected unchanged:
+- MediaSessionSync._merge_uia_position exact parent/software-2 source
+- _qq_phase_edge_correction exact parent/software-2 source
+- _qq_select_public_clock exact parent/software-2 source
+- ControlPanel._on_auto_lyric_result exact protected source
+- whole QQMusicUiAdapter old-working class lock
+- QQ_RAIL_VISUAL_DIRECT default 0; geometry never supplies lyric time
+- KuGou golden baseline, NetEase/non-QQ paths, strict lyric identity and cross-provider fallback

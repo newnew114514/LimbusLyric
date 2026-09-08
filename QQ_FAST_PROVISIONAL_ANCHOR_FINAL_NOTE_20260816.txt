@@ -1,0 +1,31 @@
+QQ FAST PROVISIONAL ANCHOR FINAL — 2026-08-16
+
+Evidence source: host log LimbusLyric_20260816-125527_pid19504.log.
+
+Observed latency:
+- QQ lyric/QRC fetch itself was usually ~1.9-2.2s.
+- For 雨爱, lyrics finished at 12:56:21 but formal QQ initial lock did not arrive until 12:56:29.
+- During that gap the old auto-track local clock rendered from 0s even though later trustworthy UIA proved playback was around 149s.
+- This made the product feel much slower than the network/provider work actually was.
+
+Change:
+1. QQ auto-track provisional local clock no longer publishes a fabricated 0s position while waiting for a trustworthy post-bind sample.
+2. Once the lyric duration is known, the first qq-time-pair-validated sample whose duration matches the bound lyric may seed the temporary renderer clock immediately.
+3. That seed is DISPLAY ONLY. It does not write _uia_position_ms, _est_position_ms, seek state, or QQ clock authority.
+4. Formal software-2 initial lock / seek / hover safeguards continue unchanged and retire the provisional lane when they succeed.
+5. Manual first QQ bind may use the same display-only seed while paused, but paused rail-hover samples are rejected.
+6. Fast seed expires after 6.5s and wrong-duration samples are rejected.
+
+Expected host effect:
+- Auto switch should stop showing line 0 for many seconds while QQ formal lock is pending.
+- A duration-matched validated compact pair should make lyrics visibly jump to the likely current position within the next validation sample, typically hundreds of ms to ~1s after lyrics bind.
+- If QQ emits no validated duration-matched sample, the overlay stays waiting instead of inventing a position.
+
+Protected:
+- exact software-2 MediaSessionSync._merge_uia_position
+- exact software-2 _qq_phase_edge_correction
+- exact software-2 _qq_select_public_clock
+- exact old-working QQMusicUiAdapter
+- QQ_RAIL_VISUAL_DIRECT default 0; geometry never supplies lyric time
+- KuGou golden baseline and NetEase/non-QQ behavior
+- strict QQ/NetEase/Kugou lyric-duration identity and cross-source fallback

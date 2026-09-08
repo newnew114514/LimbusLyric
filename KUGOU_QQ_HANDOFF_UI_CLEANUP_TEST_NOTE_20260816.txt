@@ -1,0 +1,34 @@
+KUGOU/QQ HANDOFF + UI CLEANUP TEST — 2026-08-16
+
+Evidence base
+- Latest Windows Sandbox run showed KuGou Host V2 + real UIA Slider/RangeValue working for absolute position and seek.
+- Latest Sandbox run showed QQ UIA time text can still emit hover/seek nonsense, but healthy GSMTC correctly vetoes those values.
+- NetEase native-log clock, direct seek and cut-song stale-carry protection were healthy.
+
+Reviewed changes
+- KuGou host candidate scoring now rejects non-KuGou windows even if they are large/visible.
+- Proven KuGou centisecond RangeValue can carry native duration through a track transition without rewinding the old lyric epoch.
+- Fresh KuGou host title / Range duration changes trigger faster track confirmation.
+- Visual rail polling sleeps while the proven UIA RangeValue is fresh.
+- QQ duration-mismatch track hint triggers a faster monitor pass only; QQ clock authority logic is unchanged.
+- "简洁模式" is removed from UI, tray, config-save/load hooks and frontend branches.
+- "循环边界保护" user switch is removed; loop-boundary protection is forced ON as a correctness invariant.
+
+Safety boundaries
+- No NetEase sync code intentionally changed.
+- QQ GSMTC veto, seek-session, stale-echo and dual-clock protections remain under their existing replay/source locks.
+- KuGou's 21 golden methods remain source-identical.
+- Memory position probes remain default-off.
+
+Runtime diagnostics to watch
+KuGou transition:
+  酷狗宿主V2新曲Range待绑定
+  酷狗宿主V2原生Range时长接管
+  酷狗宿主V2实时进度接管
+The last two may appear before `自动歌词搜索完成`; that is the intended handoff improvement.
+
+QQ:
+  QQ独立GSMTC否决错误UIA位置
+is expected when QQ's hover/preview Text lies. The lyric clock should remain on the healthy GSMTC/local lane.
+
+This build is replay/regression validated, not yet claimed as Windows-host runtime proven.

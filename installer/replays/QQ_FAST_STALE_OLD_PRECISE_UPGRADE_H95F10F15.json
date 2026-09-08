@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "name": "qq-fast-new-stale-old-duration-strengthen-precise-bilingual",
+  "old_track": {"song": "Flower of Life", "artist": "陽花", "key": "floweroflife|陽花"},
+  "new_track": {"song": "mede:mede", "artist": "reolれをる", "key": "mede:mede|reolれをる"},
+  "fast_event_mono": 100.0,
+  "stale_old_snapshot_mono": 101.0,
+  "genuine_return_mono": 102.601,
+  "duration_job": {"source": "QQ音乐", "song": "熱異常", "artist": "いよわ", "qq_prebind_duration_ms": 193000, "qq_prebind_transport_duration_ms": 0, "qq_prebind_duration_source": "qq-time-pair-validated"},
+  "duration_evidence": [
+    {"duration_ms": 239000, "source": "qq-time-pair-candidate"},
+    {"duration_ms": 239000, "source": "qq-time-pair-validated"}
+  ],
+  "bilingual_candidates": [
+    {"provider": "网易云", "coverage": 0.984, "quality": 1, "trans_rows": 126},
+    {"provider": "酷狗", "coverage": 0.940, "quality": 3, "trans_rows": 63},
+    {"provider": "QQ音乐", "coverage": 0.875, "quality": 3, "trans_rows": 60}
+  ],
+  "expected": {
+    "stale_old_restore_blocked": true,
+    "genuine_return_restore_allowed": true,
+    "resolved_duration_ms": 239000,
+    "precise_pair_provider": "酷狗",
+    "fast_pair_provider": "网易云"
+  }
+}

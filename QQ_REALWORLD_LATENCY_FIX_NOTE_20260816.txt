@@ -1,0 +1,17 @@
+QQ REAL-WORLD LATENCY FIX — 2026-08-16
+
+Based on LimbusLyric_20260816-002444_pid29992.log.
+
+Confirmed problems:
+- Manual QQ start: first useful time observation arrived several seconds after Start; formal software-2 startup proof appeared about nine seconds after Start in the tested path.
+- Normal rail seeks often committed in 16-562ms once QQ published a validated Text value, so much of the perceived delay was waiting for publication, not commit logic.
+- Final rail seek: geometry target ~91.3s at 00:26:39. Old UIA 44.4s was correctly rejected, but when QQ later published 96/97/98s, the code still compared against frozen 91.3s. The valid stream was rejected until the generic unarmed fallback committed 107s around 18s after the gesture.
+
+Fix strategy:
+- accelerate observation, never weaken formal startup authority;
+- provisional renderer clock for rail intent, never geometry authority;
+- move the expected rail target forward with wall-clock time after release;
+- keep an explicit rail gesture window long enough for the observed delayed QQ publication;
+- race equivalent QRC PC request methods instead of serial timeout chaining.
+
+This patch intentionally accepts that QQ Text is an unreliable sensor and uses interaction context plus time-series consistency rather than treating a syntactically valid mm:ss as truth.

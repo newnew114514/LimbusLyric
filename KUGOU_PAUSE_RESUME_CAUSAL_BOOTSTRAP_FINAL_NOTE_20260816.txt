@@ -1,0 +1,20 @@
+KuGou PAUSE-RESUME CAUSAL BOOTSTRAP FINAL 20260816
+
+Host regression source: LimbusLyric_20260816-151341_pid8992.log
+
+Observed failure:
+- KuGou GSMTC raw=0/default timestamp and UIA/MSAA expose no current position.
+- Previous causal publication guard correctly rejected motion-only numeric fields, but first manual track could remain without any lyric clock.
+- The host log had a long real paused interval before resume, but the protected A/B/C reader intentionally does not discover while paused, so that causal evidence was unused.
+
+Fix (outer layer; protected golden methods unchanged):
+1. While KuGou is genuinely paused and lyric duration is known, snapshot readable writable memory twice.
+2. On resume, only candidates frozen during pause may continue.
+3. Require 1x forward motion for two playing samples before authority.
+4. Session-only 4-byte fast path after proof; revoke if it later moves materially while paused.
+5. Motion-only continuous-no-wrap remains insufficient; previous causal guard remains active.
+
+Release gates:
+- CHECK_KUGOU_PAUSE_RESUME_CAUSAL_BOOTSTRAP_REPLAY.py
+- CHECK_KUGOU_CAUSAL_CLOCK_GUARD_REPLAY.py
+- CHECK_KUGOU_GOLDEN_BASELINE.py (21 locked methods)

@@ -1,0 +1,24 @@
+KUGOU CAUSAL CLOCK GUARD FINAL — 2026-08-16
+
+Host evidence: LimbusLyric_20260816-145221_pid13512.log
+
+Root cause
+- KuGou KRC/lyric lookup was healthy: native KRC hit, duration=271000ms, search finished in 2061ms.
+- KuGou had no usable GSMTC/Win32/UIA/MSAA playback clock on this host.
+- The protected numeric-memory discovery eventually promoted address 0x26681EB9F88 after 13.38s of continuous-no-wrap motion.
+- That promotion was false: public time jumped from local provisional ~29468ms to candidate 49460ms.
+- When playback was paused, the same field kept advancing 54930 -> 55410 -> 55830 -> 58400ms, proving it was a wall-clock-like counter rather than playback position.
+
+Fix
+- All 21 CHECK_KUGOU_GOLDEN_BASELINE methods remain source-identical.
+- Added an OUTER AsyncPlayerUiPositionReader publication guard only.
+- motion-only / continuous-no-wrap numeric fields are quarantined from lyric-time authority.
+- A numeric field may become public only after causal playback evidence: explicit KuGou seek-target match or observed pause freeze (or the protected golden reader explicitly reports gesture-target/pause-freeze proof).
+- A numeric field that continues moving while transport is paused is session-banned, its protected anchor is rejected, and the matching persisted numeric seed is removed so an app restart cannot fast-trust it.
+- While quarantined, the existing local provisional clock remains public; there is no false +20s handoff.
+
+Not changed
+- KuGou KRC/search/translation logic.
+- KuGou 21 golden methods and their internal A/B/C discovery logic.
+- QQ authority / QQMusicUiAdapter / QQ seek FSM.
+- NetEase Native Log and non-QQ lyric search behavior.

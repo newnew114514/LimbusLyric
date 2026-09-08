@@ -1,0 +1,1 @@
+netease-cloudmusic-detector==2.0.6

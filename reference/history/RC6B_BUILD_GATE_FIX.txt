@@ -1,0 +1,15 @@
+﻿LimbusLyric RC6B — Build Gate Hotfix
+2026-08-15
+
+RC6 real Windows build-host failure:
+  RELEASE INVARIANT AUDIT: FAIL
+  Python cache artifacts: 2984
+
+Cause: the invariant gate audited .build_installer_venv_ascii after pip had populated it.
+Normal site-packages __pycache__/*.pyc were therefore misclassified as project-source pollution,
+and third-party site-packages were unnecessarily recompiled (the pywinauto SyntaxWarnings).
+
+RC6B only changes the build/release gate. Player logic is identical to RC6.
+The source audit now excludes build venv/generated output directories but still rejects
+.pyc/__pycache__ inside actual project source. Third-party dependencies are validated by
+the dedicated import checks and frozen EXE smoke test.

@@ -1,0 +1,38 @@
+QQ PHASE CONVERGENCE + FASTSTART — 2026-08-16
+
+Evidence log: LimbusLyric_20260816-003902_pid30204.log
+
+Confirmed phase bug:
+- After a validated rail seek, log showed qq-clock-trust-ready delta=1187ms.
+- Subsequent +1s edges applied only ~89-95ms corrections.
+- The fourth edge then learned baseline=1078ms, effectively treating the real late clock as normal UIA publication phase.
+- Native QRC self-phase remained -5/-6ms, spread 2-3ms, drift 0ms, so the lyric source was not the large-error component.
+
+Fix:
+- Learn edge publication baseline only when predicted clock is physically inside the current mm:ss bucket corridor.
+- A predicted clock outside that corridor must converge first.
+- For a strong forward/late mismatch, apply bounded 0.68 corridor catch-up (max 520ms).
+- A genuine first post-seek +1s edge can run the existing fast corridor rephase even with no pre-learned baseline.
+
+Static replay of the field case:
+- raw QQ second = 104000ms; old local estimate = 103233ms.
+- valid low corridor = 103860ms, so local was 627ms outside the physical bucket.
+- old ordinary PLL correction = 95ms -> 103328ms, still clearly outside.
+- new ordinary catch-up = 426ms.
+- inside the post-seek fast window, existing fast edge rephase adds ~514ms; result ~104174ms, safely inside 103860..105140ms in one genuine edge.
+- because the pre-correction clock was outside the bucket, that sample is not eligible to seed publication baseline.
+
+Confirmed startup delay bug:
+- an early wake returned hwnds=0; previous unconditional 8s wake cooldown could suppress the useful wake when QQ window appeared a few seconds later.
+- zero-window wake cooldown is now 1.15s; successful wake remains 8s.
+
+Track reacquire optimization:
+- QQ soft track reset preserves live time-control wrappers across songs, but clears all per-track proof and still requires two-sample QQ adapter validation.
+- a track epoch prevents in-flight old-song samples from overwriting the new song; stale crossed-epoch results are discarded on the UIA worker thread.
+- if no healthy QQ worker exists, the old fresh-generation reset remains the fallback.
+
+Not changed:
+- historical +420ms QQ bucket center.
+- native QRC timing/decoder.
+- QQMusicUiAdapter source.
+- software-two steady-state seek/hover authority rules except the separately reviewed real-world orchestration patches.

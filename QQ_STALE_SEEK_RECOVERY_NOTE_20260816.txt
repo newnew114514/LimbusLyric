@@ -1,0 +1,18 @@
+QQ stale-seek recovery — 2026-08-16
+
+Evidence:
+- Runtime log 01:13:27 rail gesture target ≈135.768s.
+- QQ validated live Text stayed at 58.420s through release_age ≈7.141s.
+- At ≈7–8s after release QQ finally published 142s, then 143s.
+- Original 7.6s gesture evidence expired around that boundary, so 142/143 fell into unarmed far-seek fallback.
+- Later seeks published fresh Text within tens/hundreds of milliseconds and committed normally.
+
+Design:
+- Preserve software-2 time authority exactly in _merge_uia_position and _qq_phase_edge_correction.
+- Never use rail geometry as lyric-time authority.
+- After 3 repeated validated stale outliers near the pre-seek clock, request a COM-thread-safe live-control reacquire.
+- Keep learned geometry; revalidate the reacquired pair with QQ's existing 2-sample adapter proof.
+- Extend gesture evidence to 11.2s and urgent scan to 10.5s.
+- A delayed validated sample may fast-confirm only after stale-control reacquire and only when it matches the moving gesture expectation within a tight bound.
+
+This is a targeted recovery for QQ's delayed/stale UIA publication, not a new clock algorithm.

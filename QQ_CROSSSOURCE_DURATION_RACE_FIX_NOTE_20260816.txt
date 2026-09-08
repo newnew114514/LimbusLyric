@@ -1,0 +1,29 @@
+QQ CROSSSOURCE-DURATION RACE FIX — 2026-08-16
+
+Evidence basis
+- Host log 12:43:25: window-title identity had already switched from IF YOU to 我活着, but the pre-bind QQ time pair still exposed the previous 04:24/264000ms duration.
+- The automatic QQ lyric job copied that stale 264000ms into provider_duration_ms before provisional bind.
+- The new track's post-reset QQ UIA immediately exposed 03:39/219000ms, but strict three-provider search had already started with expected_duration=264000.
+- KuGou actually found the correct 219000ms KRC and NetEase later manually found 219503ms, proving the fallback providers were healthy; they were rejected only because the automatic job carried the previous song's duration.
+
+Narrow fix
+1. Pre-bind QQ duration trust is now source-sensitive.
+   - qq-track-switch-hint remains immediate new-song duration evidence.
+   - generic qq-time-pair-candidate/validated samples seen before provisional bind are diagnostic only and are never copied across the track boundary.
+2. After provisional bind/reset_qq_track_soft advances the QQ track epoch, the background lyric worker waits briefly for the first post-epoch QQ duration pair and uses that value for strict provider matching.
+3. Cancellation remains generation/key aware, so a newer track is never serialized behind the short duration refresh wait.
+4. Strict duration identity is not relaxed. The change fixes which song supplies expected_duration; it does not widen the acceptance tolerance.
+
+Explicitly unchanged
+- MediaSessionSync._merge_uia_position / _qq_select_public_clock / _qq_phase_edge_correction software-2 locks.
+- QQMusicUiAdapter old-working class lock.
+- Host/Sandbox dual-clock, rail handoff, initial PLL trust, stale-seek recovery, and geometry non-authority.
+- KuGou 21 golden methods and NetEase protected behavior.
+- Full-lyric QQ/NetEase/KuGou symmetric fallback logic itself.
+
+New replay gate: installer/CHECK_QQ_CROSSSOURCE_DURATION_RACE_REPLAY.py
+- previous-song 264s generic pre-bind pair is not trusted for new track;
+- post-bind 219s QQ pair becomes the strict identity for 我活着;
+- dedicated qq-track-switch-hint remains immediate;
+- cancelled jobs exit the wait immediately;
+- NCM 219503ms and KuGou 219000ms pass under corrected 219000ms identity.

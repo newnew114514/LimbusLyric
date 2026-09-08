@@ -12,6 +12,7 @@ __pycache__/
 venv/
 env/
 .build_installer_venv_ascii/
+.build_venv/
 
 # PyInstaller / build output
 build/
@@ -22,6 +23,9 @@ dist/
 # Installer / release output
 Output/
 installer/Output/
+installer/release/
+installer/offline_cache/
+installer_output/
 *.exe
 *.msi
 *.zip

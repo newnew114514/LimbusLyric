@@ -1,0 +1,112 @@
+LimbusLyric — full regression audit, old working baseline vs RC10
+2026-08-15
+
+WHY THE RC9 BUILD GATE FAILED
+=============================
+RC9 stored SHA256(ast.dump(node)) values created by the audit environment's CPython 3.13.
+Your Windows build uses CPython 3.12 (the build log installs cp312 wheels; the uploaded old BUILD_INFO is Python 3.12.6).
+`ast.dump()` is an interpreter-internal structural representation and is not a safe cross-version file signature.
+All four KuGou methods therefore failed the gate even though the source had not changed.
+
+RC10 no longer hashes ast.dump. It hashes normalized UTF-8 SOURCE TEXT for the method, so CRLF/LF and CPython 3.12/3.13 do not create false failures.
+
+CONCRETE EXTRA REGRESSION FOUND DURING THIS AUDIT
+=================================================
+Two AsyncPlayerUiPositionReader methods had also been changed after the old working build:
+- AsyncPlayerUiPositionReader.start
+- AsyncPlayerUiPositionReader.set_suspended
+
+The newer set_suspended() explicitly DISABLED the old urgent point-probe when resuming QQ/KuGou after NetEase.
+That could increase provider-switch/first-position latency and was not required for NetEase Native itself.
+RC10 restores BOTH methods exactly to the old working baseline.
+
+FULL FUNCTION-LEVEL INVENTORY
+=============================
+Old baseline functions/methods: 606
+RC10 functions/methods: 615
+Old functions completely unchanged: 582
+Old functions intentionally still modified: 24
+New functions added: 9
+Old functions removed: 0
+
+No old function is missing. 582 old functions are now source/semantic-baseline candidates and are build-locked.
+
+Changed old functions by purpose:
+Logging/session diagnostics (4):
+  - _async_log_worker
+  - _global_exception_hook
+  - _write_log_records
+  - write_error_log
+NetEase Native / fallback integration (10):
+  - ControlPanel._arm_zero_touch_netease
+  - MediaSessionSync.__init__
+  - MediaSessionSync._netease_poll_hover_refresh
+  - MediaSessionSync._netease_poll_page_interaction
+  - MediaSessionSync._poll_loop
+  - MediaSessionSync._reset_provider_sync_state
+  - MediaSessionSync.bind_track
+  - MediaSessionSync.recalibrate_current_clock
+  - MediaSessionSync.start
+  - MediaSessionSync.stop
+QQ targeted guards/diagnostics (4):
+  - MediaSessionSync._merge_uia_position
+  - MediaSessionSync._qq_note_unarmed_far_seek
+  - MediaSessionSync._qq_poll_pointer_gesture
+  - MediaSessionSync._sync_diag
+NetEase-native render-only guards (3):
+  - LyricWindow._precise_reveal_events
+  - LyricWindow._provider_idle_release_deadline
+  - LyricWindow._release_provider_idle_visual
+Packaging/no-console (1):
+  - LyricFetcher.get_player_pids
+UI/status/diagnostic text (2):
+  - ControlPanel.__init__
+  - ControlPanel._refresh_frontend_status
+UNCLASSIFIED: none
+
+New functions:
+  - MediaSessionSync._poll_netease_native_clock
+  - MediaSessionSync._write_qq_stability_summary
+  - _choose_log_directory
+  - _cleanup_old_log_sessions
+  - _ensure_log_session
+  - _finalize_log_session
+  - _flush_async_log
+  - _log_directory_candidates
+  - _packaging_smoke_test
+
+PROVIDER-SPECIFIC CHECKS
+========================
+KuGou named methods identical to old working baseline: 21/21
+QQMusicUiAdapter whole-class AST identical to old working baseline: 1
+Old functions removed: 0
+
+Top-level existing assignments changed: ['LIMBUSLYRIC_BUILD_TAG', 'NETEASE_INTERNAL_BRIDGE_ENABLED']
+The meaningful runtime default change is NETEASE_INTERNAL_BRIDGE_ENABLED 1 -> 0 (intentional; Native is default, Bridge opt-in).
+New top-level state/config assignments: ['NETEASE_NATIVE_LOG_ENABLED', 'QQ_UNARMED_GSMTC_VETO_MS', '_LOG_KEEP_RECENT', '_LOG_MAX_SESSIONS', '_LOG_MAX_TOTAL_BYTES', '_LOG_RETENTION_DAYS', '_LOG_SESSION_FINALIZED', '_LOG_SESSION_LOCK', '_LOG_SESSION_PATH', '_LOG_SESSION_STARTED_MONO']
+
+DEPENDENCY DELTAS AGAINST UPLOADED OLD BUILD
+============================================
+Uploaded old BUILD_INFO/PYTHON_PACKAGES_BUILD shows Python 3.12.6 and pywin32==312.
+Current builder deliberately pins pywin32==311 because the Sandbox frozen build with 312 hit the missing mfc140u/win32ui regression.
+This is an intentional runtime dependency delta, not hidden.
+NetEase cloudmusic_detector==2.0.1 is newly added.
+The other main libraries in your current build log remain the same families/versions (PyQt5 5.15.11, comtypes 1.4.16, pywinauto 0.6.9, WinRT 3.2.1, pycaw 20251023).
+
+BUILD/PACKAGING BUGS FIXED IN RC10
+==================================
+- KuGou lock no longer uses Python-version-sensitive ast.dump hashes.
+- BUILD_INFO no longer says Audited RC7; it says Audited RC10.
+- Success footer no longer tells you logs are only in LOCALAPPDATA; it points to <LimbusLyric.exe folder>\logs with fallback.
+- Existing self-healing venv/pip repair remains.
+
+NEW BUILD LOCKS
+===============
+1. CHECK_KUGOU_GOLDEN_BASELINE.py
+   Locks all 21 old KuGou-named methods by normalized source SHA256.
+2. CHECK_LEGACY_BASELINE_INTEGRITY.py
+   Locks all 582 old functions that RC10 claims are unchanged.
+3. CHECK_MAIN_SOURCE_LOCK.py
+   Locks the exact RC10 candidate main source during the build.
+
+These gates do not prove Windows runtime behavior, but they stop the specific failure mode we had: silently changing an unrelated old path while working on another provider.

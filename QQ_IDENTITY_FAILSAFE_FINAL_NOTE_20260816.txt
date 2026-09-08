@@ -1,0 +1,26 @@
+QQ IDENTITY FAILSAFE FINAL — 2026-08-16
+
+Evidence from LimbusLyric_20260816-110222_pid17952.log:
+- Manual/first IF YOU fetch began while QQ UIA already exposed 04:24 / 264000ms, but the manual fetch path still loaded a 148000ms lyric result.
+- Later automatic IF YOU detection correctly used 264000ms and rejected unsafe candidates, but the failed provisional switch had already stopped the previous overlay.
+- Because the prior successful _loaded_song identity remained while the overlay was suspended, returning to that old song was short-circuited as already loaded. UIA kept advancing but synchronization stayed at waiting lyric duration and no lyric events were available to render.
+
+Fix scope:
+1. All direct QQ lyric-fetch entry points now pass UIA duration evidence for identity validation: manual/first fetch, running manual fetch, mode-switch refetch, and automatic track search.
+2. Strict duration-aware QQ search expands the candidate window to 30. No duration-unsafe fallback is allowed when reliable QQ duration evidence exists.
+3. Manual/mode results receive a final duration guard before binding.
+4. Automatic QQ track changes have a transaction safety layer outside the protected historical result handler:
+   - mark previous loaded lyrics as suspended before provisional stop;
+   - on success, clear suspension;
+   - on failure, unlock target/candidate state and set a short failed-identity cooldown;
+   - returning to the still-cached previously loaded track rebinds and relaunches lyrics immediately;
+   - switching to any different track remains detectable.
+
+Non-goals / protected behavior:
+- No promise that a correct 04:24 IF YOU lyric is available from QQ search. If no safe version exists, fail closed.
+- MediaSessionSync._merge_uia_position unchanged from software two.
+- _qq_phase_edge_correction unchanged from software two.
+- QQMusicUiAdapter unchanged.
+- Rail geometry remains non-authoritative.
+- KuGou 21 golden methods unchanged.
+- NetEase protected behavior unchanged.

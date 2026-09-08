@@ -1,0 +1,19 @@
+QQ final GSMTC/UIA arbitration — 2026-08-16
+
+Problem proven by Windows Sandbox log:
+- Loaded QQ lyric/QRC duration ≈221s and source-affine QQ GSMTC end ≈221.626s.
+- Chromium UIA simultaneously locked an unrelated/stale 04:32 (272s) time pair.
+- On a real seek, GSMTC moved from ≈99s to ≈35.8s and then advanced continuously, while the UIA pair remained on the old ≈99–105s stream.
+- Therefore the UIA duration mismatch was not a track change; it was a wrong UIA control identity.
+
+Design:
+- Do not change software-2 _merge_uia_position, _qq_phase_edge_correction, _qq_select_public_clock or QQMusicUiAdapter.
+- Validate a QQ GSMTC identity guard only when the selected QQ session has a real timeline timestamp, a valid position, and timeline end matches the currently loaded lyric duration within a tight tolerance.
+- While that identity guard is active, a contradictory qq-track-switch-hint is quarantined as qq-gsmtc-veto-uia-duration instead of resetting QQ clock authority or generating a false auto-track hint.
+- Drop/reacquire the bad live UIA wrappers only on the existing COM worker thread and with cooldown.
+- Quarantine cached stale hints too, without touching COM from the media thread.
+- Large GSMTC position jumps require a second advancing sample before seek authority resumes.
+- A true track switch changes GSMTC duration, immediately disabling the old-track guard so ordinary track-switch detection remains available.
+
+Host safety:
+- On the user's ordinary machine QQ GSMTC has repeatedly been raw=0/default timestamp, so the guard cannot activate and the previous software-2 UIA accuracy path is unchanged.

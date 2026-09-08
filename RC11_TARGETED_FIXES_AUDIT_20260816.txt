@@ -1,0 +1,46 @@
+QQ SW2 ACCURACY + SAFE FASTSTART audit
+
+Accuracy-critical QQ authority restored exactly to software-2:
+- MediaSessionSync._merge_uia_position
+- MediaSessionSync._qq_phase_edge_correction
+- QQMusicUiAdapter old-working class remains protected
+
+Allowed safe-faststart differences:
+- QRC request race / latency only
+- urgent UIA scheduling and zero-window wake retry
+- QQ soft track reset with epoch discard
+- nonrail false-click filtering and pre-lock heavy-probe deferral
+- moving expected target for delayed seek publication
+- extended urgent observation after explicit rail gesture
+
+Forbidden in this build:
+- rail geometry driving renderer time
+- rail geometry starting local/provisional lyric clock
+- startup fast-anchor calibration
+- post-seek quick rephase experiments
+- custom phase convergence / baseline_eligible layer
+
+HOST-SAFE FINAL 2026-08-16
+- Host delayed old-stream false unarmed seek fixed without changing formal _merge_uia_position.
+- Auto-track pre-anchor display can rebase only from a 3-sample high-confidence advancing validated QQ stream with exact lyric duration.
+- Static hover cannot pass provisional proof.
+- Recent explicit rail seek creates a temporary backward unarmed stale veto; new explicit evidence bypasses it.
+- Added semantic host replay gate to BUILD_RELEASE.cmd.
+
+2026-08-16 DUAL-CLOCK+CROSSSOURCE FINAL addendum:
+- New independent QQ raw GSMTC witness avoids UIA contamination of shared estimator evidence.
+- Two-sample raw seek/restart proof may terminate stale gesture/recent-rail state only under duration-matched identity.
+- Full lyric body fallback restored symmetrically across NetEase/QQ/Kugou with duration validation when available.
+- New deterministic release gate: installer/CHECK_QQ_SANDBOX_DUAL_CLOCK_REPLAY.py.
+- software-2 merge/select/phase, ControlPanel result handler, QQMusicUiAdapter, KuGou golden, and NetEase protected paths remain locked.
+
+2026-08-16 HANDOFF+PHASE FINAL addendum
+- Sandbox evidence: validated rail/UIA commit could be immediately overwritten by still-old direct GSMTC. Added post-rail handoff suppression gated by GSMTC seek-confirm timestamp relative to the current physical gesture.
+- Host startup evidence: formal initial advancing proof was followed by redundant calibration-trust sampling. Added outer trust seeding only; fixed_offset=0 and software-2 merge/PLL remain exact.
+- Host IF YOU first seek remains fail-safe because post-reacquire UIA streams are contradictory and host has no usable GSMTC position clock.
+
+
+2026-08-16 GSMTC GESTURE-ORIGIN FINAL addendum
+- Sandbox replay exposed an older raw GSMTC seek whose confirmation completed after a newer rail gesture, causing a brief stale-time takeover.
+- Confirmation is now attributed by first discontinuity time; old seek evidence cannot bypass the fresh rail handoff.
+- Genuine post-gesture raw discontinuities remain immediately authoritative.

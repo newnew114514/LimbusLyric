@@ -1,0 +1,21 @@
+KUGOU SEEK-SEED RECOVERY TEST — 2026-08-16
+
+Problem proved by host log LimbusLyric_20260816-155551_pid22160.log:
+- no source-affine GSMTC/UIA clock; raw remains 0;
+- pause/resume bootstrap finds hundreds of moving integers but no field survives playback proof;
+- protected A/B/C discovery also fails to find a trustworthy playback field;
+- old stable runtime was fast because a previously proven numeric address already existed in persistent cache.
+
+Recovery strategy:
+- do not modify the 21 KuGou golden methods;
+- on one explicit KuGou rail seek, scan KuGou PIDs for an i32-centisecond value near the absolute seek target at each block's real sample time;
+- immediately re-read only target-matched addresses and require 1x continuation (or pause freeze);
+- only a seek-bound + motion-confirmed field can become authority and be persisted with process birth.
+
+Expected new diagnostics:
+  酷狗Seek种子深度恢复扫描
+  酷狗Seek种子深度恢复成功
+Then normal logs should return to:
+  UIA播放位置诊断 ... source=kugou-numeric-memory-cs ... fast-anchor=1
+On a later LimbusLyric restart with the same KuGou process:
+  酷狗数值内存快速启动复核通过 ... source=persistent-cache

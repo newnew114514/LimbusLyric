@@ -85,8 +85,8 @@ jobs:
           $smoke = Join-Path $env:GITHUB_WORKSPACE 'installer/PACKAGING_SMOKE_RESULT.txt'
           if (Test-Path $smoke) { Remove-Item -Force $smoke }
           $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT = $smoke
-          & .\dist\LimbusLyric\LimbusLyric.exe --packaging-smoke-test
-          $ec = $LASTEXITCODE
+          $proc = Start-Process -FilePath '.\dist\LimbusLyric\LimbusLyric.exe' -ArgumentList '--packaging-smoke-test' -Wait -PassThru
+          $ec = $proc.ExitCode
           Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT -ErrorAction SilentlyContinue
           if (-not (Test-Path $smoke)) { throw 'Frozen smoke result missing' }
           Get-Content $smoke

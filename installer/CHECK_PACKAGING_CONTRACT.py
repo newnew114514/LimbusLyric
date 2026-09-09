@@ -118,7 +118,7 @@ need('Name: "{localappdata}\\LimbusLyric\\logs"; Flags: uninsneveruninstall' in 
      'installer preserves unified diagnostics directory')
 need('Filename: "explorer.exe"; Parameters: """{localappdata}\\LimbusLyric\\logs"""' in iss,
      'installer diagnostic shortcut targets unified directory')
-need('#define MyOutputBase "LimbusLyric_Setup_1.8.9.134"' in iss and 'OutputBaseFilename={#MyOutputBase}' in iss,
+need('#define MyOutputBase "LimbusLyric_Setup_1.8.9.135"' in iss and 'OutputBaseFilename={#MyOutputBase}' in iss,
      'installer output contract intact')
 
 op = (root / 'OPEN_LOG_FOLDER.cmd').read_text(encoding='utf-8')

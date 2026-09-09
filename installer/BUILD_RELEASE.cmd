@@ -21,8 +21,8 @@ cd /d "%ROOT%\"
 set "BUILDVENV=%ROOT%\.build_installer_venv_ascii"
 set "DIST=%ROOT%\dist"
 set "RELEASE=%ROOT%\installer\release"
-set "PORTABLE=LimbusLyric_Portable_1.8.9.134.zip"
-set "SETUPNAME=LimbusLyric_Setup_1.8.9.134.exe"
+set "PORTABLE=LimbusLyric_Portable_1.8.9.135.zip"
+set "SETUPNAME=LimbusLyric_Setup_1.8.9.135.exe"
 
 echo ============================================================
 echo   LimbusLyric - Build installer + portable Sandbox package
@@ -214,7 +214,7 @@ copy /y "%ROOT%\README_DIAGNOSTIC_RC.txt" "%DIST%\LimbusLyric\README_DIAGNOSTIC_
 
 echo [8/10] Writing build manifest...
 "%BPY%" -m pip freeze > "%DIST%\LimbusLyric\PYTHON_PACKAGES_BUILD.txt"
-> "%DIST%\LimbusLyric\BUILD_INFO.txt" echo LimbusLyric 1.8.9.134 Release
+> "%DIST%\LimbusLyric\BUILD_INFO.txt" echo LimbusLyric 1.8.9.135 Release
 >>"%DIST%\LimbusLyric\BUILD_INFO.txt" echo Built=%DATE% %TIME%
 >>"%DIST%\LimbusLyric\BUILD_INFO.txt" echo BetterNCMBundled=0
 >>"%DIST%\LimbusLyric\BUILD_INFO.txt" echo NetEaseNativeDefault=1

@@ -61,10 +61,10 @@ iss=(root/"installer"/"LimbusLyric_Setup.iss").read_text(encoding="utf-8-sig")
 if "PrivilegesRequired=lowest" not in iss: fail.append("Inno not lowest privilege")
 if "打开诊断日志" not in iss or r"{localappdata}\LimbusLyric\logs" not in iss: fail.append("Inno unified LOCALAPPDATA log shortcut missing")
 if r'Name: "{localappdata}\LimbusLyric\logs"; Flags: uninsneveruninstall' not in iss: fail.append("Inno preserved LOCALAPPDATA logs dir missing")
-if "LimbusLyric_Setup_1.8.9.134" not in iss: fail.append("Inno output not v1.8.9.134")
+if "LimbusLyric_Setup_1.8.9.135" not in iss: fail.append("Inno output not v1.8.9.135")
 build=(root/"installer"/"BUILD_RELEASE.cmd").read_text(encoding="ascii",errors="ignore")
 suite=(root/"installer"/"RELEASE_GATE_SUITE.tsv").read_text(encoding="utf-8",errors="ignore")
-for token in ("LimbusLyric_Setup_1.8.9.134.exe","LimbusLyric_Portable_1.8.9.134.zip","--packaging-smoke-test","RUN_RELEASE_GATE_SUITE.py","CLEAN_PROJECT_PYTHON_CACHE.py","PYTHONDONTWRITEBYTECODE=1"):
+for token in ("LimbusLyric_Setup_1.8.9.135.exe","LimbusLyric_Portable_1.8.9.135.zip","--packaging-smoke-test","RUN_RELEASE_GATE_SUITE.py","CLEAN_PROJECT_PYTHON_CACHE.py","PYTHONDONTWRITEBYTECODE=1"):
     if token not in build: fail.append("BUILD_RELEASE missing "+token)
 for token in ("CHECK_NO_VISIBLE_SUBPROCESSES.py","CHECK_RELEASE_INVARIANTS.py","CHECK_KUGOU_GOLDEN_BASELINE.py","CHECK_KUGOU_CAUSAL_CLOCK_GUARD_REPLAY.py","CHECK_KUGOU_PAUSE_RESUME_CAUSAL_BOOTSTRAP_REPLAY.py","CHECK_KUGOU_SEEK_SEED_RECOVERY_REPLAY.py","CHECK_LEGACY_BASELINE_INTEGRITY.py","CHECK_RC11_TARGETED_FIXES.py","CHECK_CODEX_PROTECTED_BEHAVIOR.py","CHECK_MAIN_SOURCE_LOCK.py","CHECK_QQ_SANDBOX_DUAL_CLOCK_REPLAY.py","CHECK_QQ_STARTUP_AUTHORITY_REPLAY.py","CHECK_QQ_LOOP_TRANSPORT_REPLAY.py","CHECK_QQ_TEXT_BOUNDARY_RANGE_FUSE_REPLAY.py","CHECK_RC_UI_HYGIENE_LOG5_REPLAY.py","CHECK_KUGOU_HOST_RAIL_REWORK_REPLAY.py","CHECK_GUI_HOTPATH_ISOLATION_REPLAY.py","CHECK_RUNTIME_FAULT_INJECTION_ABSENCE.py","CHECK_GUI_HOTPATH_FAULT_INJECTION_REPLAY.py","CHECK_POST_RELEASE_RESPONSIVENESS_H11_REPLAY.py","CHECK_RUNTIME_HARDENING_H17_REPLAY.py","CHECK_LYRIC_PIPELINE_V14_REPLAY.py","CHECK_LYRIC_PIPELINE_V16_SWITCH_INTRO_REPLAY.py","CHECK_LYRIC_PIPELINE_V17_NORMAL_DISPLAY_RESTORE_REPLAY.py","CHECK_KUGOU_WIN10_CRASH_HARDENING_H22_REPLAY.py"):
     if token not in suite: fail.append("RELEASE_GATE_SUITE missing "+token)

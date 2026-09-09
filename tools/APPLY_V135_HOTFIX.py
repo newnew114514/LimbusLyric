@@ -13,12 +13,10 @@ HOTFIX_MARKER = 'V135 TRANSLATION OWNERSHIP HOTFIX'
 PATCHED_MAIN_SHA256 = 'fc6dedb8761c7aea81aefc68bb34fa6bdf333b7ff15db7e2a2bc181cd363b53f'
 
 
-def sha256(path: Path) -> str:
-    h = hashlib.sha256()
-    with path.open('rb') as f:
-        for block in iter(lambda: f.read(1024 * 1024), b''):
-            h.update(block)
-    return h.hexdigest()
+def normalized_text_sha256(path: Path, encoding: str = 'utf-8') -> str:
+    text = path.read_text(encoding=encoding)
+    normalized = '\n'.join(text.splitlines()).rstrip() + '\n'
+    return hashlib.sha256(normalized.encode(encoding)).hexdigest()
 
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
@@ -52,34 +50,32 @@ def patch_main(text: str) -> str:
     return text
 
 
-def patch_simple(path: Path, replacements: list[tuple[str, str, str]]) -> bool:
-    text = path.read_text(encoding='utf-8-sig')
+def patch_simple(path: Path, replacements: list[tuple[str, str, str]]) -> None:
+    encoding = 'utf-8-sig' if path.suffix.lower() == '.iss' else 'utf-8'
+    text = path.read_text(encoding=encoding)
     original = text
     for old, new, label in replacements:
-        if old == new:
-            continue
-        if old not in text:
-            if new in text:
-                continue
+        if old in text:
+            text = text.replace(old, new)
+        elif new not in text:
             raise SystemExit(f'V135 HOTFIX: {path}: missing {label}')
-        text = text.replace(old, new)
     if text != original:
-        path.write_text(text, encoding='utf-8-sig' if path.suffix.lower() == '.iss' else 'utf-8')
-        return True
-    return False
+        path.write_text(text, encoding=encoding, newline='\n')
 
 
 def apply() -> None:
     if not MAIN.is_file():
         raise SystemExit(f'V135 HOTFIX: main source missing: {MAIN}')
-    original_hash = sha256(MAIN)
+
     text = MAIN.read_text(encoding='utf-8')
     already = HOTFIX_MARKER in text
-    if not already and original_hash != BASE_SHA256:
-        raise SystemExit(f'V135 HOTFIX: unexpected base source SHA256 {original_hash}')
+    base_hash = normalized_text_sha256(MAIN)
+    if not already and base_hash != BASE_SHA256:
+        raise SystemExit(f'V135 HOTFIX: unexpected normalized base source SHA256 {base_hash}')
+
     patched = patch_main(text)
     if patched != text:
-        MAIN.write_text(patched, encoding='utf-8')
+        MAIN.write_text(patched, encoding='utf-8', newline='\n')
 
     files: dict[Path, list[tuple[str, str, str]]] = {
         ROOT / 'installer' / 'LimbusLyric_Setup.iss': [
@@ -105,20 +101,16 @@ def apply() -> None:
         ROOT / 'installer' / 'CHECK_MAIN_SOURCE_LOCK.py': [
             (f'EXPECTED = "{BASE_SHA256}"', f'EXPECTED = "{PATCHED_MAIN_SHA256}"', 'main source lock'),
         ],
+        ROOT / 'installer' / 'LimbusLyric.spec': [
+            ('LimbusLyric 1.8.9.133 diagnostic RC', 'LimbusLyric 1.8.9.135 hotfix release', 'spec description'),
+        ],
     }
     for path, replacements in files.items():
         patch_simple(path, replacements)
 
-    # Update the spec description only; its historical main filename intentionally stays stable.
-    spec = ROOT / 'installer' / 'LimbusLyric.spec'
-    patch_simple(spec, [('LimbusLyric 1.8.9.133 diagnostic RC', 'LimbusLyric 1.8.9.135 hotfix release', 'spec description')])
-
-    # This is an explicit maintainer hotfix, so refresh the deterministic source manifest after
-    # all reviewed edits.  This keeps normal local BUILD_RELEASE.cmd preflight reproducible.
     sys.path.insert(0, str(ROOT / 'installer'))
     from SOURCE_MANIFEST import regenerate_manifest
     regenerate_manifest(ROOT)
-
     verify()
 
 
@@ -129,32 +121,28 @@ def verify() -> None:
         "cur='1.8.9.135 H13'",
         "QLabel('当前版本  ·  v1.8.9.135', card)",
         'ownership_before = None',
-        "self._auto_overlay_suspended = False\n        self._auto_suspended_loaded_key = ''\n        self._auto_failed_track_key = ''\n        self._auto_failed_until = 0.0\n    out = _LIMBUS_AUTO_LYRIC_RESULT_PRE_H11",
-        ') = ownership_before',
         '+ QQ MODERN SEARCH + COVER DIRECT-ID R9.2',
     ]
     for token in required:
         if token not in text:
             raise SystemExit(f'V135 HOTFIX VERIFY: missing token: {token[:80]}')
-    if "cur='1.8.9.134 H12'" in text or "当前版本  ·  v1.8.9.134" in text:
-        raise SystemExit('V135 HOTFIX VERIFY: stale runtime version remains')
+    actual = normalized_text_sha256(MAIN)
+    if actual != PATCHED_MAIN_SHA256:
+        raise SystemExit(f'V135 HOTFIX VERIFY: patched main SHA mismatch {actual}')
     iss = (ROOT / 'installer' / 'LimbusLyric_Setup.iss').read_text(encoding='utf-8-sig')
     if '1.8.9.135' not in iss or 'LimbusLyric_Setup_1.8.9.135' not in iss:
         raise SystemExit('V135 HOTFIX VERIFY: Inno metadata not updated')
     print('V135 HOTFIX VERIFY: PASS')
-    print(f'  main_sha256={sha256(MAIN)}')
+    print(f'  normalized_main_sha256={actual}')
     print('  R9.2 retained: QQ modern search + cover direct-ID')
-    print('  translation ownership barrier released before successful next-track launch')
+    print('  next-track translation ownership barrier released before launch')
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
-    if args.check:
-        verify()
-    else:
-        apply()
+    verify() if args.check else apply()
 
 
 if __name__ == '__main__':

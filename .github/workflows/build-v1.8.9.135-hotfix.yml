@@ -7,7 +7,7 @@ on:
     paths:
       - '.github/workflows/build-v1.8.9.135-hotfix.yml'
       - 'tools/APPLY_V135_HOTFIX.py'
-      - 'V135_TRANSLATION_OWNERSHIP_HOTFIX_NOTE_20260909.md'
+      - '.gitattributes'
 
 permissions:
   contents: write
@@ -41,18 +41,16 @@ jobs:
             requirements_netease_native.txt
             installer/requirements_build.txt
 
-      - name: Apply v1.8.9.135 source hotfix
+      - name: Apply and validate v1.8.9.135 hotfix
         shell: pwsh
         run: |
-          python -c "from pathlib import Path; p=Path('LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'); t=p.read_text(encoding='utf-8'); p.write_text('\\n'.join(t.splitlines()).rstrip()+'\\n', encoding='utf-8', newline='\\n')"
           python tools/APPLY_V135_HOTFIX.py
-          python installer/CHECK_MAIN_SOURCE_LOCK.py LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
           python installer/CLEAN_PROJECT_PYTHON_CACHE.py .
+          python installer/CHECK_MAIN_SOURCE_LOCK.py LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
           python installer/CHECK_PACKAGING_STRUCTURE.py .
 
       - name: Commit patched source to main
         shell: pwsh
-        continue-on-error: true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

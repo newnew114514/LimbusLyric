@@ -44,6 +44,7 @@ jobs:
       - name: Apply v1.8.9.135 source hotfix
         shell: pwsh
         run: |
+          python -c "from pathlib import Path; p=Path('LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'); t=p.read_text(encoding='utf-8'); p.write_text('\\n'.join(t.splitlines()).rstrip()+'\\n', encoding='utf-8', newline='\\n')"
           python tools/APPLY_V135_HOTFIX.py
           python installer/CHECK_MAIN_SOURCE_LOCK.py LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
           python installer/CLEAN_PROJECT_PYTHON_CACHE.py .

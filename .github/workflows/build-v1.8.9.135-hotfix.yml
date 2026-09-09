@@ -1,0 +1,152 @@
+name: Build v1.8.9.135 hotfix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-v1.8.9.135-hotfix.yml'
+      - 'tools/APPLY_V135_HOTFIX.py'
+      - 'V135_TRANSLATION_OWNERSHIP_HOTFIX_NOTE_20260909.md'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      LIMBUSLYRIC_SOURCE_ROOT: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements_core.txt
+            requirements_optional_sync.txt
+            requirements_word_timing_optional.txt
+            requirements_audio_emphasis_optional.txt
+            requirements_netease_native.txt
+            installer/requirements_build.txt
+
+      - name: Apply v1.8.9.135 source hotfix
+        shell: pwsh
+        run: |
+          python tools/APPLY_V135_HOTFIX.py
+          python installer/CHECK_MAIN_SOURCE_LOCK.py LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+          python installer/CLEAN_PROJECT_PYTHON_CACHE.py .
+          python installer/CHECK_PACKAGING_STRUCTURE.py .
+
+      - name: Commit patched source to main
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "Hotfix LimbusLyric v1.8.9.135 translation-only ownership [skip ci]"
+            git push origin HEAD:main
+          }
+
+      - name: Install build and runtime dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements_core.txt
+          python -m pip install -r requirements_optional_sync.txt
+          python -m pip install -r requirements_word_timing_optional.txt
+          python -m pip install -r requirements_audio_emphasis_optional.txt
+          python -m pip install -r requirements_netease_native.txt
+          python -m pip install -r installer/requirements_build.txt
+          python -c "import PyQt5,win32ui,win32gui,requests,pywinauto,comtypes,cloudmusic_detector; import limbus_netease_native; from Crypto.Cipher import AES,DES3; from pycaw.pycaw import AudioUtilities; import winrt.windows.foundation,winrt.windows.foundation.collections; from winrt.windows.media.control import GlobalSystemMediaTransportControlsSessionManager; print('runtime import verification: PASS')"
+
+      - name: Build frozen application
+        shell: pwsh
+        run: |
+          if (Test-Path dist/LimbusLyric) { Remove-Item -Recurse -Force dist/LimbusLyric }
+          python -m PyInstaller --noconfirm --clean --distpath dist --workpath .pyinstaller_work installer/LimbusLyric.spec
+          if (-not (Test-Path dist/LimbusLyric/LimbusLyric.exe)) { throw 'PyInstaller output missing' }
+
+      - name: Frozen runtime smoke test
+        shell: pwsh
+        run: |
+          $smoke = Join-Path $env:GITHUB_WORKSPACE 'installer/PACKAGING_SMOKE_RESULT.txt'
+          if (Test-Path $smoke) { Remove-Item -Force $smoke }
+          $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT = $smoke
+          & .\dist\LimbusLyric\LimbusLyric.exe --packaging-smoke-test
+          $ec = $LASTEXITCODE
+          Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT -ErrorAction SilentlyContinue
+          if (-not (Test-Path $smoke)) { throw 'Frozen smoke result missing' }
+          Get-Content $smoke
+          if ($ec -ne 0) { throw "Frozen smoke exit code $ec" }
+          if (Select-String -Path $smoke -Pattern '^FAIL ' -Quiet) { throw 'Frozen smoke contains FAIL' }
+
+      - name: Add release build info
+        shell: pwsh
+        run: |
+          Copy-Item OPEN_LOG_FOLDER.cmd dist/LimbusLyric/OPEN_LOG_FOLDER.cmd -Force
+          Copy-Item README_DIAGNOSTIC_RC.txt dist/LimbusLyric/README_DIAGNOSTIC_RC.txt -Force
+          @(
+            'LimbusLyric 1.8.9.135 Release',
+            "Built=$([DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ'))",
+            'BuildHost=GitHub Actions windows-2022',
+            'BetterNCMBundled=0',
+            'NetEaseNativeDefault=1',
+            'Hotfix=translation-only next-track presentation ownership',
+            'R9.2=QQ modern search + trusted NetEase ID cover direct fetch'
+          ) | Set-Content dist/LimbusLyric/BUILD_INFO.txt -Encoding UTF8
+          python -m pip freeze | Set-Content dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding UTF8
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          choco install innosetup -y --no-progress
+
+      - name: Build installer and checksums
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force installer/release | Out-Null
+          $isccCandidates = @(
+            "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
+            "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+            "${env:ProgramFiles(x86)}\Inno Setup 7\ISCC.exe",
+            "$env:ProgramFiles\Inno Setup 7\ISCC.exe"
+          )
+          $iscc = $isccCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $iscc) { throw 'ISCC.exe not found after Inno Setup install' }
+          Push-Location installer
+          & $iscc LimbusLyric_Setup.iss
+          $ec = $LASTEXITCODE
+          Pop-Location
+          if ($ec -ne 0) { throw "Inno Setup exit code $ec" }
+          $setup = 'installer/release/LimbusLyric_Setup_1.8.9.135.exe'
+          if (-not (Test-Path $setup)) { throw 'v1.8.9.135 installer missing' }
+          $hash = (Get-FileHash $setup -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  LimbusLyric_Setup_1.8.9.135.exe" | Set-Content 'installer/release/LimbusLyric_v1.8.9.135_SHA256SUMS.txt' -Encoding ascii
+          Get-Item $setup | Format-List Name,Length,LastWriteTime
+          Write-Host "SHA256=$hash"
+
+      - name: Upload v1.8.9.135 test installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LimbusLyric-v1.8.9.135-hotfix-test
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            installer/release/LimbusLyric_Setup_1.8.9.135.exe
+            installer/release/LimbusLyric_v1.8.9.135_SHA256SUMS.txt
+            installer/PACKAGING_SMOKE_RESULT.txt
+            V135_TRANSLATION_OWNERSHIP_HOTFIX_NOTE_20260909.md

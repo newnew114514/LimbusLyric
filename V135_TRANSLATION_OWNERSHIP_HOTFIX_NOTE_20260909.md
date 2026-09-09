@@ -16,3 +16,7 @@ This preserves the existing protection against reviving an old song's lyrics aft
 - R9.2 QQ modern search routing is retained.
 - R9.2 trusted NetEase song-ID cover direct-fetch routing is retained.
 - Runtime/UI/updater/installer version metadata advances to `v1.8.9.135`.
+
+## CI note
+
+Windows CI checkout line endings are pinned through `.gitattributes` so the source-lock and hotfix patcher see the same normalized source bytes as the repository.

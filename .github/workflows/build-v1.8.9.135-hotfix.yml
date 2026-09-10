@@ -1,12 +1,14 @@
-name: Build v1.8.9.135 hotfix
+name: Build v1.8.9.136 translation state test
 
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: ['test/v1.8.9.136-translation-state']
     paths:
       - '.github/workflows/build-v1.8.9.135-hotfix.yml'
-      - 'tools/APPLY_V135_HOTFIX.py'
+      - 'tools/APPLY_V136_TEST_HOTFIX.py'
+      - 'installer/CHECK_V136_TRANSLATION_STATE_REPLAY.py'
+      - 'V136_TRANSLATION_STATE_TEST_NOTE_20260910.md'
       - '.gitattributes'
 
 permissions:
@@ -19,10 +21,11 @@ jobs:
     env:
       PYTHONDONTWRITEBYTECODE: '1'
       PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      PYTHONUTF8: '1'
       LIMBUSLYRIC_SOURCE_ROOT: ${{ github.workspace }}
 
     steps:
-      - name: Checkout
+      - name: Checkout isolated v136 test branch
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -41,23 +44,34 @@ jobs:
             requirements_netease_native.txt
             installer/requirements_build.txt
 
-      - name: Apply and validate v1.8.9.135 hotfix
+      - name: Apply v1.8.9.136 test hotfix and source checks
         shell: pwsh
         run: |
-          python tools/APPLY_V135_HOTFIX.py
+          [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+          $OutputEncoding = [Console]::OutputEncoding
+          $main = 'LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          python tools/APPLY_V136_TEST_HOTFIX.py
           python installer/CLEAN_PROJECT_PYTHON_CACHE.py .
-          python installer/CHECK_MAIN_SOURCE_LOCK.py LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+          python installer/CHECK_V136_TRANSLATION_STATE_REPLAY.py $main
+          python installer/CHECK_MAIN_SOURCE_LOCK.py $main
           python installer/CHECK_PACKAGING_STRUCTURE.py .
+          python installer/CHECK_PACKAGING_CONTRACT.py .
+          python installer/CHECK_RELEASE_INVARIANTS.py . $main
+          python installer/CHECK_AUTO_RESULT_OWNERSHIP_H50_REPLAY.py $main
+          python installer/CHECK_BILINGUAL_SUBTITLE_PLACEMENT_REGION_H95F5_REPLAY.py $main
+          python installer/CHECK_BILINGUAL_SOURCE_LOCK_EXIT_DIRTY_UI_H95F10_REPLAY.py $main
+          python installer/CHECK_RUNTIME_OWNERSHIP_CONSOLIDATION_H95F10F9_REPLAY.py $main
+          python installer/CHECK_SWITCH_LATENCY_RECORDING_STABILITY_R7.py $main
 
-      - name: Commit patched source to main
+      - name: Commit patched v136 source only to test branch
         shell: pwsh
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add --all
           if (-not (git diff --cached --quiet)) {
-            git commit -m "Hotfix LimbusLyric v1.8.9.135 translation-only ownership [skip ci]"
-            git push origin HEAD:main
+            git commit -m "Build v1.8.9.136 translation state test [skip ci]"
+            git push origin HEAD:test/v1.8.9.136-translation-state
           }
 
       - name: Install build and runtime dependencies
@@ -93,19 +107,20 @@ jobs:
           if ($ec -ne 0) { throw "Frozen smoke exit code $ec" }
           if (Select-String -Path $smoke -Pattern '^FAIL ' -Quiet) { throw 'Frozen smoke contains FAIL' }
 
-      - name: Add release build info
+      - name: Add v136 test build info
         shell: pwsh
         run: |
           Copy-Item OPEN_LOG_FOLDER.cmd dist/LimbusLyric/OPEN_LOG_FOLDER.cmd -Force
           Copy-Item README_DIAGNOSTIC_RC.txt dist/LimbusLyric/README_DIAGNOSTIC_RC.txt -Force
           @(
-            'LimbusLyric 1.8.9.135 Release',
+            'LimbusLyric 1.8.9.136 Translation State Test',
             "Built=$([DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ'))",
             'BuildHost=GitHub Actions windows-2022',
             'BetterNCMBundled=0',
             'NetEaseNativeDefault=1',
-            'Hotfix=translation-only next-track presentation ownership',
-            'R9.2=QQ modern search + trusted NetEase ID cover direct fetch'
+            'V136=translation mode Start intent + idempotent repeated Start + live-identity mode refetch',
+            'V135=next-track translation ownership release retained',
+            'R9.2=QQ modern search + trusted NetEase ID cover direct fetch retained'
           ) | Set-Content dist/LimbusLyric/BUILD_INFO.txt -Encoding UTF8
           python -m pip freeze | Set-Content dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding UTF8
 
@@ -114,7 +129,7 @@ jobs:
         run: |
           choco install innosetup -y --no-progress
 
-      - name: Build installer and checksums
+      - name: Build v136 installer and checksums
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force installer/release | Out-Null
@@ -131,21 +146,21 @@ jobs:
           $ec = $LASTEXITCODE
           Pop-Location
           if ($ec -ne 0) { throw "Inno Setup exit code $ec" }
-          $setup = 'installer/release/LimbusLyric_Setup_1.8.9.135.exe'
-          if (-not (Test-Path $setup)) { throw 'v1.8.9.135 installer missing' }
+          $setup = 'installer/release/LimbusLyric_Setup_1.8.9.136.exe'
+          if (-not (Test-Path $setup)) { throw 'v1.8.9.136 installer missing' }
           $hash = (Get-FileHash $setup -Algorithm SHA256).Hash.ToLowerInvariant()
-          "$hash  LimbusLyric_Setup_1.8.9.135.exe" | Set-Content 'installer/release/LimbusLyric_v1.8.9.135_SHA256SUMS.txt' -Encoding ascii
+          "$hash  LimbusLyric_Setup_1.8.9.136.exe" | Set-Content 'installer/release/LimbusLyric_v1.8.9.136_SHA256SUMS.txt' -Encoding ascii
           Get-Item $setup | Format-List Name,Length,LastWriteTime
           Write-Host "SHA256=$hash"
 
-      - name: Upload v1.8.9.135 test installer
+      - name: Upload v1.8.9.136 test installer
         uses: actions/upload-artifact@v4
         with:
-          name: LimbusLyric-v1.8.9.135-hotfix-test
+          name: LimbusLyric-v1.8.9.136-translation-state-test
           if-no-files-found: error
           retention-days: 14
           path: |
-            installer/release/LimbusLyric_Setup_1.8.9.135.exe
-            installer/release/LimbusLyric_v1.8.9.135_SHA256SUMS.txt
+            installer/release/LimbusLyric_Setup_1.8.9.136.exe
+            installer/release/LimbusLyric_v1.8.9.136_SHA256SUMS.txt
             installer/PACKAGING_SMOKE_RESULT.txt
-            V135_TRANSLATION_OWNERSHIP_HOTFIX_NOTE_20260909.md
+            V136_TRANSLATION_STATE_TEST_NOTE_20260910.md

@@ -1,0 +1,89 @@
+name: Publish v1.8.9.136 exact tested artifact
+
+on:
+  push:
+    branches: ['release-tools/v1.8.9.136']
+    paths:
+      - '.github/workflows/publish-v1.8.9.136.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download exact endpoint-tested artifact
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: 34467690830
+          name: LimbusLyric-v1.8.9.136-translation-state-test
+          path: artifact
+
+      - name: Verify exact installer and smoke evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f artifact/LimbusLyric_Setup_1.8.9.136.exe
+          test -f artifact/LimbusLyric_v1.8.9.136_SHA256SUMS.txt
+          test -f artifact/PACKAGING_SMOKE_RESULT.txt
+          expected='fc103f1e3a41208250ece74998b803263ba896d3e54bede3c336bdcce0620744'
+          actual="$(sha256sum artifact/LimbusLyric_Setup_1.8.9.136.exe | awk '{print $1}')"
+          test "$actual" = "$expected"
+          grep -F "$expected  LimbusLyric_Setup_1.8.9.136.exe" artifact/LimbusLyric_v1.8.9.136_SHA256SUMS.txt
+          ! grep -q '^FAIL ' artifact/PACKAGING_SMOKE_RESULT.txt
+          echo "exact installer SHA256 verified: $actual"
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          cat > release-notes.md <<'EOF'
+          LimbusLyric v1.8.9.136
+
+          本版本在 v1.8.9.135 基础上收口歌词显示状态机问题，并使用已通过朋友实机回归测试的同一份安装包作为正式发布资产。
+
+          更新内容
+          - 修复“仅翻译”模式当前歌曲无可显示翻译时，用户的歌词运行/自动切歌意图可能被丢失，导致下一首已成功取得翻译仍需要再次点击“开始”才能显示的问题。
+          - 修复已正常显示双语歌词时反复点击“开始”会重复重建歌词影子模型和媒体同步，可能导致翻译消失及随机同步漂移的问题；重复开始现在保持幂等。
+          - 修复模式刷新任务在切歌边界可能混用旧歌曲标题/歌手与新歌曲时长证据的问题；旧载荷不再以新曲时长继续 mode-refetch。
+          - 保留 v1.8.9.135 的仅翻译 ownership hotfix。
+          - 保留 R9.2 QQ 音乐现代搜索与可信网易云歌曲 ID 封面直取逻辑。
+
+          验证
+          - 专项 translation-state replay 通过。
+          - GitHub Actions Windows frozen build 与 packaging smoke test 通过。
+          - 已进行朋友实机回归测试，重点覆盖仅翻译失败→下一首成功、重复开始、双语翻译保持与时序漂移场景，未反馈新的问题。
+          - 正式发布资产直接复用该实机测试过的 Actions artifact，不重新构建不同字节的安装包。
+          - 安装包 SHA-256：fc103f1e3a41208250ece74998b803263ba896d3e54bede3c336bdcce0620744
+
+          说明
+          - 可直接覆盖安装旧版本，现有用户配置无需重建。
+          - Windows 10 / Windows 11，x64。
+          - 如遇歌词获取、切歌、封面或播放器兼容问题，请附软件版本、播放器、歌曲、复现步骤及对应日志。
+
+          Source code
+          LimbusLyric 源代码以 GNU General Public License v3.0 only（GPL-3.0-only）发布。
+          EOF
+
+      - name: Publish GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.8.9.136 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'v1.8.9.136 already exists; refusing to replace an existing release.' >&2
+            exit 1
+          fi
+          gh release create v1.8.9.136 \
+            artifact/LimbusLyric_Setup_1.8.9.136.exe \
+            artifact/LimbusLyric_v1.8.9.136_SHA256SUMS.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --target 134e17236862f635aa98e37d378257de02c2bce3 \
+            --title 'LimbusLyric v1.8.9.136' \
+            --notes-file release-notes.md

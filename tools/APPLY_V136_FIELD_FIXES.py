@@ -192,7 +192,10 @@ def _v136_activate_field_regression_closure():
 
 _v136_activate_field_regression_closure()
 '''
-    text = replace_once(text, activation, activation + block, 'R9.2 activation anchor')
+    idx = text.rfind(activation)
+    if idx < 0:
+        raise SystemExit('V136 PATCH: R9.2 activation call missing')
+    text = text[:idx] + activation + block + text[idx + len(activation):]
     ast.parse(text)
     return text
 

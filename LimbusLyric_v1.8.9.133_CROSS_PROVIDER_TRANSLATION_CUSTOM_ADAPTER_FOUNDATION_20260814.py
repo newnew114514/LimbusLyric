@@ -42221,9 +42221,30 @@ class ControlPanel(QWidget):
             return False
         source = str(self.source_combo.currentText() or '')
         trans_only = bool(self.trans_check.isChecked())
-        provider_duration_ms = (
-            LyricFetcher.get_qq_ui_duration_hint(self, 'mode-refetch') if source == 'QQ音乐' else 0
+        # V136 TRANSLATION STATE CANDIDATE: freeze every semantic/search input at
+        # transaction creation. The old path captured loaded title/artist first but
+        # then sampled QQ's current UI duration; a track handoff in between could
+        # create an impossible old-title/new-duration request. Prefer the duration
+        # already bound to the loaded payload, and only borrow a live playback duration
+        # when that snapshot still proves the same track identity.
+        prefer_precise = bool(self.precise_tracking_check.isChecked()) if hasattr(self, 'precise_tracking_check') else True
+        require_translation_pair = bool(
+            (not trans_only) and
+            str(getattr(self, '_h95f5_bilingual_mode', 'original') or 'original') == 'bilingual'
         )
+        try:
+            provider_duration_ms = int(getattr(self.lyric_window, 'song_duration', 0) or 0)
+        except Exception:
+            provider_duration_ms = 0
+        if provider_duration_ms <= 0:
+            try:
+                snap = dict(self.media_sync.snapshot() or {})
+                snap_song = str(snap.get('media_title') or '').strip()
+                snap_artist = str(snap.get('media_artist') or '').strip()
+                if snap_song and self._same_track(song, artist, snap_song, snap_artist):
+                    provider_duration_ms = int(snap.get('duration_ms') or 0)
+            except Exception:
+                provider_duration_ms = 0
         self._mode_refetch_generation = int(getattr(self, '_mode_refetch_generation', 0) or 0) + 1
         generation = self._mode_refetch_generation
         self.status.setText(
@@ -42237,8 +42258,8 @@ class ControlPanel(QWidget):
             try:
                 lyric, duration = LyricSearchEngine.search(
                     song, artist, source, trans_only, provider_duration_ms=provider_duration_ms,
-                    prefer_precise=bool(self.precise_tracking_check.isChecked()) if hasattr(self, 'precise_tracking_check') else True,
-                    require_translation_pair=bool((not trans_only) and str(getattr(self, '_h95f5_bilingual_mode', 'original') or 'original') == 'bilingual')
+                    prefer_precise=prefer_precise,
+                    require_translation_pair=require_translation_pair
                 )
                 provider_meta = LyricSearchEngine.last_provider_meta()
                 error = LyricSearchEngine.last_error or ''
@@ -42861,6 +42882,25 @@ class ControlPanel(QWidget):
                         f'loaded={getattr(self, "_loaded_track_key", "") or "<none>"} | '
                         f'target={getattr(self, "_auto_target_key", "") or "<none>"} | '
                         'result=wait-current-transaction'))
+                except Exception:
+                    pass
+                return
+            # V136 TRANSLATION STATE CANDIDATE: a semantic payload barrier means
+            # "the requested mode has nothing displayable yet", not "the user pressed
+            # Stop". Preserve the explicit Start intent while keeping presentation
+            # blank. A later current-track payload can then launch normally; a real
+            # Stop still clears the armed state through stop()/_cancel_auto_jobs().
+            if bool(getattr(self, '_limbus_mode_payload_blocked', False)):
+                self._is_started = True
+                self._auto_armed = bool(self.auto_track_check.isChecked())
+                self.lyric_window.hide()
+                try:
+                    reason = str(getattr(self, '_limbus_mode_payload_block_reason', '') or 'payload-mismatch')
+                    self.status.setText('状态：当前模式歌词暂不可用；已保持开始状态，等待有效歌词…')
+                    write_error_log('模式载荷等待期间开始保持武装', detail=(
+                        f'reason={reason} | auto_armed={int(self._auto_armed)} | '
+                        f'loaded={getattr(self, "_loaded_track_key", "") or "<manual>"} | presentation=blank'
+                    ))
                 except Exception:
                     pass
                 return

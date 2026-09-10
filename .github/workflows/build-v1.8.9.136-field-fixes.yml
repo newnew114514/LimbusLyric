@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/build-v1.8.9.136-field-fixes.yml'
       - 'tools/APPLY_V136_FIELD_FIXES.py'
+      - 'tools/FIX_V136_PATCHER_ANCHOR.py'
       - 'tools/V136_FIELD_REGRESSION.py'
       - 'V136_FIELD_REGRESSION_FIX_NOTE_20260910.md'
 
@@ -56,6 +57,7 @@ jobs:
       - name: Apply v1.8.9.136 field fixes
         shell: pwsh
         run: |
+          python tools/FIX_V136_PATCHER_ANCHOR.py
           python tools/APPLY_V136_FIELD_FIXES.py
           python installer/CLEAN_PROJECT_PYTHON_CACHE.py .
           python installer/CHECK_MAIN_SOURCE_LOCK.py $env:MAIN_SOURCE

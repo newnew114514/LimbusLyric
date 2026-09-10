@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-"""PyInstaller one-folder build for LimbusLyric 1.8.9.135 hotfix release.
+"""PyInstaller one-folder build for LimbusLyric 1.8.9.136 field hotfix test.
 
 Build on 64-bit Windows. The resulting dist/LimbusLyric folder contains its
 own Python runtime and all ordinary runtime dependencies. Target PCs and

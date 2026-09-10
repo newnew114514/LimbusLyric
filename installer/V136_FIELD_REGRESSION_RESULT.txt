@@ -1,0 +1,5 @@
+V136 FIELD REGRESSION: PASS
+ - mixed old-song/new-player mode-refetch is vetoed before provider search
+ - same-track mode-refetch remains on the historical path
+ - cached bilingual sidecar is reattached after relaunch/restart
+ - original-only mode and clock/seek/render authorities remain untouched

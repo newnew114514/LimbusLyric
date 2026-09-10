@@ -1,8 +1,8 @@
 ﻿#define MyAppName "LimbusLyric"
-#define MyAppVersion "1.8.9.135"
+#define MyAppVersion "1.8.9.136"
 #define MyAppPublisher "LimbusLyric"
 #define MyAppExeName "LimbusLyric.exe"
-#define MyOutputBase "LimbusLyric_Setup_1.8.9.135"
+#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"
 
 [Setup]
 AppId={{44D0F2D8-2C7B-4B24-91E6-911CBA2CB4C7}

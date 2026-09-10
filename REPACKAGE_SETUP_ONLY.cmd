@@ -29,7 +29,7 @@ if not exist "%~dp0installer\release" mkdir "%~dp0installer\release"
 "%ISCC%" "%~dp0installer\LimbusLyric_Setup.iss" || goto FAIL
 
 echo.
-echo SUCCESS: installer\release\LimbusLyric_Setup_1.8.9.135.exe
+echo SUCCESS: installer\release\LimbusLyric_Setup_1.8.9.136.exe
 pause
 exit /b 0
 

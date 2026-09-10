@@ -1,0 +1,77 @@
+name: Validate v1.8.9.136 translation-state candidate
+
+on:
+  push:
+    branches:
+      - fix/v136-translation-state-20260910
+    paths:
+      - '.github/workflows/validate-v136-translation-state.yml'
+      - 'tools/APPLY_V136_TRANSLATION_STATE_FIX.py'
+      - 'tools/CHECK_V136_TRANSLATION_STATE_FIX.py'
+
+permissions:
+  contents: write
+
+jobs:
+  targeted-source-validation:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: 'utf-8'
+      LIMBUSLYRIC_SOURCE_ROOT: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout isolated candidate branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: fix/v136-translation-state-20260910
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+
+      - name: Normalize console and git text behavior
+        shell: pwsh
+        run: |
+          [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+          $OutputEncoding = [Console]::OutputEncoding
+          git config core.autocrlf false
+          git config core.eol lf
+
+      - name: Dry-run exact source patch
+        shell: pwsh
+        run: |
+          python tools/APPLY_V136_TRANSLATION_STATE_FIX.py --check
+
+      - name: Apply candidate patch and compile
+        shell: pwsh
+        run: |
+          python tools/APPLY_V136_TRANSLATION_STATE_FIX.py
+          python tools/CHECK_V136_TRANSLATION_STATE_FIX.py
+          python -m py_compile LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+          git diff --check
+
+      - name: Run adjacent ownership regression gates serially
+        shell: pwsh
+        run: |
+          $main = 'LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          python installer/CHECK_AUTO_LYRIC_TRANSITION_OWNERSHIP_H49_REPLAY.py $main
+          python installer/CHECK_AUTO_RESULT_OWNERSHIP_H50_REPLAY.py $main
+          python installer/CHECK_RUNTIME_OWNERSHIP_CONSOLIDATION_H95F10F9_REPLAY.py $main
+
+      - name: Commit only the validated main-source candidate
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+          git diff --cached --check
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "Candidate v1.8.9.136 translation state ownership fix [skip ci]"
+            git push origin HEAD:fix/v136-translation-state-20260910
+          }

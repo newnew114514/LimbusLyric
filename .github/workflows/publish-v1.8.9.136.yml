@@ -29,14 +29,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f artifact/LimbusLyric_Setup_1.8.9.136.exe
-          test -f artifact/LimbusLyric_v1.8.9.136_SHA256SUMS.txt
-          test -f artifact/PACKAGING_SMOKE_RESULT.txt
+          setup="$(find artifact -type f -name 'LimbusLyric_Setup_1.8.9.136.exe' -print -quit)"
+          sums="$(find artifact -type f -name 'LimbusLyric_v1.8.9.136_SHA256SUMS.txt' -print -quit)"
+          smoke="$(find artifact -type f -name 'PACKAGING_SMOKE_RESULT.txt' -print -quit)"
+          test -n "$setup" && test -f "$setup"
+          test -n "$sums" && test -f "$sums"
+          test -n "$smoke" && test -f "$smoke"
           expected='fc103f1e3a41208250ece74998b803263ba896d3e54bede3c336bdcce0620744'
-          actual="$(sha256sum artifact/LimbusLyric_Setup_1.8.9.136.exe | awk '{print $1}')"
+          actual="$(sha256sum "$setup" | awk '{print $1}')"
           test "$actual" = "$expected"
-          grep -F "$expected  LimbusLyric_Setup_1.8.9.136.exe" artifact/LimbusLyric_v1.8.9.136_SHA256SUMS.txt
-          ! grep -q '^FAIL ' artifact/PACKAGING_SMOKE_RESULT.txt
+          grep -F "$expected  LimbusLyric_Setup_1.8.9.136.exe" "$sums"
+          ! grep -q '^FAIL ' "$smoke"
+          mkdir -p publish
+          cp "$setup" publish/LimbusLyric_Setup_1.8.9.136.exe
+          cp "$sums" publish/LimbusLyric_v1.8.9.136_SHA256SUMS.txt
           echo "exact installer SHA256 verified: $actual"
 
       - name: Write release notes
@@ -81,8 +87,8 @@ jobs:
             exit 1
           fi
           gh release create v1.8.9.136 \
-            artifact/LimbusLyric_Setup_1.8.9.136.exe \
-            artifact/LimbusLyric_v1.8.9.136_SHA256SUMS.txt \
+            publish/LimbusLyric_Setup_1.8.9.136.exe \
+            publish/LimbusLyric_v1.8.9.136_SHA256SUMS.txt \
             --repo "$GITHUB_REPOSITORY" \
             --target 134e17236862f635aa98e37d378257de02c2bce3 \
             --title 'LimbusLyric v1.8.9.136' \

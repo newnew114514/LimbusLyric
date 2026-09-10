@@ -61,7 +61,7 @@
 # interaction. Text matches are hints only until the validated compact playback clock
 # confirms an actual seek; opening/closing the lyric page can no longer seize the visual
 # clock merely because the page header matches a timestamped metadata row.
-LIMBUSLYRIC_BUILD_TAG = "v1.8.9.135 RELEASE V135 TRANSLATION OWNERSHIP HOTFIX + NON-QQ + QQ + KUGOU RC DIY ALL + PER-PLAYER + CUSTOM FONT + UX POLISH + HANGUL + INSTRUMENTAL 20260817 + PRECISION LADDER + QQ BACKGROUND + INSTRUMENTAL-RUNTIME-V29 + KUGOU TRANSPORT-FIRST H5 + QQ LOOP-TRANSPORT H6 + KUGOU PAUSE-AUTHORITY H7 + GUI HOTPATH-ISOLATION H8 + RUNTIME-ISOLATION CLOSURE H8F2 + AUTO-TRACK PROVISIONAL-TRANSPORT H9 + PLAYER-LIVENESS CLOSURE H10 + PLAYER-PRESENCE FETCH-GUARD H10F1 + RELEASE-REVIEW CLOSURE H10F2 + BURST-DISPLAY UI CLOSURE H10F3 + QQ POST-RAIL TREND RECOVERY H10F4 + POST-RELEASE RESPONSIVENESS H11 + UX EXTENSIONS H12 + OUTPUT DIY SPOTIFY H13 + AUTO PRECISION DEADLINE H14 + FRONTEND POLISH R4 + VERIFIED INSTALLER UPDATE H15 + UX RUNTIME WIRING H16 + RUNTIME HARDENING H17 + LIVENESS CORROBORATION H18 + COVER FOLLOW + MIRRORED EXIT H19 + CLASSIC EXIT + PALETTE + KUGOU PRESENTATION + PACKAGING H20 + KUGOU IDENTITY + COVER UI H21 + KUGOU WIN10 CRASH HARDENING H22 + WIN10 COMPATIBILITY + REPRO BUILD H23 + WIN10 RUNTIME SAFETY H24 + CLOCK SEEK EVIDENCE CLOSURE H25 + TRANSPORT OWNERSHIP + WIN10 EVIDENCE CLOSURE H26 + PLAYER CLOCK EPOCH + WIN10 VISUAL + KUGOU WIN11 CLOSURE H27 + UNIFIED EVIDENCE EPOCH + SEEK OBSERVER H28 + NETEASE TEMPORAL RAIL + CACHED PROCESS WITNESS H29 + SHARED VISUAL TRANSPORT ENGINE CROSS-WIN H30 + LEGACY NATIVE CONTINUITY REFERENCE H31 + KUGOU SEEK OBSERVER + QQ CAPACITY + NATIVE POSITION SANITY H32 + QQ CAPACITY EPOCH CLOSURE H33 + H22 FUSE NEXT-CALL HARDENING H33F1 + KUGOU AUTO OVERLAY + LATE ATTACH + VISUAL DRIFT + COM GUARD H34 + BASELINE RECONCILIATION H35 + KUGOU VISUAL AUTHORITY + NETEASE BOOTSTRAP H36 + RUNTIME RECONCILIATION + UI RECOVERY H37 + CROSS-PLAYER VERSION AUTHORITY + WIN10 SAFE SEEK H38 + WIN10 KUGOU AUTHORIZED SEEK + COM LIFETIME H39 + WIN10 KUGOU RATIO PREVIEW + TRANSPORT PROOF H40 + MULTI-PROVIDER STATE AUTHORITY + LYRIC COMPLETENESS H41 + FROZEN KUGOU CAPABILITY SAFETY H42 + KUGOU CLOCK DEADLOCK + STARTUP MOTION SAFETY H43 + RUNTIME LATENCY + VISUAL QUALITY RECOVERY H44 + NETEASE CLOCK IDENTITY RECOVERY H45 + NETEASE TRANSPORT SELF-HEAL H46 + NATIVE SHUTDOWN BARRIER H47 + KUGOU NONINVASIVE ACCESSIBILITY + WARMUP GLOW H48 + AUTO LYRIC TRANSITION OWNERSHIP H49 + AUTO RESULT OWNERSHIP H50 + PRESENTATION CUSTOMIZATION H51 + KUGOU ZERO CROSS-PROCESS ACCESSIBILITY H52 + PRESENTATION DEPTH + CENTER AVOIDANCE H53 + RANDOM FIXED DEPTH + MULTISCRIPT FONT PREVIEW H54 + FROSTED GLASS DEPTH H55 + TRUE ATLAS DEPTH BLUR H56 + DEPTH CONTINUITY COMPOSITE H57 + STYLE DEPTH MATERIAL COHERENCE H58 + EXIT CONTINUITY + CENTER CORRIDOR + SCRIPT PREVIEW H59 + DEPTH FUSE FALLBACK + CENTER TRANSACTION + UI CLEANUP H60 + ASYNC DEPTH FALLBACK + STABLE BIRTH LAYOUT H61 + IDLE RESUME CONTINUITY + BLUR DECAY EXIT H62 + BLUR DECAY RELEASE + KUGOU RESTART DISPLAY H63 + CAPACITY-AWARE BLUR DECAY H64 + CONTINUOUS BLUR LIFECYCLE H65 + UNINTERRUPTED BLUR EXIT H66 + CAPACITY CADENCE BLUR H67 + DEADLINE BLUR PLANNER H68 + OPTICAL CONTINUITY + EDGE WRAP STABILITY H69 + PER-EFFECT EXIT PROFILES + FLAVOR H70 + FLAVOR PRESENCE + INSTANT UI CLEANUP H71 + EXIT LIFECYCLE + DIRTY CLOSURE H72 + EDITORIAL INSTRUMENT UI H73 + PREVIEW STAGE + APPEARANCE INSPECTOR H74 + INFORMATION ARCHITECTURE + SPOTIFY PARITY H75 + EDITORIAL POLISH + WIPE REFINEMENT + BLUR RECOVERY H76 + APPLICATION SHELL + INSPECTOR SYSTEM H77 + STUDIO NAVIGATION + TYPOGRAPHIC LAYOUT H78 + LIVE LYRIC SHELL + SMOOTH SNAPSHOT TRANSITION H79 + STABLE STUDIO STAGE + MICRO MOTION H80 + LYRIC IDENTITY FIREWALL H81 + RENDER WORK CONSOLIDATION H82 + CODEX SAFE SALVAGE H83 + WORK RETIREMENT + PUBLICATION GUARD H84 + RESILIENT ASYNC + INSTANT COVER + FULLSCREEN + FRONTEND + OBS H85 + FRAMELESS VERTICAL RESIZE RECOVERY H86 + PREMIUM INTERACTION + DYNAMIC RECORD + FRONTEND PALETTES H87 + INSPECTOR WORKSPACE + COVER FALLBACK + SMOOTH NAV H88 + COLLAPSIBLE PREVIEW + RESIZE STABILITY + MICRO INTERACTIONS H89 + RESPONSIVE SHELL + RECORD RESTORE + DENSITY FIX H90 + DRAGGABLE WORKSPACE + MEDIA-FIRST HERO + SHARED COVER H91 + NAV BUTTON DRAG GESTURE H92 + EXPLICIT WORKSPACE GRIP H93 + STARTUP PALETTE RESTORE H93F1 + COMPACT GRIP HIT TARGET H93F2 + SPOTIFY LYRIC FALLBACK H94 + RUNTIME ACTION AUDIT CLOSURE H94F1 + UNIFIED LYRIC FOUNDATION + SYNC DOCTOR H95 + ADAPTIVE HEADER + GRIP MICRO INTERACTION + BACKGROUND FROST H95F1 + FROST MATERIAL + COVER IDENTITY + HEADER COLLISION H95F2 + PREVIEW FIT + CLASSIC COMPACT FRONTEND H95F3 + TRUE LEGACY FRONTEND H95F4 + STARTUP REENTRY CLOSURE H95F4F1 + LEGACY TRANSPARENT MATERIAL H95F4F2 + PAGE-LOCAL PREVIEW + LEGACY CHROME ISOLATION H95F4F3 + BILINGUAL SUBTITLE + PLACEMENT REGION H95F5 + DUAL-LANE BILINGUAL + PLAYER SYNC INSPECTOR + MODERN GLASS H95F6 + RENDER HOTPATH + UI COHERENCE H95F7 + LYRIC PAYLOAD FIREWALL + LONG-LINE CONTAINMENT + ADAPTIVE HIGH-REFRESH H95F8 + TRANSLATION ALIGNMENT + EXIT CONTINUITY H95F9 + BILINGUAL SOURCE LOCK + EXIT DIRTY CLOSURE + UI STABILITY H95F10 + RUNTIME SEARCH CHAIN + FALLBACK TXN H95F10F1 + STARTUP ANCHOR + BILINGUAL EXIT + FRAME PACING H95F10F2 + BILINGUAL NORMAL-LANE REUSE H95F10F3 + BILINGUAL PRESET + RELEASE COVER H95F10F4 + QQ AUTOTRACK ROLLBACK GUARD H95F10F5 + BILINGUAL BLUR + PRECISE CACHE + SYNC UI H95F10F6 + BILINGUAL VISUAL PRESET PARITY H95F10F7 + SYNC UI + COLD RASTER + PRECISE PAIR PRIORITY H95F10F8 + RUNTIME OWNERSHIP CONSOLIDATION H95F10F9 + RENDER PLAN + RESOLVED VISUAL PRESET H95F10F10 + IDLE PREFETCH ADMISSION H95F10F11 + UNIFIED LYRIC + VISUAL TIMING FACADE H95F10F12 + RENDER SNAPSHOT + PERF CONTRACT H95F10F13 + SHARED RENDER WORK SCHEDULER H95F10F14 + TIMELINE REPLAY CONTRACT H95F10F15 + NETEASE VISUAL JUMP + PRECISION HANDOFF GUARD H95F10F16 + EXIT MATERIAL CONTINUITY + MULTIROW BUDGET H95F10F17 + STABILIZATION CORE S1 + STABILIZATION CONTRACT S2 + RELEASE LAST-MILE R6 + SWITCH LATENCY + RECORDING STABILITY R7 + VARIABLE FONT STABILITY + SHARED FRAME PACING R8 + VISUAL CONTINUITY + FRAME BUDGET R9 + QQ MODERN SEARCH + COVER DIRECT-ID R9.2"
+LIMBUSLYRIC_BUILD_TAG = "v1.8.9.136 TEST V136 TRANSLATION STATE TEST + V135 TRANSLATION OWNERSHIP HOTFIX + NON-QQ + QQ + KUGOU RC DIY ALL + PER-PLAYER + CUSTOM FONT + UX POLISH + HANGUL + INSTRUMENTAL 20260817 + PRECISION LADDER + QQ BACKGROUND + INSTRUMENTAL-RUNTIME-V29 + KUGOU TRANSPORT-FIRST H5 + QQ LOOP-TRANSPORT H6 + KUGOU PAUSE-AUTHORITY H7 + GUI HOTPATH-ISOLATION H8 + RUNTIME-ISOLATION CLOSURE H8F2 + AUTO-TRACK PROVISIONAL-TRANSPORT H9 + PLAYER-LIVENESS CLOSURE H10 + PLAYER-PRESENCE FETCH-GUARD H10F1 + RELEASE-REVIEW CLOSURE H10F2 + BURST-DISPLAY UI CLOSURE H10F3 + QQ POST-RAIL TREND RECOVERY H10F4 + POST-RELEASE RESPONSIVENESS H11 + UX EXTENSIONS H12 + OUTPUT DIY SPOTIFY H13 + AUTO PRECISION DEADLINE H14 + FRONTEND POLISH R4 + VERIFIED INSTALLER UPDATE H15 + UX RUNTIME WIRING H16 + RUNTIME HARDENING H17 + LIVENESS CORROBORATION H18 + COVER FOLLOW + MIRRORED EXIT H19 + CLASSIC EXIT + PALETTE + KUGOU PRESENTATION + PACKAGING H20 + KUGOU IDENTITY + COVER UI H21 + KUGOU WIN10 CRASH HARDENING H22 + WIN10 COMPATIBILITY + REPRO BUILD H23 + WIN10 RUNTIME SAFETY H24 + CLOCK SEEK EVIDENCE CLOSURE H25 + TRANSPORT OWNERSHIP + WIN10 EVIDENCE CLOSURE H26 + PLAYER CLOCK EPOCH + WIN10 VISUAL + KUGOU WIN11 CLOSURE H27 + UNIFIED EVIDENCE EPOCH + SEEK OBSERVER H28 + NETEASE TEMPORAL RAIL + CACHED PROCESS WITNESS H29 + SHARED VISUAL TRANSPORT ENGINE CROSS-WIN H30 + LEGACY NATIVE CONTINUITY REFERENCE H31 + KUGOU SEEK OBSERVER + QQ CAPACITY + NATIVE POSITION SANITY H32 + QQ CAPACITY EPOCH CLOSURE H33 + H22 FUSE NEXT-CALL HARDENING H33F1 + KUGOU AUTO OVERLAY + LATE ATTACH + VISUAL DRIFT + COM GUARD H34 + BASELINE RECONCILIATION H35 + KUGOU VISUAL AUTHORITY + NETEASE BOOTSTRAP H36 + RUNTIME RECONCILIATION + UI RECOVERY H37 + CROSS-PLAYER VERSION AUTHORITY + WIN10 SAFE SEEK H38 + WIN10 KUGOU AUTHORIZED SEEK + COM LIFETIME H39 + WIN10 KUGOU RATIO PREVIEW + TRANSPORT PROOF H40 + MULTI-PROVIDER STATE AUTHORITY + LYRIC COMPLETENESS H41 + FROZEN KUGOU CAPABILITY SAFETY H42 + KUGOU CLOCK DEADLOCK + STARTUP MOTION SAFETY H43 + RUNTIME LATENCY + VISUAL QUALITY RECOVERY H44 + NETEASE CLOCK IDENTITY RECOVERY H45 + NETEASE TRANSPORT SELF-HEAL H46 + NATIVE SHUTDOWN BARRIER H47 + KUGOU NONINVASIVE ACCESSIBILITY + WARMUP GLOW H48 + AUTO LYRIC TRANSITION OWNERSHIP H49 + AUTO RESULT OWNERSHIP H50 + PRESENTATION CUSTOMIZATION H51 + KUGOU ZERO CROSS-PROCESS ACCESSIBILITY H52 + PRESENTATION DEPTH + CENTER AVOIDANCE H53 + RANDOM FIXED DEPTH + MULTISCRIPT FONT PREVIEW H54 + FROSTED GLASS DEPTH H55 + TRUE ATLAS DEPTH BLUR H56 + DEPTH CONTINUITY COMPOSITE H57 + STYLE DEPTH MATERIAL COHERENCE H58 + EXIT CONTINUITY + CENTER CORRIDOR + SCRIPT PREVIEW H59 + DEPTH FUSE FALLBACK + CENTER TRANSACTION + UI CLEANUP H60 + ASYNC DEPTH FALLBACK + STABLE BIRTH LAYOUT H61 + IDLE RESUME CONTINUITY + BLUR DECAY EXIT H62 + BLUR DECAY RELEASE + KUGOU RESTART DISPLAY H63 + CAPACITY-AWARE BLUR DECAY H64 + CONTINUOUS BLUR LIFECYCLE H65 + UNINTERRUPTED BLUR EXIT H66 + CAPACITY CADENCE BLUR H67 + DEADLINE BLUR PLANNER H68 + OPTICAL CONTINUITY + EDGE WRAP STABILITY H69 + PER-EFFECT EXIT PROFILES + FLAVOR H70 + FLAVOR PRESENCE + INSTANT UI CLEANUP H71 + EXIT LIFECYCLE + DIRTY CLOSURE H72 + EDITORIAL INSTRUMENT UI H73 + PREVIEW STAGE + APPEARANCE INSPECTOR H74 + INFORMATION ARCHITECTURE + SPOTIFY PARITY H75 + EDITORIAL POLISH + WIPE REFINEMENT + BLUR RECOVERY H76 + APPLICATION SHELL + INSPECTOR SYSTEM H77 + STUDIO NAVIGATION + TYPOGRAPHIC LAYOUT H78 + LIVE LYRIC SHELL + SMOOTH SNAPSHOT TRANSITION H79 + STABLE STUDIO STAGE + MICRO MOTION H80 + LYRIC IDENTITY FIREWALL H81 + RENDER WORK CONSOLIDATION H82 + CODEX SAFE SALVAGE H83 + WORK RETIREMENT + PUBLICATION GUARD H84 + RESILIENT ASYNC + INSTANT COVER + FULLSCREEN + FRONTEND + OBS H85 + FRAMELESS VERTICAL RESIZE RECOVERY H86 + PREMIUM INTERACTION + DYNAMIC RECORD + FRONTEND PALETTES H87 + INSPECTOR WORKSPACE + COVER FALLBACK + SMOOTH NAV H88 + COLLAPSIBLE PREVIEW + RESIZE STABILITY + MICRO INTERACTIONS H89 + RESPONSIVE SHELL + RECORD RESTORE + DENSITY FIX H90 + DRAGGABLE WORKSPACE + MEDIA-FIRST HERO + SHARED COVER H91 + NAV BUTTON DRAG GESTURE H92 + EXPLICIT WORKSPACE GRIP H93 + STARTUP PALETTE RESTORE H93F1 + COMPACT GRIP HIT TARGET H93F2 + SPOTIFY LYRIC FALLBACK H94 + RUNTIME ACTION AUDIT CLOSURE H94F1 + UNIFIED LYRIC FOUNDATION + SYNC DOCTOR H95 + ADAPTIVE HEADER + GRIP MICRO INTERACTION + BACKGROUND FROST H95F1 + FROST MATERIAL + COVER IDENTITY + HEADER COLLISION H95F2 + PREVIEW FIT + CLASSIC COMPACT FRONTEND H95F3 + TRUE LEGACY FRONTEND H95F4 + STARTUP REENTRY CLOSURE H95F4F1 + LEGACY TRANSPARENT MATERIAL H95F4F2 + PAGE-LOCAL PREVIEW + LEGACY CHROME ISOLATION H95F4F3 + BILINGUAL SUBTITLE + PLACEMENT REGION H95F5 + DUAL-LANE BILINGUAL + PLAYER SYNC INSPECTOR + MODERN GLASS H95F6 + RENDER HOTPATH + UI COHERENCE H95F7 + LYRIC PAYLOAD FIREWALL + LONG-LINE CONTAINMENT + ADAPTIVE HIGH-REFRESH H95F8 + TRANSLATION ALIGNMENT + EXIT CONTINUITY H95F9 + BILINGUAL SOURCE LOCK + EXIT DIRTY CLOSURE + UI STABILITY H95F10 + RUNTIME SEARCH CHAIN + FALLBACK TXN H95F10F1 + STARTUP ANCHOR + BILINGUAL EXIT + FRAME PACING H95F10F2 + BILINGUAL NORMAL-LANE REUSE H95F10F3 + BILINGUAL PRESET + RELEASE COVER H95F10F4 + QQ AUTOTRACK ROLLBACK GUARD H95F10F5 + BILINGUAL BLUR + PRECISE CACHE + SYNC UI H95F10F6 + BILINGUAL VISUAL PRESET PARITY H95F10F7 + SYNC UI + COLD RASTER + PRECISE PAIR PRIORITY H95F10F8 + RUNTIME OWNERSHIP CONSOLIDATION H95F10F9 + RENDER PLAN + RESOLVED VISUAL PRESET H95F10F10 + IDLE PREFETCH ADMISSION H95F10F11 + UNIFIED LYRIC + VISUAL TIMING FACADE H95F10F12 + RENDER SNAPSHOT + PERF CONTRACT H95F10F13 + SHARED RENDER WORK SCHEDULER H95F10F14 + TIMELINE REPLAY CONTRACT H95F10F15 + NETEASE VISUAL JUMP + PRECISION HANDOFF GUARD H95F10F16 + EXIT MATERIAL CONTINUITY + MULTIROW BUDGET H95F10F17 + STABILIZATION CORE S1 + STABILIZATION CONTRACT S2 + RELEASE LAST-MILE R6 + SWITCH LATENCY + RECORDING STABILITY R7 + VARIABLE FONT STABILITY + SHARED FRAME PACING R8 + VISUAL CONTINUITY + FRAME BUDGET R9 + QQ MODERN SEARCH + COVER DIRECT-ID R9.2"
 # v1.8.9.47 NCM internal bridge: prefer NetEase's own audioplayer.onPlayProgress clock over UIA; mouse-hover fallback is disabled by default.
 # v1.8.9.47 lyric-click text anchor: NetEase lyric-row clicks may resolve the clicked UIA lyric text against the loaded LRC timeline in an isolated worker; transport seek remains unchanged.
 # v1.8.9.47 UI/sync follow-up: widen NetEase seek-intent capture to the progress rail, let explicit high-speed burst work in classic mode, add a separate Western entrance channel, and make per-song font/color rows directly editable.
@@ -42221,6 +42221,61 @@ class ControlPanel(QWidget):
             return False
         source = str(self.source_combo.currentText() or '')
         trans_only = bool(self.trans_check.isChecked())
+
+        _v136_live_song = ''
+        _v136_live_artist = ''
+        try:
+            _v136_state = self.media_sync.snapshot() or {}
+            _v136_player = str(self.player_combo.currentText() or '')
+            _v136_process = str((self.players.get(_v136_player, {}) or {}).get('process') or '')
+            _v136_media_source = str(_v136_state.get('media_source') or '')
+            _v136_title = str(_v136_state.get('media_title') or '').strip()
+            if (
+                _v136_title and _v136_process and
+                self.media_sync._source_matches_process_hint(_v136_media_source, _v136_process)
+            ):
+                _v136_live_song = _v136_title
+                _v136_live_artist = str(_v136_state.get('media_artist') or '').strip()
+        except Exception as exc:
+            try:
+                write_error_log('V136模式刷新当前身份快照失败', exc)
+            except Exception:
+                pass
+
+        if (
+            _v136_live_song and
+            not self._same_track(song, artist, _v136_live_song, _v136_live_artist)
+        ):
+            self._mode_refetch_generation = int(getattr(self, '_mode_refetch_generation', 0) or 0) + 1
+            try:
+                _v136_failed_key = str(getattr(self, '_auto_failed_track_key', '') or '')
+                if _v136_failed_key and '|' in _v136_failed_key:
+                    _v136_fs, _v136_fa = _v136_failed_key.split('|', 1)
+                    if self._same_track(_v136_live_song, _v136_live_artist, _v136_fs, _v136_fa):
+                        self._auto_failed_track_key = ''
+                        self._auto_failed_until = 0.0
+                self._auto_target_key = ''
+                self._auto_candidate_key = ''
+                self._auto_candidate_hits = 0
+                self._auto_queued_job = None
+                self._auto_fetch_in_progress = False
+                self._auto_generation = int(getattr(self, '_auto_generation', 0) or 0) + 1
+            except Exception:
+                pass
+            try:
+                write_error_log('V136模式刷新旧载荷身份转当前曲目', detail=(
+                    f'loaded={song}|{artist} | live={_v136_live_song}|{_v136_live_artist} | '
+                    f'trans_only={int(trans_only)} | old-duration-query=blocked | route=auto-current-track'))
+            except Exception:
+                pass
+            self.status.setText(
+                f"状态：模式已切换，正在按当前曲目「{_v136_live_song}」重新获取歌词..."
+            )
+            if bool(getattr(self, '_is_started', False)) and bool(self.auto_track_check.isChecked()):
+                self._auto_armed = True
+                QTimer.singleShot(0, lambda s=_v136_live_song, a=_v136_live_artist: self._request_auto_track(s, a))
+            return True
+
         provider_duration_ms = (
             LyricFetcher.get_qq_ui_duration_hint(self, 'mode-refetch') if source == 'QQ音乐' else 0
         )
@@ -42818,7 +42873,66 @@ class ControlPanel(QWidget):
         return True
 
     def start(self):
-        text = self.text_input.toPlainText().strip()
+        _v136_was_started = bool(getattr(self, '_is_started', False))
+        _v136_mode_blocked = bool(getattr(self, '_limbus_mode_payload_blocked', False))
+        _v136_text = self.text_input.toPlainText().strip()
+
+        if _v136_mode_blocked:
+            # A semantic-mode miss means "nothing valid to present for this track", not
+            # "the user asked to stop". Preserve the explicit Start intent so the next
+            # current-track success launches automatically without another click.
+            self._is_started = True
+            self._auto_armed = bool(self.auto_track_check.isChecked())
+            if not _v136_was_started:
+                try:
+                    _v136_player = str(self.player_combo.currentText() or '')
+                    _v136_process = str((self.players.get(_v136_player, {}) or {}).get('process') or '')
+                    if _v136_process:
+                        self.media_sync.start(_v136_process)
+                except Exception as exc:
+                    write_error_log('V136模式空载荷开始同步预热失败', exc)
+            try:
+                self.lyric_window.hide()
+            except Exception:
+                pass
+            try:
+                write_error_log('V136模式空载荷开始保持武装', detail=(
+                    f'loaded={getattr(self, "_loaded_track_key", "") or "<none>"} | '
+                    f'mode_reason={getattr(self, "_limbus_mode_payload_block_reason", "") or "<none>"} | '
+                    f'auto_armed={int(bool(self._auto_armed))} | desired_active=1'))
+            except Exception:
+                pass
+            self.status.setText('状态：当前模式暂无可显示歌词；保持运行，后续有效歌词会自动接管')
+            return True
+
+        _v136_runtime_busy = bool(
+            getattr(self, '_auto_overlay_suspended', False) or
+            getattr(self, '_track_switch_visual_hold', False) or
+            str(getattr(self, '_auto_target_key', '') or '')
+        )
+        _v136_has_bound_timeline = bool(
+            str(getattr(self, '_loaded_track_key', '') or '') and
+            getattr(self.lyric_window, 'lyric_timeline', None)
+        )
+        if _v136_was_started and _v136_text and _v136_has_bound_timeline and not _v136_runtime_busy:
+            # Start is idempotent once a current lyric performance is active. Re-show/check the
+            # existing performance only; do not recreate the timeline/translation sidecar or
+            # restart the player clock. Sync Doctor remains the explicit recalibration control.
+            self._auto_armed = bool(self.auto_track_check.isChecked())
+            try:
+                self.lyric_window.show()
+                self.lyric_window.check_lyric_time()
+            except Exception as exc:
+                write_error_log('V136重复开始轻量刷新失败', exc)
+            try:
+                write_error_log('V136重复开始幂等', detail=(
+                    f'loaded={getattr(self, "_loaded_track_key", "") or "<none>"} | '
+                    'shadow-rebuild=0 | media-restart=0 | bilingual-sidecar=preserve'))
+            except Exception:
+                pass
+            return True
+
+        text = _v136_text
         if not text:
             self.status.setText("状态：请先输入歌词！")
             return
@@ -44195,7 +44309,7 @@ def _h12_check_update(panel):
     def work():
         try:
             r=requests.get(url,headers={'User-Agent':'LimbusLyric-H12'},timeout=6); r.raise_for_status(); d=r.json(); tag=str(d.get('tag_name') or d.get('version') or '').strip(); body=str(d.get('body') or d.get('notes') or d.get('changelog') or '').strip(); dl=str(d.get('html_url') or d.get('download_url') or '').strip(); dl=dl if dl.startswith('https://') else ''
-            cur='1.8.9.135 H13'; nums=lambda z: tuple(int(x) for x in re.findall(r'\d+',z)[:5])
+            cur='1.8.9.136 H14'; nums=lambda z: tuple(int(x) for x in re.findall(r'\d+',z)[:5])
             newer=bool(tag and nums(tag)>nums(cur)); state=('发现新版本。' if newer else ('当前已是最新版。' if tag else '未能识别远端版本。')); msg=f'当前版本：{cur}\n最新版本：{tag or "未知"}\n'+state+(f'\n\n更新内容：\n{body}' if body else '')
             panel._h12_update_result=(newer,msg,dl)
         except Exception as exc: panel._h12_update_result=(False,f'检查更新失败：{exc}','')
@@ -45152,7 +45266,7 @@ def _h15_version_key(value):
 def _h15_current_version_label():
     tag = str(globals().get('LIMBUSLYRIC_BUILD_TAG') or '').strip()
     m = re.search(r'(?i)\bv?(\d+\.\d+\.\d+\.\d+)\b', tag)
-    base = m.group(1) if m else '1.8.9.135'
+    base = m.group(1) if m else '1.8.9.136'
     stages = [(int(a), int(b or 0)) for a, b in re.findall(r'(?i)\bH(\d+)(?:F(\d+))?\b', tag)]
     if not stages:
         return base
@@ -64549,7 +64663,7 @@ def _h75_make_update_card(panel):
     except Exception: more.setText('⋯')
     more.setFixedSize(31,28); more.setToolTip('更新高级选项')
     menu = QMenu(more); menu.addAction('自定义更新源…', lambda: _h75_edit_update_source(panel)); more.setMenu(menu); more.setPopupMode(QToolButton.InstantPopup); header.addWidget(more); v.addLayout(header)
-    version = QLabel('当前版本  ·  v1.8.9.135', card); version.setObjectName('trackDetail'); v.addWidget(version)
+    version = QLabel('当前版本  ·  v1.8.9.136', card); version.setObjectName('trackDetail'); v.addWidget(version)
     buttons = QHBoxLayout(); buttons.addWidget(panel.h12_check_btn); buttons.addWidget(panel.h12_download_btn); buttons.addStretch(); v.addLayout(buttons)
     panel.h12_update_status.setMaximumHeight(120); v.addWidget(panel.h12_update_status)
     panel.h12_update_url_edit.hide()

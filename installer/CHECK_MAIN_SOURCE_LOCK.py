@@ -18,7 +18,7 @@ import hashlib,sys
 # 2026-09-08 Runtime Convergence R2.1: reviewed first-safe-main startup, transport/search identity separation, rapid-switch cancellation debounce, and KuGou transport-scoped gesture invalidation; frontend runtime installation chains unchanged.
 # 2026-09-08 Runtime Fix R2: reviewed QQ advancing-time duration proof + QQ search 5xx circuit breaker + cross-provider precise-version quarantine + KuGou background holdover/visual quarantine + transport visual-epoch reset; frontend runtime installation chains unchanged.
 # 2026-09-08 Stabilization Contract S2: reviewed provider/query registry + playback snapshot contract + bounded fault journal + patch-debt freeze + isolated H95 fallback/source-lock audit fixes; live player clock/seek authorities unchanged.
-EXPECTED = "fc6dedb8761c7aea81aefc68bb34fa6bdf333b7ff15db7e2a2bc181cd363b53f"
+EXPECTED = "41819b4366456612b0e58f9615a59a0e65cb72b66c42421fc76f0751f5b546bb"
 if len(sys.argv)!=2: raise SystemExit(2)
 text=Path(sys.argv[1]).read_text(encoding='utf-8')
 normalized='\n'.join(text.splitlines()).rstrip()+'\n'

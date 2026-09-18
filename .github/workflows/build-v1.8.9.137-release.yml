@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.release_payload/v137_source.tar.xz.b64'
+      - '.release_payload/v137_source.part*.b64'
 
 permissions:
   contents: write
@@ -35,15 +35,16 @@ jobs:
       - name: Finalize v1.8.9.137 source payload
         shell: pwsh
         run: |
-          $payload = '.release_payload/v137_source.tar.xz.b64'
-          if (Test-Path $payload) {
+          $parts = @(Get-ChildItem '.release_payload/v137_source.part*.b64' -ErrorAction SilentlyContinue | Sort-Object Name)
+          if ($parts.Count -gt 0) {
             @'
           import base64, io, lzma, tarfile
           from pathlib import Path
 
           root = Path.cwd().resolve()
-          payload = root / '.release_payload' / 'v137_source.tar.xz.b64'
-          packed = base64.b64decode(payload.read_text(encoding='ascii').strip())
+          payload_dir = root / '.release_payload'
+          parts = sorted(payload_dir.glob('v137_source.part*.b64'))
+          packed = base64.b64decode(''.join(p.read_text(encoding='ascii').strip() for p in parts))
           tar_bytes = lzma.decompress(packed)
           with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
               for member in tf.getmembers():
@@ -51,9 +52,10 @@ jobs:
                   if target != root and root not in target.parents:
                       raise SystemExit(f'unsafe payload path: {member.name}')
               tf.extractall(root)
-          payload.unlink()
+          for part in parts:
+              part.unlink()
           try:
-              payload.parent.rmdir()
+              payload_dir.rmdir()
           except OSError:
               pass
           print('v1.8.9.137 source payload applied')

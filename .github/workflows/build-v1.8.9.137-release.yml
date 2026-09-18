@@ -1,0 +1,50 @@
+name: Build v1.8.9.137
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      PYTHONUTF8: '1'
+      LIMBUSLYRIC_CLEAN_BUILD: '1'
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup -y --no-progress
+
+      - name: Build and verify
+        shell: cmd
+        run: echo.|call BUILD_END_USER_INSTALLER.cmd
+
+      - name: Upload build files
+        uses: actions/upload-artifact@v4
+        with:
+          name: LimbusLyric-v1.8.9.137
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            installer/release/LimbusLyric_Setup_1.8.9.137.exe
+            installer/release/LimbusLyric_Setup_1.8.9.137.exe.sha256.txt
+            installer/release/LimbusLyric_Portable_1.8.9.137.zip
+            installer/PACKAGING_SMOKE_RESULT.txt
+            RELEASE_NOTES_V137.md

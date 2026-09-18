@@ -1,10 +1,14 @@
-name: Build v1.8.9.137
+name: Build and publish v1.8.9.137
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.release_payload/v137_source.tar.xz.b64'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -20,13 +24,51 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           architecture: 'x64'
+
+      - name: Finalize v1.8.9.137 source payload
+        shell: pwsh
+        run: |
+          $payload = '.release_payload/v137_source.tar.xz.b64'
+          if (Test-Path $payload) {
+            @'
+          import base64, io, lzma, tarfile
+          from pathlib import Path
+
+          root = Path.cwd().resolve()
+          payload = root / '.release_payload' / 'v137_source.tar.xz.b64'
+          packed = base64.b64decode(payload.read_text(encoding='ascii').strip())
+          tar_bytes = lzma.decompress(packed)
+          with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
+              for member in tf.getmembers():
+                  target = (root / member.name).resolve()
+                  if target != root and root not in target.parents:
+                      raise SystemExit(f'unsafe payload path: {member.name}')
+              tf.extractall(root)
+          payload.unlink()
+          try:
+              payload.parent.rmdir()
+          except OSError:
+              pass
+          print('v1.8.9.137 source payload applied')
+          '@ | python -
+
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Finalize v1.8.9.137 source [skip ci]"
+            git push origin HEAD:main
+            $finalSha = (git rev-parse HEAD).Trim()
+            "FINAL_SHA=$finalSha" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          } else {
+            "FINAL_SHA=$env:GITHUB_SHA" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          }
 
       - name: Install Inno Setup
         shell: pwsh
@@ -46,5 +88,26 @@ jobs:
             installer/release/LimbusLyric_Setup_1.8.9.137.exe
             installer/release/LimbusLyric_Setup_1.8.9.137.exe.sha256.txt
             installer/release/LimbusLyric_Portable_1.8.9.137.zip
+            installer/release/LimbusLyric_Portable_1.8.9.137.zip.sha256.txt
             installer/PACKAGING_SMOKE_RESULT.txt
             RELEASE_NOTES_V137.md
+
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = 'v1.8.9.137'
+          $assets = @(
+            'installer/release/LimbusLyric_Setup_1.8.9.137.exe',
+            'installer/release/LimbusLyric_Setup_1.8.9.137.exe.sha256.txt',
+            'installer/release/LimbusLyric_Portable_1.8.9.137.zip',
+            'installer/release/LimbusLyric_Portable_1.8.9.137.zip.sha256.txt'
+          )
+          gh release view $tag --repo $env:GITHUB_REPOSITORY *> $null
+          if ($LASTEXITCODE -eq 0) {
+            gh release edit $tag --repo $env:GITHUB_REPOSITORY --title $tag --notes-file RELEASE_NOTES_V137.md --latest
+            gh release upload $tag @assets --repo $env:GITHUB_REPOSITORY --clobber
+          } else {
+            gh release create $tag @assets --repo $env:GITHUB_REPOSITORY --target $env:FINAL_SHA --title $tag --notes-file RELEASE_NOTES_V137.md --latest
+          }

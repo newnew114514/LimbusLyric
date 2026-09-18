@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.release_payload/v137_source.part*.b64'
+      - '.release_payload/READY'
 
 permissions:
   contents: write
@@ -35,15 +35,17 @@ jobs:
       - name: Finalize v1.8.9.137 source payload
         shell: pwsh
         run: |
-          $parts = @(Get-ChildItem '.release_payload/v137_source.part*.b64' -ErrorAction SilentlyContinue | Sort-Object Name)
-          if ($parts.Count -gt 0) {
+          $ready = '.release_payload/READY'
+          $parts = @(Get-ChildItem '.release_payload/parts/v137_source.part*.b64' -ErrorAction SilentlyContinue | Sort-Object Name)
+          if ((Test-Path $ready) -and $parts.Count -gt 0) {
             @'
           import base64, io, lzma, tarfile
           from pathlib import Path
 
           root = Path.cwd().resolve()
           payload_dir = root / '.release_payload'
-          parts = sorted(payload_dir.glob('v137_source.part*.b64'))
+          parts_dir = payload_dir / 'parts'
+          parts = sorted(parts_dir.glob('v137_source.part*.b64'))
           packed = base64.b64decode(''.join(p.read_text(encoding='ascii').strip() for p in parts))
           tar_bytes = lzma.decompress(packed)
           with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
@@ -54,6 +56,11 @@ jobs:
               tf.extractall(root)
           for part in parts:
               part.unlink()
+          (payload_dir / 'READY').unlink(missing_ok=True)
+          try:
+              parts_dir.rmdir()
+          except OSError:
+              pass
           try:
               payload_dir.rmdir()
           except OSError:

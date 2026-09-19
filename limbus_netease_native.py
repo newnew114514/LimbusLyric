@@ -346,19 +346,29 @@ class NeteaseNativeClockAdapter:
             track = getattr(state, "track", None) or getattr(cm, "track", None)
             if track is None:
                 return {"ready": False, "available": True, "error": "track-unavailable", "start_state": "ready", "start_age_ms": 0.0}
-            # cloudmusic_detector may transiently expose a truthy placeholder Track while
-            # its local-log parser has not recovered the actual song yet. A native clock is
-            # usable only after the detector owns at least one track-identity field.
+
+            # Capture detector event serials before validating identity. Field logs show that
+            # cloudmusic_detector can keep a healthy state.position while its local-log track
+            # object temporarily loses both title and id. Those samples MUST NOT become normal
+            # clock authority, but the serials + position let MediaSync prove same-track
+            # presentation continuity instead of falling back to a drifting local timer.
+            with self._lock:
+                track_serial = int(self._track_serial)
+                state_serial = int(self._state_serial)
+                seek_serial = int(self._seek_serial)
+                event_serial = int(self._event_serial)
+                last_event_mono = float(self._last_event_mono)
+
             title = str(getattr(track, "name", "") or "").strip()
             track_id = self._track_id(track).strip()
-            if not title and not track_id:
-                return {
-                    "ready": False, "available": True, "error": "track-identity-unavailable",
-                    "title": "", "track_id": "", "start_state": "ready", "start_age_ms": 0.0,
-                }
             position = float(getattr(state, "position", 0.0) or 0.0)
             if not math.isfinite(position) or position < 0.0:
-                return {"ready": False, "available": True, "error": "invalid-position", "start_state": "ready", "start_age_ms": 0.0}
+                return {
+                    "ready": False, "available": True, "error": "invalid-position",
+                    "track_serial": track_serial, "state_serial": state_serial,
+                    "seek_serial": seek_serial, "event_serial": event_serial,
+                    "start_state": "ready", "start_age_ms": 0.0,
+                }
             duration = float(getattr(track, "duration", 0.0) or 0.0)
             duration_ms = duration * 1000.0 if 0.0 < duration < 10000.0 else duration
             # cloudmusic_detector normally reports seconds, but field evidence from 2.0.6
@@ -375,8 +385,6 @@ class NeteaseNativeClockAdapter:
                 elif 0.0 <= raw_candidate <= duration_ms + tolerance:
                     position_ms = raw_candidate
             else:
-                # Without duration, accept only human-scale playback positions. Seconds are
-                # preferred; a large value may be an already-millisecond position.
                 max_ms = 12.0 * 60.0 * 60.0 * 1000.0
                 if 0.0 <= sec_candidate <= max_ms:
                     position_ms = sec_candidate
@@ -385,21 +393,37 @@ class NeteaseNativeClockAdapter:
             if position_ms is None or not math.isfinite(position_ms):
                 return {
                     "ready": False, "available": True, "error": "invalid-position-range",
+                    "track_serial": track_serial, "state_serial": state_serial,
+                    "seek_serial": seek_serial, "event_serial": event_serial,
                     "start_state": "ready", "start_age_ms": 0.0,
                 }
             is_playing = bool(getattr(state, "is_playing", False))
-            with self._lock:
-                track_serial = int(self._track_serial)
-                state_serial = int(self._state_serial)
-                seek_serial = int(self._seek_serial)
-                event_serial = int(self._event_serial)
-                last_event_mono = float(self._last_event_mono)
+            status = "playing" if is_playing else "paused"
+
+            # Identity-less state is exported only as explicitly non-authoritative evidence.
+            # MediaSync may use it solely to renew a previously proven same-track presentation
+            # clock when track_serial, duration and motion all remain coherent.
+            if not title and not track_id:
+                return {
+                    "ready": False, "available": True, "error": "track-identity-unavailable",
+                    "anonymous_clock": True,
+                    "position_ms": position_ms,
+                    "duration_ms": duration_ms if duration_ms > 0.0 else None,
+                    "status": status,
+                    "title": "", "artist": "", "track_id": "",
+                    "track_serial": track_serial, "state_serial": state_serial,
+                    "seek_serial": seek_serial, "event_serial": event_serial,
+                    "last_event_mono": last_event_mono,
+                    "seek_callback_bound": bool(self._seek_callback_bound),
+                    "start_state": "ready", "start_age_ms": 0.0,
+                }
+
             return {
                 "ready": True,
                 "available": True,
                 "position_ms": position_ms,
                 "duration_ms": duration_ms if duration_ms > 0.0 else None,
-                "status": "playing" if is_playing else "paused",
+                "status": status,
                 "title": title,
                 "artist": self._artist(track),
                 "track_id": track_id,

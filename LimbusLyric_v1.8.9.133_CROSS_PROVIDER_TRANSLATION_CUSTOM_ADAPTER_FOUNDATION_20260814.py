@@ -62,6 +62,7 @@
 # confirms an actual seek; opening/closing the lyric page can no longer seize the visual
 # clock merely because the page header matches a timestamped metadata row.
 LIMBUSLYRIC_BUILD_TAG = "v1.8.9.136 TEST V136 TRANSLATION STATE TEST + V135 TRANSLATION OWNERSHIP HOTFIX + NON-QQ + QQ + KUGOU RC DIY ALL + PER-PLAYER + CUSTOM FONT + UX POLISH + HANGUL + INSTRUMENTAL 20260817 + PRECISION LADDER + QQ BACKGROUND + INSTRUMENTAL-RUNTIME-V29 + KUGOU TRANSPORT-FIRST H5 + QQ LOOP-TRANSPORT H6 + KUGOU PAUSE-AUTHORITY H7 + GUI HOTPATH-ISOLATION H8 + RUNTIME-ISOLATION CLOSURE H8F2 + AUTO-TRACK PROVISIONAL-TRANSPORT H9 + PLAYER-LIVENESS CLOSURE H10 + PLAYER-PRESENCE FETCH-GUARD H10F1 + RELEASE-REVIEW CLOSURE H10F2 + BURST-DISPLAY UI CLOSURE H10F3 + QQ POST-RAIL TREND RECOVERY H10F4 + POST-RELEASE RESPONSIVENESS H11 + UX EXTENSIONS H12 + OUTPUT DIY SPOTIFY H13 + AUTO PRECISION DEADLINE H14 + FRONTEND POLISH R4 + VERIFIED INSTALLER UPDATE H15 + UX RUNTIME WIRING H16 + RUNTIME HARDENING H17 + LIVENESS CORROBORATION H18 + COVER FOLLOW + MIRRORED EXIT H19 + CLASSIC EXIT + PALETTE + KUGOU PRESENTATION + PACKAGING H20 + KUGOU IDENTITY + COVER UI H21 + KUGOU WIN10 CRASH HARDENING H22 + WIN10 COMPATIBILITY + REPRO BUILD H23 + WIN10 RUNTIME SAFETY H24 + CLOCK SEEK EVIDENCE CLOSURE H25 + TRANSPORT OWNERSHIP + WIN10 EVIDENCE CLOSURE H26 + PLAYER CLOCK EPOCH + WIN10 VISUAL + KUGOU WIN11 CLOSURE H27 + UNIFIED EVIDENCE EPOCH + SEEK OBSERVER H28 + NETEASE TEMPORAL RAIL + CACHED PROCESS WITNESS H29 + SHARED VISUAL TRANSPORT ENGINE CROSS-WIN H30 + LEGACY NATIVE CONTINUITY REFERENCE H31 + KUGOU SEEK OBSERVER + QQ CAPACITY + NATIVE POSITION SANITY H32 + QQ CAPACITY EPOCH CLOSURE H33 + H22 FUSE NEXT-CALL HARDENING H33F1 + KUGOU AUTO OVERLAY + LATE ATTACH + VISUAL DRIFT + COM GUARD H34 + BASELINE RECONCILIATION H35 + KUGOU VISUAL AUTHORITY + NETEASE BOOTSTRAP H36 + RUNTIME RECONCILIATION + UI RECOVERY H37 + CROSS-PLAYER VERSION AUTHORITY + WIN10 SAFE SEEK H38 + WIN10 KUGOU AUTHORIZED SEEK + COM LIFETIME H39 + WIN10 KUGOU RATIO PREVIEW + TRANSPORT PROOF H40 + MULTI-PROVIDER STATE AUTHORITY + LYRIC COMPLETENESS H41 + FROZEN KUGOU CAPABILITY SAFETY H42 + KUGOU CLOCK DEADLOCK + STARTUP MOTION SAFETY H43 + RUNTIME LATENCY + VISUAL QUALITY RECOVERY H44 + NETEASE CLOCK IDENTITY RECOVERY H45 + NETEASE TRANSPORT SELF-HEAL H46 + NATIVE SHUTDOWN BARRIER H47 + KUGOU NONINVASIVE ACCESSIBILITY + WARMUP GLOW H48 + AUTO LYRIC TRANSITION OWNERSHIP H49 + AUTO RESULT OWNERSHIP H50 + PRESENTATION CUSTOMIZATION H51 + KUGOU ZERO CROSS-PROCESS ACCESSIBILITY H52 + PRESENTATION DEPTH + CENTER AVOIDANCE H53 + RANDOM FIXED DEPTH + MULTISCRIPT FONT PREVIEW H54 + FROSTED GLASS DEPTH H55 + TRUE ATLAS DEPTH BLUR H56 + DEPTH CONTINUITY COMPOSITE H57 + STYLE DEPTH MATERIAL COHERENCE H58 + EXIT CONTINUITY + CENTER CORRIDOR + SCRIPT PREVIEW H59 + DEPTH FUSE FALLBACK + CENTER TRANSACTION + UI CLEANUP H60 + ASYNC DEPTH FALLBACK + STABLE BIRTH LAYOUT H61 + IDLE RESUME CONTINUITY + BLUR DECAY EXIT H62 + BLUR DECAY RELEASE + KUGOU RESTART DISPLAY H63 + CAPACITY-AWARE BLUR DECAY H64 + CONTINUOUS BLUR LIFECYCLE H65 + UNINTERRUPTED BLUR EXIT H66 + CAPACITY CADENCE BLUR H67 + DEADLINE BLUR PLANNER H68 + OPTICAL CONTINUITY + EDGE WRAP STABILITY H69 + PER-EFFECT EXIT PROFILES + FLAVOR H70 + FLAVOR PRESENCE + INSTANT UI CLEANUP H71 + EXIT LIFECYCLE + DIRTY CLOSURE H72 + EDITORIAL INSTRUMENT UI H73 + PREVIEW STAGE + APPEARANCE INSPECTOR H74 + INFORMATION ARCHITECTURE + SPOTIFY PARITY H75 + EDITORIAL POLISH + WIPE REFINEMENT + BLUR RECOVERY H76 + APPLICATION SHELL + INSPECTOR SYSTEM H77 + STUDIO NAVIGATION + TYPOGRAPHIC LAYOUT H78 + LIVE LYRIC SHELL + SMOOTH SNAPSHOT TRANSITION H79 + STABLE STUDIO STAGE + MICRO MOTION H80 + LYRIC IDENTITY FIREWALL H81 + RENDER WORK CONSOLIDATION H82 + CODEX SAFE SALVAGE H83 + WORK RETIREMENT + PUBLICATION GUARD H84 + RESILIENT ASYNC + INSTANT COVER + FULLSCREEN + FRONTEND + OBS H85 + FRAMELESS VERTICAL RESIZE RECOVERY H86 + PREMIUM INTERACTION + DYNAMIC RECORD + FRONTEND PALETTES H87 + INSPECTOR WORKSPACE + COVER FALLBACK + SMOOTH NAV H88 + COLLAPSIBLE PREVIEW + RESIZE STABILITY + MICRO INTERACTIONS H89 + RESPONSIVE SHELL + RECORD RESTORE + DENSITY FIX H90 + DRAGGABLE WORKSPACE + MEDIA-FIRST HERO + SHARED COVER H91 + NAV BUTTON DRAG GESTURE H92 + EXPLICIT WORKSPACE GRIP H93 + STARTUP PALETTE RESTORE H93F1 + COMPACT GRIP HIT TARGET H93F2 + SPOTIFY LYRIC FALLBACK H94 + RUNTIME ACTION AUDIT CLOSURE H94F1 + UNIFIED LYRIC FOUNDATION + SYNC DOCTOR H95 + ADAPTIVE HEADER + GRIP MICRO INTERACTION + BACKGROUND FROST H95F1 + FROST MATERIAL + COVER IDENTITY + HEADER COLLISION H95F2 + PREVIEW FIT + CLASSIC COMPACT FRONTEND H95F3 + TRUE LEGACY FRONTEND H95F4 + STARTUP REENTRY CLOSURE H95F4F1 + LEGACY TRANSPARENT MATERIAL H95F4F2 + PAGE-LOCAL PREVIEW + LEGACY CHROME ISOLATION H95F4F3 + BILINGUAL SUBTITLE + PLACEMENT REGION H95F5 + DUAL-LANE BILINGUAL + PLAYER SYNC INSPECTOR + MODERN GLASS H95F6 + RENDER HOTPATH + UI COHERENCE H95F7 + LYRIC PAYLOAD FIREWALL + LONG-LINE CONTAINMENT + ADAPTIVE HIGH-REFRESH H95F8 + TRANSLATION ALIGNMENT + EXIT CONTINUITY H95F9 + BILINGUAL SOURCE LOCK + EXIT DIRTY CLOSURE + UI STABILITY H95F10 + RUNTIME SEARCH CHAIN + FALLBACK TXN H95F10F1 + STARTUP ANCHOR + BILINGUAL EXIT + FRAME PACING H95F10F2 + BILINGUAL NORMAL-LANE REUSE H95F10F3 + BILINGUAL PRESET + RELEASE COVER H95F10F4 + QQ AUTOTRACK ROLLBACK GUARD H95F10F5 + BILINGUAL BLUR + PRECISE CACHE + SYNC UI H95F10F6 + BILINGUAL VISUAL PRESET PARITY H95F10F7 + SYNC UI + COLD RASTER + PRECISE PAIR PRIORITY H95F10F8 + RUNTIME OWNERSHIP CONSOLIDATION H95F10F9 + RENDER PLAN + RESOLVED VISUAL PRESET H95F10F10 + IDLE PREFETCH ADMISSION H95F10F11 + UNIFIED LYRIC + VISUAL TIMING FACADE H95F10F12 + RENDER SNAPSHOT + PERF CONTRACT H95F10F13 + SHARED RENDER WORK SCHEDULER H95F10F14 + TIMELINE REPLAY CONTRACT H95F10F15 + NETEASE VISUAL JUMP + PRECISION HANDOFF GUARD H95F10F16 + EXIT MATERIAL CONTINUITY + MULTIROW BUDGET H95F10F17 + STABILIZATION CORE S1 + STABILIZATION CONTRACT S2 + RELEASE LAST-MILE R6 + SWITCH LATENCY + RECORDING STABILITY R7 + VARIABLE FONT STABILITY + SHARED FRAME PACING R8 + VISUAL CONTINUITY + FRAME BUDGET R9 + QQ MODERN SEARCH + COVER DIRECT-ID R9.2"
+LIMBUSLYRIC_DISPLAY_VERSION = "v1.8.9.137"
 # v1.8.9.47 NCM internal bridge: prefer NetEase's own audioplayer.onPlayProgress clock over UIA; mouse-hover fallback is disabled by default.
 # v1.8.9.47 lyric-click text anchor: NetEase lyric-row clicks may resolve the clicked UIA lyric text against the loaded LRC timeline in an isolated worker; transport seek remains unchanged.
 # v1.8.9.47 UI/sync follow-up: widen NetEase seek-intent capture to the progress rail, let explicit high-speed burst work in classic mode, add a separate Western entrance channel, and make per-song font/color rows directly editable.
@@ -1591,23 +1592,37 @@ SUPPORT_ALIPAY_FILENAME = 'alipay_support.png'
 SUPPORT_WECHAT_FILENAME = 'wechat_support.png'
 
 LIVING_SHAKE_FRAME_MS = 16
+LIVING_SHAKE_MOTION_MODE = 'shake'
+
+def _set_living_shake_motion_mode(mode):
+    global LIVING_SHAKE_MOTION_MODE
+    LIVING_SHAKE_MOTION_MODE = 'tremble' if str(mode or '').strip().lower() == 'tremble' else 'shake'
+    return LIVING_SHAKE_MOTION_MODE
 
 def _advance_living_shake(states, intensity, cadence_ms, last_target_mono, last_motion_mono, now_mono=None):
-    """Keep target cadence, but interpolate the old 30% response continuously."""
+    """Animate per-glyph motion; shake keeps the mature path, tremble is smaller and faster."""
     if not states or int(intensity or 0) <= 0:
         return False, float(last_target_mono or 0.0), float(last_motion_mono or 0.0)
     now = float(now_mono if now_mono is not None else time.monotonic() * 1000.0)
-    cadence = max(10.0, float(cadence_ms or 143))
+    mode = str(globals().get('LIVING_SHAKE_MOTION_MODE', 'shake') or 'shake')
+    base_cadence = max(10.0, float(cadence_ms or 143))
+    tremble = mode == 'tremble'
+    cadence = max(12.0, base_cadence * 0.35) if tremble else base_cadence
     last_target = float(last_target_mono or now); last_motion = float(last_motion_mono or now)
     target_changed = False
     if now - last_target >= cadence:
-        for st in states:
-            st['target_x'] = random.randint(-int(intensity), int(intensity)); st['target_y'] = random.randint(-int(intensity), int(intensity))
+        if tremble:
+            amp = max(0.35, float(intensity) * 0.55)
+            for st in states:
+                st['target_x'] = random.uniform(-amp, amp); st['target_y'] = random.uniform(-amp, amp)
+        else:
+            for st in states:
+                st['target_x'] = random.randint(-int(intensity), int(intensity)); st['target_y'] = random.randint(-int(intensity), int(intensity))
         last_target = now; target_changed = True
     dt = max(0.0, min(120.0, now - last_motion)); last_motion = now
     if dt <= 0.0:
         return target_changed, last_target, last_motion
-    alpha = 1.0 - math.pow(0.70, dt / cadence)
+    alpha = 1.0 - math.pow(0.42 if tremble else 0.70, dt / cadence)
     moved = False
     for st in states:
         ox=float(st.get('x',0.0) or 0.0); oy=float(st.get('y',0.0) or 0.0)
@@ -1891,8 +1906,15 @@ def _application_icon():
         pass
     return QIcon()
 
-# 用户配置固定放在 LOCALAPPDATA，跨解压目录/跨版本保留。
-_CONFIG_ROOT = os.path.join(os.environ.get("LOCALAPPDATA") or os.path.expanduser("~"), "LimbusLyric")
+# 用户配置默认固定放在 LOCALAPPDATA，跨解压目录/跨版本保留。
+# Field/integration runners may override only LimbusLyric's own config root without
+# replacing the process LOCALAPPDATA.  Player adapters and third-party libraries must
+# continue seeing the real Windows profile (notably NetEase cloudmusic-detector).
+_TEST_CONFIG_ROOT = str(os.environ.get("LIMBUSLYRIC_CONFIG_ROOT") or "").strip()
+if _TEST_CONFIG_ROOT:
+    _CONFIG_ROOT = os.path.abspath(os.path.expandvars(os.path.expanduser(_TEST_CONFIG_ROOT)))
+else:
+    _CONFIG_ROOT = os.path.join(os.environ.get("LOCALAPPDATA") or os.path.expanduser("~"), "LimbusLyric")
 os.makedirs(_CONFIG_ROOT, exist_ok=True)
 CONFIG_FILE = os.path.join(_CONFIG_ROOT, "lyric_config.json")
 AUTO_LYRIC_CACHE_FILE = os.path.join(_CONFIG_ROOT, "auto_lyric_cache_v1.json")
@@ -2098,7 +2120,7 @@ def set_autostart_enabled(enabled):
 DEFAULT_PLAYERS = {
     "网易云音乐": {
         "process": "cloudmusic.exe",
-        "pattern": r'^(.+)\s*-\s*(.+?)$'
+        "pattern": r'^(.+)\s+[-–—－]\s+(.+?)$'
     },
     "QQ音乐": {
         "process": "qqmusic.exe",
@@ -2140,6 +2162,14 @@ _LOG_SESSION_TRIM_TO_BYTES = 8 * 1024 * 1024
 
 def _log_directory_candidates():
     candidates = []
+    # Keep test/field logs beside the isolated LimbusLyric config while leaving the
+    # process LOCALAPPDATA untouched for player-native integrations.  In production
+    # _CONFIG_ROOT is still LOCALAPPDATA\LimbusLyric, so behavior is unchanged.
+    try:
+        if _CONFIG_ROOT:
+            candidates.append(os.path.join(_CONFIG_ROOT, 'logs'))
+    except Exception:
+        pass
     local = str(os.environ.get('LOCALAPPDATA') or '').strip()
     if local:
         candidates.append(os.path.join(local, 'LimbusLyric', 'logs'))
@@ -4461,6 +4491,36 @@ def _add_lrc_offset(lrc_text, delta_ms):
     return f'[offset:{combined}]\n' + '\n'.join(kept).strip()
 
 
+def _foreign_instrumental_identity_matches(song_name, artist, provider_meta):
+    """Require explicit provider identity before foreign instrumental evidence can end search.
+
+    Duration equality alone is not identity.  A field log matched ``夏|soutk`` to KuGou's
+    ``June|arkady sevidov`` placeholder because both happened to be 105s.  Foreign ordinary/
+    precise lyrics keep their mature ranking rules; only the terminal *instrumental* shortcut
+    is fail-closed here because it can suppress every remaining provider.
+    """
+    meta = dict(provider_meta or {})
+    matched_song = str(meta.get('matched_song') or '').strip()
+    matched_artist = str(meta.get('matched_artist') or '').strip()
+    if not matched_song:
+        return False
+    q_song = _clean_name(song_name)
+    c_song = _clean_name(matched_song)
+    if not q_song or not c_song or q_song != c_song:
+        return False
+    if str(artist or '').strip():
+        if not matched_artist:
+            return False
+        try:
+            artist_ok, _alias = _artist_alias_match(artist, matched_artist)
+            if not artist_ok:
+                return False
+        except Exception:
+            if _clean_name(artist) != _clean_name(matched_artist):
+                return False
+    return True
+
+
 # ==================== 歌词搜索引擎 ====================
 class LyricSearchEngine:
     HEADERS = {
@@ -5488,6 +5548,21 @@ class LyricSearchEngine:
                     song = LyricSearchEngine._best(
                         songs, song_name, artist,
                         lambda x: x.get('name', ''), _artist_text)
+                    # A text-rank winner must still match the requested title.  Artist score
+                    # alone used to let a different song by the same singer win when provider
+                    # search returned no title match (for example 海の幽霊 -> Lemon).  Keep
+                    # parenthetical/translated aliases compatible through normalized containment,
+                    # but never promote an unrelated title into lyric/cover identity metadata.
+                    if song is not None:
+                        q_song = _clean_name(song_name)
+                        c_song = _clean_name(song.get('name', ''))
+                        song_ok = bool(q_song and c_song and (q_song == c_song or q_song in c_song or c_song in q_song))
+                        if not song_ok:
+                            write_error_log('网易云文本排名错题拒绝', detail=(
+                                f'song={song_name} | artist={artist} | matched_song={song.get("name","")} | '
+                                f'matched_artist={_artist_text(song)} | candidates={len(songs)} | action=no-unsafe-fallback'
+                            ))
+                            song = None
                     if preferred_id:
                         write_error_log('网易云Bridge song_id搜索未确认', detail=(
                             f'song={song_name} | track_id={preferred_id} | candidates={len(songs)} | fallback=text-rank'
@@ -6715,6 +6790,18 @@ class LyricSearchEngine:
                             break
                 if song is None:
                     song = LyricSearchEngine._best(songs, song_name, artist, lambda x: x.get('name', ''), _artist_text)
+                    # Ordinary first-screen lookup has the same identity requirement as the
+                    # precise path: a same-artist different-title row is not a safe fallback.
+                    # This also prevents a bad NetEase song_id from poisoning cover lookup.
+                    if song is not None:
+                        c_song = _clean_name(song.get('name', ''))
+                        song_ok = bool(q_song and c_song and (q_song == c_song or q_song in c_song or c_song in q_song))
+                        if not song_ok:
+                            write_error_log('网易云普通歌词文本排名错题拒绝', detail=(
+                                f'song={song_name} | artist={artist} | matched_song={song.get("name","")} | '
+                                f'matched_artist={_artist_text(song)} | candidates={len(songs)} | action=no-unsafe-fallback'
+                            ))
+                            song = None
             if not song:
                 return LyricSearchEngine._fail('网易云', detail='没有搜索到匹配歌曲')
             song_id = song.get('id')
@@ -7211,6 +7298,13 @@ class LyricSearchEngine:
                     alt_instrumental = bool(
                         _provider_payload_instrumental(provider, alt_lrc, int(alt_duration or expected_ms or 0), alt_meta)
                     )
+                    if alt_instrumental and not _foreign_instrumental_identity_matches(song_name, artist, alt_meta):
+                        write_error_log('V137跨平台纯音乐身份不一致拒绝', detail=(
+                            f'from={source} | to={provider} | song={song_name} | artist={artist} | '
+                            f'matched_song={str((alt_meta or {}).get("matched_song") or "")} | '
+                            f'matched_artist={str((alt_meta or {}).get("matched_artist") or "")} | '
+                            f'candidate_duration={int(alt_duration or 0)} | action=continue-search'))
+                        alt_instrumental = False
                     foreign_rows.append((
                         provider, alt_lrc, alt_tlyric, int(alt_duration or 0),
                         _lyric_clock_quality(alt_lrc), dict(alt_meta or {}), alt_instrumental
@@ -7219,7 +7313,7 @@ class LyricSearchEngine:
                         write_error_log('跨平台纯音乐证据提前收口', detail=(
                             f'from={source} | to={provider} | song={song_name} | artist={artist} | '
                             f'expected_duration={expected_ms} | candidate_duration={int(alt_duration or 0)} | '
-                            'remaining_providers=skip | presentation-only=1'))
+                            'identity=explicit-match | remaining_providers=skip | presentation-only=1'))
                         break
 
             if not primary_lrc:
@@ -12246,7 +12340,25 @@ class MediaSessionSync:
                         pass
             if (not startup_existing and not bool(getattr(self, '_auto_local_active', False)) and
                     status in ('playing', 'paused', 'unknown')):
-                self._start_auto_local_clock(elapsed)
+                display_seed = float(elapsed)
+                if proc == 'cloudmusic':
+                    floor_fn = globals().get('_v137p8_ncm_floor_now')
+                    if callable(floor_fn):
+                        try:
+                            floor = floor_fn(self, track_key, status, now)
+                        except Exception:
+                            floor = None
+                        if floor is not None and float(floor) > display_seed:
+                            old_seed = display_seed
+                            display_seed = float(floor)
+                            actions.append('ncm-continuity-floor')
+                            try:
+                                write_error_log('V137P8网易云临时时钟无后退交接', detail=(
+                                    f'elapsed_seed={int(round(old_seed))}ms | floor={int(round(display_seed))}ms | '
+                                    'authority=display-only | seek=unchanged'))
+                            except Exception:
+                                pass
+                self._start_auto_local_clock(display_seed)
                 try:
                     self._arm_auto_local_unknown_play_carry(startup_existing=False)
                 except Exception:
@@ -13953,11 +14065,16 @@ class MediaSessionSync:
                 bool(getattr(self, '_kugou_rail_master_active', False)) or
                 not str(getattr(self, '_track_key', '') or '')):
             return False
-        st = str(status or 'unknown')
-        if st not in ('playing', 'paused'):
+        st = str(status or 'unknown').lower()
+        if st not in ('playing', 'paused', 'unknown'):
             return False
+        # UIA/Host-V2 retains its reviewed playing/paused contract.  For old-Win10 frozen
+        # startup where status itself is unknown, only the read-only on-screen rail is allowed
+        # to establish authority, and only after stronger temporal-motion proof below.
         try:
-            observed = self._kugou_poll_uia_progress_v2(st, local_position_hint=fallback_position_ms)
+            observed = None
+            if st in ('playing', 'paused'):
+                observed = self._kugou_poll_uia_progress_v2(st, local_position_hint=fallback_position_ms)
             if observed is not None and bool(getattr(self, '_kugou_rail_master_active', False)):
                 self._startup_existing_attach = False
                 try:
@@ -13981,7 +14098,7 @@ class MediaSessionSync:
         # the visible window.  This path likewise has to prove temporal motion before it can
         # seed the master, so it is safe for a mid-song startup attach.
         try:
-            if st == 'playing' and self._kugou_poll_visual_rail_anchor(status_hint=st, local_position_hint=fallback_position_ms):
+            if st in ('playing', 'unknown') and self._kugou_poll_visual_rail_anchor(status_hint=st, local_position_hint=fallback_position_ms):
                 if bool(getattr(self, '_kugou_rail_master_active', False)):
                     self._startup_existing_attach = False
                     try:
@@ -14396,8 +14513,9 @@ class MediaSessionSync:
             return False
         prev=getattr(self, '_kugou_visual_prev_frame', None); prev_mono=float(getattr(self, '_kugou_visual_prev_mono', 0.0) or 0.0)
         self._kugou_visual_prev_frame=frame; self._kugou_visual_prev_mono=now
-        status=str(status_hint or self._state.get('status') or self._est_status or 'unknown')
-        if status != 'playing' or not prev or prev_mono <= 0.0:
+        status=str(status_hint or self._state.get('status') or self._est_status or 'unknown').lower()
+        unknown_status = (status == 'unknown')
+        if status not in ('playing', 'unknown') or not prev or prev_mono <= 0.0:
             return False
         motion=self._kugou_visual_motion_candidate(prev, frame)
         if not motion:
@@ -14436,15 +14554,29 @@ class MediaSessionSync:
                 except Exception:
                     pass
             self._kugou_visual_pending={
-                'hits':1,'first_mono':now,'last_mono':now,'last_position':observed,
-                'x0':gx0,'x1':gx1,'y':gy,'rail_w':rail_w,'color_sep':color_sep,'changed':changed
+                'hits':1,'first_mono':now,'last_mono':now,'last_position':observed,'first_position':observed,
+                'x0':gx0,'x1':gx1,'y':gy,'rail_w':rail_w,'color_sep':color_sep,'changed':changed,
+                'unknown_status':int(unknown_status)
             }
             return False
         pending['hits']=int(pending.get('hits') or 1)+1
         pending['last_mono']=now; pending['last_position']=observed
         pending['x0']=gx0; pending['x1']=gx1; pending['y']=gy; pending['rail_w']=rail_w
         hits=int(pending['hits']); span=now-float(pending.get('first_mono') or now)
-        if hits < int(KUGOU_VISUAL_RAIL_MIN_HITS) or span < float(KUGOU_VISUAL_RAIL_MIN_SPAN_MS):
+        # Unknown playback state is common on old-Win10 frozen KuGou. Never infer playing
+        # from mere liveness: require two extra coherent rail samples, a longer span, and
+        # meaningful forward progress at roughly wall-clock pace. A paused/static rail therefore
+        # cannot create a clock, while a visibly moving rail can prove both position and playing.
+        proof_unknown = bool(unknown_status or int(pending.get('unknown_status') or 0))
+        required_hits = int(KUGOU_VISUAL_RAIL_MIN_HITS) + (2 if proof_unknown else 0)
+        required_span = max(float(KUGOU_VISUAL_RAIL_MIN_SPAN_MS), 1400.0 if proof_unknown else 0.0)
+        total_progress = float(observed) - float(pending.get('first_position') or observed)
+        if hits < required_hits or span < required_span:
+            return False
+        if proof_unknown and (total_progress < max(500.0, span * 0.35) or total_progress > span * 1.85):
+            self._kugou_visual_pending = None
+            self._kugou_visual_wait_diag(now, 'unknown-status-motion-proof-reset',
+                                         f'hits={hits} | span={int(round(span))}ms | progress={int(round(total_progress))}ms')
             return False
         self._kugou_visual_rail_bounds=(float(gx0),float(gx1))
         self._kugou_visual_rail_y=float(gy)
@@ -14469,16 +14601,18 @@ class MediaSessionSync:
                        abs(float(drift)) >= float(KUGOU_VISUAL_RAIL_REANCHOR_DRIFT_MS))
         if should_anchor and now-float(getattr(self, '_kugou_visual_last_anchor_mono', 0.0) or 0.0) >= 700.0:
             self._kugou_visual_last_anchor_mono=now
-            self._kugou_seed_rail_local_master(observed,status=status,reason='visual-rail-auto',absolute=True,now_ms=now)
+            anchor_status = 'playing' if proof_unknown else status
+            anchor_reason = 'visual-rail-unknown-motion-proof' if proof_unknown else 'visual-rail-auto'
+            self._kugou_seed_rail_local_master(observed,status=anchor_status,reason=anchor_reason,absolute=True,now_ms=now)
             try:
                 self._set_state(connected=True,sync_waiting=False,position_ms=int(round(observed)),raw_position_ms=0,
-                                duration_ms=int(round(duration)),status=status,source='kgmusic.exe',
+                                duration_ms=int(round(duration)),status=anchor_status,source='kgmusic.exe',
                                 position_source='kugou-rail-local-master')
                 write_error_log('酷狗视觉进度条自动校准',detail=(
                     f'position={int(round(observed))}ms | duration={int(round(duration))}ms | ratio={ratio:.5f} | '
                     f'rail=({int(round(gx0))},{int(round(gy))})->({int(round(gx1))},{int(round(gy))}) | '
                     f'hits={hits} | span={int(round(span))}ms | drift={None if drift is None else int(round(drift))}ms | '
-                    f'color_sep={int(color_sep)} | screen-readonly=1'))
+                    f'color_sep={int(color_sep)} | status_proof={"visual-motion" if proof_unknown else "player-state"} | screen-readonly=1'))
             except Exception:
                 pass
             # Restart proof after a commit so an unrelated later animation cannot inherit hits.
@@ -15221,6 +15355,26 @@ class MediaSessionSync:
 
         if is_down and not was_down:
             if in_progress:
+                # v137 infra8: the progress rectangle is cached screen geometry, not input
+                # ownership.  When QQ is behind/minimized, an unrelated foreground click can
+                # land on the same coordinates.  Require the actual WindowFromPoint target to
+                # belong to QQ before arming a seek gesture.
+                click_stem = self._process_stem(self._process_stem_at_point(cx, cy))
+                if not _v137_qq_progress_input_owned(click_stem):
+                    self._qq_mouse_is_down = False
+                    self._qq_gesture_recent_until_mono = 0.0
+                    try:
+                        self._uia_reader.set_qq_gesture_candidate_quarantine(0.0)
+                    except Exception:
+                        pass
+                    if SOURCE_GUARD_ENABLED:
+                        try:
+                            write_error_log('V137 QQ后台进度条伪手势已拒绝', detail=(
+                                f'cursor=({int(cx)},{int(cy)}) | band={rect} | target={click_stem or "unknown"} | '
+                                'required=qqmusic | seek=0'))
+                        except Exception:
+                            pass
+                    return
                 if SYNC_AUTHORITY_ENABLED:
                     self._qq_reset_clock_authority()
                 self._qq_gesture_id += 1
@@ -16085,6 +16239,37 @@ class MediaSessionSync:
                 except Exception:
                     pass
             return None
+        # V137P8: a long identity-loss streak gets a bounded native-detector soft restart.
+        # H31 continuity bridges the restart; this mirrors the field observation that a full
+        # app restart recovers the clock without forcing the user to restart LimbusLyric.
+        heal_fn = globals().get('_v137p8_ncm_maybe_restart_native')
+        if callable(heal_fn):
+            try:
+                heal_fn(self, snap, time.monotonic() * 1000.0)
+            except Exception:
+                pass
+
+        # V137P8: keep identity-less detector position strictly outside formal authority,
+        # but expose a short-lived raw witness to H31. This closes the field failure where
+        # cloudmusic_detector retained a healthy position for minutes while title/id became
+        # temporarily empty, causing the 120s continuity lease to fall back to a local timer.
+        if bool(snap.get('anonymous_clock')):
+            try:
+                self._v137p8_ncm_anonymous_clock = {
+                    'position_ms': float(snap.get('position_ms')),
+                    'duration_ms': float(snap.get('duration_ms') or 0.0),
+                    'status': str(snap.get('status') or 'unknown').lower(),
+                    'track_serial': int(snap.get('track_serial', -1) or 0),
+                    'seek_serial': int(snap.get('seek_serial', -1) or 0),
+                    'state_serial': int(snap.get('state_serial', -1) or 0),
+                    'sample_mono': time.monotonic() * 1000.0,
+                    'error': str(snap.get('error') or ''),
+                }
+            except Exception:
+                self._v137p8_ncm_anonymous_clock = None
+        elif snap.get('ready'):
+            self._v137p8_ncm_anonymous_clock = None
+
         if not snap.get('ready'):
             self._netease_native_primary = False
             now_diag = time.monotonic() * 1000.0
@@ -18690,7 +18875,7 @@ MediaSessionSync._player_liveness_worker = _limbus_player_liveness_worker_bounde
 class QQMusicUiAdapter:
     """QQ音乐专用播放时钟适配器。
 
-    QQ Desktop 在当前测试版本中稳定暴露两个独立的 mm:ss 文本标签，而不是
+    QQ Desktop 在当前版本中稳定暴露两个独立的 mm:ss 文本标签，而不是
     网易云那种一个紧凑的 “当前 / 总时长” Button。通用 UIA 扫描最终能找到它们，
     但第一次可能需要几十秒，而且 uia-time-pair 过去被故意视为低可信来源。
 
@@ -26522,8 +26707,19 @@ class LyricFetcher:
 
         patterns = []
         if custom_pattern:
-            patterns.append(custom_pattern)
-        if player_name == 'QQ音乐':
+            # Existing installations may have persisted the historical NetEase default into
+            # config. Skip that one known-unsafe pattern even if it came from saved settings;
+            # genuinely different user custom patterns retain their historical precedence.
+            _legacy_ncm_pattern = r'^(.+)\s*-\s*(.+?)$'
+            if not (player_name == '网易云音乐' and str(custom_pattern) == _legacy_ncm_pattern):
+                patterns.append(custom_pattern)
+        if player_name == '网易云音乐':
+            # V137 phase-1: NetEase's old zero-space delimiter accepted the final hyphen
+            # inside artist names such as SLAVE.V-V-R and manufactured a new track identity.
+            # Fail closed on ambiguous no-space titles; a desktop separator must have visible
+            # whitespace on both sides. Native NetEase track-id authority remains unchanged.
+            patterns.append(r'^(.+)\s+[-–—－]\s+(.+?)$')
+        elif player_name == 'QQ音乐':
             patterns.extend([
                 r'^(.+?)\s*[-–—－]\s*(.+?)\s*[-–—－]\s*QQ音乐$',
                 r'^(.+?)\s*[-–—－]\s*(.+?)$'
@@ -27194,6 +27390,7 @@ def save_all_config(panel, presets, players):
             'font_italic': panel.font_italic_check.isChecked() if hasattr(panel, 'font_italic_check') else False,
             'stroke_width': panel.stroke_spin.value(),
             'spacing': panel.spacing_spin.value(),
+            'shake_mode': str(panel.shake_mode_combo.currentData() or 'shake') if hasattr(panel, 'shake_mode_combo') else 'shake',
             'shake_intensity': panel.shake_intensity_slider.value(),
             'shake_speed': panel.shake_speed_slider.value(),
             'fade_speed': panel.fade_speed_slider.value(),
@@ -32922,10 +33119,20 @@ class LyricWindow(QMainWindow):
                 self._r24_visibility_wait_started_mono = now_mono
             wait_ms = max(0.0, now_mono - wait_started)
             if wait_ms >= 650.0:
+                # Keep early recovery responsive, then back off. A permanently unavailable
+                # player clock used to create thousands of identical R2.4 lines and repeated
+                # evidence wakeups for hours without improving authority.
+                if wait_ms < 15000.0:
+                    rescue_cadence_ms, diag_cadence_ms = 900.0, 1800.0
+                elif wait_ms < 60000.0:
+                    rescue_cadence_ms, diag_cadence_ms = 5000.0, 10000.0
+                else:
+                    rescue_cadence_ms, diag_cadence_ms = 15000.0, 60000.0
                 last_rescue = float(getattr(self, '_r24_visibility_rescue_request_mono', 0.0) or 0.0)
-                if now_mono - last_rescue >= 900.0:
+                if now_mono - last_rescue >= rescue_cadence_ms:
                     self._r24_visibility_rescue_request_mono = now_mono
-                    sync_obj = getattr(getattr(self, 'position_provider', None), '__self__', None)
+                    sync_obj = (getattr(getattr(self, 'position_provider', None), '__self__', None) or
+                                getattr(self, '_r24_sync_obj', None))
                     try:
                         if sync_obj is not None and hasattr(sync_obj, 'request_visibility_clock_rescue'):
                             sync_obj.request_visibility_clock_rescue(int(getattr(self, 'song_duration', 0) or 0))
@@ -32933,7 +33140,7 @@ class LyricWindow(QMainWindow):
                         try: write_error_log('R2.4可见字幕时钟救援异常', exc)
                         except Exception: pass
                     last_diag = float(getattr(self, '_r24_visibility_wait_log_mono', 0.0) or 0.0)
-                    if now_mono - last_diag >= 1800.0:
+                    if now_mono - last_diag >= diag_cadence_ms:
                         self._r24_visibility_wait_log_mono = now_mono
                         try:
                             proc = str(getattr(sync_obj, '_process_hint', '') or 'unknown') if sync_obj is not None else 'unknown'
@@ -32943,7 +33150,7 @@ class LyricWindow(QMainWindow):
                                 f'player={proc} | track={track} | wait={int(wait_ms)}ms | '
                                 f'position_source={str(getattr(self, "_last_sync_position_source", "") or "none")} | '
                                 f'status={str(playback_status or "unknown")} | startup_existing={startup} | '
-                                'visual_count=0 | success=0'))
+                                f'rescue_cadence={int(rescue_cadence_ms)}ms | visual_count=0 | success=0'))
                         except Exception:
                             pass
             self.char_timer.stop()
@@ -32953,6 +33160,7 @@ class LyricWindow(QMainWindow):
             return
         self._r24_visibility_wait_started_mono = 0.0
         self._r24_visibility_rescue_request_mono = 0.0
+        self._r24_visibility_wait_log_mono = 0.0
 
         if bool(getattr(self, '_track_card_mode', False)):
             if bool(getattr(self, '_track_card_hidden', False)):
@@ -33190,6 +33398,16 @@ class LyricWindow(QMainWindow):
             self._audio_emphasis_last_latched_mono = 0.0
             self._pre_admit_burst_row(target)
             self.init_char_shakes(); self._place_randomly_safe()
+            # v137 infra4: H51 typography/depth/style are final only after placement preparation.
+            # Prewarm per-character/wipe exit material here, once per lyric-line birth, rather
+            # than only in start_lyric (which is song/hot-upgrade scoped). This gives H61 the
+            # whole active-line lifetime to finish before the row becomes history.
+            try:
+                _prewarm_active = globals().get('_h71_prewarm_active_line')
+                if callable(_prewarm_active):
+                    _prewarm_active(self, self.full_text)
+            except Exception:
+                pass
             self._active_char_speed = self._calc_char_speed(target, self.full_text)
             if SMOOTH_CLOCK_FLOW_ENABLED:
                 if self._precise_reveal_events(target):
@@ -33299,7 +33517,8 @@ class LyricWindow(QMainWindow):
             # This is the first point where the renderer actually owns a concrete lyric row.
             # Search success, overlay visibility and a non-empty timeline are not substitutes.
             try:
-                sync_obj = getattr(getattr(self, 'position_provider', None), '__self__', None)
+                sync_obj = (getattr(getattr(self, 'position_provider', None), '__self__', None) or
+                                getattr(self, '_r24_sync_obj', None))
                 track_key = str(getattr(sync_obj, '_track_key', '') or '') if sync_obj is not None else ''
                 visible_token = f'{track_key}|{int(getattr(sync_obj, "_track_identity_epoch", 0) or 0)}' if sync_obj is not None else str(target)
                 if visible_token != str(getattr(self, '_r24_first_visible_token', '') or ''):
@@ -33766,7 +33985,26 @@ class LyricWindow(QMainWindow):
                 painter.fillRect(_cr, Qt.transparent)
         painter.setCompositionMode(QPainter.CompositionMode_SourceOver)
 
+        # V137 Phase-2.1: QPainter clipping prevents stale pixels, but calling every resident
+        # history row's draw() on an active-only paint still executes its CPU-side layout/effect
+        # work.  Skip resident rows whose conservative visual region does not intersect this
+        # QPaintEvent.  Fading rows keep the mature full-cadence path.
+        try:
+            _v137p21_event_region = QRegion(event.region())
+        except Exception:
+            _v137p21_event_region = QRegion(event.rect())
         for f in self.history_lines:
+            _v137p21_skip = False
+            try:
+                _v137p21_row_region = self._held_visual_region(f)
+                if (not _v137p21_row_region.isEmpty() and
+                        not _v137p21_event_region.intersects(_v137p21_row_region)):
+                    _v137p21_skip = True
+            except Exception:
+                _v137p21_skip = False
+            if _v137p21_skip:
+                self._v137p21_history_draw_skip_count = int(getattr(self, '_v137p21_history_draw_skip_count', 0) or 0) + 1
+                continue
             f.draw(painter)
         for f in self.fading_lines:
             f.draw(painter)
@@ -33982,6 +34220,162 @@ class LyricWindow(QMainWindow):
         if event.key() == Qt.Key_Escape: QApplication.quit()
 
 # ==================== 控制面板无边框标题栏 ====================
+
+# ---------------------------------------------------------------------------
+# V137 PHASE1 LOCAL STABILITY CANDIDATE
+# This local-only stabilization pass deliberately adds no runtime monkey-patch layer to
+# the S2 debt hotspots. Formal MediaSessionSync clock/seek authority remains unchanged.
+# ---------------------------------------------------------------------------
+
+def _v137p1_presentation_snapshot(panel):
+    """Return a LyricWindow-only playback view without mutating formal transport state."""
+    sync = getattr(panel, 'media_sync', None)
+    if sync is None:
+        return {}
+    state = dict(sync.snapshot() or {})
+    formal_position = state.get('position_ms')
+    if formal_position is not None:
+        if bool(getattr(panel, '_v137p1_ncm_display_active', False)):
+            try:
+                last = float(getattr(panel, '_v137p1_ncm_display_last_ms', formal_position) or formal_position)
+                drift = int(float(formal_position) - last)
+                write_error_log('V137P1网易云真实时钟接管', detail=(
+                    f'formal={int(formal_position)}ms | previous_display={int(last)}ms | drift={drift}ms | '
+                    'authority=formal-restored'))
+            except Exception:
+                pass
+        panel._v137p1_ncm_display_active = False
+        panel._v137p1_ncm_display_last_ms = None
+        return state
+
+    try:
+        selected = str(panel.player_combo.currentText() or '')
+    except Exception:
+        selected = ''
+    process = str(getattr(sync, '_process_hint', '') or '').lower().replace('.exe', '')
+    if selected != '网易云音乐' or 'cloudmusic' not in process:
+        return state
+    try:
+        safe = bool(_h26_netease_win10_safe_profile(sync))
+    except Exception:
+        safe = False
+    if not safe:
+        return state
+    if not bool(getattr(panel, '_is_started', False)):
+        return state
+    if bool(getattr(panel, '_limbus_mode_payload_blocked', False)):
+        return state
+    try:
+        if not list(getattr(panel.lyric_window, 'lyric_timeline', None) or []):
+            return state
+    except Exception:
+        return state
+    if str(state.get('player_liveness') or '').lower() == 'dead':
+        return state
+    status = str(state.get('status') or 'unknown').lower()
+    if status == 'stopped':
+        return state
+
+    hint = getattr(sync, '_v137p1_ncm_display_hint', None)
+    if not isinstance(hint, dict) or bool(hint.get('startup_existing')):
+        return state
+    track_key = str(getattr(sync, '_track_key', '') or '')
+    if not track_key or str(hint.get('track') or '') != track_key:
+        return state
+    now = time.monotonic() * 1000.0
+    age = max(0.0, now - float(hint.get('mono') or 0.0))
+    if age > 2500.0:
+        return state
+    try:
+        pos = max(0.0, float(hint.get('position_ms') or 0.0))
+    except Exception:
+        return state
+    if pos < 650.0:
+        return state
+    # Only explicit PLAYING may extrapolate between R2.4 evidence refreshes. UNKNOWN and
+    # PAUSED use the latest hint as a frozen presentation sample instead of inventing motion.
+    if status == 'playing':
+        pos += min(age, 1000.0)
+    duration = int(state.get('duration_ms') or getattr(panel.lyric_window, 'song_duration', 0) or 0)
+    if duration > 0:
+        pos = min(pos, max(0.0, float(duration)))
+
+    patched = dict(state)
+    patched['position_ms'] = int(pos)
+    patched['connected'] = True
+    patched['sync_waiting'] = False
+    patched['position_source'] = 'v137p1-ncm-presentation-only'
+    patched['visual_seek'] = False
+    panel._v137p1_ncm_display_last_ms = float(pos)
+    if not bool(getattr(panel, '_v137p1_ncm_display_active', False)):
+        panel._v137p1_ncm_display_active = True
+        try:
+            write_error_log('V137P1网易云展示时钟启动', detail=(
+                f'track={track_key} | hint={int(hint.get("position_ms") or 0)}ms | status={status} | '
+                'authority=renderer-only | seek=forbidden | formal-sync=unchanged'))
+        except Exception:
+            pass
+    return patched
+
+
+def _v137p1_show_overlay_notice(panel, message):
+    """Render one presentation-only status card; does not fabricate provider lyrics."""
+    w = getattr(panel, 'lyric_window', None)
+    if w is None:
+        return False
+    text = str(message or '').strip()
+    if not text:
+        return False
+    try:
+        w.set_track_card_mode(True, 60000)
+        w.start_lyric(
+            '[00:00.00]' + text[:160],
+            w.font, w.text_color, w.stroke_color, w.stroke_width,
+            w.angle_min, w.angle_max, w.margin_time, w.max_interval, w.max_duration,
+            w.mode, w.spacing, w.shake_intensity, w.shake_speed,
+            w.fade_speed, w.rise_speed, w.glow, w.glow_color, w.glow_size, w.glow_alpha,
+            start_delay=0,
+            timing_tail_override_ms=w.timing_tail_override_ms,
+            timing_active_cap_ms=w.timing_active_cap_ms,
+        )
+        w.show()
+        panel._v137p1_mode_notice_visible = True
+        return True
+    except Exception as exc:
+        try:
+            write_error_log('V137P1模式提示卡显示失败', exc)
+        except Exception:
+            pass
+        return False
+
+
+def _v137p1_clear_overlay_notice(panel):
+    if not bool(getattr(panel, '_v137p1_mode_notice_visible', False)):
+        return
+    panel._v137p1_mode_notice_visible = False
+    try:
+        panel.lyric_window.set_track_card_mode(False)
+    except Exception:
+        pass
+
+
+def _v137p1_start_ctor_watchdog(done_event, main_thread_id, started_mono):
+    """Log the real GUI-thread stack if ControlPanel construction stalls."""
+    def worker():
+        for threshold_s in (2.0, 5.0, 15.0, 45.0):
+            wait_s = max(0.0, threshold_s - ((time.monotonic() * 1000.0 - started_mono) / 1000.0))
+            if done_event.wait(wait_s):
+                return
+            try:
+                frame = sys._current_frames().get(main_thread_id)
+                stack = ''.join(traceback.format_stack(frame, limit=18)) if frame is not None else '<main-frame-unavailable>'
+                write_error_log('V137P1 ControlPanel构造看门狗', detail=(
+                    f'elapsed={int(time.monotonic() * 1000.0 - started_mono)}ms | '\
+                    f'frozen={int(bool(getattr(sys, "frozen", False)))} | stack=\\n{stack}'), force_sync=True)
+            except Exception:
+                pass
+    threading.Thread(target=worker, name='LimbusLyric-V137P1-StartupWatchdog', daemon=True).start()
+
 
 # V13 track-card late-attach presentation fast path ---------------------------
 # Normal lyrics still wait for a real player position.  A pure-music card is not a timed
@@ -34415,7 +34809,7 @@ class StartupMotion(QWidget):
         meta_font = QFont('Segoe UI', 8)
         meta_font.setLetterSpacing(QFont.AbsoluteSpacing, 1.15)
         painter.setFont(meta_font)
-        version = str(LIMBUSLYRIC_BUILD_TAG).split(' ', 1)[0].lstrip('vV')
+        version = str(LIMBUSLYRIC_DISPLAY_VERSION).split(' ', 1)[0].lstrip('vV')
         painter.drawText(QRectF(98.0, 82.0, 300.0, 20.0), Qt.AlignLeft | Qt.AlignVCenter, f'LYRIC SYNC  ·  {version}')
 
         marks_x = 36.0
@@ -34505,6 +34899,423 @@ class DiyStylePreview(QWidget):
         p.setPen(Qt.NoPen); p.setBrush(self._color(payload.get('text_color'), '#fffeef')); p.drawPath(path)
 
 
+class FrozenSafeStartupMotion(QWidget):
+    """Frozen-safe startup morph that follows the original RC11 choreography.
+
+    The old RC11 transition felt continuous because it did three separate things:
+    (1) finish the brand intro before heavy panel construction, (2) prepare the real panel
+    before the grow begins, and (3) morph into a *picture of the real panel* before swapping
+    windows.  The historical implementation used a transparent virtual-desktop top-level host,
+    which H43 later correlated with packaged-Windows 0x8001010d failures.  This version keeps a
+    normal opaque splash HWND and never uses a translucent host or top-level alpha cross-fade.
+    """
+    BASE_W = 488
+    BASE_H = 238
+
+    def __init__(self, app_icon=None):
+        super().__init__(None)
+        flags = Qt.SplashScreen | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint
+        try:
+            flags |= Qt.WindowTransparentForInput
+        except Exception:
+            pass
+        self.setWindowFlags(flags)
+        self.setAttribute(Qt.WA_TranslucentBackground, False)
+        self.setAttribute(Qt.WA_ShowWithoutActivating, True)
+        self.setFocusPolicy(Qt.NoFocus)
+        self.resize(self.BASE_W, self.BASE_H)
+        self._app_icon = app_icon if isinstance(app_icon, QIcon) else QIcon()
+        self._started_mono = 0.0
+        self._expand_started_mono = 0.0
+        self._expanding = False
+        self._completed = False
+        self._target_panel = None
+        self._target_geometry = QRect()
+        self._start_geometry = QRect()
+        self._finish_callback = None
+        self._grow_progress = 0.0
+        self._painted_once = False
+        self._panel_snapshot = QPixmap()
+        self._snapshot_ok = False
+        self._settle_pending = False
+        # Keep the old RC11 rhythm, but remove its 720 ms mandatory pre-build dwell.  The intro
+        # itself is accelerated so it can finish before construction without adding a full second.
+        self._intro_ms = 360
+        self._post_ready_settle_ms = 110
+        self._grow_ms = 780
+        self._snapshot_reveal_at = 0.42
+        self._identity_fade_at = 0.24
+        self._timer = QTimer(self)
+        self._timer.setInterval(16)
+        try:
+            self._timer.setTimerType(Qt.PreciseTimer)
+        except Exception:
+            pass
+        self._timer.timeout.connect(self._tick)
+
+    @staticmethod
+    def _clamp01(value):
+        return max(0.0, min(1.0, float(value)))
+
+    @classmethod
+    def _smoothstep(cls, value):
+        value = cls._clamp01(value)
+        return value * value * (3.0 - 2.0 * value)
+
+    @classmethod
+    def _ease_out_cubic(cls, value):
+        value = cls._clamp01(value)
+        return 1.0 - math.pow(1.0 - value, 3.0)
+
+    @staticmethod
+    def _lerp(a, b, t):
+        return int(round(float(a) + (float(b) - float(a)) * float(t)))
+
+    @classmethod
+    def _interpolate_rect(cls, start, end, t):
+        return QRect(
+            cls._lerp(start.x(), end.x(), t),
+            cls._lerp(start.y(), end.y(), t),
+            max(1, cls._lerp(start.width(), end.width(), t)),
+            max(1, cls._lerp(start.height(), end.height(), t)),
+        )
+
+    def _request_native_rounding(self):
+        """Ask DWM for normal rounded corners without creating a translucent/layered host."""
+        if sys.platform != 'win32':
+            return
+        try:
+            # DWMWA_WINDOW_CORNER_PREFERENCE = 33, DWMWCP_ROUND = 2 (Win11+).
+            pref = ctypes.c_int(2)
+            ctypes.windll.dwmapi.DwmSetWindowAttribute(
+                int(self.winId()), 33, ctypes.byref(pref), ctypes.sizeof(pref))
+        except Exception:
+            pass
+
+    def show_centered(self, screen=None):
+        screen = screen or QApplication.primaryScreen()
+        try:
+            area = screen.availableGeometry() if screen is not None else QRect(0, 0, 1280, 720)
+        except Exception:
+            area = QRect(0, 0, 1280, 720)
+        self.resize(self.BASE_W, self.BASE_H)
+        self.move(area.left() + max(0, (area.width() - self.width()) // 2),
+                  area.top() + max(0, (area.height() - self.height()) // 2))
+        self._started_mono = time.monotonic()
+        self._grow_progress = 0.0
+        self.show()
+        self._request_native_rounding()
+        self.raise_()
+        self.update()
+        try:
+            QApplication.processEvents()
+        except Exception:
+            pass
+        if not self._timer.isActive():
+            self._timer.start()
+        try:
+            write_error_log('V137 frozen RC11式启动动画已显示', detail=(
+                f'hwnd={int(self.winId())} | opaque=1 | translucent=0 | preconstruction=1 | '
+                f'intro={int(self._intro_ms)}ms | handoff=snapshot-morph'), force_sync=True)
+        except Exception:
+            pass
+
+    def _capture_panel_snapshot(self, panel, target_geometry):
+        """Render the fully laid-out hidden panel; this is the visual bridge into the real window."""
+        if panel is None:
+            return QPixmap()
+        try:
+            target = QRect(target_geometry)
+            if target.isValid() and target.width() > 0 and target.height() > 0:
+                panel.setGeometry(target)
+            panel.ensurePolished()
+            layout = panel.layout()
+            if layout is not None:
+                layout.activate()
+            panel.updateGeometry()
+            size = panel.size()
+            if size.width() <= 0 or size.height() <= 0:
+                return QPixmap()
+            pm = QPixmap(size)
+            try:
+                pm.fill(panel.palette().window().color())
+            except Exception:
+                pm.fill(QColor(17, 17, 20))
+            panel.render(pm)
+            return pm
+        except Exception:
+            return QPixmap()
+
+    def finish(self, panel=None, target_geometry=None, callback=None):
+        if self._completed or self._expanding or self._settle_pending:
+            return
+        self._target_panel = panel
+        self._finish_callback = callback
+        self._start_geometry = QRect(self.geometry())
+        try:
+            self._target_geometry = QRect(target_geometry) if target_geometry is not None else QRect(panel.geometry())
+        except Exception:
+            self._target_geometry = QRect(self._start_geometry)
+
+        # RC11 prepared the real panel before the grow.  We preserve that sequencing without
+        # showing an invisible native panel: render a snapshot of the already-laid-out QWidget.
+        self._panel_snapshot = self._capture_panel_snapshot(panel, self._target_geometry)
+        self._snapshot_ok = not self._panel_snapshot.isNull()
+        self._settle_pending = True
+        try:
+            self.raise_()
+        except Exception:
+            pass
+        QTimer.singleShot(self._post_ready_settle_ms, self._begin_expand)
+
+    def _begin_expand(self):
+        if self._completed or self._expanding:
+            return
+        self._settle_pending = False
+        self._expanding = True
+        self._expand_started_mono = time.monotonic()
+        self._grow_progress = 0.0
+        if not self._timer.isActive():
+            self._timer.start()
+
+    def _complete(self):
+        if self._completed:
+            return
+        self._completed = True
+        callback = self._finish_callback
+        self._finish_callback = None
+        self._timer.stop()
+
+        # Prepare/show the real panel while the final snapshot is still covering the exact same
+        # geometry.  Only after Windows has painted it do we remove the splash, eliminating the
+        # one-frame dark gap that infra9 could expose.
+        if callback is not None:
+            try:
+                callback()
+                QApplication.processEvents()
+            except Exception:
+                pass
+        self.hide()
+        self.deleteLater()
+        try:
+            write_error_log('V137 frozen RC11式启动动画交接完成', detail=(
+                f'painted={int(bool(self._painted_once))} | snapshot={int(bool(self._snapshot_ok))} | '
+                f'grow_ms={int(self._grow_ms)} | '
+                f'duration={int(max(0.0, time.monotonic() - self._started_mono) * 1000)}ms'),
+                force_sync=True)
+        except Exception:
+            pass
+
+    def _tick(self):
+        if self._completed:
+            return
+        if not self._expanding:
+            self.update()
+            return
+        now = time.monotonic()
+        grow_t = self._clamp01((now - self._expand_started_mono) * 1000.0 / max(1.0, float(self._grow_ms)))
+        self._grow_progress = grow_t
+        geometry_t = self._smoothstep(grow_t)
+        try:
+            self.setGeometry(self._interpolate_rect(self._start_geometry, self._target_geometry, geometry_t))
+        except Exception:
+            pass
+        self.update()
+        if grow_t >= 1.0:
+            self._complete()
+
+    def paintEvent(self, event):
+        del event
+        self._painted_once = True
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing, True)
+        painter.setRenderHint(QPainter.TextAntialiasing, True)
+        painter.fillRect(self.rect(), QColor(17, 17, 20))
+
+        now_ms = max(0.0, (time.monotonic() - max(self._started_mono, 0.0001)) * 1000.0)
+        # Same RC11 staging, compressed so the identity has completed before the heavy constructor.
+        intro = self._ease_out_cubic(now_ms / 180.0)
+        title_intro = self._ease_out_cubic(max(0.0, now_ms - 45.0) / 210.0)
+        grow = self._clamp01(self._grow_progress)
+        surface = QRectF(self.rect()).adjusted(1.0, 1.0, -1.0, -1.0)
+        radius = 14.0 - 6.0 * self._smoothstep(grow)
+
+        # During the grow, transition into an actual render of the destination panel instead of
+        # stretching a blank dark rectangle and hard-cutting to the real UI at the end.
+        snapshot_alpha = 0.0
+        if self._snapshot_ok and grow > self._snapshot_reveal_at:
+            snapshot_alpha = self._smoothstep(
+                (grow - self._snapshot_reveal_at) / max(0.001, 1.0 - self._snapshot_reveal_at))
+        if snapshot_alpha > 0.0:
+            painter.save()
+            painter.setOpacity(snapshot_alpha)
+            painter.drawPixmap(self.rect(), self._panel_snapshot)
+            painter.restore()
+
+        # Keep the RC11 surface and identity above the destination snapshot until the handoff.
+        identity_alpha = 1.0 - self._smoothstep(
+            self._clamp01((grow - self._identity_fade_at) / max(0.001, 0.76 - self._identity_fade_at)))
+        surface_alpha = max(0.0, 1.0 - snapshot_alpha * 0.94)
+        painter.save()
+        painter.setOpacity(surface_alpha)
+        painter.setPen(QPen(QColor(70, 64, 67, 210), 1.0))
+        painter.setBrush(QColor(17, 17, 20, 250))
+        painter.drawRoundedRect(surface, radius, radius)
+        painter.restore()
+
+        painter.save()
+        painter.setOpacity(max(0.0, min(1.0, identity_alpha)))
+        painter.translate((self.width() - self.BASE_W) / 2.0, (self.height() - self.BASE_H) / 2.0)
+        painter.setPen(Qt.NoPen)
+        painter.setBrush(QColor(197, 139, 150, int(12 + 11 * intro)))
+        painter.drawRoundedRect(QRectF(18.0, 18.0, self.BASE_W - 36.0, 72.0), 10.0, 10.0)
+        icon_rect = QRectF(34.0, 42.0, 44.0, 44.0)
+        painter.setPen(QPen(QColor(93, 82, 86, int(170 * intro)), 1.0))
+        painter.setBrush(QColor(31, 29, 32, int(238 * intro)))
+        painter.drawRoundedRect(icon_rect, 9.0, 9.0)
+        if not self._app_icon.isNull():
+            try:
+                pm = self._app_icon.pixmap(30, 30)
+                painter.save(); painter.setOpacity(max(0.0, min(1.0, intro)))
+                painter.drawPixmap(QRect(41, 49, 30, 30), pm); painter.restore()
+            except Exception:
+                pass
+
+        painter.setPen(QColor(244, 239, 235, int(255 * title_intro)))
+        title_font = QFont('Microsoft YaHei UI', 20); title_font.setWeight(QFont.DemiBold); painter.setFont(title_font)
+        title_y = 68.0 + (1.0 - title_intro) * 5.0
+        painter.drawText(QRectF(96.0, title_y - 25.0, 330.0, 34.0), Qt.AlignLeft | Qt.AlignVCenter, 'LimbusLyric')
+        painter.setPen(QColor(153, 143, 147, int(220 * title_intro)))
+        meta_font = QFont('Segoe UI', 8); meta_font.setLetterSpacing(QFont.AbsoluteSpacing, 1.15); painter.setFont(meta_font)
+        version = str(LIMBUSLYRIC_DISPLAY_VERSION).split(' ', 1)[0].lstrip('vV')
+        painter.drawText(QRectF(98.0, 82.0, 300.0, 20.0), Qt.AlignLeft | Qt.AlignVCenter, f'LYRIC SYNC  ·  {version}')
+        marks_x = 36.0; marks_y = 139.0
+        painter.setPen(Qt.NoPen)
+        for idx, width in enumerate((26.0, 46.0, 34.0)):
+            local = self._ease_out_cubic(max(0.0, now_ms - 80.0 - idx * 30.0) / 210.0)
+            painter.setBrush(QColor(126, 116, 120, int(105 + 85 * local)))
+            painter.drawRoundedRect(QRectF(marks_x, marks_y + idx * 13.0, width * local, 2.0), 1.0, 1.0)
+        painter.setPen(QColor(132, 122, 126, int(185 * title_intro)))
+        hint_font = QFont('Microsoft YaHei UI', 9); painter.setFont(hint_font)
+        painter.drawText(QRectF(96.0, 132.0, 340.0, 28.0), Qt.AlignLeft | Qt.AlignVCenter, '桌面歌词 · 实时同步')
+        painter.setPen(QColor(101, 94, 97, int(160 * title_intro)))
+        foot_font = QFont('Segoe UI', 8); painter.setFont(foot_font)
+        painter.drawText(QRectF(36.0, 205.0, 416.0, 18.0), Qt.AlignRight | Qt.AlignVCenter, 'RC11')
+        painter.restore()
+
+
+class EmbeddedStartupMotion(QWidget):
+    """Frozen-safe startup transition drawn as a child of the real panel.
+
+    H43 proved that a separate translucent top-level splash can hit 0x8001010d on
+    packaged Windows.  This overlay deliberately creates no extra top-level/native
+    startup window: it only covers the already-created ControlPanel for a short fade.
+    """
+    def __init__(self, parent, app_icon=None):
+        super().__init__(parent)
+        self.setAttribute(Qt.WA_TransparentForMouseEvents, True)
+        self.setFocusPolicy(Qt.NoFocus)
+        self._app_icon = app_icon if isinstance(app_icon, QIcon) else QIcon()
+        self._started_mono = 0.0
+        self._hold_ms = 120
+        self._fade_ms = 620
+        self._alpha = 1.0
+        self._timer = QTimer(self)
+        self._timer.setInterval(16)
+        try:
+            self._timer.setTimerType(Qt.PreciseTimer)
+        except Exception:
+            pass
+        self._timer.timeout.connect(self._tick)
+
+    @staticmethod
+    def _smoothstep(value):
+        value = max(0.0, min(1.0, float(value)))
+        return value * value * (3.0 - 2.0 * value)
+
+    def start(self):
+        try:
+            self.setGeometry(self.parentWidget().rect())
+        except Exception:
+            pass
+        self._started_mono = time.monotonic()
+        self._alpha = 1.0
+        self.show()
+        self.raise_()
+        self.update()
+        if not self._timer.isActive():
+            self._timer.start()
+
+    def _finish(self):
+        self._timer.stop()
+        self.hide()
+        self.deleteLater()
+
+    def _tick(self):
+        parent = self.parentWidget()
+        if parent is None:
+            self._finish()
+            return
+        try:
+            if self.geometry() != parent.rect():
+                self.setGeometry(parent.rect())
+        except Exception:
+            pass
+        elapsed = max(0.0, (time.monotonic() - self._started_mono) * 1000.0)
+        if elapsed <= self._hold_ms:
+            self._alpha = 1.0
+        else:
+            t = (elapsed - self._hold_ms) / max(1.0, float(self._fade_ms))
+            self._alpha = 1.0 - self._smoothstep(t)
+        self.update()
+        if self._alpha <= 0.001:
+            self._finish()
+
+    def paintEvent(self, event):
+        del event
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing, True)
+        painter.setRenderHint(QPainter.TextAntialiasing, True)
+        painter.setOpacity(max(0.0, min(1.0, float(self._alpha))))
+        painter.fillRect(self.rect(), QColor(17, 17, 20))
+
+        w = min(488, max(360, self.width() - 80))
+        h = 238
+        x = (self.width() - w) / 2.0
+        y = (self.height() - h) / 2.0
+        card = QRectF(x, y, w, h)
+        painter.setPen(QPen(QColor(70, 64, 67, 210), 1.0))
+        painter.setBrush(QColor(24, 23, 26, 250))
+        painter.drawRoundedRect(card, 14.0, 14.0)
+
+        icon_rect = QRectF(x + 34.0, y + 42.0, 44.0, 44.0)
+        painter.setPen(QPen(QColor(93, 82, 86, 170), 1.0))
+        painter.setBrush(QColor(31, 29, 32, 238))
+        painter.drawRoundedRect(icon_rect, 9.0, 9.0)
+        if not self._app_icon.isNull():
+            try:
+                painter.drawPixmap(QRect(int(x + 41), int(y + 49), 30, 30), self._app_icon.pixmap(30, 30))
+            except Exception:
+                pass
+
+        painter.setPen(QColor(244, 239, 235))
+        title_font = QFont('Microsoft YaHei UI', 20)
+        title_font.setWeight(QFont.DemiBold)
+        painter.setFont(title_font)
+        painter.drawText(QRectF(x + 96.0, y + 43.0, w - 120.0, 38.0), Qt.AlignLeft | Qt.AlignVCenter, 'LimbusLyric')
+
+        painter.setPen(QColor(153, 143, 147))
+        meta_font = QFont('Microsoft YaHei UI', 9)
+        painter.setFont(meta_font)
+        version = str(LIMBUSLYRIC_DISPLAY_VERSION).split(' ', 1)[0].lstrip('vV')
+        painter.drawText(QRectF(x + 98.0, y + 82.0, w - 122.0, 22.0), Qt.AlignLeft | Qt.AlignVCenter, f'桌面歌词  ·  {version}')
+
+        painter.setPen(QColor(180, 170, 174))
+        small_font = QFont('Microsoft YaHei UI', 9)
+        painter.setFont(small_font)
+        painter.drawText(QRectF(x + 36.0, y + 150.0, w - 72.0, 28.0), Qt.AlignCenter, '正在启动…')
+
+
 class ControlPanel(QWidget):
     auto_lyric_result = pyqtSignal(object)
     mode_lyric_result = pyqtSignal(object)
@@ -34516,7 +35327,7 @@ class ControlPanel(QWidget):
         super().__init__()
         self._startup_tasks_deferred = bool(defer_startup_tasks)
         self._startup_tasks_released = not self._startup_tasks_deferred
-        self.setWindowTitle(f"LimbusLyric · {LIMBUSLYRIC_BUILD_TAG}")
+        self.setWindowTitle(f"LimbusLyric · {LIMBUSLYRIC_DISPLAY_VERSION}")
         # v86+: 控制面板使用自绘标题栏，去掉 Windows 系统白框；歌词悬浮窗保持独立逻辑。
         self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         # v89: the control panel is an opaque frameless application surface. "Transparent"
@@ -34561,7 +35372,11 @@ class ControlPanel(QWidget):
         settings = all_data['settings']
         self.media_sync = MediaSessionSync()
         self.lyric_window = LyricWindow()
-        self.lyric_window.set_position_provider(self.media_sync.snapshot)
+        self.lyric_window.set_position_provider(lambda: _v137p1_presentation_snapshot(self))
+        # V137: the presentation adapter above is a lambda, so __self__ no longer exposes
+        # MediaSessionSync to R2.4's no-position rescue path. Keep an explicit non-owning
+        # reference for rescue/diagnostics; formal clock authority is still the adapter.
+        self.lyric_window._r24_sync_obj = self.media_sync
         # 启动时绝不显示字幕窗口。只有本次进程明确点击“开始”后才 show。
         self.lyric_window.hide()
 
@@ -34646,7 +35461,7 @@ class ControlPanel(QWidget):
             write_error_log(
                 '控制面板会话启动',
                 detail=(
-                    f'build={LIMBUSLYRIC_BUILD_TAG} | pid={os.getpid()} | autostart={int(self._started_from_autostart)} | '
+                    f'build={LIMBUSLYRIC_DISPLAY_VERSION} | pid={os.getpid()} | autostart={int(self._started_from_autostart)} | '
                     f'is_started={int(self._is_started)} | auto_armed={int(self._auto_armed)} | '
                     f'overlay_visible={int(self.lyric_window.isVisible())} | '
                     f'word_timing={int(WORD_TIMING_ENABLED)} | stability={int(STABILITY_FIXES_ENABLED)} | '
@@ -35474,21 +36289,35 @@ class ControlPanel(QWidget):
 
         style_layout.addStretch()
 
-        # 动效页：颤动、淡出、逐字时序、角度。
+        # 动效页：抖动/颤动、淡出、逐字时序、角度。
         layout = motion_layout
-        shl = QHBoxLayout(); shl.addWidget(QLabel("抖动强度："))
+        shml = QHBoxLayout(); shml.addWidget(QLabel("动态方式："))
+        self.shake_mode_combo = QComboBox(); self.shake_mode_combo.addItem("抖动", "shake"); self.shake_mode_combo.addItem("颤动", "tremble")
+        shml.addWidget(self.shake_mode_combo); shml.addStretch(); layout.addLayout(shml)
+
+        shl = QHBoxLayout(); self.shake_intensity_title = QLabel("抖动强度："); shl.addWidget(self.shake_intensity_title)
         self.shake_intensity_slider = QSlider(Qt.Horizontal); self.shake_intensity_slider.setRange(0, 10)
         self.shake_intensity_slider.setValue(2); self.shake_intensity_label = QLabel("2")
         self.shake_intensity_slider.valueChanged.connect(lambda v: self.shake_intensity_label.setText(str(v)))
         shl.addWidget(self.shake_intensity_slider); shl.addWidget(self.shake_intensity_label)
         layout.addLayout(shl)
 
-        shvl = QHBoxLayout(); shvl.addWidget(QLabel("抖动速度："))
+        shvl = QHBoxLayout(); self.shake_speed_title = QLabel("抖动速度："); shvl.addWidget(self.shake_speed_title)
         self.shake_speed_slider = QSlider(Qt.Horizontal); self.shake_speed_slider.setRange(10, 200)
         self.shake_speed_slider.setValue(143); self.shake_speed_label = QLabel("143 ms")
         self.shake_speed_slider.valueChanged.connect(lambda v: self.shake_speed_label.setText(f"{v} ms"))
         shvl.addWidget(self.shake_speed_slider); shvl.addWidget(self.shake_speed_label)
         layout.addLayout(shvl)
+
+        def _sync_shake_mode_ui(_idx=0):
+            mode = _set_living_shake_motion_mode(self.shake_mode_combo.currentData())
+            label = "颤动" if mode == "tremble" else "抖动"
+            self.shake_intensity_title.setText(f"{label}强度：")
+            self.shake_speed_title.setText(f"{label}速度：")
+            try: self.lyric_window.update()
+            except Exception: pass
+        self.shake_mode_combo.currentIndexChanged.connect(_sync_shake_mode_ui)
+        _sync_shake_mode_ui()
 
         fsl = QHBoxLayout(); fsl.addWidget(QLabel("淡出速度："))
         self.fade_speed_slider = QSlider(Qt.Horizontal); self.fade_speed_slider.setRange(1, 15)
@@ -35868,9 +36697,9 @@ class ControlPanel(QWidget):
         footer_info = QVBoxLayout()
         footer_info.setContentsMargins(0, 0, 0, 0)
         footer_info.setSpacing(1)
-        contact_hint = QLabel("遇到问题？点击右侧“反馈问题”可直接复制邮箱和诊断信息")
+        contact_hint = QLabel("遇到问题？点“反馈问题”直接描述，并附上软件日志即可")
         contact_hint.setObjectName("footerHint")
-        contact_hint.setToolTip(f"反馈邮箱：{FEEDBACK_EMAIL}。无需配置邮件客户端；可直接复制邮箱、反馈模板和日志。")
+        contact_hint.setToolTip(f"反馈邮箱：{FEEDBACK_EMAIL}。反馈页面可复制邮箱、打开最新日志和日志文件夹。")
         free_hint = QLabel("LimbusLyric 免费提供 · 请勿为软件本体付费")
         free_hint.setObjectName("freeNotice")
         free_hint.setToolTip("LimbusLyric 软件本体免费提供。支持开发完全自愿，不会解锁额外功能。")
@@ -35992,6 +36821,9 @@ class ControlPanel(QWidget):
                 if hasattr(self, 'font_italic_check'): self.font_italic_check.setChecked(bool(settings.get('font_italic', False)))
                 self.stroke_spin.setValue(settings.get('stroke_width', 0.5))
                 self.spacing_spin.setValue(settings.get('spacing', 5.0))
+                shake_mode = str(settings.get('shake_mode', 'shake') or 'shake')
+                smidx = self.shake_mode_combo.findData(shake_mode) if hasattr(self, 'shake_mode_combo') else -1
+                if smidx >= 0: self.shake_mode_combo.setCurrentIndex(smidx)
                 self.shake_intensity_slider.setValue(settings.get('shake_intensity', 2))
                 self.shake_speed_slider.setValue(settings.get('shake_speed', 143))
                 self.fade_speed_slider.setValue(settings.get('fade_speed', 12))
@@ -36739,6 +37571,20 @@ class ControlPanel(QWidget):
             write_error_log("打开日志目录失败", exc)
             self.status.setText("状态：无法打开日志目录，请查看本地应用数据目录")
 
+    def _open_latest_log(self):
+        try:
+            log_path = os.path.abspath(_ensure_log_session())
+            if not os.path.isfile(log_path):
+                raise FileNotFoundError(log_path)
+            if os.name == 'nt':
+                os.startfile(log_path)
+            else:
+                subprocess.Popen(['xdg-open', log_path])
+            self.status.setText("状态：已打开最新日志")
+        except Exception as exc:
+            write_error_log("打开最新日志失败", exc)
+            self.status.setText("状态：无法打开最新日志，可改用“打开日志文件夹”")
+
     def _open_limbus_theme_folder(self):
         try:
             os.makedirs(LIMBUS_THEME_ROOT, exist_ok=True)
@@ -36807,7 +37653,7 @@ class ControlPanel(QWidget):
         self.standard_control_bar.setVisible(not limbus)
         self.app_title.setText("LIMBUS LYRIC" if limbus else "LimbusLyric")
         self.setWindowTitle(
-            f"LimbusLyric · Manager Terminal · {LIMBUSLYRIC_BUILD_TAG}" if limbus else f"LimbusLyric · {LIMBUSLYRIC_BUILD_TAG}"
+            f"LimbusLyric · Manager Terminal · {LIMBUSLYRIC_DISPLAY_VERSION}" if limbus else f"LimbusLyric · {LIMBUSLYRIC_DISPLAY_VERSION}"
         )
         if hasattr(self, 'window_title_bar'):
             self.window_title_bar.build.setText('MANAGER TERMINAL' if limbus else 'CONTROL PANEL')
@@ -38056,15 +38902,15 @@ class ControlPanel(QWidget):
         track = f'{song} - {artist}'.strip(' -') if (song or artist) else '未载入'
         return (
             'LimbusLyric 问题反馈\n'
-            f'版本：{LIMBUSLYRIC_BUILD_TAG}\n'
+            f'版本：{LIMBUSLYRIC_DISPLAY_VERSION}\n'
             f'播放器：{player or "未选择"}\n'
             f'歌词源：{source or "未选择"}\n'
             f'当前歌曲：{track}\n'
-            f'日志：{log_path or "请在软件内点击“打开日志目录”后附上最新日志"}\n\n'
-            '问题描述：\n'
-            '复现步骤：\n'
-            '预期表现：\n'
-            '实际表现：\n'
+            f'日志：{log_path or "请在反馈页面点击“打开最新日志”"}\n\n'
+            '请直接描述你遇到的问题：\n'
+            '什么时候出现、当时在做什么、看到什么现象，想到什么就写什么。\n'
+            '如果你知道怎么重复触发，也可以顺手写一下；不知道也没关系。\n\n'
+            '发送邮件时请附上日志：最好在问题出现后不要先重启软件，直接附上最新的 .log 文件。\n'
         )
 
     def _open_feedback_email(self):
@@ -38098,8 +38944,8 @@ class ControlPanel(QWidget):
         lay.addWidget(title)
 
         hint = QLabel(
-            '无需添加作者 QQ，也不要求电脑配置邮件客户端。\n'
-            '复制下面的邮箱和反馈信息，在 QQ 邮箱、网页邮箱或任意邮件应用中发送即可。'
+            '直接说你遇到了什么就行，不用按固定格式写工单。\n'
+            '发邮件时请把最新日志一起附上；下面可以直接打开日志。'
         )
         hint.setWordWrap(True)
         lay.addWidget(hint)
@@ -38117,21 +38963,22 @@ class ControlPanel(QWidget):
         template.setReadOnly(True)
         template.setPlainText(self._feedback_template_text())
         template.setMinimumHeight(190)
-        template.setToolTip('建议发送时补充问题描述和复现步骤，并附上最新日志')
         lay.addWidget(template, 1)
 
         action_row = QHBoxLayout()
         copy_info_btn = QPushButton('复制反馈信息')
-        log_btn = QPushButton('打开日志目录')
+        latest_log_btn = QPushButton('打开最新日志')
+        log_btn = QPushButton('打开日志文件夹')
         mail_btn = QPushButton('打开邮件应用（可选）')
         mail_btn.setToolTip('调用系统 mailto 处理程序；未配置邮件客户端时可能由浏览器接管')
         action_row.addWidget(copy_info_btn)
+        action_row.addWidget(latest_log_btn)
         action_row.addWidget(log_btn)
         action_row.addStretch()
         action_row.addWidget(mail_btn)
         lay.addLayout(action_row)
 
-        note = QLabel('建议：把“复制反馈信息”的内容粘贴进邮件，再附上日志目录中最新的 .log 文件。')
+        note = QLabel('发邮件时请附上最新的 .log 日志。最好在问题刚出现时就打开/保存日志，不要为了反馈先反复重启软件。')
         note.setWordWrap(True)
         note.setObjectName('footerHint')
         lay.addWidget(note)
@@ -38156,6 +39003,7 @@ class ControlPanel(QWidget):
 
         copy_email_btn.clicked.connect(_copy_email)
         copy_info_btn.clicked.connect(_copy_info)
+        latest_log_btn.clicked.connect(self._open_latest_log)
         log_btn.clicked.connect(self._open_log_folder)
         mail_btn.clicked.connect(self._open_feedback_email)
         dlg.exec_()
@@ -40327,6 +41175,10 @@ class ControlPanel(QWidget):
             trans_only = bool(job.get('trans_only'))
             requested_precise = bool(job.get('prefer_precise', True))
             progressive = bool(requested_precise and not trans_only)
+            # Tracks whether this transaction has already published a usable fast-stage payload.
+            # A later precision cancellation must never be reclassified as a whole-track failure,
+            # otherwise the ownership wrapper hides a timeline the user is already entitled to see.
+            fast_display_emitted = False
             cancel_check = lambda: (
                 int(job.get('generation', -1)) != int(getattr(self, '_auto_generation', -2)) or
                 str(job.get('key') or '') != str(getattr(self, '_auto_target_key', '') or '')
@@ -40591,10 +41443,69 @@ class ControlPanel(QWidget):
                         fast_meta = dict(fast_meta or {})
                         fast_meta['progressive_fast_stage'] = True
                         fast_meta['lyric_candidate_duration_ms'] = int(fast_duration or 0)
+                        fast_display_emitted = True
                         emit_result(fast_lyric, bind_duration, fast_meta, stage='fast', final=False)
 
                 if cancel_check():
                     return
+
+                # QQ can spend tens of seconds waiting for a minimized/off-screen UIA duration.
+                # If the fast first-screen payload already came from KuGou with a concrete
+                # same-title/same-artist version, allow that *same KuGou version* to upgrade the
+                # presentation clock before QQ proves transport duration.  This is deliberately
+                # display-only: published duration stays 0, seek/MediaSync authority is untouched,
+                # the candidate duration is retained only for H81's later player-owned version
+                # reconciliation, and text evidence must agree with the already-visible LRC.
+                if (
+                    progressive and requested_precise and source == 'QQ音乐' and identity_duration_ms <= 0 and
+                    fast_lyric and int(fast_duration or 0) > 0 and
+                    str((fast_meta or {}).get('lyric_payload_source') or '') == '酷狗'
+                ):
+                    try:
+                        provisional_lrc, provisional_duration = LyricSearchEngine.search(
+                            job['song'], search_artist, '酷狗', False,
+                            provider_duration_ms=int(fast_duration or 0),
+                            prefer_precise=True, provider_locked=True,
+                            require_translation_pair=bool(bilingual_pair),
+                        )
+                        provisional_meta = LyricSearchEngine.last_provider_meta() or {}
+                        provisional_q = int(_lyric_clock_quality(provisional_lrc or ''))
+                        duration_tol = max(1200, int(max(int(fast_duration or 0), int(provisional_duration or 0) or int(fast_duration or 0)) * 0.008))
+                        duration_ok = bool(
+                            int(provisional_duration or 0) > 0 and
+                            abs(int(provisional_duration or 0) - int(fast_duration or 0)) <= duration_tol
+                        )
+                        text_ok, text_stats, text_reason = _precise_clock_reference_evidence(fast_lyric, provisional_lrc)
+                        if provisional_lrc and provisional_q >= 3 and duration_ok and text_ok and not cancel_check():
+                            safe_meta = _build_lyric_payload_meta(
+                                fast_meta, '酷狗', provisional_lrc, int(provisional_duration or fast_duration or 0), provisional_meta
+                            )
+                            safe_meta.update(dict(provisional_meta or {}))
+                            safe_meta['lyric_payload_source'] = '酷狗'
+                            safe_meta['lyric_candidate_duration_ms'] = int(provisional_duration or fast_duration or 0)
+                            safe_meta['v137_qq_provisional_precise_display_only'] = True
+                            safe_meta['transport_authority'] = False
+                            write_error_log('V137 QQ同源酷狗逐字提前显示', detail=(
+                                f'song={job.get("song","")} | fast_duration={int(fast_duration or 0)} | '
+                                f'precise_duration={int(provisional_duration or 0)} | quality={provisional_q} | '
+                                f'text_matches={int((text_stats or {}).get("matches") or 0)} | '
+                                f'text_ratio={float((text_stats or {}).get("ratio") or 0.0):.3f} | '
+                                f'text_reason={text_reason} | duration-published=0 | media-rebind=0 | seek-authority=player'
+                            ))
+                            emit_result(
+                                provisional_lrc, 0, safe_meta, stage='final', final=True,
+                                precision_upgrade=True
+                            )
+                            return
+                        write_error_log('V137 QQ同源酷狗逐字提前显示拒绝', detail=(
+                            f'song={job.get("song","")} | quality={provisional_q} | '
+                            f'fast_duration={int(fast_duration or 0)} | precise_duration={int(provisional_duration or 0)} | '
+                            f'duration_ok={int(duration_ok)} | text_ok={int(bool(text_ok))} | text_reason={text_reason} | '
+                            'fallback=mature-duration-gated-path'
+                        ))
+                    except Exception as exc:
+                        write_error_log('V137 QQ同源酷狗逐字提前显示异常', exc, detail=(
+                            f'song={job.get("song","")} | fallback=mature-duration-gated-path'))
 
                 # Classic/translation-only keeps the historical single-stage path.  Precise
                 # auto mode reaches here after the fast display and may take as long as needed;
@@ -40643,7 +41554,20 @@ class ControlPanel(QWidget):
 
                 cancelled = bool(cancel_check())
                 if cancelled:
-                    emit_result(lyric, duration or 0, provider_meta, stage='final', err=error, final=True)
+                    if progressive and fast_display_emitted:
+                        # The ordinary/fast payload already succeeded. Cancellation here belongs
+                        # only to the optional precision enhancement. Preserve the loaded timeline
+                        # and Start intent instead of letting terminal ownership cleanup hide it.
+                        write_error_log('自动歌词增强取消保留快速歌词', detail=(
+                            f'song={job.get("song","")} | source={source} | '
+                            'fast-display=keep | start-intent=preserve | transaction=enhancement-cancel'))
+                        emit_result(
+                            None, 0, fast_meta, stage='final',
+                            err=error or 'precision-cancelled-after-fast-display',
+                            final=True, keep_fast=True
+                        )
+                    else:
+                        emit_result(lyric, duration or 0, provider_meta, stage='final', err=error, final=True)
                     return
 
                 if progressive and fast_lyric and not lyric:
@@ -41968,6 +42892,7 @@ class ControlPanel(QWidget):
             'font_bold': self.font_bold_check.isChecked() if hasattr(self, 'font_bold_check') else True,
             'font_italic': self.font_italic_check.isChecked() if hasattr(self, 'font_italic_check') else False,
             'stroke_width': self.stroke_spin.value(), 'spacing': self.spacing_spin.value(),
+            'shake_mode': str(self.shake_mode_combo.currentData() or 'shake') if hasattr(self, 'shake_mode_combo') else 'shake',
             'shake_intensity': self.shake_intensity_slider.value(), 'shake_speed': self.shake_speed_slider.value(),
             'fade_speed': self.fade_speed_slider.value(), 'rise_speed': self.rise_speed_slider.value(),
             'angle_min': self.angle_min.value(),
@@ -42050,6 +42975,9 @@ class ControlPanel(QWidget):
                 try:
                     widget.setChecked(bool(c[key])) if kind == 'check' else widget.setValue(c[key])
                 except Exception: pass
+            if 'shake_mode' in c and hasattr(self, 'shake_mode_combo'):
+                smidx = self.shake_mode_combo.findData(str(c.get('shake_mode') or 'shake'))
+                if smidx >= 0: self.shake_mode_combo.setCurrentIndex(smidx)
             if c.get('font_family'):
                 self.font_combo.setCurrentFont(QFont(c['font_family']))
             if c.get('mode'):
@@ -42892,7 +43820,10 @@ class ControlPanel(QWidget):
                 except Exception as exc:
                     write_error_log('V136模式空载荷开始同步预热失败', exc)
             try:
-                self.lyric_window.hide()
+                if bool(getattr(self, '_v137p1_mode_notice_visible', False)):
+                    self.lyric_window.show()
+                else:
+                    self.lyric_window.hide()
             except Exception:
                 pass
             try:
@@ -43325,25 +44256,25 @@ def _limbus_mode_lyric_result_persistent(self, result):
         if result.get('lyric'):
             self._limbus_mode_payload_blocked = False
             self._limbus_mode_payload_block_reason = ''
+            _v137p1_clear_overlay_notice(self)
             return _LIMBUS_MODE_LYRIC_RESULT_LOCKED(self, result)
         detail = str(result.get('error') or '当前歌曲没有符合该模式的歌词')
         self._limbus_mode_payload_blocked = True
         self._limbus_mode_payload_block_reason = 'translation-toggle-no-payload'
-        try:
-            self.lyric_window.stop_lyric(); self.lyric_window.hide()
-        except Exception:
-            pass
+        notice_text = '当前歌曲未找到可靠翻译' if bool(result.get('trans_only')) else '当前歌曲未找到可用原始歌词'
+        notice_ok = _v137p1_show_overlay_notice(self, notice_text)
         try:
             if getattr(self, '_settings_loaded', False):
                 self._schedule_config_save()
         except Exception:
             pass
         mode_name = '仅翻译' if bool(result.get('trans_only')) else '原始歌词'
-        self.status.setText(f'状态：当前歌曲没有可用{mode_name}；模式偏好已保留')
+        self.status.setText(f'状态：{notice_text}；{mode_name}模式偏好已保留')
         try:
             write_error_log('模式切换无歌词保持用户偏好', detail=(
                 f'reason=translation-toggle | song={result.get("song","")} | source={result.get("source","")} | '
-                f'trans_only={int(bool(result.get("trans_only")))} | presentation=blank | rollback=0 | error={detail}'
+                f'trans_only={int(bool(result.get("trans_only")))} | presentation=status-card | '
+                f'notice={int(bool(notice_ok))} | rollback=0 | fabrication=0 | error={detail}'
             ))
         except Exception:
             pass
@@ -43356,6 +44287,15 @@ def _limbus_mode_lyric_result_persistent(self, result):
 
 def _limbus_launch_current_lyrics_ownership_guard(self, start_delay=0):
     if bool(getattr(self, '_limbus_mode_payload_blocked', False)):
+        if bool(getattr(self, '_v137p1_mode_notice_visible', False)):
+            try:
+                self.lyric_window.show()
+                write_error_log('阻止模式切换期间旧歌词重新显示', detail=(
+                    f'reason={getattr(self,"_limbus_mode_payload_block_reason","") or "payload-mismatch"} | '
+                    f'loaded={getattr(self,"_loaded_track_key","")} | presentation=status-card'))
+            except Exception:
+                pass
+            return False
         try:
             write_error_log('阻止模式切换期间旧歌词重新显示', detail=(
                 f'reason={getattr(self,"_limbus_mode_payload_block_reason","") or "payload-mismatch"} | '
@@ -44107,11 +45047,9 @@ def _packaging_smoke_test():
         rows.append(f'FAIL config-root-writable: {type(exc).__name__}: {exc}')
     try:
         chosen_log = os.path.abspath(_choose_log_directory())
-        local = str(os.environ.get('LOCALAPPDATA') or '').strip()
-        if local:
-            expected_log = os.path.abspath(os.path.join(local, 'LimbusLyric', 'logs'))
-            if os.path.normcase(chosen_log) != os.path.normcase(expected_log):
-                raise RuntimeError(f'expected={expected_log} chosen={chosen_log}')
+        expected_log = os.path.abspath(os.path.join(_CONFIG_ROOT, 'logs'))
+        if os.path.normcase(chosen_log) != os.path.normcase(expected_log):
+            raise RuntimeError(f'expected={expected_log} chosen={chosen_log}')
         rows.append('PASS preferred-log-root')
     except Exception as exc:
         ok = False
@@ -44309,7 +45247,7 @@ def _h12_check_update(panel):
     def work():
         try:
             r=requests.get(url,headers={'User-Agent':'LimbusLyric-H12'},timeout=6); r.raise_for_status(); d=r.json(); tag=str(d.get('tag_name') or d.get('version') or '').strip(); body=str(d.get('body') or d.get('notes') or d.get('changelog') or '').strip(); dl=str(d.get('html_url') or d.get('download_url') or '').strip(); dl=dl if dl.startswith('https://') else ''
-            cur='1.8.9.136 H14'; nums=lambda z: tuple(int(x) for x in re.findall(r'\d+',z)[:5])
+            cur=_h15_current_version_label() if '_h15_current_version_label' in globals() else str(LIMBUSLYRIC_DISPLAY_VERSION).split(' ',1)[0].lstrip('vV'); nums=lambda z: tuple(int(x) for x in re.findall(r'\d+',z)[:5])
             newer=bool(tag and nums(tag)>nums(cur)); state=('发现新版本。' if newer else ('当前已是最新版。' if tag else '未能识别远端版本。')); msg=f'当前版本：{cur}\n最新版本：{tag or "未知"}\n'+state+(f'\n\n更新内容：\n{body}' if body else '')
             panel._h12_update_result=(newer,msg,dl)
         except Exception as exc: panel._h12_update_result=(False,f'检查更新失败：{exc}','')
@@ -44820,11 +45758,15 @@ ControlPanel._refetch_loaded_track_for_mode_switch = _h13_refetch_loaded_track_f
 class H13ObsLyricMirror(QWidget):
     """Dedicated capturable mirror. Shares presentation pixels, never MediaSync/timeline state."""
     def __init__(self, source_window):
-        flags = Qt.Tool | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.WindowTransparentForInput
+        # V137 Phase-3 OBS: a Qt.Tool top-level is intentionally absent from some capture/window
+        # enumerators.  Keep this a real native top-level Window while preserving frameless,
+        # click-through and no-activation behavior.  The source lyric overlay remains unchanged.
+        flags = Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.WindowTransparentForInput
         super().__init__(None, flags)
         self.source_window = source_window
         self.setWindowTitle('LimbusLyric OBS Lyrics')
         self.setObjectName('limbusObsLyricsOutput')
+        self.setAttribute(Qt.WA_NativeWindow, True)
         self.setAttribute(Qt.WA_TranslucentBackground, True)
         self.setAttribute(Qt.WA_TransparentForMouseEvents, True)
         self.setAttribute(Qt.WA_ShowWithoutActivating, True)
@@ -44832,14 +45774,94 @@ class H13ObsLyricMirror(QWidget):
         self._frame_rect = QRect()
         self._active = False
         self._capture_busy = False
+        self._v137_obs_native_last_log_mono = 0.0
         self._timer = QTimer(self); self._timer.timeout.connect(self._tick); self._timer.setInterval(50)
+
+    def _v137_obs_apply_native_capture_compat(self, reason='runtime', force_log=False):
+        """Keep the OBS mirror capturable and emit enough Win32 state to diagnose real OBS failures."""
+        if os.name != 'nt':
+            return True
+        try:
+            hwnd = int(self.winId())
+            from ctypes import wintypes as _v137_wt
+            user32 = ctypes.windll.user32
+            _hwnd = _v137_wt.HWND(hwnd)
+            # Declare pointer-sized Win32 signatures explicitly.  Relying on ctypes' default
+            # c_int conversion can truncate HWND values in a 64-bit frozen process.
+            user32.SetWindowDisplayAffinity.argtypes = [_v137_wt.HWND, _v137_wt.DWORD]
+            user32.SetWindowDisplayAffinity.restype = _v137_wt.BOOL
+            user32.GetWindowDisplayAffinity.argtypes = [_v137_wt.HWND, ctypes.POINTER(_v137_wt.DWORD)]
+            user32.GetWindowDisplayAffinity.restype = _v137_wt.BOOL
+            user32.GetWindowLongW.argtypes = [_v137_wt.HWND, ctypes.c_int]
+            user32.GetWindowLongW.restype = ctypes.c_long
+            user32.IsWindowVisible.argtypes = [_v137_wt.HWND]
+            user32.IsWindowVisible.restype = _v137_wt.BOOL
+            # The mirror must never inherit WDA_EXCLUDEFROMCAPTURE.  WDA_NONE is harmless when
+            # capture exclusion was never enabled and makes re-show/recreate behavior explicit.
+            affinity_ok = bool(user32.SetWindowDisplayAffinity(_hwnd, 0x0))
+            affinity = _v137_wt.DWORD(0)
+            get_affinity_ok = False
+            try:
+                get_affinity_ok = bool(user32.GetWindowDisplayAffinity(_hwnd, ctypes.byref(affinity)))
+            except Exception:
+                pass
+            exstyle = 0
+            visible = 0
+            cloaked = -1
+            try:
+                exstyle = int(user32.GetWindowLongW(_hwnd, -20))
+                visible = int(bool(user32.IsWindowVisible(_hwnd)))
+            except Exception:
+                pass
+            try:
+                cloaked_value = _v137_wt.DWORD(0)
+                dwmapi = ctypes.windll.dwmapi
+                dwmapi.DwmGetWindowAttribute.argtypes = [_v137_wt.HWND, _v137_wt.DWORD, ctypes.c_void_p, _v137_wt.DWORD]
+                dwmapi.DwmGetWindowAttribute.restype = ctypes.c_long
+                hr = int(dwmapi.DwmGetWindowAttribute(
+                    _hwnd, 14, ctypes.byref(cloaked_value), ctypes.sizeof(cloaked_value)))
+                if hr == 0:
+                    cloaked = int(cloaked_value.value)
+            except Exception:
+                pass
+            now = time.monotonic() * 1000.0
+            if bool(force_log) or now - float(getattr(self, '_v137_obs_native_last_log_mono', 0.0) or 0.0) >= 5000.0:
+                self._v137_obs_native_last_log_mono = now
+                try:
+                    write_error_log('V137 OBS独立输出原生捕获状态', detail=(
+                        f'reason={reason} | hwnd=0x{hwnd:x} | visible={visible} | cloaked={cloaked} | '
+                        f'exstyle=0x{exstyle & 0xffffffff:x} | affinity_set={int(affinity_ok)} | '
+                        f'affinity_get={int(get_affinity_ok)} | affinity=0x{int(affinity.value):x} | '
+                        'window-type=normal-native-top-level | translucent=1'))
+                except Exception:
+                    pass
+            return bool(affinity_ok)
+        except Exception as exc:
+            try: write_error_log('V137 OBS独立输出原生捕获状态失败', exc, detail=f'reason={reason}')
+            except Exception: pass
+            return False
+
+    def showEvent(self, event):
+        try:
+            super().showEvent(event)
+        finally:
+            try: self._v137_obs_apply_native_capture_compat('show', force_log=True)
+            except Exception: pass
 
     def set_active(self, active):
         self._active = bool(active)
         if self._active:
-            self._timer.start(); self._tick(); self.show()
+            # Show first: this creates/stabilizes the native HWND before the first mirrored frame,
+            # which also makes the titled window available to OBS enumeration immediately.
+            self.show()
+            self._v137_obs_apply_native_capture_compat('activate', force_log=True)
+            self._timer.start(); self._tick()
         else:
             self._timer.stop(); self.hide(); self._frame = QPixmap(); self._frame_rect = QRect()
+            try:
+                self._v137_obs_tiles=[]; self._v137_obs_tile_cache={}; self._v137_obs_tick_index=0
+            except Exception:
+                pass
 
     def _tick(self):
         if not self._active or self._capture_busy:
@@ -44873,15 +45895,144 @@ class H13ObsLyricMirror(QWidget):
     def paintEvent(self, event):
         p=QPainter(self); p.setRenderHint(QPainter.SmoothPixmapTransform, True)
         try:
+            # Clear the exact invalidated region.  The OBS mirror is translucent, so stale
+            # pixels from a moved/retired tile must become transparent before drawing the
+            # current tile set.
+            p.save()
+            try: p.setClipRegion(event.region())
+            except Exception: pass
             p.setCompositionMode(QPainter.CompositionMode_Source)
-            p.fillRect(event.rect(), QColor(0,0,0,0))
+            p.fillRect(self.rect(), QColor(0,0,0,0))
+            p.restore()
             p.setCompositionMode(QPainter.CompositionMode_SourceOver)
         except Exception:
             pass
-        if self._frame.isNull() or self._frame_rect.isEmpty(): return
         try: p.setOpacity(max(0.0,min(1.0,float(self.source_window.windowOpacity()))))
         except Exception: pass
+        # V137 Phase-3.1 OBS tiled mirror.  Capturing one giant boundingRect made a three-row
+        # layout effectively a near-fullscreen screenshot and starved Windows Graphics Capture.
+        # Keep independently captured row tiles so WGC receives frequent native-window updates
+        # without copying millions of transparent pixels on the GUI thread.
+        tiles=getattr(self,'_v137_obs_tiles',None)
+        if isinstance(tiles,list):
+            for _order, rect, pix in sorted(tiles,key=lambda item:int(item[0])):
+                try:
+                    if pix is not None and not pix.isNull() and not rect.isEmpty(): p.drawPixmap(rect,pix)
+                except Exception: pass
+            return
+        if self._frame.isNull() or self._frame_rect.isEmpty(): return
         p.drawPixmap(self._frame_rect, self._frame)
+
+
+def _v137_obs_direct_source_mode(panel, enabled, reason='mode-switch'):
+    """Expose the real lyric HWND to OBS instead of mirroring it through QWidget.grab().
+
+    Windows Graphics Capture already captures the native window at the compositor boundary.
+    Reusing the real lyric HWND therefore preserves the exact renderer cadence and avoids the
+    GUI-thread screenshot loop (and R6's late-frame mirror drops) that made the old mirror
+    progressively turn into static snapshots.
+    """
+    window=getattr(panel,'lyric_window',None)
+    if window is None:
+        return False
+    enabled=bool(enabled)
+    try:
+        active=bool(getattr(window,'_v137_obs_direct_source_active',False))
+        if enabled==active:
+            return True
+        visible=bool(window.isVisible())
+        geometry=QRect(window.geometry())
+        opacity=float(window.windowOpacity())
+        if enabled:
+            window._v137_obs_direct_saved_flags=window.windowFlags()
+            window._v137_obs_direct_saved_title=str(window.windowTitle() or '歌词悬浮窗')
+            flags=Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint | Qt.WindowTransparentForInput
+            try:
+                flags |= Qt.WindowDoesNotAcceptFocus
+            except Exception:
+                pass
+            window.setWindowFlags(flags)
+            window.setWindowTitle('LimbusLyric OBS Lyrics')
+            try: window.setAttribute(Qt.WA_ShowWithoutActivating,True)
+            except Exception: pass
+            window.setGeometry(geometry)
+            window.setWindowOpacity(opacity)
+            if visible:
+                window.show()
+            window._v137_obs_direct_source_active=True
+            # setWindowFlags recreates the HWND. Re-apply capture affinity only after the new
+            # native window exists; OBS mode must always be WDA_NONE.
+            try: _h12_set_capture(panel,False,quiet=True)
+            except Exception: pass
+            hwnd=0; exstyle=0; affinity=-1; affinity_ok=0
+            if os.name=='nt':
+                try:
+                    from ctypes import wintypes as _wt
+                    user32=ctypes.windll.user32
+                    hwnd=int(window.winId())
+                    wh=_wt.HWND(hwnd)
+                    user32.SetWindowDisplayAffinity.argtypes=[_wt.HWND,_wt.DWORD]
+                    user32.SetWindowDisplayAffinity.restype=_wt.BOOL
+                    user32.GetWindowDisplayAffinity.argtypes=[_wt.HWND,ctypes.POINTER(_wt.DWORD)]
+                    user32.GetWindowDisplayAffinity.restype=_wt.BOOL
+                    user32.GetWindowLongW.argtypes=[_wt.HWND,ctypes.c_int]
+                    user32.GetWindowLongW.restype=ctypes.c_long
+                    # Keep the full-screen capture target non-activating/click-through without
+                    # reintroducing WS_EX_TOOLWINDOW, which can disappear from capture pickers.
+                    try:
+                        if ctypes.sizeof(ctypes.c_void_p)==8:
+                            user32.GetWindowLongPtrW.argtypes=[_wt.HWND,ctypes.c_int]
+                            user32.GetWindowLongPtrW.restype=ctypes.c_ssize_t
+                            user32.SetWindowLongPtrW.argtypes=[_wt.HWND,ctypes.c_int,ctypes.c_ssize_t]
+                            user32.SetWindowLongPtrW.restype=ctypes.c_ssize_t
+                            exstyle=int(user32.GetWindowLongPtrW(wh,-20))
+                            user32.SetWindowLongPtrW(wh,-20,ctypes.c_ssize_t(exstyle | 0x08000000 | 0x20))
+                            exstyle=int(user32.GetWindowLongPtrW(wh,-20))
+                        else:
+                            user32.SetWindowLongW.argtypes=[_wt.HWND,ctypes.c_int,ctypes.c_long]
+                            user32.SetWindowLongW.restype=ctypes.c_long
+                            exstyle=int(user32.GetWindowLongW(wh,-20))
+                            user32.SetWindowLongW(wh,-20,ctypes.c_long(exstyle | 0x08000000 | 0x20))
+                            exstyle=int(user32.GetWindowLongW(wh,-20))
+                    except Exception:
+                        exstyle=int(user32.GetWindowLongW(wh,-20))
+                    affinity_ok=int(bool(user32.SetWindowDisplayAffinity(wh,0x0)))
+                    av=_wt.DWORD(0)
+                    if bool(user32.GetWindowDisplayAffinity(wh,ctypes.byref(av))):
+                        affinity=int(av.value)
+                except Exception:
+                    pass
+            try:
+                write_error_log('V137 OBS直连源窗口激活',detail=(
+                    f'reason={reason} | hwnd=0x{int(hwnd):x} | title=LimbusLyric OBS Lyrics | '
+                    f'visible={int(bool(window.isVisible()))} | exstyle=0x{int(exstyle)&0xffffffff:x} | '
+                    f'affinity_ok={affinity_ok} | affinity=0x{max(0,int(affinity)):x} | '
+                    'capture=windows-graphics-capture | frame-copy=0 | mirror-timer=0 | renderer=shared-native-window'))
+            except Exception:
+                pass
+            return True
+
+        saved_flags=getattr(window,'_v137_obs_direct_saved_flags',None)
+        saved_title=str(getattr(window,'_v137_obs_direct_saved_title','歌词悬浮窗') or '歌词悬浮窗')
+        if saved_flags is not None:
+            window.setWindowFlags(saved_flags)
+        window.setWindowTitle(saved_title)
+        window.setGeometry(geometry)
+        window.setWindowOpacity(opacity)
+        if visible:
+            window.show()
+        window._v137_obs_direct_source_active=False
+        try:
+            write_error_log('V137 OBS直连源窗口停用',detail=(
+                f'reason={reason} | title={saved_title} | visible={int(bool(window.isVisible()))} | '
+                'frame-copy=0 | renderer=shared-native-window'))
+        except Exception:
+            pass
+        return True
+    except Exception as exc:
+        try: write_error_log('V137 OBS直连源窗口切换失败',exc,detail=f'enabled={int(enabled)} | reason={reason}')
+        except Exception: pass
+        return False
 
 
 def _h13_set_window_mode(panel, mode, quiet=False):
@@ -44890,14 +46041,22 @@ def _h13_set_window_mode(panel, mode, quiet=False):
     mirror=getattr(panel,'_h13_obs_mirror',None)
     if mirror is None:
         mirror=H13ObsLyricMirror(panel.lyric_window); panel._h13_obs_mirror=mirror
+    # V137 Phase-3.2: OBS mode captures the real lyric HWND. The legacy mirror remains present
+    # only as a compatibility object for old state/tests; it is never activated by the v137 path.
+    if mirror:
+        mirror.set_active(False)
     if mode=='exclude':
-        if mirror: mirror.set_active(False)
+        _v137_obs_direct_source_mode(panel,False,reason='exclude')
         _h12_set_capture(panel, True, quiet=quiet)
         if not bool(getattr(panel,'_h12_capture_exclusion',False)):
             mode='normal'
-    else:
+    elif mode=='obs':
         _h12_set_capture(panel, False, quiet=True)
-        if mirror: mirror.set_active(mode=='obs')
+        if not _v137_obs_direct_source_mode(panel,True,reason='obs'):
+            mode='normal'
+    else:
+        _v137_obs_direct_source_mode(panel,False,reason='normal')
+        _h12_set_capture(panel, False, quiet=True)
     panel._h13_window_mode=mode
     if hasattr(panel,'h12_capture_combo'):
         idx=panel.h12_capture_combo.findData(mode)
@@ -45264,7 +46423,7 @@ def _h15_version_key(value):
 
 
 def _h15_current_version_label():
-    tag = str(globals().get('LIMBUSLYRIC_BUILD_TAG') or '').strip()
+    tag = str(globals().get('LIMBUSLYRIC_DISPLAY_VERSION') or globals().get('LIMBUSLYRIC_BUILD_TAG') or '').strip()
     m = re.search(r'(?i)\bv?(\d+\.\d+\.\d+\.\d+)\b', tag)
     base = m.group(1) if m else '1.8.9.136'
     stages = [(int(a), int(b or 0)) for a, b in re.findall(r'(?i)\bH(\d+)(?:F(\d+))?\b', tag)]
@@ -45364,6 +46523,43 @@ def _h15_release_candidate(payload):
     return candidate
 
 
+def _h15_user_release_notes(raw, max_items=6):
+    """Keep the in-app changelog short and readable for normal users.
+
+    GitHub release bodies may contain verification notes, hashes, workflow details and long
+    paragraphs.  The updater should surface the actual user-facing bullet points first.
+    """
+    text = str(raw or '').replace('\r\n', '\n').strip()
+    if not text:
+        return ''
+    bullets = []
+    fallback = []
+    for raw_line in text.split('\n'):
+        line = raw_line.strip()
+        if not line:
+            continue
+        low = line.lower()
+        if low.startswith(('full changelog:', 'sha256', 'checksum', '构建校验', '发布验证')):
+            continue
+        if line.startswith('#'):
+            continue
+        m = re.match(r'^(?:[-*•]|\d+[.)])\s+(.+)$', line)
+        if m:
+            item = re.sub(r'[`*_]+', '', m.group(1)).strip()
+            if item and item not in bullets:
+                bullets.append(item)
+            if len(bullets) >= int(max_items):
+                break
+        elif len(fallback) < 3:
+            plain = re.sub(r'[`*_]+', '', line).strip()
+            if plain:
+                fallback.append(plain)
+    rows = bullets or fallback
+    if not rows:
+        return ''
+    return '\n'.join(f'• {row}' for row in rows[:int(max_items)])
+
+
 def _h15_update_status(candidate):
     c = candidate if isinstance(candidate, dict) else {}
     current = _h15_current_version_label()
@@ -45382,9 +46578,9 @@ def _h15_update_status(candidate):
             lines.append('安装器缺少可验证 SHA-256；仅允许打开下载页，不会自动执行。')
         else:
             lines.append('没有找到可安全使用的安装器或下载页。')
-    notes = str(c.get('notes') or '').strip()
+    notes = _h15_user_release_notes(c.get('notes'))
     if notes:
-        lines.extend(['', '更新内容：', notes])
+        lines.extend(['', '这次更新：', notes])
     return '\n'.join(lines)
 
 
@@ -46857,12 +48053,44 @@ def _h26_same_track_identity(song, artist, media_title, media_artist):
         return False
 
 
+def _v137_qq_prebind_position_allowed(process_stem, bound_key, wanted_key):
+    """Pure ownership predicate used by H26 and source/frozen parity fixtures."""
+    return not (
+        str(process_stem or '').lower() == 'qqmusic' and
+        bool(str(bound_key or '')) and bool(str(wanted_key or '')) and
+        str(bound_key) != str(wanted_key)
+    )
+
+
+def _v137_qq_progress_input_owned(target_stem):
+    """A cached QQ rail rectangle never owns input unless the click target is QQ itself."""
+    return str(target_stem or '').lower().replace('.exe','') == 'qqmusic'
+
+
 def _h26_refine_provisional_origin(sync, song, artist, legacy_position_ms):
     try:
         legacy = max(0, int(legacy_position_ms or 0))
     except Exception:
         legacy = 0
     try:
+        # v137 infra8: a QQ metadata edge can arrive before Chromium/UIA updates its
+        # current/total pair.  The pre-bind snapshot may therefore contain B's identity
+        # together with A's still-valid position.  Never seed a *different* QQ track from
+        # a sample that predates bind_track(); the new track must prove its own post-bind
+        # advancing pair.  Same-track refreshes retain the mature H26 behavior.
+        process_stem = sync._process_stem(getattr(sync, '_process_hint', ''))
+        wanted_key = f"{_clean_name(song)}|{_clean_name(artist)}"
+        bound_key = str(getattr(sync, '_track_key', '') or '')
+        if not _v137_qq_prebind_position_allowed(process_stem, bound_key, wanted_key):
+            try:
+                _h26_log_ownership_once(
+                    f'qq-prebind-origin:{bound_key}->{wanted_key}',
+                    'V137 QQ新曲拒绝旧曲预绑定进度',
+                    f'old_track={bound_key} | new_track={wanted_key} | legacy_detection={legacy}ms | '
+                    'action=wait-post-bind-clock-proof | seek=unchanged', interval_ms=500.0)
+            except Exception:
+                pass
+            return 0
         state = _LIMBUS_H26_SNAPSHOT_PRE(sync) or {}
         process_name = str(getattr(sync, '_process_hint', '') or '')
         if not sync._source_matches_process_hint(str(state.get('media_source') or ''), process_name):
@@ -46924,14 +48152,35 @@ MediaSessionSync.bind_track = _h26_bind_track_player_owned
 def _h26_start_auto_local_clock(self, initial_position_ms=0):
     # Win11 and every non-NetEase player delegate exactly to the accumulated H25 path.
     if self._process_stem(self._process_hint) == 'cloudmusic' and _h26_netease_win10_safe_profile(self):
+        # H26 formal transport safety is intentionally preserved: never publish this hint
+        # through MediaSessionSync.snapshot(), never grant seek authority, and keep the
+        # historical generic auto-local clock reset. R2.4 already computes a display-level
+        # current-position hint for later confirmed tracks; retain only that hint for the
+        # LyricWindow-only presentation adapter installed by V137 phase-1.
         self._reset_auto_local_clock()
         now = time.monotonic() * 1000.0
+        try:
+            startup_existing = bool(getattr(self, '_startup_existing_attach', False))
+            hint_ms = max(0.0, float(initial_position_ms or 0.0))
+            track_key = str(getattr(self, '_track_key', '') or '')
+            if startup_existing or not track_key:
+                self._v137p1_ncm_display_hint = None
+            elif hint_ms >= 650.0:
+                self._v137p1_ncm_display_hint = {
+                    'track': track_key,
+                    'position_ms': hint_ms,
+                    'mono': now,
+                    'startup_existing': False,
+                }
+        except Exception:
+            self._v137p1_ncm_display_hint = None
         if now - float(getattr(self, '_h26_netease_unknown_log_mono', 0.0) or 0.0) >= 3000.0:
             self._h26_netease_unknown_log_mono = now
             try:
                 write_error_log('H26网易云Win10临时时钟无证据禁用', detail=(
                     f'initial_hint={int(initial_position_ms or 0)}ms | position=none | '
-                    'reason=no-player-owned-clock | win11-path=unchanged'))
+                    'reason=no-player-owned-clock | win11-path=unchanged | '
+                    'v137p1-render-hint=retained-formal-authority=0'))
             except Exception:
                 pass
         return False
@@ -51528,6 +52777,13 @@ def _h34_activate_runtime():
 if 'MediaSessionSync' in globals():
     H31_NCM_CONTINUITY_MAX_MS = 120000.0
     H31_NCM_CONTINUITY_LOG_MS = 6000.0
+    # V137P8 field closure: an identity-less detector sample may renew only an already
+    # trusted same-track presentation clock. It never gains seek/provider/identity authority.
+    H31_NCM_ANON_SAMPLE_MAX_AGE_MS = 1800.0
+    H31_NCM_ANON_DRIFT_MAX_MS = 2200.0
+    H31_NCM_ANON_LOG_MS = 30000.0
+    H31_NCM_IDENTITY_MISSING_RESTART_MS = 18000.0
+    H31_NCM_IDENTITY_RESTART_COOLDOWN_MS = 60000.0
     _LIMBUS_H31_SNAPSHOT_PRE = MediaSessionSync.snapshot
     _LIMBUS_H31_BIND_TRACK_PRE = MediaSessionSync.bind_track
 
@@ -51562,6 +52818,139 @@ if 'MediaSessionSync' in globals():
                 except Exception:
                     return False
             return False
+        except Exception:
+            return False
+
+    def _v137p8_ncm_maybe_restart_native(sync, snap, now):
+        try:
+            if not isinstance(snap, dict):
+                return False
+            if bool(snap.get('ready')):
+                sync._v137p8_ncm_identity_missing_since_mono = 0.0
+                return False
+            if str(snap.get('error') or '') != 'track-identity-unavailable':
+                return False
+            if str(sync._process_stem(getattr(sync, '_process_hint', '')) or '') != 'cloudmusic':
+                return False
+            if not str(getattr(sync, '_track_key', '') or ''):
+                return False
+            since = float(getattr(sync, '_v137p8_ncm_identity_missing_since_mono', 0.0) or 0.0)
+            if since <= 0.0:
+                sync._v137p8_ncm_identity_missing_since_mono = float(now)
+                return False
+            if float(now) - since < float(H31_NCM_IDENTITY_MISSING_RESTART_MS):
+                return False
+            retry_after = float(getattr(sync, '_v137p8_ncm_identity_restart_after_mono', 0.0) or 0.0)
+            if float(now) < retry_after:
+                return False
+            native = getattr(sync, '_netease_native', None)
+            if native is None or not callable(getattr(native, 'stop_background', None)):
+                return False
+            requested = bool(native.stop_background())
+            if not requested:
+                return False
+            sync._v137p8_ncm_identity_restart_after_mono = float(now) + float(H31_NCM_IDENTITY_RESTART_COOLDOWN_MS)
+            sync._v137p8_ncm_identity_missing_since_mono = float(now)
+            try:
+                sync._netease_native_primary = False
+            except Exception:
+                pass
+            try:
+                write_error_log('V137P8网易云原生日志身份自愈重启', detail=(
+                    f'missing={int(round(float(now)-since))}ms | '
+                    f'cooldown={int(H31_NCM_IDENTITY_RESTART_COOLDOWN_MS)}ms | '
+                    'clock-bridge=H31 | formal-authority=unchanged'))
+            except Exception:
+                pass
+            return True
+        except Exception:
+            return False
+
+    def _v137p8_ncm_record_presentation_floor(sync, track, player_epoch, position, status, now):
+        try:
+            sync._v137p8_ncm_presentation_floor = {
+                'track': str(track or ''), 'player_epoch': int(player_epoch or 0),
+                'position': max(0.0, float(position or 0.0)), 'anchor_mono': float(now),
+                'status': str(status or 'unknown').lower(),
+            }
+        except Exception:
+            pass
+
+    def _v137p8_ncm_floor_now(sync, track, status, now):
+        floor = getattr(sync, '_v137p8_ncm_presentation_floor', None)
+        if not isinstance(floor, dict) or str(floor.get('track') or '') != str(track or ''):
+            return None
+        try:
+            epoch = int(getattr(sync, '_media_player_epoch', 0) or 0)
+            if int(floor.get('player_epoch') or 0) != epoch:
+                return None
+            value = max(0.0, float(floor.get('position') or 0.0))
+            anchor_mono = float(floor.get('anchor_mono') or now)
+            floor_status = str(floor.get('status') or 'unknown').lower()
+            incoming = str(status or 'unknown').lower()
+            # Never infer motion through an explicit pause/stop. UNKNOWN is allowed only when
+            # the floor itself was proven playing; this is a display floor, not transport proof.
+            if floor_status == 'playing' and incoming not in ('paused', 'stopped'):
+                value += max(0.0, float(now) - anchor_mono)
+            return max(0.0, value)
+        except Exception:
+            return None
+
+    def _v137p8_ncm_renew_from_anonymous(sync, cont, state, now):
+        sample = getattr(sync, '_v137p8_ncm_anonymous_clock', None)
+        if not isinstance(cont, dict) or not isinstance(sample, dict):
+            return False
+        try:
+            sample_age = max(0.0, float(now) - float(sample.get('sample_mono') or 0.0))
+            if sample_age > float(H31_NCM_ANON_SAMPLE_MAX_AGE_MS):
+                return False
+            serial = int(sample.get('track_serial', -1))
+            trusted_serial = int(cont.get('native_track_serial', -1))
+            if serial < 0 or trusted_serial < 0 or serial != trusted_serial:
+                return False
+            sample_status = str(sample.get('status') or 'unknown').lower()
+            public_status = str(state.get('status') or 'unknown').lower()
+            if sample_status not in ('playing', 'paused') or public_status not in ('playing', 'paused'):
+                return False
+            if sample_status != public_status:
+                return False
+            sample_pos = max(0.0, float(sample.get('position_ms')))
+            if sample_status == 'playing':
+                sample_pos += sample_age
+            sample_duration = max(0.0, float(sample.get('duration_ms') or 0.0))
+            expected_duration = max(0.0, float(state.get('duration_ms') or getattr(sync, '_uia_duration_ms', 0) or 0.0))
+            if sample_duration > 0.0 and expected_duration > 0.0:
+                tol = max(2500.0, expected_duration * 0.025)
+                if abs(sample_duration - expected_duration) > tol:
+                    return False
+            base = max(0.0, float(cont.get('position') or 0.0))
+            anchor_mono = float(cont.get('anchor_mono') or now)
+            predicted = base + (max(0.0, float(now) - anchor_mono) if str(cont.get('status') or '') == 'playing' else 0.0)
+            seek_serial = int(sample.get('seek_serial', -1))
+            previous_seek_serial = int(cont.get('native_seek_serial', -1))
+            explicit_seek = bool(seek_serial >= 0 and previous_seek_serial >= 0 and seek_serial != previous_seek_serial)
+            drift = sample_pos - predicted
+            if not explicit_seek and abs(drift) > float(H31_NCM_ANON_DRIFT_MAX_MS):
+                return False
+            # Same detector track serial + coherent duration/motion is enough to renew only the
+            # presentation anchor. Explicit seek serial may rebase this presentation clock, but
+            # still does not publish seek authority.
+            cont['position'] = sample_pos
+            cont['anchor_mono'] = float(now)
+            cont['status'] = sample_status
+            cont['native_seek_serial'] = seek_serial
+            cont['anon_renew_mono'] = float(now)
+            last_log = float(cont.get('anon_last_log_mono') or 0.0)
+            if float(now) - last_log >= float(H31_NCM_ANON_LOG_MS):
+                cont['anon_last_log_mono'] = float(now)
+                try:
+                    write_error_log('V137P8网易云匿名原生时钟同曲续租', detail=(
+                        f'position={int(round(sample_pos))}ms | drift={int(round(drift))}ms | '
+                        f'track_serial={serial} | seek_edge={int(explicit_seek)} | '
+                        'authority=presentation-only | identity/seek-authority=unchanged'))
+                except Exception:
+                    pass
+            return True
         except Exception:
             return False
 
@@ -51629,8 +53018,11 @@ if 'MediaSessionSync' in globals():
                 'track': track, 'player_epoch': player_epoch, 'position': pos,
                 'anchor_mono': now, 'status': status,
                 'from_source': str(state.get('position_source') or ''),
-                'using': False, 'last_log_mono': 0.0,
+                'native_track_serial': int(getattr(sync, '_netease_native_last_track_serial', -1) or 0),
+                'native_seek_serial': int(getattr(sync, '_netease_native_last_seek_serial', -1) or 0),
+                'using': False, 'last_log_mono': 0.0, 'anon_last_log_mono': 0.0,
             }
+            _v137p8_ncm_record_presentation_floor(sync, track, player_epoch, pos, status, now)
             if was_using:
                 try:
                     write_error_log('H31网易云连续时钟交回真实证据', detail=(
@@ -51642,6 +53034,10 @@ if 'MediaSessionSync' in globals():
         cont = getattr(sync, '_h31_ncm_continuity', None)
         if not isinstance(cont, dict):
             return state
+        # Identity may disappear while cloudmusic_detector's state.position remains healthy.
+        # Renew only when the same detector track serial, duration and motion prove continuity.
+        # Without that proof, the historical 120s fail-closed lease is unchanged.
+        _v137p8_ncm_renew_from_anonymous(sync, cont, state, now)
         try:
             age = max(0.0, now - float(cont.get('anchor_mono') or now))
         except Exception:
@@ -51682,6 +53078,7 @@ if 'MediaSessionSync' in globals():
         state['sync_waiting'] = True
         state['continuity_clock'] = True
         state['continuity_from'] = str(cont.get('from_source') or '')
+        _v137p8_ncm_record_presentation_floor(sync, track, player_epoch, value, status, now)
         last_log = float(cont.get('last_log_mono') or 0.0)
         if now - last_log >= float(H31_NCM_CONTINUITY_LOG_MS):
             cont['last_log_mono'] = now
@@ -53093,8 +54490,22 @@ def _h83_reconcile_netease_id(panel, song, artist):
 def _h83_guard_netease_result(panel, result):
     if str(result.get('source') or '') != '网易云' or not result.get('lyric'):
         return
+    # V137: H13 DIY lyrics are user-owned payloads keyed by the app's exact normalized
+    # song+artist identity, not NetEase provider payloads. They intentionally have no
+    # netease_song_id, so applying H83's provider-ID fence would reject every valid DIY
+    # auto-load while the manual path (which does not traverse this guard) succeeds.
+    meta = result.get('provider_meta') if isinstance(result.get('provider_meta'), dict) else {}
+    if bool(meta.get('user_owned')) and str(meta.get('h13_custom_lyric_slot') or '') in H13_LYRIC_SLOT_NAMES:
+        result['_h83_identity_rebind'] = False
+        try:
+            write_error_log('H83用户DIY歌词按曲目身份放行', detail=(
+                f'song={str(result.get("song") or "")} | slot={str(meta.get("h13_custom_lyric_slot") or "")} | '
+                'provider-id-check=not-applicable | exact-song-artist=H13'))
+        except Exception:
+            pass
+        return
     expected = str(result.get('provider_track_id') or '').strip().split('_')[0]
-    actual = str((result.get('provider_meta') or {}).get('netease_song_id') or '').strip().split('_')[0]
+    actual = str(meta.get('netease_song_id') or '').strip().split('_')[0]
     bound = str(getattr(panel.media_sync, '_netease_bridge_bound_track_id', '') or '').split('_')[0]
     result['_h83_identity_rebind'] = bool(actual and actual != bound)
     row = _h83_netease_player_hint(panel)
@@ -62161,6 +63572,8 @@ def _h69_install_song_fragment_atlas(window, payload):
                 for row in list(getattr(window, 'history_lines', []) or []) + list(getattr(window, 'fading_lines', []) or []):
                     if str(getattr(row, 'text', '') or '') != text:
                         continue
+                    if bool(getattr(row, '_h71_no_late_material_swap', False)):
+                        continue
                     expected_key = _h61_held_row_key(row)
                     if expected_key[0] is None or key != expected_key or shared[2] != expected_key[0]:
                         continue
@@ -63184,6 +64597,33 @@ def _h71_fading_draw(row, painter):
         painter.restore()
 
 
+def _h71_prewarm_active_line(window, text):
+    """Queue H61 fragment material after per-line typography is final, before history birth."""
+    text = str(text or '')
+    if not text:
+        return 'empty'
+    try:
+        effect = _h70_effect_key(getattr(window, 'exit_effect', 'fade'))
+        profile = _h70_profile(window, effect) if '_h70_profile' in globals() else {}
+        flavor = max(0, min(100, int((profile or {}).get('flavor', 0) or 0)))
+        if effect not in ('per_char', 'wipe_ltr', 'wipe_rtl') or flavor <= 0:
+            return 'not-needed'
+        schedule = globals().get('_h61_schedule_row_atlas')
+        state = schedule(window, text) if callable(schedule) else 'unavailable'
+        token = (int(getattr(window, 'displayed_line_index', -1) or -1), text, effect, flavor)
+        if token != getattr(window, '_h71_active_prewarm_log_token', None):
+            window._h71_active_prewarm_log_token = token
+            try:
+                write_error_log('H71当前行退场材质提前预热', detail=(
+                    f'line={token[0]} | effect={effect} | flavor={flavor}% | state={state} | '
+                    'phase=post-typography-pre-history | gui_build=0'))
+            except Exception:
+                pass
+        return str(state or '')
+    except Exception:
+        return 'error'
+
+
 def _h71_make_history_line(window, text):
     row = _h71_make_history_pre(window, text) if callable(_h71_make_history_pre) else None
     try:
@@ -63191,12 +64631,35 @@ def _h71_make_history_line(window, text):
             effect = _h70_effect_key(getattr(row, 'exit_effect', 'fade'))
             flavor = _h70_row_flavor(row)
             if flavor > 0.0001 and effect in ('per_char', 'wipe_ltr', 'wipe_rtl') and getattr(row, '_shared_fragment_atlas', None) is None:
-                schedule = globals().get('_h61_schedule_row_atlas')
-                state = schedule(window, str(getattr(row, 'text', text) or '')) if callable(schedule) else 'unavailable'
-                row._h71_fragment_prewarm_state = str(state or '')
-                if state == 'scheduled':
-                    try: write_error_log('H71专属风味片段材质预热', detail=f'effect={effect} | flavor={int(round(flavor*100))}% | gui_build=0')
-                    except Exception: pass
+                row_text = str(getattr(row, 'text', text) or '')
+                try:
+                    cache_get = globals().get('_h61_row_cached_shared')
+                    cache_key, cached = cache_get(window, row_text) if callable(cache_get) else (None, None)
+                    expected_key = _h61_held_row_key(row) if '_h61_held_row_key' in globals() else (None, row_text)
+                    if cached is not None and cache_key == expected_key and cached[2] == expected_key[0]:
+                        row._shared_fragment_atlas = cached
+                        row._h71_fragment_prewarm_state = 'cache-adopt'
+                        try:
+                            write_error_log('H71专属风味片段材质首帧接管', detail=(
+                                f'effect={effect} | flavor={int(round(flavor*100))}% | '
+                                f'text_len={len(row_text)} | late_handoff=0'))
+                        except Exception:
+                            pass
+                except Exception:
+                    pass
+                if getattr(row, '_shared_fragment_atlas', None) is None:
+                    # Continuity wins over optional flavor fidelity. Once a history row is born
+                    # without its immutable fragment material, keep that row on the mature
+                    # fallback for the rest of its short lifetime. A late atlas may warm the
+                    # shared cache for future rows, but must not visibly replace material under
+                    # an already-present lyric.
+                    row._h71_no_late_material_swap = True
+                    schedule = globals().get('_h61_schedule_row_atlas')
+                    state = schedule(window, row_text) if callable(schedule) else 'unavailable'
+                    row._h71_fragment_prewarm_state = str(state or '')
+                    if state == 'scheduled':
+                        try: write_error_log('H71专属风味片段材质预热', detail=f'effect={effect} | flavor={int(round(flavor*100))}% | gui_build=0')
+                        except Exception: pass
     except Exception:
         pass
     return row
@@ -64663,7 +66126,7 @@ def _h75_make_update_card(panel):
     except Exception: more.setText('⋯')
     more.setFixedSize(31,28); more.setToolTip('更新高级选项')
     menu = QMenu(more); menu.addAction('自定义更新源…', lambda: _h75_edit_update_source(panel)); more.setMenu(menu); more.setPopupMode(QToolButton.InstantPopup); header.addWidget(more); v.addLayout(header)
-    version = QLabel('当前版本  ·  v1.8.9.136', card); version.setObjectName('trackDetail'); v.addWidget(version)
+    version = QLabel(f'当前版本  ·  {_h15_current_version_label()}', card); version.setObjectName('trackDetail'); v.addWidget(version)
     buttons = QHBoxLayout(); buttons.addWidget(panel.h12_check_btn); buttons.addWidget(panel.h12_download_btn); buttons.addStretch(); v.addLayout(buttons)
     panel.h12_update_status.setMaximumHeight(120); v.addWidget(panel.h12_update_status)
     panel.h12_update_url_edit.hide()
@@ -68346,8 +69809,12 @@ def _h85_lyric_paint(window,event):
     try:
         return _h85_lyric_paint_pre(window,event) if callable(_h85_lyric_paint_pre) else None
     finally:
-        try: window._h85_frame_serial=int(getattr(window,'_h85_frame_serial',0) or 0)+1
-        except Exception: pass
+        # OBS QWidget.grab() re-enters the source paint path.  Do not publish that mirror-owned
+        # repaint as a new source frame, otherwise the mirror creates a self-sustaining capture
+        # loop (grab -> paint -> serial++ -> next tick thinks the source changed -> grab again).
+        if not bool(getattr(window, '_h85_obs_capture_in_progress', False)):
+            try: window._h85_frame_serial=int(getattr(window,'_h85_frame_serial',0) or 0)+1
+            except Exception: pass
 
 
 _h85_lyric_show_pre=getattr(LyricWindow,'showEvent',None) if 'LyricWindow' in globals() else None
@@ -68364,6 +69831,41 @@ def _h85_obs_init(mirror,source_window):
     try: mirror._timer.setTimerType(Qt.PreciseTimer)
     except Exception: pass
     mirror._h85_last_source_serial=-1; mirror._h85_last_visual_rect=QRect(); mirror._h85_last_opacity=None
+    mirror._v137_obs_grab_max_ms=0.0; mirror._v137_obs_grab_count=0; mirror._v137_obs_grab_diag_mono=0.0
+    mirror._v137_obs_tiles=[]; mirror._v137_obs_tile_cache={}; mirror._v137_obs_tick_index=0
+    mirror._v137_obs_capture_ms_window=[]; mirror._v137_obs_tile_capture_count=0
+
+
+def _v137_obs_clip_rect(src, region):
+    try:
+        if isinstance(region,QRegion): rect=region.boundingRect()
+        elif isinstance(region,QRect): rect=QRect(region)
+        else: return QRect()
+        if rect.isEmpty(): return QRect()
+        # Region helpers already include effect padding; a small extra guard absorbs subpixel
+        # shake/glow changes between the geometry sample and the QWidget.grab paint.
+        return rect.adjusted(-6,-6,6,6).intersected(src.rect())
+    except Exception:
+        return QRect()
+
+
+def _v137_obs_desired_tiles(src):
+    out=[]
+    try:
+        active=_v137_obs_clip_rect(src,src._active_visual_region())
+        if not active.isEmpty(): out.append(('active',2,active,True))
+    except Exception: pass
+    try:
+        for item in list(getattr(src,'fading_lines',[]) or []):
+            rect=_v137_obs_clip_rect(src,src._held_visual_region(item))
+            if not rect.isEmpty(): out.append((f'fading:{id(item)}',1,rect,True))
+    except Exception: pass
+    try:
+        for item in list(getattr(src,'history_lines',[]) or []):
+            rect=_v137_obs_clip_rect(src,src._held_visual_region(item))
+            if not rect.isEmpty(): out.append((f'history:{id(item)}',0,rect,False))
+    except Exception: pass
+    return out
 
 
 def _h85_obs_tick(mirror):
@@ -68373,27 +69875,80 @@ def _h85_obs_tick(mirror):
         if src is None or not src.isVisible(): mirror.hide(); return
         mirror._capture_busy=True; g=src.geometry()
         if mirror.geometry()!=g: mirror.setGeometry(g)
-        old=QRect(mirror._frame_rect)
-        try:
-            visual=src._current_visual_region().boundingRect(); rect=visual.adjusted(-48,-48,48,48).intersected(src.rect()) if not visual.isEmpty() else QRect()
-        except Exception: rect=src.rect()
-        serial=int(getattr(src,'_h85_frame_serial',0) or 0)
+        mirror._v137_obs_tick_index=int(getattr(mirror,'_v137_obs_tick_index',0) or 0)+1
+        tick=int(mirror._v137_obs_tick_index)
+        desired=_v137_obs_desired_tiles(src)
+        cache=getattr(mirror,'_v137_obs_tile_cache',None)
+        if not isinstance(cache,dict): cache={}; mirror._v137_obs_tile_cache=cache
+        desired_keys={key for key,_order,_rect,_fast in desired}
+        dirty=QRegion()
+        # Retired/moved rows must be cleared immediately from the translucent mirror.
+        for key in list(cache.keys()):
+            if key not in desired_keys:
+                try: dirty=dirty.united(QRegion(cache[key]['rect']))
+                except Exception: pass
+                cache.pop(key,None)
+        total_grab_ms=0.0; captured=0; active_grab_ms=0.0; active_pixels=0
+        for key,order,rect,fast in desired:
+            prev=cache.get(key)
+            rect_changed=prev is None or QRect(prev.get('rect',QRect()))!=rect
+            # Active/fading content is sampled at the 30fps OBS cadence.  Held history is
+            # largely static, so refresh it every third tick (~10fps) unless geometry changes.
+            capture_now=bool(fast or rect_changed or prev is None or (tick%3)==0)
+            if not capture_now:
+                continue
+            t0=time.monotonic()*1000.0
+            src._h85_obs_capture_in_progress=True
+            try:
+                pix=src.grab(rect)
+            finally:
+                src._h85_obs_capture_in_progress=False
+            grab_ms=max(0.0,time.monotonic()*1000.0-t0)
+            total_grab_ms+=grab_ms; captured+=1
+            if key=='active':
+                active_grab_ms=grab_ms; active_pixels=max(0,int(rect.width())*int(rect.height()))
+            mirror._v137_obs_grab_count=int(getattr(mirror,'_v137_obs_grab_count',0) or 0)+1
+            mirror._v137_obs_tile_capture_count=int(getattr(mirror,'_v137_obs_tile_capture_count',0) or 0)+1
+            mirror._v137_obs_grab_max_ms=max(float(getattr(mirror,'_v137_obs_grab_max_ms',0.0) or 0.0),grab_ms)
+            if prev is not None:
+                try: dirty=dirty.united(QRegion(prev.get('rect',QRect())))
+                except Exception: pass
+            dirty=dirty.united(QRegion(rect))
+            cache[key]={'order':int(order),'rect':QRect(rect),'pix':pix}
+        mirror._v137_obs_tiles=[(int(v['order']),QRect(v['rect']),v['pix']) for v in cache.values()]
+        mirror._frame=QPixmap(); mirror._frame_rect=QRect()
         try: opacity=round(float(src.windowOpacity()),4)
         except Exception: opacity=1.0
-        rect_changed=rect!=getattr(mirror,'_h85_last_visual_rect',QRect()); frame_changed=serial!=int(getattr(mirror,'_h85_last_source_serial',-1)); opacity_changed=opacity!=getattr(mirror,'_h85_last_opacity',None)
-        mirror._h85_last_visual_rect=QRect(rect); mirror._h85_last_opacity=opacity
-        if rect.isEmpty():
-            if not mirror._frame.isNull() or not old.isEmpty(): mirror._frame=QPixmap(); mirror._frame_rect=QRect(); mirror.update(old)
-            mirror._h85_last_source_serial=serial; return
-        if frame_changed or rect_changed or mirror._frame.isNull():
-            mirror._frame=src.grab(rect); mirror._frame_rect=QRect(rect); mirror._h85_last_source_serial=serial
-            if not mirror.isVisible(): mirror.show()
-            mirror.update(old.united(rect) if not old.isEmpty() else rect)
-        elif opacity_changed:
-            if not mirror.isVisible(): mirror.show()
-            mirror.update(mirror._frame_rect)
-    except Exception: pass
-    finally: mirror._capture_busy=False
+        opacity_changed=opacity!=getattr(mirror,'_h85_last_opacity',None)
+        mirror._h85_last_opacity=opacity
+        if opacity_changed:
+            for v in cache.values(): dirty=dirty.united(QRegion(v['rect']))
+        if not mirror.isVisible(): mirror.show()
+        if not dirty.isEmpty(): mirror.update(dirty)
+        now=time.monotonic()*1000.0
+        window=getattr(mirror,'_v137_obs_capture_ms_window',None)
+        if not isinstance(window,list): window=[]; mirror._v137_obs_capture_ms_window=window
+        if captured:
+            window.append(float(total_grab_ms))
+            if len(window)>120: del window[:-120]
+        # Keep diagnostics sparse.  One record per ~10s is enough to prove whether tiled capture
+        # reduced GUI-thread work and whether the active row is really being sampled at 30fps.
+        if now-float(getattr(mirror,'_v137_obs_grab_diag_mono',0.0) or 0.0)>=10000.0:
+            mirror._v137_obs_grab_diag_mono=now
+            avg=(sum(window)/len(window)) if window else 0.0
+            try: write_error_log('V137 OBS独立输出分块帧复制',detail=(
+                f'tiles={len(cache)} | captured={captured} | tick={tick} | target_fps={int(round(1000.0/H85_OBS_INTERVAL_MS))} | '
+                f'active_grab={active_grab_ms:.2f}ms | active_pixels={active_pixels} | batch={total_grab_ms:.2f}ms | '
+                f'batch_avg120={avg:.2f}ms | max_tile={float(getattr(mirror,"_v137_obs_grab_max_ms",0.0) or 0.0):.2f}ms | '
+                f'tile_count={int(getattr(mirror,"_v137_obs_tile_capture_count",0) or 0)} | gui-thread=1'))
+            except Exception: pass
+    except Exception as exc:
+        try: write_error_log('V137 OBS独立输出分块帧复制失败',exc)
+        except Exception: pass
+    finally:
+        try: src._h85_obs_capture_in_progress=False
+        except Exception: pass
+        mirror._capture_busy=False
 
 
 _h85_h75_global_filter_pre=globals().get('_h75_global_filter')
@@ -68469,7 +70024,7 @@ def _h85_control_init(panel,*args,**kwargs):
         if app is not None: app.applicationStateChanged.connect(lambda _s,p=panel:QTimer.singleShot(0,lambda:_h85_set_topmost(getattr(p,'lyric_window',None),'app-state')))
     except Exception: pass
     try:
-        if hasattr(panel,'h75_output_mode_combo'): panel.h75_output_mode_combo.setToolTip('OBS 独立输出：在 OBS 添加“窗口采集”并选择 LimbusLyric OBS Lyrics。普通 Overlay 与捕获排除保持原逻辑。')
+        if hasattr(panel,'h75_output_mode_combo'): panel.h75_output_mode_combo.setToolTip('OBS 独立输出：在 OBS 添加“窗口采集”并选择 LimbusLyric OBS Lyrics；透明窗口请使用“Windows 10（1903 或更新版本）”捕获方式。普通 Overlay 与捕获排除保持原逻辑。')
     except Exception: pass
 
 
@@ -73897,6 +75452,22 @@ def _h95f3_apply_card_density(panel, legacy):
             pass
 
 
+# V137P1.3: suppress only shell-density -> frontend -> layout reentry while H95F3 layout owns the call.
+def _v137p13_h95f3_shell_density_no_frontend_reentry(panel):
+    attr = '_v137p13_h95f3_shell_density_depth'
+    depth = int(getattr(panel, attr, 0) or 0)
+    setattr(panel, attr, depth + 1)
+    try:
+        return _h95f1_apply_shell_density(panel)
+    finally:
+        if depth > 0:
+            setattr(panel, attr, depth)
+        else:
+            try:
+                delattr(panel, attr)
+            except Exception:
+                setattr(panel, attr, 0)
+
 def _h95f3_apply_layout(panel, mode=None, save=False):
     mode = 'legacy' if str(mode or _h95f3_layout_value(panel)).lower() == 'legacy' else 'studio'
     previous = _h95f3_layout_value(panel)
@@ -73908,7 +75479,8 @@ def _h95f3_apply_layout(panel, mode=None, save=False):
         panel.setProperty('h95f3Layout', mode); _h95f3_repolish(panel)
         # Dynamic ancestor selectors need descendants repolished after the layout property flips.
         for child in panel.findChildren(QWidget):
-            try: child.setProperty('h95f3Layout',mode); _h95f3_repolish(child)
+            # V137P1.1 h95f3-layout-change-only-repolish
+            try: child.property('h95f3Layout') == mode or (child.setProperty('h95f3Layout',mode), _h95f3_repolish(child))
             except Exception: pass
         nav = getattr(panel, 'top_nav', None)
         if nav is not None:
@@ -73921,7 +75493,7 @@ def _h95f3_apply_layout(panel, mode=None, save=False):
             else:
                 header.setMinimumHeight(0); header.setMaximumHeight(16777215)
                 if '_h95f1_apply_shell_density' in globals():
-                    try: _h95f1_apply_shell_density(panel)
+                    try: _v137p13_h95f3_shell_density_no_frontend_reentry(panel)
                     except Exception: pass
         for name in ('workspace_title','workspace_description','h77_workspace_kicker','h78_workspace_mark'):
             w = getattr(panel, name, None)
@@ -74385,7 +75957,7 @@ def _h95f4_save_all_config(panel,presets,players):
 _H95F4_DENSITY_PRE=globals().get('_h95f1_apply_shell_density')
 def _h95f4_apply_shell_density(panel):
     out=_H95F4_DENSITY_PRE(panel) if callable(_H95F4_DENSITY_PRE) else None
-    try: _h95f4_apply_frontend(panel,_h95f4_frontend_value(panel),False)
+    try: (None if int(getattr(panel,'_v137p13_h95f3_shell_density_depth',0) or 0) > 0 else _h95f4_apply_frontend(panel,_h95f4_frontend_value(panel),False))
     except Exception: pass
     return out
 
@@ -78150,18 +79722,36 @@ def _h95f10f4_fetch_netease_art(http,song,artist,duration_ms,headers,preferred_i
             query=f'{sname} {aname}'.strip()
             if not query or query in seen: continue
             seen.add(query)
-            try:
-                resp=http.post('https://music.163.com/api/search/get/web',data={'s':query,'type':1,'limit':18},headers=headers,timeout=4); resp.raise_for_status(); rows=((resp.json().get('result') or {}).get('songs') or [])
-                hit=_h95f10f4_choose_netease_cover_row(rows,song,artist,duration_ms,preferred_id,album)
-                if not hit: continue
-                url=_h16_cover_pic_url(hit) if '_h16_cover_pic_url' in globals() else ''
-                if not url: continue
-                img=http.get(url,headers=headers,timeout=4); img.raise_for_status(); path=_h88_save_art_bytes(img.content,out_path) if '_h88_save_art_bytes' in globals() else ''
-                if path:
-                    try: write_error_log('H95F10F4封面发行身份命中',detail=f'provider=网易云 | song={song} | album={_h95f10f4_netease_album(hit) or "<unknown>"} | wanted_album={album or "<unknown>"} | source=netease:{hit.get("id") or ""}')
-                    except Exception: pass
-                    return path,f'netease:{hit.get("id") or ""}:{sname}'
-            except Exception: pass
+            # NetEase exposes two search shapes in the wild. The /web POST endpoint can
+            # return no usable rows on some clients/networks even while the legacy GET endpoint
+            # used by lyric lookup is healthy. Try the mature POST first, then GET only on miss.
+            # Both paths feed the exact same release-aware title/credit/duration/album guard.
+            search_attempts = (
+                ('web-post', 'POST', 'https://music.163.com/api/search/get/web'),
+                ('api-get', 'GET', 'https://music.163.com/api/search/get'),
+            )
+            for search_label, method, endpoint in search_attempts:
+                try:
+                    if method == 'POST':
+                        resp=http.post(endpoint,data={'s':query,'type':1,'limit':18},headers=headers,timeout=4)
+                    else:
+                        resp=http.get(endpoint,params={'s':query,'type':1,'limit':18},headers=headers,timeout=4)
+                    resp.raise_for_status(); rows=((resp.json().get('result') or {}).get('songs') or [])
+                    hit=_h95f10f4_choose_netease_cover_row(rows,song,artist,duration_ms,preferred_id,album)
+                    if not hit:
+                        continue
+                    url=_h16_cover_pic_url(hit) if '_h16_cover_pic_url' in globals() else ''
+                    if not url:
+                        continue
+                    img=http.get(url,headers=headers,timeout=4); img.raise_for_status(); path=_h88_save_art_bytes(img.content,out_path) if '_h88_save_art_bytes' in globals() else ''
+                    if path:
+                        try: write_error_log('H95F10F4封面发行身份命中',detail=(
+                            f'provider=网易云 | song={song} | album={_h95f10f4_netease_album(hit) or "<unknown>"} | '
+                            f'wanted_album={album or "<unknown>"} | source=netease:{hit.get("id") or ""} | search={search_label}'))
+                        except Exception: pass
+                        return path,f'netease:{hit.get("id") or ""}:{sname}:{search_label}'
+                except Exception:
+                    continue
     return '',''
 
 
@@ -78627,7 +80217,56 @@ def _h95f10f5_should_block_qq_old_restore(panel, song, artist='', now_mono=None)
         return False
 
 
+def _h95f10f5_should_block_netease_old_restore(panel, song, artist=''):
+    """Block a cached old-track restore when current NetEase identity already proves another song."""
+    try:
+        if str(panel.player_combo.currentText() or '') != '网易云音乐':
+            return False
+        if not bool(getattr(panel, '_auto_overlay_suspended', False)):
+            return False
+        requested = str(panel._track_identity(song, artist) or '')
+        loaded = str(getattr(panel, '_loaded_track_key', '') or '')
+        if not requested or not loaded or requested != loaded:
+            return False
+
+        native_song = native_artist = ''
+        if '_h38_ncm_current_identity' in globals():
+            try:
+                native_song, native_artist, _duration = _h38_ncm_current_identity(panel.media_sync)
+            except Exception:
+                native_song = native_artist = ''
+        if native_song and not panel._same_track(song, artist, native_song, native_artist):
+            return True
+
+        # H38's player identity can lag a short publication edge. A fresh native snapshot is
+        # also acceptable as a veto, but only when H83 considers it a valid process-affine row.
+        if '_h83_netease_player_hint' in globals():
+            try:
+                row = _h83_netease_player_hint(panel)
+            except Exception:
+                row = None
+            if isinstance(row, dict) and str(row.get('title') or '').strip():
+                if not panel._same_track(song, artist, row.get('title'), row.get('artist')):
+                    return True
+        return False
+    except Exception:
+        return False
+
+
 def _h95f10f5_restore_suspended_loaded_track(panel, song, artist=''):
+    if _h95f10f5_should_block_netease_old_restore(panel, song, artist):
+        try:
+            native_song = native_artist = ''
+            if '_h38_ncm_current_identity' in globals():
+                native_song, native_artist, _duration = _h38_ncm_current_identity(panel.media_sync)
+            write_error_log('V137网易云新身份阻止旧歌词回滚', detail=(
+                f'loaded={getattr(panel, "_loaded_track_key", "") or "<none>"} | '
+                f'detector={panel._track_identity(song, artist) or "<none>"} | '
+                f'native={panel._track_identity(native_song, native_artist) or "fresh-native-snapshot"} | '
+                'restore=blocked | presentation-owner=current-player-identity'))
+        except Exception:
+            pass
+        return False
     if _h95f10f5_should_block_qq_old_restore(panel, song, artist):
         try:
             age_ms = int(max(0.0, (time.monotonic() - float(getattr(panel, '_qq_background_hint_log_mono', 0.0) or 0.0)) * 1000.0))
@@ -78650,11 +80289,11 @@ def _h95f10f5_activate():
         if 'ControlPanel' in globals() and callable(_H95F10F5_RESTORE_PRE):
             ControlPanel._restore_qq_suspended_loaded_track = _h95f10f5_restore_suspended_loaded_track
             ControlPanel._restore_qq_suspended_loaded_track._limbus_layer = 'H95F10F5'
-            ControlPanel._restore_qq_suspended_loaded_track._limbus_policy = 'fresh-qq-target-blocks-stale-loaded-restore-only'
+            ControlPanel._restore_qq_suspended_loaded_track._limbus_policy = 'fresh-player-identity-blocks-stale-loaded-restore-only'
         try:
             write_error_log('H95F10F5 QQ自动切歌旧身份回滚保护激活', detail=(
                 f'guard={int(H95F10F5_QQ_IDENTITY_ROLLBACK_GUARD_MS)}ms | '
-                'evidence=fresh-qq-fast-identity+pending-target | restore-only=1 | transport/search=unchanged'))
+                'evidence=qq-fast-identity+netease-native-identity | restore-only=1 | transport/search=unchanged'))
         except Exception:
             pass
     except Exception as exc:
@@ -79599,6 +81238,22 @@ def _h95f10f7_queue_translation_depth(owner, text, history=False, window=None):
         return False
 
 
+def _h95f10f7_depth_lane_complete(shared, text, visible=None):
+    """Depth material is lane-atomic: never mix blurred and sharp glyphs in one lane."""
+    try:
+        if not shared or len(shared) < 2:
+            return False
+        cmap = shared[1]
+        if not isinstance(cmap, dict) or not cmap:
+            return False
+        text = str(text or '')
+        if visible is not None:
+            text = text[:max(0, min(len(text), int(visible)))]
+        return all((not ch or ch.isspace() or ch in cmap) for ch in text)
+    except Exception:
+        return False
+
+
 def _h95f10f7_append_fragment(fragments, raw, gx, gy, scale, opacity, rotation=0.0):
     try:
         if len(raw) >= 6: source, left, top, lw, lh, source_ss = raw[:6]
@@ -79706,6 +81361,8 @@ def _h95f10f7_draw_active_translation(window, painter, text):
         return False
     _h95f10f7_queue_translation_depth(window, text, False, window)
     depth = getattr(window, '_h95f10f7_translation_depth_shared', None)
+    if not _h95f10f7_depth_lane_complete(depth, text, visible):
+        depth = None
     sheet = depth[0] if depth else None; cmap = depth[1] if depth else None
     shakes = _h95f10f4_translation_shakes(window, text)
     audio_scales = _h95f10f7_translation_audio_scales(window, text, visible)
@@ -79790,6 +81447,8 @@ def _h95f10f7_draw_history_translation(row, painter, text):
     proxy = _H95F10F7TranslationExitProxy(row, text, scales)
     shakes = _h95f10f4_translation_shakes(row, text)
     depth = getattr(row, '_h95f10f7_translation_depth_shared', None)
+    if not _h95f10f7_depth_lane_complete(depth, text):
+        depth = None
     sheet = depth[0] if depth else None; cmap = depth[1] if depth else None
     cursor = 0.0; drawn = False; fragments = []; fallback = []
     old = _h95f10f7_anchor_enter(row, painter)
@@ -81115,15 +82774,46 @@ def _h95f10f11_heavy_render_busy(window):
     return False
 
 
+def _h95f10f11_work_now_visible(window, work_token):
+    """Promote an already-queued speculative/current job once one of its glyphs is visible.
+
+    F9 deduplicates glyph work across lanes. Without this check a low-priority translation
+    prewarm can own a glyph for ~180 ms and prevent the later translation-visible request
+    from entering the queue. That produces a sharp/blurred bilingual split even though the
+    visible lane itself is supposed to be never-denied.
+    """
+    try:
+        if not isinstance(work_token, tuple) or len(work_token) != 2:
+            return False
+        style_sig, missing = work_token
+        missing = set(missing or ())
+        if not missing:
+            return False
+        plan = getattr(window, '_h95f10f10_render_plan', None)
+        if not isinstance(plan, dict):
+            return False
+        if style_sig == plan.get('primary_style'):
+            return bool(missing.intersection(set(plan.get('primary_visible_missing_chars') or ())))
+        if style_sig == plan.get('translation_style'):
+            return bool(missing.intersection(set(plan.get('translation_visible_missing_chars') or ())))
+    except Exception:
+        pass
+    return False
+
+
 def _h95f10f11_admit(window, owner_id, lane, work_token, priority):
-    """Return (allowed, waited_ms). Visible work is never delayed."""
+    """Return (allowed, waited_ms). Visible work is never delayed, including promoted work."""
     priority = int(priority)
-    if priority < 0: return True, 0.0
+    if priority < 0 or _h95f10f11_work_now_visible(window, work_token): return True, 0.0
     deadline_ms = float(H95F10F11_CURRENT_MAX_WAIT_MS if priority <= 1 else H95F10F11_NEIGHBOR_MAX_WAIT_MS)
     started = time.monotonic() * 1000.0
     while _h95f10f11_heavy_render_busy(window):
         if _h95f10f11_stale(owner_id, lane, work_token): return False, max(0.0, time.monotonic()*1000.0-started)
         waited = time.monotonic()*1000.0-started
+        # A job may have entered as current/full-row or neighbour work and become visible while
+        # waiting. Promote it in place so F9's glyph-level dedup cannot invert priorities.
+        if _h95f10f11_work_now_visible(window, work_token):
+            return True, max(0.0, waited)
         if waited >= deadline_ms:
             # Current-row material eventually proceeds; speculative neighbour work is cheaper to
             # discard and will be reconsidered by the next generation/plan.
@@ -82190,7 +83880,7 @@ def _h95f10f17_draw_history_material(window, event):
     return drawn
 
 
-def _h95f10f17_draw_active_primary_cache_only(window, event, plan):
+def _h95f10f17_draw_active_primary_cache_only(window, event, plan, force_plain=False):
     """Cold active row: styled ready glyphs + plain missing glyphs; no raster/path build."""
     started=time.perf_counter(); started_mono=time.monotonic()*1000.0
     # Keep the same frame/dirty telemetry as the mature/emergency painters.
@@ -82241,7 +83931,7 @@ def _h95f10f17_draw_active_primary_cache_only(window, event, plan):
         # R2.2: never mix decorated and plain glyphs inside one visible row. If a single
         # visible glyph is cold, the current row uses one consistent plain material for this
         # bounded frame and atomically returns to the full material when the cache is complete.
-        row_plain=any(
+        row_plain=bool(force_plain) or any(
             ch and not ch.isspace() and _h95f10f17_cached_sprite(style_sig,ch) is None
             for ch in draw_text
         )
@@ -82296,7 +83986,7 @@ def _h95f10f17_draw_active_primary_cache_only(window, event, plan):
     return None
 
 
-def _h95f10f17_draw_active_translation_cache_only(window, text):
+def _h95f10f17_draw_active_translation_cache_only(window, text, force_plain=False):
     """Draw only ready translated material. Missing translation glyphs never downgrade main."""
     text=str(text or '').strip(); main=str(getattr(window,'full_text','') or '')
     if not text or not main: return False
@@ -82311,8 +84001,8 @@ def _h95f10f17_draw_active_translation_cache_only(window, text):
     except Exception: scales=[]
     base=max(0.0,min(1.0,float(getattr(window,'line_alpha',1.0) or 0.0))); style_sig=_h95f10f8_translation_style(window,text) if '_h95f10f8_translation_style' in globals() else None
     visible_text=text[:max(0,min(len(text),int(visible)))]
-    lane_complete=bool(cmap is not None and all((not ch or ch.isspace() or ch in cmap) for ch in visible_text))
-    if not lane_complete:
+    lane_complete=False if force_plain else bool(cmap is not None and all((not ch or ch.isspace() or ch in cmap) for ch in visible_text))
+    if not lane_complete and not force_plain:
         lane_complete=bool(style_sig and all(
             (not ch or ch.isspace() or _h95f10f17_cached_sprite(style_sig,ch) is not None)
             for ch in visible_text
@@ -82344,8 +84034,12 @@ def _h95f10f17_draw_active_translation_cache_only(window, text):
                     sprite=_h95f10f17_cached_sprite(style_sig,ch)
                     if sprite is not None and '_h95f7_draw_sprite' in globals(): drawn=bool(_h95f7_draw_sprite(painter,sprite,gx,gy,scale,alpha) or drawn)
                 else:
-                    painter.save(); painter.setOpacity(alpha); painter.setPen(QPen(QColor(getattr(window,'text_color',QColor('#ffffff')))))
-                    painter.setFont(font); painter.drawText(QPointF(gx,gy+float(fm.height())/3.0),ch); painter.restore(); drawn=True
+                    painter.save(); painter.setOpacity(alpha); painter.setFont(font)
+                    if bool(getattr(window,'shadow_enabled',False)):
+                        painter.setPen(QPen(QColor(getattr(window,'shadow_color',QColor('#000000')))))
+                        painter.drawText(QPointF(gx+2.0,gy+float(fm.height())/3.0+2.0),ch)
+                    painter.setPen(QPen(QColor(getattr(window,'text_color',QColor('#ffffff')))))
+                    painter.drawText(QPointF(gx,gy+float(fm.height())/3.0),ch); painter.restore(); drawn=True
             cursor += advances[i] + tsp
         if fragments and sheet is not None:
             painter.setOpacity(1.0); painter.setRenderHint(QPainter.SmoothPixmapTransform,True); painter.drawPixmapFragments(fragments,sheet); drawn=True
@@ -82361,15 +84055,24 @@ def _h95f10f17_paint_core(window, event):
     if not bool(plan.get('cold')):
         return _H95F10F8_PAINT_PRE(window,event) if callable(globals().get('_H95F10F8_PAINT_PRE')) else (_H95F10F17_PAINT_PRE(window,event) if callable(_H95F10F17_PAINT_PRE) else None)
     if pm<=0:
-        # Mature primary/history remains intact. Suppress only the active legacy translation
-        # pass, then redraw ready translated material cache-only.
-        try:
-            window._h95f10f9_suppress_legacy_translation=True
-            out=_H95F7_PAINT_PRE(window,event) if callable(globals().get('_H95F7_PAINT_PRE')) else None
-        finally:
-            window._h95f10f9_suppress_legacy_translation=False
-        if translation: _h95f10f17_draw_active_translation_cache_only(window,translation)
-        route='translation-local-cold'
+        depth_pair_cold=bool(translation and tm>0 and getattr(window,'_h54_depth_enabled',False))
+        if depth_pair_cold:
+            # Bilingual depth is one visual pair. While the translation lane is cold, render
+            # both active lanes with the same bounded plain material instead of exposing a
+            # mature blurred primary next to a sharp/partially-ready translation.
+            out=_h95f10f17_draw_active_primary_cache_only(window,event,plan,force_plain=True)
+            _h95f10f17_draw_active_translation_cache_only(window,translation,force_plain=True)
+            route='bilingual-depth-pair-cold'
+        else:
+            # Mature primary/history remains intact. Suppress only the active legacy translation
+            # pass, then redraw ready translated material cache-only.
+            try:
+                window._h95f10f9_suppress_legacy_translation=True
+                out=_H95F7_PAINT_PRE(window,event) if callable(globals().get('_H95F7_PAINT_PRE')) else None
+            finally:
+                window._h95f10f9_suppress_legacy_translation=False
+            if translation: _h95f10f17_draw_active_translation_cache_only(window,translation)
+            route='translation-local-cold'
     else:
         out=_h95f10f17_draw_active_primary_cache_only(window,event,plan)
         if translation: _h95f10f17_draw_active_translation_cache_only(window,translation)
@@ -84081,7 +85784,19 @@ def _r9_freeze_history_row(window, row):
 
 
 def _r9_update_hold(row):
-    return bool(_R9_HOLD_PRE(row)) if callable(_R9_HOLD_PRE) else False
+    changed = bool(_R9_HOLD_PRE(row)) if callable(_R9_HOLD_PRE) else False
+    # V137 Phase-2: preserve every mature held-row state update, but tell the sparse repaint
+    # scheduler that history pixels changed.  The scheduler may sample those secondary pixels
+    # at a bounded cadence instead of repainting all resident rows for every active-glyph tick.
+    if changed:
+        try:
+            owner_ref = getattr(row, '_h62_owner_ref', None)
+            owner = owner_ref() if callable(owner_ref) else None
+            if owner is not None:
+                owner._v137p2_history_motion_pending = True
+        except Exception:
+            pass
+    return changed
 
 
 def _r9_uncached_visible_batch(style_sig, chars, limit=R9_VISIBLE_GLYPH_BATCH):
@@ -84151,6 +85866,101 @@ def _r9_activate_visual_continuity_frame_budget():
 
 
 _r9_activate_visual_continuity_frame_budget()
+
+
+# V137 Phase-2 held-history dirty-region decoupling --------------------------------
+# Field logs with current+2 resident rows showed ~76% dirty area on ordinary active-glyph ticks.
+# The v103/v109 sparse scheduler still unioned every history row into every repaint even when the
+# only high-frequency change was the current lyric.  Keep the full semantic/effect state alive,
+# keep fading rows on the primary cadence, but sample resident-history pixel motion on a 30ms
+# secondary cadence.  Structural add/remove/transfer is always repainted immediately.
+V137P2_HISTORY_REPAINT_INTERVAL_MS = 30.0
+
+_v137p2_flush_visual_pre = getattr(LyricWindow, '_flush_visual_update', None)
+
+def _v137p2_region_union(window, rows):
+    region = QRegion()
+    try:
+        for row in list(rows or []):
+            region = region.united(window._held_visual_region(row))
+    except Exception:
+        return QRegion(window.rect())
+    return region
+
+def _v137p2_flush_visual_update(window):
+    """Sparse repaint current/fading at full cadence and resident history only when due."""
+    try:
+        if not bool(RENDER_DIRTY_REGION_ENABLED):
+            return _v137p2_flush_visual_pre(window) if callable(_v137p2_flush_visual_pre) else QMainWindow.update(window)
+
+        now = time.monotonic() * 1000.0
+        active = window._active_visual_region()
+        fading_rows = list(getattr(window, 'fading_lines', []) or [])
+        history_rows = list(getattr(window, 'history_lines', []) or [])
+        dynamic = active.united(_v137p2_region_union(window, fading_rows))
+        history = _v137p2_region_union(window, history_rows)
+        history_sig = tuple(id(row) for row in history_rows)
+
+        last_dynamic = getattr(window, '_v137p2_last_dynamic_region', QRegion())
+        last_history = getattr(window, '_v137p2_last_history_region', QRegion())
+        last_sig = getattr(window, '_v137p2_last_history_sig', None)
+        structure_changed = history_sig != last_sig
+        motion_pending = bool(getattr(window, '_v137p2_history_motion_pending', False))
+        last_history_submit = float(getattr(window, '_v137p2_history_submit_mono', 0.0) or 0.0)
+        history_due = bool(structure_changed or (motion_pending and (last_history_submit <= 0.0 or
+            now - last_history_submit >= float(V137P2_HISTORY_REPAINT_INTERVAL_MS))))
+        force_full = bool(getattr(window, '_render_force_full', False))
+
+        if force_full:
+            dirty = QRegion(window.rect())
+            history_due = True
+        else:
+            dirty = dynamic.united(last_dynamic)
+            dirty = dirty.united(getattr(window, '_pending_explicit_region', QRegion()))
+            if history_due:
+                dirty = dirty.united(history).united(last_history)
+            elif motion_pending and history_rows:
+                window._v137p2_history_scoped_skip_count = int(getattr(window, '_v137p2_history_scoped_skip_count', 0) or 0) + 1
+
+        window._v137p2_last_dynamic_region = dynamic
+        if history_due:
+            window._v137p2_last_history_region = history
+            window._v137p2_last_history_sig = history_sig
+            window._v137p2_history_motion_pending = False
+            window._v137p2_history_submit_mono = now
+            window._v137p2_history_submit_count = int(getattr(window, '_v137p2_history_submit_count', 0) or 0) + 1
+        last_diag = float(getattr(window, '_v137p2_dirty_diag_mono', 0.0) or 0.0)
+        if history_rows and now - last_diag >= 10000.0:
+            window._v137p2_dirty_diag_mono = now
+            try:
+                write_error_log('V137P2历史字幕脏区节流', detail=(
+                    f'history={len(history_rows)} | fading={len(fading_rows)} | '
+                    f'history-submit={int(getattr(window,"_v137p2_history_submit_count",0) or 0)} | '
+                    f'active-only-skip={int(getattr(window,"_v137p2_history_scoped_skip_count",0) or 0)} | '
+                    f'history-draw-skip={int(getattr(window,"_v137p21_history_draw_skip_count",0) or 0)} | '
+                    f'interval={int(V137P2_HISTORY_REPAINT_INTERVAL_MS)}ms | state-motion=unchanged'))
+            except Exception:
+                pass
+        # Preserve the historical diagnostic/compatibility field as the full current visual union.
+        window._last_visual_region = dynamic.united(history)
+        window._pending_explicit_region = QRegion()
+        window._render_force_full = False
+        if not dirty.isEmpty():
+            window._render_last_submit_mono = now
+            QMainWindow.update(window, dirty)
+    except Exception as exc:
+        # Sparse accounting must fail open to the mature renderer; correctness beats optimization.
+        try:
+            if not bool(getattr(window, '_v137p2_dirty_fallback_logged', False)):
+                window._v137p2_dirty_fallback_logged = True
+                write_error_log('V137P2历史字幕脏区优化回退', exc, detail='fallback=mature-flush')
+        except Exception:
+            pass
+        return _v137p2_flush_visual_pre(window) if callable(_v137p2_flush_visual_pre) else QMainWindow.update(window)
+
+if callable(_v137p2_flush_visual_pre):
+    LyricWindow._flush_visual_update = _v137p2_flush_visual_update
+    _v137p2_flush_visual_update._limbus_layer = 'V137P2-held-history-dirty-scope'
 
 
 # QQ modern search + trusted cover direct-ID R9.2 ----------------------------------
@@ -84375,7 +86185,218 @@ def _r9_2_activate_network_metadata_routing():
 
 _r9_2_activate_network_metadata_routing()
 
+
+def _v137_semantic_fixture_payload():
+    """Return deterministic product semantics that must match source and frozen builds.
+
+    This intentionally exercises real runtime helpers while avoiding live player/GUI access.
+    It is a packaging parity probe, not a replacement for real-player field validation.
+    """
+    payload = {'schema': 1}
+
+    # Track identity parsing is a frequent source of silent provider divergence.
+    payload['title_parser'] = {
+        'netease_spaced': LyricFetcher._split_title('Song - Artist', '网易云音乐'),
+        'netease_ambiguous': LyricFetcher._split_title('Song-Artist', '网易云音乐'),
+        'netease_hyphen_artist': LyricFetcher._split_title('Song - SLAVE.V-V-R', '网易云音乐'),
+        'netease_custom': LyricFetcher._split_title('Song|Artist', '网易云音乐', r'^(.+?)\|(.+?)$'),
+        'kugou_three_field': LyricFetcher._split_title('Artist - Song - 酷狗音乐', '酷狗音乐'),
+    }
+
+    # H83 ownership: user-authored DIY payloads are track-owned rather than provider-ID-owned,
+    # while normal NetEase payloads must still be rejected on an ID mismatch.
+    class _FixturePanel:
+        def __init__(self):
+            self.media_sync = type('_FixtureSync', (), {'_netease_bridge_bound_track_id': ''})()
+
+        @staticmethod
+        def _same_track(song_a, artist_a, song_b, artist_b):
+            def _norm(value):
+                return ''.join(ch.lower() for ch in str(value or '') if ch.isalnum())
+            return _norm(song_a) == _norm(song_b) and (
+                not _norm(artist_a) or not _norm(artist_b) or _norm(artist_a) == _norm(artist_b)
+            )
+
+    _old_hint = globals().get('_h83_netease_player_hint')
+    _old_log = globals().get('write_error_log')
+    try:
+        globals()['_h83_netease_player_hint'] = lambda panel: {
+            'track_id': '2031664863', 'title': '拝啓', 'artist': 'ぺぽよ, 初音ミク'
+        }
+        globals()['write_error_log'] = lambda *args, **kwargs: None
+        _panel = _FixturePanel()
+        _diy = {
+            'source': '网易云', 'lyric': '[00:00.00]DIY', 'song': '拝啓', 'artist': 'ぺぽよ, 初音ミク',
+            'provider_track_id': '',
+            'provider_meta': {'h13_custom_lyric_slot': 'translation', 'user_owned': True},
+        }
+        _h83_guard_netease_result(_panel, _diy)
+        _normal = {
+            'source': '网易云', 'lyric': '[00:00.00]provider', 'song': '拝啓', 'artist': 'ぺぽよ, 初音ミク',
+            'provider_track_id': '999', 'provider_meta': {'netease_song_id': '999'},
+        }
+        _h83_guard_netease_result(_panel, _normal)
+        payload['h83_ownership'] = {
+            'diy_kept': bool(_diy.get('lyric')),
+            'diy_rebind': bool(_diy.get('_h83_identity_rebind')),
+            'provider_mismatch_rejected': not bool(_normal.get('lyric')),
+        }
+    finally:
+        if _old_hint is not None:
+            globals()['_h83_netease_player_hint'] = _old_hint
+        if _old_log is not None:
+            globals()['write_error_log'] = _old_log
+
+    # NetEase long-run presentation continuity: anonymous native evidence may renew only a
+    # same-detector-track presentation anchor and must fail closed at a track-serial edge.
+    class _FixtureClockSync:
+        pass
+
+    _sync = _FixtureClockSync()
+    _sync._media_player_epoch = 4
+    _sync._uia_duration_ms = 180000
+    _cont = {
+        'track': 'song|artist', 'player_epoch': 4, 'position': 2500.0, 'anchor_mono': 1000.0,
+        'status': 'playing', 'native_track_serial': 7, 'native_seek_serial': 3, 'anon_last_log_mono': 120000.0,
+    }
+    _state = {'status': 'playing', 'duration_ms': 180000}
+    _sync._v137p8_ncm_anonymous_clock = {
+        'position_ms': 121000.0, 'duration_ms': 180000.0, 'status': 'playing',
+        'track_serial': 7, 'seek_serial': 3, 'state_serial': 20, 'sample_mono': 119500.0,
+        'error': 'track-identity-unavailable',
+    }
+    _renew_ok = _v137p8_ncm_renew_from_anonymous(_sync, _cont, _state, 120000.0)
+    _serial_cont = dict(_cont)
+    _sync._v137p8_ncm_anonymous_clock = dict(
+        _sync._v137p8_ncm_anonymous_clock, track_serial=8, sample_mono=120100.0
+    )
+    _serial_reject = not _v137p8_ncm_renew_from_anonymous(_sync, _serial_cont, _state, 120200.0)
+    _v137p8_ncm_record_presentation_floor(_sync, 'song|artist', 4, 121500.0, 'playing', 120000.0)
+    _floor = _v137p8_ncm_floor_now(_sync, 'song|artist', 'playing', 120500.0)
+    payload['netease_presentation'] = {
+        'renew_ok': bool(_renew_ok),
+        'renew_position_ms': int(round(float(_cont.get('position') or 0.0))),
+        'serial_edge_rejected': bool(_serial_reject),
+        'floor_position_ms': int(round(float(_floor or 0.0))),
+    }
+
+    # NetEase transition ownership: once the player has proven track B, a late restore request
+    # for cached track A must not steal presentation back. Genuine detector return to A stays valid.
+    class _RestoreCombo:
+        def currentText(self): return '网易云音乐'
+    class _RestorePanel:
+        def __init__(self):
+            self.player_combo = _RestoreCombo()
+            self.media_sync = object()
+            self._auto_overlay_suspended = True
+            self._loaded_track_key = 'old|artist'
+        @staticmethod
+        def _track_identity(song, artist=''):
+            return f'{str(song or "").strip().lower()}|{str(artist or "").strip().lower()}'
+        @staticmethod
+        def _same_track(a, b, c, d):
+            return str(a or '').casefold() == str(c or '').casefold() and str(b or '').casefold() == str(d or '').casefold()
+    _restore_panel = _RestorePanel()
+    _old_h38 = globals().get('_h38_ncm_current_identity')
+    _old_h83 = globals().get('_h83_netease_player_hint')
+    try:
+        globals()['_h38_ncm_current_identity'] = lambda sync: ('new', 'artist', 200000)
+        globals()['_h83_netease_player_hint'] = lambda panel: None
+        _blocked = _h95f10f5_should_block_netease_old_restore(_restore_panel, 'old', 'artist')
+        globals()['_h38_ncm_current_identity'] = lambda sync: ('old', 'artist', 200000)
+        _returned = not _h95f10f5_should_block_netease_old_restore(_restore_panel, 'old', 'artist')
+        payload['netease_stale_restore'] = {
+            'new_identity_blocks_old': bool(_blocked),
+            'genuine_return_allows_old': bool(_returned),
+        }
+    finally:
+        if _old_h38 is not None: globals()['_h38_ncm_current_identity'] = _old_h38
+        if _old_h83 is not None: globals()['_h83_netease_player_hint'] = _old_h83
+
+    # Presentation motion mode must also stay identical between source and frozen builds.
+    # Seed randomness so the probe is deterministic and does not depend on wall-clock time.
+    _old_random_state = random.getstate()
+    _old_motion_mode = str(globals().get('LIVING_SHAKE_MOTION_MODE', 'shake') or 'shake')
+    try:
+        random.seed(137)
+        _shake_states = [{'x': 0.0, 'y': 0.0, 'target_x': 0.0, 'target_y': 0.0} for _ in range(2)]
+        _set_living_shake_motion_mode('shake')
+        _advance_living_shake(_shake_states, 4, 143, 900.0, 1000.0, 1100.0)
+        random.seed(137)
+        _tremble_states = [{'x': 0.0, 'y': 0.0, 'target_x': 0.0, 'target_y': 0.0} for _ in range(2)]
+        _set_living_shake_motion_mode('tremble')
+        _advance_living_shake(_tremble_states, 4, 143, 900.0, 1000.0, 1100.0)
+        payload['motion_mode'] = {
+            'shake': [[round(float(st['x']), 4), round(float(st['y']), 4)] for st in _shake_states],
+            'tremble': [[round(float(st['x']), 4), round(float(st['y']), 4)] for st in _tremble_states],
+            'tremble_is_micro': max(abs(float(st['x'])) + abs(float(st['y'])) for st in _tremble_states) < 4.0,
+        }
+    finally:
+        random.setstate(_old_random_state)
+        _set_living_shake_motion_mode(_old_motion_mode)
+
+    # QQ post-bind epoch ownership: old-track UIA cannot seed a newly identified track, and
+    # cached rail geometry cannot own mouse input when the actual click target is not QQ.
+    payload['qq_transition_ownership'] = {
+        'different_track_rejects_prebind_position': not _v137_qq_prebind_position_allowed(
+            'qqmusic', 'old|artist', 'new|artist'),
+        'same_track_allows_refresh': _v137_qq_prebind_position_allowed(
+            'qqmusic', 'same|artist', 'same|artist'),
+        'qq_target_owns_rail': _v137_qq_progress_input_owned('qqmusic'),
+        'background_other_target_rejected': not _v137_qq_progress_input_owned('explorer'),
+    }
+
+    payload['foreign_instrumental_identity'] = {
+        'exact_match_allowed': _foreign_instrumental_identity_matches(
+            '夏', 'soutk', {'matched_song': '夏', 'matched_artist': 'soutk'}),
+        'wrong_title_rejected': not _foreign_instrumental_identity_matches(
+            '夏', 'soutk', {'matched_song': 'June', 'matched_artist': 'arkady sevidov'}),
+        'missing_identity_rejected': not _foreign_instrumental_identity_matches(
+            '夏', 'soutk', {}),
+    }
+
+    # Bilingual depth coherence: one lane must never expose a partial depth atlas, and a
+    # queued low-priority translation job becomes urgent once one of its glyphs is visible.
+    _depth_shared = (None, {'A': (0,), 'B': (1,)}, None, 0)
+    class _DepthFixtureWindow:
+        pass
+    _dw = _DepthFixtureWindow()
+    _style = ('fixture-style',)
+    _dw._h95f10f10_render_plan = {
+        'primary_style': ('primary-style',), 'translation_style': _style,
+        'primary_visible_missing_chars': (), 'translation_visible_missing_chars': ('C',),
+    }
+    payload['bilingual_depth_coherence'] = {
+        'complete_lane': bool(_h95f10f7_depth_lane_complete(_depth_shared, 'AB', 2)),
+        'partial_lane_rejected': not bool(_h95f10f7_depth_lane_complete(_depth_shared, 'ABC', 3)),
+        'visible_translation_promotes': bool(_h95f10f11_work_now_visible(_dw, (_style, ('C', 'D')))),
+        'unrelated_work_not_promoted': not bool(_h95f10f11_work_now_visible(_dw, (_style, ('Z',)))),
+    }
+    return payload
+
+
+def _v137_run_semantic_fixture_cli(argv=None):
+    import json as _json
+    argv = list(sys.argv if argv is None else argv)
+    out_path = ''
+    prefix = '--v137-semantic-fixture-output='
+    for arg in argv:
+        if str(arg).startswith(prefix):
+            out_path = str(arg)[len(prefix):]
+            break
+    data = _v137_semantic_fixture_payload()
+    text = _json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(',', ':')) + '\n'
+    if out_path:
+        Path(out_path).write_text(text, encoding='utf-8', newline='\n')
+    else:
+        sys.stdout.write(text)
+        sys.stdout.flush()
+    return 0
+
+
 if __name__ == "__main__":
+    if '--v137-semantic-fixture' in sys.argv:
+        sys.exit(_v137_run_semantic_fixture_cli())
     if '--packaging-smoke-test' in sys.argv:
         sys.exit(_packaging_smoke_test())
     sys.excepthook = _global_exception_hook
@@ -84385,8 +86406,8 @@ if __name__ == "__main__":
             try:
                 ctypes.windll.user32.MessageBoxW(
                     None,
-                    f"LimbusLyric 已经在运行。\n\n你正在启动：{LIMBUSLYRIC_BUILD_TAG}\n\n请先在系统托盘把旧实例完全退出，再启动当前版本。",
-                    f"LimbusLyric · {LIMBUSLYRIC_BUILD_TAG}",
+                    f"LimbusLyric 已经在运行。\n\n你正在启动：{LIMBUSLYRIC_DISPLAY_VERSION}\n\n请先在系统托盘把旧实例完全退出，再启动当前版本。",
+                    f"LimbusLyric · {LIMBUSLYRIC_DISPLAY_VERSION}",
                     0x40
                 )
             except Exception:
@@ -84422,25 +86443,49 @@ if __name__ == "__main__":
                 skip_startup_animation = bool(_startup_settings.get('skip_startup_animation', False))
             except Exception:
                 skip_startup_animation = False
-        # H43: affected packaged Windows builds repeatedly raise 0x8001010d from the
-        # transparent StartupMotion QWidget.show() itself. The animation is cosmetic; skip
-        # that native-window stage in frozen Windows while leaving normal panel startup intact.
+        # v137 infra8: packaged Windows gets an *opaque* pre-construction startup card.
+        # The historical transparent virtual-desktop host remains disabled in frozen builds;
+        # the previous child-overlay replacement was created only after the ~2s panel constructor
+        # and therefore users correctly reported "no startup animation".
+        embedded_startup_motion = False
+        frozen_safe_startup = False
         try:
-            if '_h42_windows_frozen' in globals() and _h42_windows_frozen():
-                skip_startup_animation = True
-                write_error_log('H43 Windows frozen启动动画安全跳过', detail='reason=StartupMotion.show-0x8001010d | panel-startup=direct')
+            frozen_safe_startup = bool(
+                '_h42_windows_frozen' in globals() and _h42_windows_frozen() and
+                '--autostart' not in sys.argv and not skip_startup_animation
+            )
         except Exception:
-            pass
+            frozen_safe_startup = False
         if '--autostart' not in sys.argv and not skip_startup_animation:
-            startup_motion = StartupMotion(app_icon)
-            startup_motion.show_centered(app.primaryScreen())
+            if frozen_safe_startup:
+                startup_motion = FrozenSafeStartupMotion(app_icon)
+                startup_motion.show_centered(app.primaryScreen())
+                write_error_log('H43 Windows frozen启动动画安全替代', detail=(
+                    'unsafe-translucent-host=0 | rc11-choreography=snapshot-morph | '
+                    'embedded-postconstruction-overlay=0 | build-delay=380ms'))
+            else:
+                startup_motion = StartupMotion(app_icon)
+                startup_motion.show_centered(app.primaryScreen())
 
         app.setQuitOnLastWindowClosed(False)
         startup_state = {'panel': None}
 
         def _build_panel_and_continue():
             try:
-                panel = ControlPanel(defer_startup_tasks=(startup_motion is not None))
+                _v137p1_ctor_started = time.monotonic() * 1000.0
+                _v137p1_ctor_done = threading.Event()
+                _v137p1_start_ctor_watchdog(_v137p1_ctor_done, threading.get_ident(), _v137p1_ctor_started)
+                try:
+                    panel = ControlPanel(defer_startup_tasks=('--autostart' not in sys.argv))
+                finally:
+                    _v137p1_ctor_done.set()
+                try:
+                    write_error_log('V137P1 ControlPanel构造耗时', detail=(
+                        f'elapsed={int(time.monotonic() * 1000.0 - _v137p1_ctor_started)}ms | '
+                        f'frozen={int(bool(getattr(sys, "frozen", False)))} | startup-motion={int(startup_motion is not None)} | startup-overlay={int(bool(embedded_startup_motion))} | '
+                        f'deferred={int("--autostart" not in sys.argv)}'), force_sync=True)
+                except Exception:
+                    pass
                 startup_state['panel'] = panel  # keep the hidden panel alive after this callback
                 if not app_icon.isNull():
                     panel.setWindowIcon(app_icon)
@@ -84478,7 +86523,11 @@ if __name__ == "__main__":
         # Let the paint-only 0->1 card fade fully finish before QWidget-heavy panel construction.
         # Any construction/show/layout cost therefore lands on a stationary solid card, never on
         # the fade or the small->large morph itself.
-        QTimer.singleShot(720 if startup_motion is not None else 0, _build_panel_and_continue)
+        # Frozen opaque splash only needs one real paint before construction.  The previous
+        # infra8 reused the historical 720ms transparent-splash fade delay even though the
+        # replacement had no such fade; that added ~0.7s of pure startup latency.
+        startup_build_delay_ms = 380 if frozen_safe_startup else (720 if startup_motion is not None else 0)
+        QTimer.singleShot(startup_build_delay_ms, _build_panel_and_continue)
         sys.exit(app.exec_())
     except Exception as exc:
         write_error_log("程序启动失败", exc)

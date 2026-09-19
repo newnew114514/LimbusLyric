@@ -1,3 +1,4 @@
+# 2026-09-19 v137 final: infra12 start-intent preservation + final release label; runtime authority unchanged.
 # 2026-09-09 R9.2: QQ modern musicu desktop search primary with legacy standby; trusted NetEase song-ID cover direct fetch; clock/seek/render/identity validators unchanged.
 # 2026-09-09 Visual Continuity + Frame Budget R9: retire R8 false performance fuse/history freeze, preserve H51 per-line size cache across same-track precise upgrades, and bound variable-size visible prewarm; mature entrance/hold/exit/material effects restored for all players.
 # 2026-09-09 Variable Font Stability + Shared Frame Pacing R8: reviewed shared LyricWindow/FadingLine variable-size row-material policy, held-row geometry freeze, secondary history cadence, and user-facing copy cleanup; all player/provider clock/search/seek ownership unchanged.
@@ -18,7 +19,7 @@ import hashlib,sys
 # 2026-09-08 Runtime Convergence R2.1: reviewed first-safe-main startup, transport/search identity separation, rapid-switch cancellation debounce, and KuGou transport-scoped gesture invalidation; frontend runtime installation chains unchanged.
 # 2026-09-08 Runtime Fix R2: reviewed QQ advancing-time duration proof + QQ search 5xx circuit breaker + cross-provider precise-version quarantine + KuGou background holdover/visual quarantine + transport visual-epoch reset; frontend runtime installation chains unchanged.
 # 2026-09-08 Stabilization Contract S2: reviewed provider/query registry + playback snapshot contract + bounded fault journal + patch-debt freeze + isolated H95 fallback/source-lock audit fixes; live player clock/seek authorities unchanged.
-EXPECTED = "41819b4366456612b0e58f9615a59a0e65cb72b66c42421fc76f0751f5b546bb"
+EXPECTED = "e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12"
 if len(sys.argv)!=2: raise SystemExit(2)
 text=Path(sys.argv[1]).read_text(encoding='utf-8')
 normalized='\n'.join(text.splitlines()).rstrip()+'\n'

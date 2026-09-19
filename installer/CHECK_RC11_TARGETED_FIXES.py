@@ -137,11 +137,11 @@ SAFE_FASTSTART_PATCH = {'AsyncPlayerUiPositionReader.__init__': '24acbef433b649a
  # 2026-09-08 R2.4: first-attach lifecycle is consumed by confirmed track bind, not provider-result branches; formal player authority unchanged.
  # 2026-08-18 V29 maintenance re-lock: _start_auto_search_job only persists an already-validated cache_put row; QQ duration/version authority branches are byte-identical.
  'ControlPanel._request_auto_track': 'c393efaae3d37ee7507992b9ac12bfc1990a9c62efe881968455fc1c311631a4',
- 'ControlPanel._start_auto_search_job': '32b27be278c1dc908f6518f6030c22699cc1b5b9f7cd133077fae88639cce5bc',
+ 'ControlPanel._start_auto_search_job': '6ee9b55e506fe1e82cfe70dfeda35aa76f140ee4d30754d86fe6aa9b726f3557',
  'ControlPanel._resolve_qq_auto_track_duration_after_bind': '7a2b8fea3f659d9b135f9828c949428b2357949e99f541ef9e296dcc1b85a886',
  'LyricFetcher.fetch_and_set': '4a98199166266e55b659513c3573475c4d9f9b66ad472f7aafad68a030829d7c',
  'ControlPanel._monitor_track_change': 'acb2e70bd9cea22394ae467d118856bda8fa2dd989bd98877ea410311d37328e',
- 'ControlPanel._refetch_loaded_track_for_mode_switch': '5b433f9318887544add4e82bb72430155d0df354468197c679d4c8a40cc8570b',
+ 'ControlPanel._refetch_loaded_track_for_mode_switch': '25daa704d1582ebf2419f81a71511ef19e477cce93a91a4739f8fdc8c4bedb98',
  'LyricFetcher.get_qq_ui_duration_hint': '46148957431c6e08226c83783b7eaeed404714143b90028f62b136a6039168c9',
  'ControlPanel._restore_qq_suspended_loaded_track': '37d13b6927f1ee1061c3280b1637282357803085c818c99b8b588d49d54d5cd9',
  'ControlPanel._on_qq_auto_lyric_transaction_result': '5950bdf6da989a1204004cdf2d1ebc3daf066dff07be8c48b5ff950948d39fb1'}

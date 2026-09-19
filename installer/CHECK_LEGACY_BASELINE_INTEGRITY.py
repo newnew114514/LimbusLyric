@@ -611,6 +611,8 @@ INTENTIONAL_REVIEWED_PATCH = {
     # diagnostic instead of dumping urllib3 traceback. Unexpected exceptions retain the
     # historical traceback path; V29 dedicated replay reviews this exact branch.
     'LyricSearchEngine._fail',
+    # v137 infra11: strict NetEase title identity reviewed from field log.
+    'LyricSearchEngine.search_netease',
     'LyricSearchEngine.search_qq',
     'LyricSearchEngine.search',
     'MediaSessionSync.start',
@@ -647,6 +649,8 @@ INTENTIONAL_REVIEWED_PATCH = {
     'ControlPanel._on_track_probe_result',
     'ControlPanel._refresh_frontend_status',
     'ControlPanel._refetch_loaded_track_for_mode_switch',
+    # V137 title parser hardening is covered by CHECK_V137_TRACK_TITLE_PARSER.py.
+    'LyricFetcher._split_title',
     # 2026-08-16 HANDOFF/UI CLEANUP: user-requested compact-mode removal, forced-on
     # loop-boundary correctness guard, and event-driven KuGou/QQ track confirmation.
     # These are covered by CHECK_KUGOU_HANDOFF_UI_CLEANUP_REPLAY; clock authority
@@ -744,6 +748,8 @@ INTENTIONAL_REVIEWED_PATCH = {
     '_glyph_glow_raster',
     '_hires_glyph_sprite',
     '_render_song_atlas_glyph',
+    # v137 presentation-only shake/tremble branch is covered by its dedicated replay.
+    '_advance_living_shake',
     # V27 presentation-only renderer/cache/collision optimization. These methods only
     # schedule/retain visual atlases or score subtitle placement; timing/provider authority
     # remains locked by the existing QQ/KuGou gates and the dedicated V27 replay.

@@ -1,0 +1,43 @@
+--- a/LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
++++ b/LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+@@ -41175,6 +41175,10 @@
+             trans_only = bool(job.get('trans_only'))
+             requested_precise = bool(job.get('prefer_precise', True))
+             progressive = bool(requested_precise and not trans_only)
++            # Tracks whether this transaction has already published a usable fast-stage payload.
++            # A later precision cancellation must never be reclassified as a whole-track failure,
++            # otherwise the ownership wrapper hides a timeline the user is already entitled to see.
++            fast_display_emitted = False
+             cancel_check = lambda: (
+                 int(job.get('generation', -1)) != int(getattr(self, '_auto_generation', -2)) or
+                 str(job.get('key') or '') != str(getattr(self, '_auto_target_key', '') or '')
+@@ -41439,6 +41443,7 @@
+                         fast_meta = dict(fast_meta or {})
+                         fast_meta['progressive_fast_stage'] = True
+                         fast_meta['lyric_candidate_duration_ms'] = int(fast_duration or 0)
++                        fast_display_emitted = True
+                         emit_result(fast_lyric, bind_duration, fast_meta, stage='fast', final=False)
+ 
+                 if cancel_check():
+@@ -41549,7 +41554,20 @@
+ 
+                 cancelled = bool(cancel_check())
+                 if cancelled:
+-                    emit_result(lyric, duration or 0, provider_meta, stage='final', err=error, final=True)
++                    if progressive and fast_display_emitted:
++                        # The ordinary/fast payload already succeeded. Cancellation here belongs
++                        # only to the optional precision enhancement. Preserve the loaded timeline
++                        # and Start intent instead of letting terminal ownership cleanup hide it.
++                        write_error_log('自动歌词增强取消保留快速歌词', detail=(
++                            f'song={job.get("song","")} | source={source} | '
++                            'fast-display=keep | start-intent=preserve | transaction=enhancement-cancel'))
++                        emit_result(
++                            None, 0, fast_meta, stage='final',
++                            err=error or 'precision-cancelled-after-fast-display',
++                            final=True, keep_fast=True
++                        )
++                    else:
++                        emit_result(lyric, duration or 0, provider_meta, stage='final', err=error, final=True)
+                     return
+ 
+                 if progressive and fast_lyric and not lyric:

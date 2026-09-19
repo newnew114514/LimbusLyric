@@ -103,7 +103,7 @@ jobs:
                               '当前版本中稳定暴露两个独立的 mm:ss 文本标签')
           if '测试版' in text:
               raise SystemExit('Chinese test-version label still exists in final main source')
-          p.write_text(text, encoding='utf-8')
+          p.write_bytes(text.encode('utf-8'))
           got = hashlib.sha256(p.read_bytes()).hexdigest()
           print('FINAL_MAIN_SHA256=', got)
           if got != 'e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12':

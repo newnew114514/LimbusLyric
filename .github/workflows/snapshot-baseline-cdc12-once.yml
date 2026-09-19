@@ -1,0 +1,67 @@
+name: Snapshot baseline CDC12 once
+
+on:
+  push:
+    branches: [build/infra11-fast-test-20260919]
+    paths: ['.github/workflows/snapshot-baseline-cdc12-once.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 1}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Write baseline CDC12 map
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          MAIN='LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          FILES=[MAIN,'limbus_netease_native.py']
+          MASK=(1<<12)-1
+          MIN=1024
+          MAX=16384
+          U64=(1<<64)-1
+          def gear(b):
+              x=(b+1)*0x9E3779B185EBCA87 & U64
+              x ^= x>>29; x=(x*0xC2B2AE3D27D4EB4F)&U64; x^=x>>32
+              return x & U64
+          G=[gear(i) for i in range(256)]
+          def chunks(data):
+              out=[]; start=0; h=0
+              for i,b in enumerate(data):
+                  h=((h<<1)+G[b])&U64
+                  n=i+1-start
+                  if n>=MIN and ((h&MASK)==0 or n>=MAX):
+                      buf=data[start:i+1]
+                      out.append([start,len(buf),hashlib.sha256(buf).hexdigest()])
+                      start=i+1;h=0
+              if start<len(data):
+                  buf=data[start:]
+                  out.append([start,len(buf),hashlib.sha256(buf).hexdigest()])
+              return out
+          doc={'algo':'gear12-min1024-max16384-v1','files':{}}
+          for name in FILES:
+              data=Path(name).read_bytes()
+              doc['files'][name]={
+                  'size':len(data),
+                  'sha256':hashlib.sha256(data).hexdigest(),
+                  'chunks':chunks(data),
+              }
+              print(name,len(data),len(doc['files'][name]['chunks']),doc['files'][name]['sha256'])
+          Path('.ci/baseline-cdc12.json').write_text(json.dumps(doc,separators=(',',':')),encoding='utf8')
+          print('map_bytes',Path('.ci/baseline-cdc12.json').stat().st_size)
+          PY
+      - name: Commit map
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .ci/baseline-cdc12.json
+          git commit -m "Record baseline CDC12 map [skip ci]"
+          git push origin HEAD:build/infra11-fast-test-20260919

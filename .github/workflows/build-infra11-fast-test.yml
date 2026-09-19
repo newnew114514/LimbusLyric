@@ -6,7 +6,7 @@ on:
       - build/infra11-fast-test-20260919
     paths:
       - '.github/workflows/build-infra11-fast-test.yml'
-      - '.ci/infra11-main.patch'
+      - '.ci/infra11_runtime_payload.b64'
   workflow_dispatch:
 
 permissions:
@@ -42,109 +42,52 @@ jobs:
             requirements_netease_native.txt
             installer/requirements_build.txt
 
-      - name: Recover exact tested v137 source
+      - name: Restore verified infra11 runtime source
         shell: pwsh
         run: |
           @'
           import base64, hashlib, io, lzma, tarfile
           from pathlib import Path
 
-          root=Path.cwd().resolve()
-          files=sorted((root/'.release_payload/parts').glob('v137_source.part*.b64'))
-          if len(files) < 3:
-              raise SystemExit('expected three staged v137 payload parts')
-          p0,p1,p2=[''.join(x.read_text(encoding='ascii').split()) for x in files[:3]]
+          root = Path.cwd().resolve()
+          payload = root / '.ci' / 'infra11_runtime_payload.b64'
+          packed = base64.b64decode(''.join(payload.read_text(encoding='ascii').split()), validate=True)
+          tar_bytes = lzma.decompress(packed)
+          with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
+              for member in tf.getmembers():
+                  target = (root / member.name).resolve()
+                  if target != root and root not in target.parents:
+                      raise SystemExit(f'unsafe payload path: {member.name}')
+              tf.extractall(root)
 
-          # Upload history shows part001 accidentally contains the first 8000 chars
-          # of part002 plus an old 3-char base64 tail ("4==").  The old short payload
-          # is therefore exactly one base64 character short.  Recover that one symbol
-          # by exhaustive validation: base64 -> xz -> tar -> exact-tested file hashes.
-          if p1[16000:24000] != p2[:8000] or p1[24000:] != '4==':
-              raise SystemExit('staged payload shape is not the diagnosed resumable-upload pattern')
-
-          prefix=p0+p1[:16000]+p2[:8000]
-          suffix='4=='
-          alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-          expected_main='6a5e22bd8f979fd8baa815f075179629c612765fb2ee7e1afb6b4b1075e0461a'
-          expected_native='4b7b87580e572b60dc46be0df81d8ac34bd23360b3f78c32771edfa06c161c46'
-          main_name='LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
-          successes=[]
-
-          for ch in alphabet:
-              s=prefix+ch+suffix
-              try:
-                  raw=base64.b64decode(s, validate=True)
-                  tar_bytes=lzma.decompress(raw)
-                  with tarfile.open(fileobj=io.BytesIO(tar_bytes),mode='r:') as tf:
-                      members=tf.getmembers()
-                      blobs={}
-                      for m in members:
-                          if not m.isfile():
-                              continue
-                          f=tf.extractfile(m)
-                          data=f.read() if f else b''
-                          blobs[m.name.replace('\\','/')]=data
-                      main_key=next((k for k in blobs if k.endswith(main_name)),None)
-                      native_key=next((k for k in blobs if k.endswith('limbus_netease_native.py')),None)
-                      mh=hashlib.sha256(blobs[main_key]).hexdigest() if main_key else '<missing>'
-                      nh=hashlib.sha256(blobs[native_key]).hexdigest() if native_key else '<missing>'
-                      successes.append((ch,mh,nh,len(members),len(tar_bytes)))
-                      if mh != expected_main:
-                          continue
-                      if native_key and nh != expected_native:
-                          continue
-                      for m in members:
-                          target=(root/m.name).resolve()
-                          if target != root and root not in target.parents:
-                              raise ValueError('unsafe payload path: '+m.name)
-                      tf.extractall(root)
-                  print('RECOVERED_CHAR=',ch)
-                  print('RECOVERED_MAIN_SHA256=',mh)
-                  print('RECOVERED_NATIVE_SHA256=',nh)
-                  print('RECOVERED_MEMBERS=',len(members))
-                  break
-              except Exception:
-                  continue
-          else:
-              print('Decompressible candidates:',successes)
-              raise SystemExit('could not recover exact-tested v137 payload')
-
-          got=hashlib.sha256((root/main_name).read_bytes()).hexdigest()
-          if got != expected_main:
-              raise SystemExit('extracted main hash mismatch')
-          native=root/'limbus_netease_native.py'
-          if native.exists():
-              gotn=hashlib.sha256(native.read_bytes()).hexdigest()
-              print('POST_EXTRACT_NATIVE_SHA256=',gotn)
-              if gotn != expected_native:
-                  raise SystemExit('extracted native hash mismatch')
+          expected = {
+              'LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py':
+                  '5bee776fb0d5eb37f1a082c1acf92fddc5e00582cd730c731f2fe47c53db95d5',
+              'limbus_netease_native.py':
+                  '4b7b87580e572b60dc46be0df81d8ac34bd23360b3f78c32771edfa06c161c46',
+          }
+          for name, want in expected.items():
+              p = root / name
+              got = hashlib.sha256(p.read_bytes()).hexdigest()
+              print(name, got)
+              if got != want:
+                  raise SystemExit(f'hash mismatch for {name}: {got}')
+          print('INFRA11_RUNTIME_RESTORE_OK')
           '@ | python -
 
-      - name: Apply infra11 runtime patch and verify
+      - name: Compile restored runtime source
         shell: pwsh
         run: |
-          git apply --check .ci/infra11-main.patch
-          git apply --whitespace=nowarn .ci/infra11-main.patch
-          @'
-          from pathlib import Path
-          import hashlib, py_compile
-          p=Path('LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py')
-          got=hashlib.sha256(p.read_bytes()).hexdigest()
-          expected='5bee776fb0d5eb37f1a082c1acf92fddc5e00582cd730c731f2fe47c53db95d5'
-          print('INFRA11_MAIN_SHA256=',got)
-          if got != expected:
-              raise SystemExit('infra11 patch hash mismatch')
-          py_compile.compile(str(p),doraise=True)
-          print('infra11 source compile OK')
-          '@ | python -
+          python -m py_compile LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+          python -m py_compile limbus_netease_native.py
 
       - name: Prepare test-only package metadata
         shell: pwsh
         run: |
-          $iss='installer/LimbusLyric_Setup.iss'
-          $text=Get-Content -LiteralPath $iss -Raw
-          $text=$text.Replace('#define MyAppVersion "1.8.9.136"','#define MyAppVersion "1.8.9.137"')
-          $text=$text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"','#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra11_test"')
+          $iss = 'installer/LimbusLyric_Setup.iss'
+          $text = Get-Content -LiteralPath $iss -Raw
+          $text = $text.Replace('#define MyAppVersion "1.8.9.136"', '#define MyAppVersion "1.8.9.137"')
+          $text = $text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra11_test"')
           Set-Content -LiteralPath $iss -Value $text -Encoding utf8
           Select-String -LiteralPath $iss -Pattern 'MyAppVersion|MyOutputBase'
 
@@ -171,7 +114,7 @@ jobs:
           python -m pip freeze | Set-Content -LiteralPath dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding ascii
           @(
             'LimbusLyric 1.8.9.137 infra11 test',
-            ('Built='+(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')),
+            ('Built=' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')),
             'BetterNCMBundled=0',
             'NetEaseNativeDefault=1',
             'BuildMode=fast-test-no-release-gates',
@@ -181,7 +124,7 @@ jobs:
       - name: Frozen runtime smoke test
         shell: pwsh
         run: |
-          $smoke=(Resolve-Path installer).Path+'\PACKAGING_SMOKE_RESULT_INFRA11.txt'
+          $smoke = (Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT_INFRA11.txt'
           $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT=$smoke
           & .\dist\LimbusLyric\LimbusLyric.exe --packaging-smoke-test
           $ec=$LASTEXITCODE
@@ -199,7 +142,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path installer/release -Force | Out-Null
-          $iscc=@(
+          $iscc = @(
             "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
             "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
             "$env:ProgramFiles(x86)\Inno Setup 7\ISCC.exe",

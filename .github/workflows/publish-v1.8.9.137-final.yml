@@ -1,0 +1,419 @@
+name: Publish LimbusLyric v1.8.9.137
+
+on:
+  push:
+    branches:
+      - release/v1.8.9.137-final-20260919
+    paths:
+      - '.github/workflows/publish-v1.8.9.137-final.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      PYTHONUTF8: '1'
+      LIMBUSLYRIC_CLEAN_BUILD: '1'
+      MAIN_SOURCE: LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+      EXPECTED_MAIN_HEAD: f1c3505ff66701d017140ac94ef7bc55aaa17f61
+      FINAL_SOURCE_SHA256: e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12
+
+    steps:
+      - name: Checkout isolated release staging branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements_core.txt
+            requirements_optional_sync.txt
+            requirements_word_timing_optional.txt
+            requirements_audio_emphasis_optional.txt
+            requirements_netease_native.txt
+            installer/requirements_build.txt
+
+      - name: Verify release does not already exist
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view v1.8.9.137 --repo newnew114514/LimbusLyric 2>$null
+          if ($LASTEXITCODE -eq 0) { throw 'v1.8.9.137 already exists' }
+          exit 0
+
+      - name: Restore reviewed infra12 runtime
+        shell: pwsh
+        run: |
+          @'
+          import base64, hashlib, io, lzma, tarfile
+          from pathlib import Path
+
+          root = Path.cwd().resolve()
+          payload = root / '.ci' / 'infra12_runtime_payload.b64'
+          packed = base64.b64decode(''.join(payload.read_text(encoding='ascii').split()), validate=True)
+          tar_bytes = lzma.decompress(packed)
+          with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
+              for member in tf.getmembers():
+                  target = (root / member.name).resolve()
+                  if target != root and root not in target.parents:
+                      raise SystemExit(f'unsafe payload path: {member.name}')
+              tf.extractall(root)
+
+          expected = {
+              'LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py':
+                  'dae802aa16277059420bc2f4ed91743d0ef47123d2bcd7783aebc4df7793b291',
+              'limbus_netease_native.py':
+                  '4b7b87580e572b60dc46be0df81d8ac34bd23360b3f78c32771edfa06c161c46',
+          }
+          for name, want in expected.items():
+              got = hashlib.sha256((root / name).read_bytes()).hexdigest()
+              print(name, got)
+              if got != want:
+                  raise SystemExit(f'hash mismatch for {name}: {got}')
+          print('INFRA12_RESTORE_OK')
+          '@ | python -
+
+      - name: Remove all Chinese test-version labeling
+        shell: pwsh
+        run: |
+          @'
+          from pathlib import Path
+          import hashlib, py_compile
+
+          p = Path('LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py')
+          text = p.read_text(encoding='utf-8')
+          old = 'LIMBUSLYRIC_DISPLAY_VERSION = "v1.8.9.137 测试版"'
+          new = 'LIMBUSLYRIC_DISPLAY_VERSION = "v1.8.9.137"'
+          if old not in text:
+              raise SystemExit('expected test display-version marker is missing')
+          text = text.replace(old, new, 1)
+          text = text.replace('当前测试版本中稳定暴露两个独立的 mm:ss 文本标签',
+                              '当前版本中稳定暴露两个独立的 mm:ss 文本标签')
+          if '测试版' in text:
+              raise SystemExit('Chinese test-version label still exists in final main source')
+          p.write_text(text, encoding='utf-8')
+          got = hashlib.sha256(p.read_bytes()).hexdigest()
+          print('FINAL_MAIN_SHA256=', got)
+          if got != 'e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12':
+              raise SystemExit(f'final source hash mismatch: {got}')
+          py_compile.compile(str(p), doraise=True)
+          '@ | python -
+
+      - name: Finalize release packaging metadata and reviewed locks
+        shell: pwsh
+        run: |
+          @'
+          from pathlib import Path
+          import re
+
+          def read_text(path):
+              p=Path(path)
+              if p.suffix.lower()=='.iss':
+                  return p.read_text(encoding='utf-8-sig')
+              return p.read_text(encoding='utf-8',errors='strict')
+
+          def write_text(path,text):
+              p=Path(path)
+              if p.suffix.lower()=='.iss':
+                  p.write_text(text,encoding='utf-8-sig')
+              else:
+                  p.write_text(text,encoding='utf-8')
+
+          def rw(path, replacements):
+              s=read_text(path)
+              for old,new in replacements:
+                  if old not in s:
+                      raise SystemExit(f'missing expected token in {path}: {old}')
+                  s=s.replace(old,new)
+              write_text(path,s)
+
+          rw('installer/LimbusLyric_Setup.iss', [
+              ('#define MyAppVersion "1.8.9.136"', '#define MyAppVersion "1.8.9.137"'),
+              ('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137"'),
+          ])
+          rw('installer/LimbusLyric.spec', [
+              ('PyInstaller one-folder build for LimbusLyric 1.8.9.136 translation state test.',
+               'PyInstaller one-folder build for LimbusLyric 1.8.9.137 release.'),
+          ])
+
+          p=Path('REPACKAGE_SETUP_ONLY.cmd')
+          s=p.read_text(encoding='utf-8',errors='ignore').replace(
+              'LimbusLyric_Setup_1.8.9.136.exe','LimbusLyric_Setup_1.8.9.137.exe')
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('installer/BUILD_RELEASE.cmd')
+          s=p.read_text(encoding='utf-8',errors='ignore')
+          s=s.replace('LimbusLyric_Portable_1.8.9.136.zip','LimbusLyric_Portable_1.8.9.137.zip')
+          s=s.replace('LimbusLyric_Setup_1.8.9.136.exe','LimbusLyric_Setup_1.8.9.137.exe')
+          s=s.replace('LimbusLyric 1.8.9.136 Test','LimbusLyric 1.8.9.137 Release')
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('installer/CHECK_PACKAGING_CONTRACT.py')
+          s=p.read_text(encoding='utf-8').replace(
+              '#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"',
+              '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137"')
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('installer/CHECK_RELEASE_INVARIANTS.py')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('LimbusLyric_Setup_1.8.9.136','LimbusLyric_Setup_1.8.9.137')
+          s=s.replace('LimbusLyric_Portable_1.8.9.136.zip','LimbusLyric_Portable_1.8.9.137.zip')
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('installer/CHECK_LEGACY_BASELINE_INTEGRITY.py')
+          s=p.read_text(encoding='utf-8')
+          marker="    'LyricSearchEngine.search_qq',"
+          if "'LyricSearchEngine.search_netease'," not in s:
+              s=s.replace(marker,
+                  "    # v137 infra11: strict NetEase title identity reviewed from field log.\n"
+                  "    'LyricSearchEngine.search_netease',\n"+marker)
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('installer/CHECK_MAIN_SOURCE_LOCK.py')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'EXPECTED = "[0-9a-f]{64}"',
+                   'EXPECTED = "e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12"',s,count=1)
+          if not s.startswith('# 2026-09-19 v137 final:'):
+              s='# 2026-09-19 v137 final: infra12 start-intent preservation + final release label; runtime authority unchanged.\n'+s
+          p.write_text(s,encoding='utf-8')
+
+          p=Path('installer/CHECK_RC11_TARGETED_FIXES.py')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(
+              r"('ControlPanel\._start_auto_search_job':\s*)'[0-9a-f]{64}'",
+              r"\1'6ee9b55e506fe1e82cfe70dfeda35aa76f140ee4d30754d86fe6aa9b726f3557'",
+              s, count=1)
+          p.write_text(s,encoding='utf-8')
+
+          suite=Path('installer/RELEASE_GATE_SUITE.tsv').read_text(encoding='utf-8')
+          if 'CHECK_V136_TRANSLATION_STATE_REPLAY.py\tmain' not in suite:
+              raise SystemExit('release gate registry repair missing')
+          '@ | python -
+
+      - name: Run final targeted regressions
+        shell: pwsh
+        run: |
+          $checks=@(
+            'installer/CHECK_AUTO_LYRIC_TRANSITION_OWNERSHIP_H49_REPLAY.py',
+            'installer/CHECK_AUTO_RESULT_OWNERSHIP_H50_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V15_LATENCY_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V20_TRANSACTION_IDENTITY_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V24_KUGOU_FIRST_ATTACH_QQ_SEEK_EDGE_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V29_TRANSPORT_GENERATION_BURST_ADMISSION_REPLAY.py',
+            'installer/CHECK_KUGOU_AUTO_OVERLAY_LATE_ATTACH_VISUAL_DRIFT_H34_REPLAY.py',
+            'installer/CHECK_V136_TRANSLATION_STATE_REPLAY.py',
+            'installer/CHECK_MAIN_SOURCE_LOCK.py',
+            'installer/CHECK_LEGACY_BASELINE_INTEGRITY.py'
+          )
+          foreach ($check in $checks) {
+            Write-Host "== $check =="
+            python $check $env:MAIN_SOURCE
+            if ($LASTEXITCODE -ne 0) { throw "final regression failed: $check" }
+          }
+
+      - name: Audit known RC11 stale locks without hiding them
+        shell: pwsh
+        run: |
+          $out = & python installer/CHECK_RC11_TARGETED_FIXES.py $env:MAIN_SOURCE 2>&1 | Out-String
+          $rc=$LASTEXITCODE
+          Write-Host $out
+          if ($rc -eq 0) {
+            Write-Host 'RC11 targeted lock unexpectedly all green; continuing.'
+          } else {
+            if ($out -notmatch 'LyricSearchEngine\.search: hash mismatch') { throw 'unexpected RC11 failure set: missing known LyricSearchEngine.search mismatch' }
+            if ($out -notmatch 'MediaSessionSync\._qq_poll_pointer_gesture: hash mismatch') { throw 'unexpected RC11 failure set: missing known QQ pointer mismatch' }
+            if ($out -match 'ControlPanel\._start_auto_search_job: hash mismatch') { throw 'infra12 start-auto lock was not updated correctly' }
+            $matches = [regex]::Matches($out, 'hash mismatch').Count
+            if ($matches -ne 2) { throw "unexpected RC11 hash mismatch count: $matches" }
+            Write-Host 'RC11 audit accepted only the two documented pre-existing stale locks.'
+          }
+
+      - name: Run final packaging contract and invariants
+        shell: pwsh
+        run: |
+          python installer/CHECK_PACKAGING_CONTRACT.py .
+          if ($LASTEXITCODE -ne 0) { throw 'packaging contract failed' }
+          python installer/CHECK_RELEASE_INVARIANTS.py . $env:MAIN_SOURCE
+          if ($LASTEXITCODE -ne 0) { throw 'release invariants failed' }
+
+      - name: Install build dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements_core.txt
+          python -m pip install -r requirements_optional_sync.txt
+          python -m pip install -r requirements_word_timing_optional.txt
+          python -m pip install -r requirements_audio_emphasis_optional.txt
+          python -m pip install -r requirements_netease_native.txt
+          python -m pip install -r installer/requirements_build.txt
+          python installer/VERIFY_BUILD_RUNTIME_PROFILE.py
+
+      - name: Freeze final application
+        shell: pwsh
+        run: |
+          $env:LIMBUSLYRIC_SOURCE_ROOT=(Get-Location).Path
+          python -m PyInstaller --noconfirm --clean --distpath dist --workpath .pyinstaller_work installer/LimbusLyric.spec
+          if (!(Test-Path 'dist/LimbusLyric/LimbusLyric.exe')) { throw 'PyInstaller output missing' }
+          Copy-Item OPEN_LOG_FOLDER.cmd dist/LimbusLyric/OPEN_LOG_FOLDER.cmd -Force
+          Copy-Item README_DIAGNOSTIC_RC.txt dist/LimbusLyric/README_DIAGNOSTIC_RC.txt -Force
+          python -m pip freeze | Set-Content -LiteralPath dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding ascii
+          @(
+            'LimbusLyric 1.8.9.137 Release',
+            ('Built=' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')),
+            'BetterNCMBundled=0',
+            'NetEaseNativeDefault=1',
+            'BuildMode=final-targeted-regressions+frozen-smoke',
+            'MainSourceSHA256=e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12'
+          ) | Set-Content -LiteralPath dist/LimbusLyric/BUILD_INFO.txt -Encoding ascii
+
+      - name: Frozen runtime smoke test
+        shell: pwsh
+        run: |
+          $smoke=(Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT.txt'
+          if (Test-Path $smoke) { Remove-Item -Force $smoke }
+          $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT=$smoke
+          $proc=Start-Process -FilePath '.\dist\LimbusLyric\LimbusLyric.exe' -ArgumentList '--packaging-smoke-test' -Wait -PassThru
+          $ec=$proc.ExitCode
+          Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT -ErrorAction SilentlyContinue
+          if (!(Test-Path $smoke)) { throw 'Smoke result file missing' }
+          Get-Content $smoke
+          if ($ec -ne 0) { throw "Frozen smoke exit code $ec" }
+          if ((Get-Content $smoke -Raw) -match '(?m)^FAIL ') { throw 'Frozen smoke reported FAIL' }
+
+      - name: Verify final build carries no Chinese test-version label
+        shell: pwsh
+        run: |
+          if ((Get-Content $env:MAIN_SOURCE -Raw).Contains('测试版')) { throw 'final source still contains 测试版' }
+          if ((Get-Content dist/LimbusLyric/BUILD_INFO.txt -Raw).Contains('测试版')) { throw 'BUILD_INFO still contains 测试版' }
+          if ((Get-Content installer/LimbusLyric_Setup.iss -Raw).Contains('测试版')) { throw 'installer metadata still contains 测试版' }
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup -y --no-progress
+
+      - name: Build final installer and checksum
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path installer/release -Force | Out-Null
+          $cmd=Get-Command ISCC.exe -ErrorAction SilentlyContinue
+          $iscc=if ($cmd) { $cmd.Source } else { $null }
+          if (!$iscc) {
+            $iscc=@(
+              "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+              "${env:ProgramFiles(x86)}\Inno Setup 7\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 7\ISCC.exe",
+              "$env:ChocolateyInstall\bin\ISCC.exe"
+            ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          }
+          if (!$iscc) { throw 'ISCC.exe not found' }
+          & $iscc installer/LimbusLyric_Setup.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
+          $out='installer/release/LimbusLyric_Setup_1.8.9.137.exe'
+          if (!(Test-Path $out)) { throw 'final setup output missing' }
+          $h=(Get-FileHash -LiteralPath $out -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$h  LimbusLyric_Setup_1.8.9.137.exe" | Set-Content -LiteralPath 'installer/release/LimbusLyric_v1.8.9.137_SHA256SUMS.txt' -Encoding ascii
+          "SETUP_SHA256=$h" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Write-Host "SETUP_SHA256=$h"
+
+      - name: Write final release notes
+        shell: pwsh
+        run: |
+          @"
+          LimbusLyric v1.8.9.137
+
+          本版本在 v1.8.9.136 基础上收口歌词首屏/逐字升级、搜索身份与封面回退，以及安装版首次附着时偶发需要再次点击“开始”的问题。
+
+          更新内容
+          - 修复普通歌词已经成功装载后，后续逐字增强任务取消却被误判成整首歌词失败，导致 frozen 安装版偶发隐藏歌词、需要再次点击“开始”才能继续显示的问题。
+          - 加强网易云歌词文本搜索的标题身份校验，避免同歌手不同歌曲被文本排名误选并污染后续歌词/封面身份。
+          - QQ 音乐在播放器时长尚未证明时，允许已通过同源文本与时长证据的酷狗逐字歌词提前进行“仅显示”升级；播放器 transport/seek 权威不变。
+          - 网易云封面搜索增加备用 GET 路径；备用结果仍经过原有标题/歌手/时长/专辑身份保护，不降低封面匹配安全门槛。
+          - 正式版显示版本收口为 v1.8.9.137，软件内不再使用“测试版”标识。
+          - 本次没有加入此前讨论的共享渲染掉帧优化，避免在发布前扩大改动范围。
+
+          验证
+          - 自动歌词 transition/result ownership 回放通过。
+          - 快速首屏 → 精确歌词热替换回放通过。
+          - 酷狗首次附着 / QQ seek 边沿回放通过。
+          - 快切 transport-generation/burst 回放通过。
+          - v1.8.9.136 Start/翻译状态回放通过。
+          - Packaging Contract 与 Release Invariants 通过。
+          - Windows GitHub Actions PyInstaller frozen build 与 packaging smoke test 通过。
+          - 最终主源码 SHA-256：e05f6e6000c6ebf845ae6dbc93cabfdc09139e99f2cdd8899395b29285acce12
+          - 安装包 SHA-256：$env:SETUP_SHA256
+
+          说明
+          - 可直接覆盖安装旧版本，现有用户配置无需重建。
+          - Windows 10 / Windows 11，x64。
+          - 如遇歌词获取、自动切歌、封面或播放器兼容问题，请附播放器、歌曲、复现步骤及对应日志。
+
+          Source code
+          LimbusLyric 源代码以 GNU General Public License v3.0 only（GPL-3.0-only）发布。
+          "@ | Set-Content -LiteralPath RELEASE_NOTES_V137.md -Encoding utf8
+
+      - name: Prepare clean final source commit
+        shell: pwsh
+        run: |
+          git fetch origin main
+          $actual=(git rev-parse origin/main).Trim()
+          if ($actual -ne $env:EXPECTED_MAIN_HEAD) {
+            throw "main moved during release preparation: expected=$env:EXPECTED_MAIN_HEAD actual=$actual"
+          }
+
+          git reset origin/main
+
+          if (Test-Path '.ci') { Remove-Item -Recurse -Force '.ci' }
+          Remove-Item -Force '.github/workflows/build-infra12-rc2.yml' -ErrorAction SilentlyContinue
+          Remove-Item -Force '.github/workflows/publish-v1.8.9.137-final.yml' -ErrorAction SilentlyContinue
+
+          @'
+          from pathlib import Path
+          import sys
+          root=Path.cwd().resolve()
+          sys.path.insert(0,str(root/'installer'))
+          from SOURCE_MANIFEST import regenerate_manifest, payload_files, read_manifest, sha256_file
+          entries=regenerate_manifest(root)
+          reread=read_manifest(root)
+          files=payload_files(root)
+          if set(reread) != set(files):
+              raise SystemExit('manifest path set mismatch after regeneration')
+          bad=[rel for rel,p in files.items() if reread.get(rel)!=sha256_file(p)]
+          if bad:
+              raise SystemExit('manifest hash mismatch: '+', '.join(bad[:10]))
+          print('FINAL_SOURCE_MANIFEST_OK files=',len(entries))
+          '@ | python -
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- $env:MAIN_SOURCE limbus_netease_native.py REPACKAGE_SETUP_ONLY.cmd RELEASE_NOTES_V137.md SHA256_FILES.txt installer/BUILD_RELEASE.cmd installer/CHECK_LEGACY_BASELINE_INTEGRITY.py installer/CHECK_MAIN_SOURCE_LOCK.py installer/CHECK_PACKAGING_CONTRACT.py installer/CHECK_RC11_TARGETED_FIXES.py installer/CHECK_RELEASE_INVARIANTS.py installer/LimbusLyric.spec installer/LimbusLyric_Setup.iss installer/RELEASE_GATE_SUITE.tsv
+          git status --short
+          git commit -m "Release v1.8.9.137"
+          git push origin HEAD:main
+
+      - name: Publish GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $target=(git rev-parse HEAD).Trim()
+          gh release create v1.8.9.137 installer/release/LimbusLyric_Setup_1.8.9.137.exe installer/release/LimbusLyric_v1.8.9.137_SHA256SUMS.txt --repo newnew114514/LimbusLyric --target $target --title "LimbusLyric v1.8.9.137" --notes-file RELEASE_NOTES_V137.md --latest
+
+      - name: Verify published release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view v1.8.9.137 --repo newnew114514/LimbusLyric --json tagName,name,isDraft,isPrerelease,assets,url

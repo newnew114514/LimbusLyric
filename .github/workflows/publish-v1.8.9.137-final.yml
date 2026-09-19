@@ -209,6 +209,10 @@ jobs:
               r"('ControlPanel\._start_auto_search_job':\s*)'[0-9a-f]{64}'",
               r"\1'6ee9b55e506fe1e82cfe70dfeda35aa76f140ee4d30754d86fe6aa9b726f3557'",
               s, count=1)
+          s=re.sub(
+              r"('ControlPanel\._refetch_loaded_track_for_mode_switch':\s*)'[0-9a-f]{64}'",
+              r"\1'25daa704d1582ebf2419f81a71511ef19e477cce93a91a4739f8fdc8c4bedb98'",
+              s, count=1)
           p.write_text(s,encoding='utf-8')
 
           suite=Path('installer/RELEASE_GATE_SUITE.tsv').read_text(encoding='utf-8')

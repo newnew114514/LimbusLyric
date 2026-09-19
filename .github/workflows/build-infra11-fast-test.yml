@@ -125,10 +125,11 @@ jobs:
         shell: pwsh
         run: |
           $smoke = (Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT_INFRA11.txt'
+          if (Test-Path $smoke) { Remove-Item -Force $smoke }
           $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT=$smoke
-          & .\dist\LimbusLyric\LimbusLyric.exe --packaging-smoke-test
-          $ec=$LASTEXITCODE
-          Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT
+          $proc = Start-Process -FilePath '.\dist\LimbusLyric\LimbusLyric.exe' -ArgumentList '--packaging-smoke-test' -Wait -PassThru
+          $ec=$proc.ExitCode
+          Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT -ErrorAction SilentlyContinue
           if (!(Test-Path $smoke)) { throw 'Smoke result file missing' }
           Get-Content $smoke
           if ($ec -ne 0) { throw "Frozen smoke exit code $ec" }

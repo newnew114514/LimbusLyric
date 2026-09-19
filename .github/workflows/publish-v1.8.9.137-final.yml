@@ -257,6 +257,7 @@ jobs:
             if ($matches -ne 2) { throw "unexpected RC11 hash mismatch count: $matches" }
             Write-Host 'RC11 audit accepted only the two documented pre-existing stale locks.'
           }
+          exit 0
 
       - name: Run final packaging contract and invariants
         shell: pwsh

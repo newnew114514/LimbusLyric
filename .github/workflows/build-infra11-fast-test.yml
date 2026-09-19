@@ -1,0 +1,258 @@
+name: Build infra11 fast test installer
+
+on:
+  push:
+    branches:
+      - build/infra11-fast-test-20260919
+    paths:
+      - '.github/workflows/build-infra11-fast-test.yml'
+      - '.ci/infra11-main.patch'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      PYTHONUTF8: '1'
+      LIMBUSLYRIC_CLEAN_BUILD: '1'
+
+    steps:
+      - name: Checkout temporary build branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements_core.txt
+            requirements_optional_sync.txt
+            requirements_word_timing_optional.txt
+            requirements_audio_emphasis_optional.txt
+            requirements_netease_native.txt
+            installer/requirements_build.txt
+
+      - name: Restore exact tested v137 source payload
+        shell: pwsh
+        run: |
+          @'
+          import base64, hashlib, io, itertools, lzma, tarfile
+          from pathlib import Path
+
+          root = Path.cwd().resolve()
+          parts_dir = root / '.release_payload' / 'parts'
+          files = sorted(parts_dir.glob('v137_source.part*.b64'))
+          if not files:
+              raise SystemExit('v137 payload parts are missing')
+
+          p = [''.join(x.read_text(encoding='ascii').split()) for x in files]
+          while len(p) < 3:
+              p.append('')
+          p0, p1, p2 = p[:3]
+          p1a, p1b = p1[:16000], p1[16000:]
+
+          def overlap_merge(a, b):
+              top = min(len(a), len(b))
+              for k in range(top, 0, -1):
+                  if a[-k:] == b[:k]:
+                      return a + b[k:]
+              return a + b
+
+          candidates = []
+          seen = set()
+          def add(label, s):
+              if not s or s in seen:
+                  return
+              seen.add(s)
+              candidates.append((label, s))
+
+          add('raw-all', ''.join(p))
+          add('p0+p1', p0+p1)
+          add('p0+p2', p0+p2)
+          add('p0+p1a+p2', p0+p1a+p2)
+          add('p0+p1a+p1b', p0+p1a+p1b)
+
+          segs = [('p1a',p1a), ('p1b',p1b), ('p2',p2)]
+          for r in range(1, 4):
+              for combo in itertools.permutations(segs, r):
+                  label = 'p0+' + '+'.join(x[0] for x in combo)
+                  seq = [p0] + [x[1] for x in combo]
+                  add(label, ''.join(seq))
+                  merged = seq[0]
+                  for item in seq[1:]:
+                      merged = overlap_merge(merged, item)
+                  add(label+'-overlap', merged)
+
+          def b64_one(s):
+              if '=' in s[:-2]:
+                  raise ValueError('internal base64 padding')
+              return base64.b64decode(s + ('=' * ((-len(s)) % 4)), validate=True)
+
+          raw_candidates = []
+          for label, s in candidates:
+              try:
+                  raw_candidates.append((label+'-single-b64', b64_one(s)))
+              except Exception:
+                  pass
+
+          pieces = [('p0',p0), ('p1',p1), ('p2',p2), ('p1a',p1a), ('p1b',p1b)]
+          decoded = {}
+          for name, s in pieces:
+              if not s:
+                  continue
+              try:
+                  decoded[name] = base64.b64decode(s + ('=' * ((-len(s)) % 4)), validate=False)
+              except Exception:
+                  pass
+          for names in [
+              ('p0','p1'), ('p0','p2'), ('p0','p1a','p2'),
+              ('p0','p1a','p1b'), ('p0','p1a','p2','p1b'),
+              ('p0','p2','p1b')
+          ]:
+              if all(x in decoded for x in names):
+                  raw_candidates.append(('+'.join(names)+'-piece-b64', b''.join(decoded[x] for x in names)))
+
+          expected = '6a5e22bd8f979fd8baa815f075179629c612765fb2ee7e1afb6b4b1075e0461a'
+          main_name = 'LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          failures = []
+          for label, raw in raw_candidates:
+              try:
+                  tar_bytes = lzma.decompress(raw)
+                  with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
+                      members = tf.getmembers()
+                      if not any(m.name.replace('\\','/').endswith(main_name) for m in members):
+                          raise ValueError('payload does not contain main source')
+                      for m in members:
+                          target = (root / m.name).resolve()
+                          if target != root and root not in target.parents:
+                              raise ValueError('unsafe payload path: '+m.name)
+                      tf.extractall(root)
+                  got = hashlib.sha256((root/main_name).read_bytes()).hexdigest()
+                  if got != expected:
+                      raise ValueError(f'main source hash mismatch: {got}')
+                  print('RESTORE_OK', label, 'members=', len(members), 'main_sha256=', got)
+                  break
+              except Exception as exc:
+                  failures.append((label, str(exc)))
+          else:
+              print('Tried payload candidates:')
+              for item in failures:
+                  print(' ', item)
+              raise SystemExit('could not reconstruct exact tested v137 payload')
+          '@ | python -
+
+      - name: Apply infra11 runtime patch and verify
+        shell: pwsh
+        run: |
+          git apply --check .ci/infra11-main.patch
+          git apply --whitespace=nowarn .ci/infra11-main.patch
+          @'
+          from pathlib import Path
+          import hashlib, py_compile
+          p=Path('LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py')
+          got=hashlib.sha256(p.read_bytes()).hexdigest()
+          expected='5bee776fb0d5eb37f1a082c1acf92fddc5e00582cd730c731f2fe47c53db95d5'
+          print('INFRA11_MAIN_SHA256=', got)
+          if got != expected:
+              raise SystemExit('infra11 patch hash mismatch')
+          py_compile.compile(str(p), doraise=True)
+          print('infra11 source compile OK')
+          '@ | python -
+
+      - name: Prepare test-only package metadata
+        shell: pwsh
+        run: |
+          $iss = 'installer/LimbusLyric_Setup.iss'
+          $text = Get-Content -LiteralPath $iss -Raw
+          $text = $text.Replace('#define MyAppVersion "1.8.9.136"', '#define MyAppVersion "1.8.9.137"')
+          $text = $text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra11_test"')
+          Set-Content -LiteralPath $iss -Value $text -Encoding utf8
+          Select-String -LiteralPath $iss -Pattern 'MyAppVersion|MyOutputBase'
+
+      - name: Install build dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements_core.txt
+          python -m pip install -r requirements_optional_sync.txt
+          python -m pip install -r requirements_word_timing_optional.txt
+          python -m pip install -r requirements_audio_emphasis_optional.txt
+          python -m pip install -r requirements_netease_native.txt
+          python -m pip install -r installer/requirements_build.txt
+          python installer/VERIFY_BUILD_RUNTIME_PROFILE.py
+
+      - name: Freeze application only
+        shell: pwsh
+        run: |
+          $env:LIMBUSLYRIC_SOURCE_ROOT=(Get-Location).Path
+          python -m PyInstaller --noconfirm --clean --distpath dist --workpath .pyinstaller_work installer/LimbusLyric.spec
+          if (!(Test-Path 'dist/LimbusLyric/LimbusLyric.exe')) { throw 'PyInstaller output missing' }
+          Copy-Item OPEN_LOG_FOLDER.cmd dist/LimbusLyric/OPEN_LOG_FOLDER.cmd -Force
+          Copy-Item README_DIAGNOSTIC_RC.txt dist/LimbusLyric/README_DIAGNOSTIC_RC.txt -Force
+          python -m pip freeze | Set-Content -LiteralPath dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding ascii
+          @(
+            'LimbusLyric 1.8.9.137 infra11 test',
+            ('Built=' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')),
+            'BetterNCMBundled=0',
+            'NetEaseNativeDefault=1',
+            'BuildMode=fast-test-no-release-gates',
+            'MainSourceSHA256=5bee776fb0d5eb37f1a082c1acf92fddc5e00582cd730c731f2fe47c53db95d5'
+          ) | Set-Content -LiteralPath dist/LimbusLyric/BUILD_INFO.txt -Encoding ascii
+
+      - name: Frozen runtime smoke test
+        shell: pwsh
+        run: |
+          $smoke = (Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT_INFRA11.txt'
+          $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT=$smoke
+          & .\dist\LimbusLyric\LimbusLyric.exe --packaging-smoke-test
+          $ec=$LASTEXITCODE
+          Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT
+          if (!(Test-Path $smoke)) { throw 'Smoke result file missing' }
+          Get-Content $smoke
+          if ($ec -ne 0) { throw "Frozen smoke exit code $ec" }
+          if ((Get-Content $smoke -Raw) -match '(?m)^FAIL ') { throw 'Frozen smoke reported FAIL' }
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup -y --no-progress
+
+      - name: Build test Setup
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path installer/release -Force | Out-Null
+          $iscc = @(
+            "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
+            "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+            "$env:ProgramFiles(x86)\Inno Setup 7\ISCC.exe",
+            "$env:ProgramFiles\Inno Setup 7\ISCC.exe"
+          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (!$iscc) { throw 'ISCC.exe not found' }
+          & $iscc installer/LimbusLyric_Setup.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
+          $out='installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe'
+          if (!(Test-Path $out)) { throw 'Setup output missing' }
+          $h=(Get-FileHash -LiteralPath $out -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$h  LimbusLyric_Setup_1.8.9.137_infra11_test.exe" | Set-Content -LiteralPath ($out+'.sha256.txt') -Encoding ascii
+          Write-Host "SETUP_SHA256=$h"
+
+      - name: Upload test installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LimbusLyric-v1.8.9.137-infra11-test
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe
+            installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe.sha256.txt
+            installer/PACKAGING_SMOKE_RESULT_INFRA11.txt
+            dist/LimbusLyric/BUILD_INFO.txt

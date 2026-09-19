@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/build-infra12-rc2.yml'
       - '.ci/infra12_runtime_payload.b64'
+      - 'installer/RELEASE_GATE_SUITE.tsv'
   workflow_dispatch:
 
 permissions:

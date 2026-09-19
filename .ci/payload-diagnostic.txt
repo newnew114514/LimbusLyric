@@ -1,0 +1,10 @@
+part_sizes=[16000, 24003, 16000]
+part_sha256=["2ab85ea208c16add92ff88207994f64d1f0c8768390da6cf91db844073ed5199", "f71e688a82df89b6525bdd236a6d2be7d7d7e6bb87586c05071d6a9907293e58", "4a10506dce411f67583ec1e66232d298a786101da96be2690c7ad98aa40c26b3"]
+FAIL p0+p2 single :: LZMAError('Corrupt input data')
+FAIL p0+p1a+p2 single :: LZMAError('Compressed data ended before the end-of-stream marker was reached')
+FAIL p0+p1a single :: LZMAError('Compressed data ended before the end-of-stream marker was reached')
+FAIL p0+p2+p1a single :: LZMAError('Corrupt input data')
+FAIL p0+p2 pieces :: LZMAError('Corrupt input data')
+FAIL p0+p1a+p2 pieces :: LZMAError('Compressed data ended before the end-of-stream marker was reached')
+
+success_count=0

@@ -1,4 +1,4 @@
-name: Build infra11 fast test installer
+name: Build infra12 start-intent test installer
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/build-infra11-fast-test.yml'
       - '.ci/infra11_runtime_payload.b64'
+      - '.ci/infra12-start-intent.patch'
   workflow_dispatch:
 
 permissions:
@@ -75,6 +76,22 @@ jobs:
           print('INFRA11_RUNTIME_RESTORE_OK')
           '@ | python -
 
+      - name: Apply infra12 start-intent patch
+        shell: pwsh
+        run: |
+          git apply --check .ci/infra12-start-intent.patch
+          git apply --whitespace=nowarn .ci/infra12-start-intent.patch
+          @'
+          import hashlib
+          from pathlib import Path
+          p=Path('LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py')
+          got=hashlib.sha256(p.read_bytes()).hexdigest()
+          want='dae802aa16277059420bc2f4ed91743d0ef47123d2bcd7783aebc4df7793b291'
+          print('INFRA12_MAIN_SHA256=',got)
+          if got != want:
+              raise SystemExit(f'infra12 hash mismatch: {got}')
+          '@ | python -
+
       - name: Compile restored runtime source
         shell: pwsh
         run: |
@@ -87,7 +104,7 @@ jobs:
           $iss = 'installer/LimbusLyric_Setup.iss'
           $text = Get-Content -LiteralPath $iss -Raw
           $text = $text.Replace('#define MyAppVersion "1.8.9.136"', '#define MyAppVersion "1.8.9.137"')
-          $text = $text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra11_test"')
+          $text = $text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra12_startfix_test"')
           Set-Content -LiteralPath $iss -Value $text -Encoding utf8
           Select-String -LiteralPath $iss -Pattern 'MyAppVersion|MyOutputBase'
 
@@ -113,18 +130,18 @@ jobs:
           Copy-Item README_DIAGNOSTIC_RC.txt dist/LimbusLyric/README_DIAGNOSTIC_RC.txt -Force
           python -m pip freeze | Set-Content -LiteralPath dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding ascii
           @(
-            'LimbusLyric 1.8.9.137 infra11 test',
+            'LimbusLyric 1.8.9.137 infra12 start-intent test',
             ('Built=' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')),
             'BetterNCMBundled=0',
             'NetEaseNativeDefault=1',
             'BuildMode=fast-test-no-release-gates',
-            'MainSourceSHA256=5bee776fb0d5eb37f1a082c1acf92fddc5e00582cd730c731f2fe47c53db95d5'
+            'MainSourceSHA256=dae802aa16277059420bc2f4ed91743d0ef47123d2bcd7783aebc4df7793b291'
           ) | Set-Content -LiteralPath dist/LimbusLyric/BUILD_INFO.txt -Encoding ascii
 
       - name: Frozen runtime smoke test
         shell: pwsh
         run: |
-          $smoke = (Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT_INFRA11.txt'
+          $smoke = (Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT_INFRA12.txt'
           if (Test-Path $smoke) { Remove-Item -Force $smoke }
           $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT=$smoke
           $proc = Start-Process -FilePath '.\dist\LimbusLyric\LimbusLyric.exe' -ArgumentList '--packaging-smoke-test' -Wait -PassThru
@@ -158,20 +175,20 @@ jobs:
           Write-Host "Using ISCC: $iscc"
           & $iscc installer/LimbusLyric_Setup.iss
           if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
-          $out='installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe'
+          $out='installer/release/LimbusLyric_Setup_1.8.9.137_infra12_startfix_test.exe'
           if (!(Test-Path $out)) { throw 'Setup output missing' }
           $h=(Get-FileHash -LiteralPath $out -Algorithm SHA256).Hash.ToLowerInvariant()
-          "$h  LimbusLyric_Setup_1.8.9.137_infra11_test.exe" | Set-Content -LiteralPath ($out+'.sha256.txt') -Encoding ascii
+          "$h  LimbusLyric_Setup_1.8.9.137_infra12_startfix_test.exe" | Set-Content -LiteralPath ($out+'.sha256.txt') -Encoding ascii
           Write-Host "SETUP_SHA256=$h"
 
       - name: Upload test installer
         uses: actions/upload-artifact@v4
         with:
-          name: LimbusLyric-v1.8.9.137-infra11-test
+          name: LimbusLyric-v1.8.9.137-infra12-startfix-test
           if-no-files-found: error
           retention-days: 7
           path: |
-            installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe
-            installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe.sha256.txt
-            installer/PACKAGING_SMOKE_RESULT_INFRA11.txt
+            installer/release/LimbusLyric_Setup_1.8.9.137_infra12_startfix_test.exe
+            installer/release/LimbusLyric_Setup_1.8.9.137_infra12_startfix_test.exe.sha256.txt
+            installer/PACKAGING_SMOKE_RESULT_INFRA12.txt
             dist/LimbusLyric/BUILD_INFO.txt

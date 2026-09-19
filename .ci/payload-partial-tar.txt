@@ -1,0 +1,14 @@
+encoded_len=48000
+raw_len=36000
+decompressed_len=128574
+eof=False
+unused=0
+error=
+
+PARTIAL_TAR_MEMBERS:
+0	././@PaxHeader	type=b'x'	size=25	complete=1	sha256=-
+1	LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py	type=b'0'	size=4636996	complete=0	sha256=-
+
+parsed_members=2
+next_offset=4638720
+bytes_remaining=0

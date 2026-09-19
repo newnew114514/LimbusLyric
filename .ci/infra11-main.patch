@@ -1,0 +1,157 @@
+--- a/LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
++++ b/LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py
+@@ -5548,6 +5548,21 @@
+                     song = LyricSearchEngine._best(
+                         songs, song_name, artist,
+                         lambda x: x.get('name', ''), _artist_text)
++                    # A text-rank winner must still match the requested title.  Artist score
++                    # alone used to let a different song by the same singer win when provider
++                    # search returned no title match (for example 海の幽霊 -> Lemon).  Keep
++                    # parenthetical/translated aliases compatible through normalized containment,
++                    # but never promote an unrelated title into lyric/cover identity metadata.
++                    if song is not None:
++                        q_song = _clean_name(song_name)
++                        c_song = _clean_name(song.get('name', ''))
++                        song_ok = bool(q_song and c_song and (q_song == c_song or q_song in c_song or c_song in q_song))
++                        if not song_ok:
++                            write_error_log('网易云文本排名错题拒绝', detail=(
++                                f'song={song_name} | artist={artist} | matched_song={song.get("name","")} | '
++                                f'matched_artist={_artist_text(song)} | candidates={len(songs)} | action=no-unsafe-fallback'
++                            ))
++                            song = None
+                     if preferred_id:
+                         write_error_log('网易云Bridge song_id搜索未确认', detail=(
+                             f'song={song_name} | track_id={preferred_id} | candidates={len(songs)} | fallback=text-rank'
+@@ -6775,6 +6790,18 @@
+                             break
+                 if song is None:
+                     song = LyricSearchEngine._best(songs, song_name, artist, lambda x: x.get('name', ''), _artist_text)
++                    # Ordinary first-screen lookup has the same identity requirement as the
++                    # precise path: a same-artist different-title row is not a safe fallback.
++                    # This also prevents a bad NetEase song_id from poisoning cover lookup.
++                    if song is not None:
++                        c_song = _clean_name(song.get('name', ''))
++                        song_ok = bool(q_song and c_song and (q_song == c_song or q_song in c_song or c_song in q_song))
++                        if not song_ok:
++                            write_error_log('网易云普通歌词文本排名错题拒绝', detail=(
++                                f'song={song_name} | artist={artist} | matched_song={song.get("name","")} | '
++                                f'matched_artist={_artist_text(song)} | candidates={len(songs)} | action=no-unsafe-fallback'
++                            ))
++                            song = None
+             if not song:
+                 return LyricSearchEngine._fail('网易云', detail='没有搜索到匹配歌曲')
+             song_id = song.get('id')
+@@ -41417,6 +41444,64 @@
+                 if cancel_check():
+                     return
+ 
++                # QQ can spend tens of seconds waiting for a minimized/off-screen UIA duration.
++                # If the fast first-screen payload already came from KuGou with a concrete
++                # same-title/same-artist version, allow that *same KuGou version* to upgrade the
++                # presentation clock before QQ proves transport duration.  This is deliberately
++                # display-only: published duration stays 0, seek/MediaSync authority is untouched,
++                # the candidate duration is retained only for H81's later player-owned version
++                # reconciliation, and text evidence must agree with the already-visible LRC.
++                if (
++                    progressive and requested_precise and source == 'QQ音乐' and identity_duration_ms <= 0 and
++                    fast_lyric and int(fast_duration or 0) > 0 and
++                    str((fast_meta or {}).get('lyric_payload_source') or '') == '酷狗'
++                ):
++                    try:
++                        provisional_lrc, provisional_duration = LyricSearchEngine.search(
++                            job['song'], search_artist, '酷狗', False,
++                            provider_duration_ms=int(fast_duration or 0),
++                            prefer_precise=True, provider_locked=True,
++                            require_translation_pair=bool(bilingual_pair),
++                        )
++                        provisional_meta = LyricSearchEngine.last_provider_meta() or {}
++                        provisional_q = int(_lyric_clock_quality(provisional_lrc or ''))
++                        duration_tol = max(1200, int(max(int(fast_duration or 0), int(provisional_duration or 0) or int(fast_duration or 0)) * 0.008))
++                        duration_ok = bool(
++                            int(provisional_duration or 0) > 0 and
++                            abs(int(provisional_duration or 0) - int(fast_duration or 0)) <= duration_tol
++                        )
++                        text_ok, text_stats, text_reason = _precise_clock_reference_evidence(fast_lyric, provisional_lrc)
++                        if provisional_lrc and provisional_q >= 3 and duration_ok and text_ok and not cancel_check():
++                            safe_meta = _build_lyric_payload_meta(
++                                fast_meta, '酷狗', provisional_lrc, int(provisional_duration or fast_duration or 0), provisional_meta
++                            )
++                            safe_meta.update(dict(provisional_meta or {}))
++                            safe_meta['lyric_payload_source'] = '酷狗'
++                            safe_meta['lyric_candidate_duration_ms'] = int(provisional_duration or fast_duration or 0)
++                            safe_meta['v137_qq_provisional_precise_display_only'] = True
++                            safe_meta['transport_authority'] = False
++                            write_error_log('V137 QQ同源酷狗逐字提前显示', detail=(
++                                f'song={job.get("song","")} | fast_duration={int(fast_duration or 0)} | '
++                                f'precise_duration={int(provisional_duration or 0)} | quality={provisional_q} | '
++                                f'text_matches={int((text_stats or {}).get("matches") or 0)} | '
++                                f'text_ratio={float((text_stats or {}).get("ratio") or 0.0):.3f} | '
++                                f'text_reason={text_reason} | duration-published=0 | media-rebind=0 | seek-authority=player'
++                            ))
++                            emit_result(
++                                provisional_lrc, 0, safe_meta, stage='final', final=True,
++                                precision_upgrade=True
++                            )
++                            return
++                        write_error_log('V137 QQ同源酷狗逐字提前显示拒绝', detail=(
++                            f'song={job.get("song","")} | quality={provisional_q} | '
++                            f'fast_duration={int(fast_duration or 0)} | precise_duration={int(provisional_duration or 0)} | '
++                            f'duration_ok={int(duration_ok)} | text_ok={int(bool(text_ok))} | text_reason={text_reason} | '
++                            'fallback=mature-duration-gated-path'
++                        ))
++                    except Exception as exc:
++                        write_error_log('V137 QQ同源酷狗逐字提前显示异常', exc, detail=(
++                            f'song={job.get("song","")} | fallback=mature-duration-gated-path'))
++
+                 # Classic/translation-only keeps the historical single-stage path.  Precise
+                 # auto mode reaches here after the fast display and may take as long as needed;
+                 # it no longer blocks the user's first visible lyric.
+@@ -79619,18 +79704,36 @@
+             query=f'{sname} {aname}'.strip()
+             if not query or query in seen: continue
+             seen.add(query)
+-            try:
+-                resp=http.post('https://music.163.com/api/search/get/web',data={'s':query,'type':1,'limit':18},headers=headers,timeout=4); resp.raise_for_status(); rows=((resp.json().get('result') or {}).get('songs') or [])
+-                hit=_h95f10f4_choose_netease_cover_row(rows,song,artist,duration_ms,preferred_id,album)
+-                if not hit: continue
+-                url=_h16_cover_pic_url(hit) if '_h16_cover_pic_url' in globals() else ''
+-                if not url: continue
+-                img=http.get(url,headers=headers,timeout=4); img.raise_for_status(); path=_h88_save_art_bytes(img.content,out_path) if '_h88_save_art_bytes' in globals() else ''
+-                if path:
+-                    try: write_error_log('H95F10F4封面发行身份命中',detail=f'provider=网易云 | song={song} | album={_h95f10f4_netease_album(hit) or "<unknown>"} | wanted_album={album or "<unknown>"} | source=netease:{hit.get("id") or ""}')
+-                    except Exception: pass
+-                    return path,f'netease:{hit.get("id") or ""}:{sname}'
+-            except Exception: pass
++            # NetEase exposes two search shapes in the wild. The /web POST endpoint can
++            # return no usable rows on some clients/networks even while the legacy GET endpoint
++            # used by lyric lookup is healthy. Try the mature POST first, then GET only on miss.
++            # Both paths feed the exact same release-aware title/credit/duration/album guard.
++            search_attempts = (
++                ('web-post', 'POST', 'https://music.163.com/api/search/get/web'),
++                ('api-get', 'GET', 'https://music.163.com/api/search/get'),
++            )
++            for search_label, method, endpoint in search_attempts:
++                try:
++                    if method == 'POST':
++                        resp=http.post(endpoint,data={'s':query,'type':1,'limit':18},headers=headers,timeout=4)
++                    else:
++                        resp=http.get(endpoint,params={'s':query,'type':1,'limit':18},headers=headers,timeout=4)
++                    resp.raise_for_status(); rows=((resp.json().get('result') or {}).get('songs') or [])
++                    hit=_h95f10f4_choose_netease_cover_row(rows,song,artist,duration_ms,preferred_id,album)
++                    if not hit:
++                        continue
++                    url=_h16_cover_pic_url(hit) if '_h16_cover_pic_url' in globals() else ''
++                    if not url:
++                        continue
++                    img=http.get(url,headers=headers,timeout=4); img.raise_for_status(); path=_h88_save_art_bytes(img.content,out_path) if '_h88_save_art_bytes' in globals() else ''
++                    if path:
++                        try: write_error_log('H95F10F4封面发行身份命中',detail=(
++                            f'provider=网易云 | song={song} | album={_h95f10f4_netease_album(hit) or "<unknown>"} | '
++                            f'wanted_album={album or "<unknown>"} | source=netease:{hit.get("id") or ""} | search={search_label}'))
++                        except Exception: pass
++                        return path,f'netease:{hit.get("id") or ""}:{sname}:{search_label}'
++                except Exception:
++                    continue
+     return '',''
+ 
+ 

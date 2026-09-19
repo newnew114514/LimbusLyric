@@ -1,0 +1,69 @@
+name: Inspect partial v137 payload once
+
+on:
+  push:
+    branches: [build/infra11-fast-test-20260919]
+    paths: ['.github/workflows/inspect-v137-partial-once.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Inspect
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64,hashlib,lzma
+          from pathlib import Path
+          root=Path.cwd()
+          fs=sorted((root/'.release_payload/parts').glob('v137_source.part*.b64'))
+          p0,p1,p2=[''.join(x.read_text(encoding='ascii').split()) for x in fs[:3]]
+          variants=[
+              ('p0+p1a+p2',p0+p1[:16000]+p2),
+              ('p0+p1a+p2first8000',p0+p1[:16000]+p2[:8000]),
+          ]
+          report=[]
+          for label,s in variants:
+              raw=base64.b64decode(s+'='*((-len(s))%4),validate=False)
+              d=lzma.LZMADecompressor()
+              try: out=d.decompress(raw); err=''
+              except Exception as e: out=b''; err=repr(e)
+              report += [f'[{label}]',f'encoded={len(s)} raw={len(raw)} out={len(out)} eof={d.eof} err={err}']
+              pos=0;i=0
+              while pos+512<=len(out):
+                  h=out[pos:pos+512]
+                  if h==b'\0'*512: break
+                  name=h[:100].split(b'\0',1)[0].decode('utf8','replace')
+                  pref=h[345:500].split(b'\0',1)[0].decode('utf8','replace')
+                  if pref:name=pref+'/'+name
+                  try:size=int(h[124:136].rstrip(b'\0 ').strip() or b'0',8)
+                  except Exception:
+                      report.append(f'BAD_HEADER at {pos}');break
+                  typ=h[156:157]
+                  ds=pos+512;de=ds+size
+                  complete=de<=len(out)
+                  sha=hashlib.sha256(out[ds:de]).hexdigest() if complete and typ in (b'0',b'\0') else '-'
+                  report.append(f'{i}\t{name}\ttype={typ!r}\tsize={size}\tcomplete={int(complete)}\tsha256={sha}')
+                  i+=1
+                  pos=ds+((size+511)//512)*512
+                  if not complete: break
+              report += [f'parsed={i} remaining={max(0,len(out)-pos)}','']
+          Path('.ci/payload-partial-tar.txt').write_text('\n'.join(report),encoding='utf8')
+          print('\n'.join(report))
+          PY
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .ci/payload-partial-tar.txt
+          git commit -m "Record partial v137 payload contents [skip ci]"
+          git push origin HEAD:build/infra11-fast-test-20260919

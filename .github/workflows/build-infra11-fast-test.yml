@@ -143,13 +143,19 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path installer/release -Force | Out-Null
-          $iscc = @(
-            "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
-            "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
-            "$env:ProgramFiles(x86)\Inno Setup 7\ISCC.exe",
-            "$env:ProgramFiles\Inno Setup 7\ISCC.exe"
-          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          $cmd = Get-Command ISCC.exe -ErrorAction SilentlyContinue
+          $iscc = if ($cmd) { $cmd.Source } else { $null }
+          if (!$iscc) {
+            $iscc = @(
+              "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+              "${env:ProgramFiles(x86)}\Inno Setup 7\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 7\ISCC.exe",
+              "$env:ChocolateyInstall\bin\ISCC.exe"
+            ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          }
           if (!$iscc) { throw 'ISCC.exe not found' }
+          Write-Host "Using ISCC: $iscc"
           & $iscc installer/LimbusLyric_Setup.iss
           if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
           $out='installer/release/LimbusLyric_Setup_1.8.9.137_infra11_test.exe'

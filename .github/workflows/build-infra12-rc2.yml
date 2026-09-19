@@ -1,0 +1,221 @@
+name: Build infra12 RC2 frozen installer
+
+on:
+  push:
+    branches:
+      - build/infra12-rc2-userpath-20260919
+    paths:
+      - '.github/workflows/build-infra12-rc2.yml'
+      - '.ci/infra12_runtime_payload.b64'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 50
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+      PYTHONUTF8: '1'
+      LIMBUSLYRIC_CLEAN_BUILD: '1'
+
+    steps:
+      - name: Checkout isolated RC branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: 'x64'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements_core.txt
+            requirements_optional_sync.txt
+            requirements_word_timing_optional.txt
+            requirements_audio_emphasis_optional.txt
+            requirements_netease_native.txt
+            installer/requirements_build.txt
+
+      - name: Restore exact infra12 runtime source
+        shell: pwsh
+        run: |
+          @'
+          import base64, hashlib, io, lzma, tarfile
+          from pathlib import Path
+
+          root = Path.cwd().resolve()
+          payload = root / '.ci' / 'infra12_runtime_payload.b64'
+          packed = base64.b64decode(''.join(payload.read_text(encoding='ascii').split()), validate=True)
+          tar_bytes = lzma.decompress(packed)
+          with tarfile.open(fileobj=io.BytesIO(tar_bytes), mode='r:') as tf:
+              members = tf.getmembers()
+              for member in members:
+                  target = (root / member.name).resolve()
+                  if target != root and root not in target.parents:
+                      raise SystemExit(f'unsafe payload path: {member.name}')
+              tf.extractall(root)
+
+          expected = {
+              'LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py':
+                  'dae802aa16277059420bc2f4ed91743d0ef47123d2bcd7783aebc4df7793b291',
+              'limbus_netease_native.py':
+                  '4b7b87580e572b60dc46be0df81d8ac34bd23360b3f78c32771edfa06c161c46',
+          }
+          for name, want in expected.items():
+              p = root / name
+              got = hashlib.sha256(p.read_bytes()).hexdigest()
+              print(name, got)
+              if got != want:
+                  raise SystemExit(f'hash mismatch for {name}: {got}')
+          print('INFRA12_RUNTIME_RESTORE_OK members=', len(members))
+          '@ | python -
+
+      - name: Compile and verify start-preservation fix
+        shell: pwsh
+        run: |
+          $main='LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          python -m py_compile $main
+          python -m py_compile limbus_netease_native.py
+          $src=Get-Content -LiteralPath $main -Raw
+          foreach ($needle in @(
+            'fast_display_emitted = False',
+            'fast_display_emitted = True',
+            '自动歌词增强取消保留快速歌词',
+            'keep_fast=True'
+          )) {
+            if (-not $src.Contains($needle)) { throw "missing infra12 marker: $needle" }
+          }
+
+      - name: Run targeted ownership and first-attach regressions
+        shell: pwsh
+        run: |
+          $main='LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          $checks=@(
+            'installer/CHECK_AUTO_LYRIC_TRANSITION_OWNERSHIP_H49_REPLAY.py',
+            'installer/CHECK_AUTO_RESULT_OWNERSHIP_H50_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V15_LATENCY_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V20_TRANSACTION_IDENTITY_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V24_KUGOU_FIRST_ATTACH_QQ_SEEK_EDGE_REPLAY.py',
+            'installer/CHECK_LYRIC_PIPELINE_V29_TRANSPORT_GENERATION_BURST_ADMISSION_REPLAY.py',
+            'installer/CHECK_KUGOU_AUTO_OVERLAY_LATE_ATTACH_VISUAL_DRIFT_H34_REPLAY.py',
+            'installer/CHECK_V136_TRANSLATION_STATE_REPLAY.py'
+          )
+          foreach ($check in $checks) {
+            Write-Host "== $check =="
+            python $check $main
+            if ($LASTEXITCODE -ne 0) { throw "regression failed: $check" }
+          }
+
+      - name: Run packaging and invariant preflight
+        shell: pwsh
+        run: |
+          $main='LimbusLyric_v1.8.9.133_CROSS_PROVIDER_TRANSLATION_CUSTOM_ADAPTER_FOUNDATION_20260814.py'
+          python installer/CHECK_PACKAGING_CONTRACT.py .
+          if ($LASTEXITCODE -ne 0) { throw 'packaging contract failed' }
+          python installer/CHECK_RELEASE_INVARIANTS.py . $main
+          if ($LASTEXITCODE -ne 0) { throw 'release invariants failed' }
+
+      - name: Prepare RC2 package metadata
+        shell: pwsh
+        run: |
+          $iss='installer/LimbusLyric_Setup.iss'
+          $text=Get-Content -LiteralPath $iss -Raw
+          $text=$text.Replace('#define MyAppVersion "1.8.9.136"', '#define MyAppVersion "1.8.9.137"')
+          $text=$text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.136"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra12_RC2"')
+          $text=$text.Replace('#define MyOutputBase "LimbusLyric_Setup_1.8.9.137"', '#define MyOutputBase "LimbusLyric_Setup_1.8.9.137_infra12_RC2"')
+          Set-Content -LiteralPath $iss -Value $text -Encoding utf8
+          $spec='installer/LimbusLyric.spec'
+          $s=Get-Content -LiteralPath $spec -Raw
+          $s=$s.Replace('1.8.9.136 translation state test','1.8.9.137 infra12 RC2')
+          Set-Content -LiteralPath $spec -Value $s -Encoding utf8
+          Select-String -LiteralPath $iss -Pattern 'MyAppVersion|MyOutputBase'
+
+      - name: Install build dependencies
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements_core.txt
+          python -m pip install -r requirements_optional_sync.txt
+          python -m pip install -r requirements_word_timing_optional.txt
+          python -m pip install -r requirements_audio_emphasis_optional.txt
+          python -m pip install -r requirements_netease_native.txt
+          python -m pip install -r installer/requirements_build.txt
+          python installer/VERIFY_BUILD_RUNTIME_PROFILE.py
+
+      - name: Freeze exact infra12 application
+        shell: pwsh
+        run: |
+          $env:LIMBUSLYRIC_SOURCE_ROOT=(Get-Location).Path
+          python -m PyInstaller --noconfirm --clean --distpath dist --workpath .pyinstaller_work installer/LimbusLyric.spec
+          if (!(Test-Path 'dist/LimbusLyric/LimbusLyric.exe')) { throw 'PyInstaller output missing' }
+          Copy-Item OPEN_LOG_FOLDER.cmd dist/LimbusLyric/OPEN_LOG_FOLDER.cmd -Force
+          Copy-Item README_DIAGNOSTIC_RC.txt dist/LimbusLyric/README_DIAGNOSTIC_RC.txt -Force
+          python -m pip freeze | Set-Content -LiteralPath dist/LimbusLyric/PYTHON_PACKAGES_BUILD.txt -Encoding ascii
+          @(
+            'LimbusLyric 1.8.9.137 infra12 RC2',
+            ('Built=' + (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')),
+            'BetterNCMBundled=0',
+            'NetEaseNativeDefault=1',
+            'BuildMode=targeted-regressions+frozen-smoke',
+            'MainSourceSHA256=dae802aa16277059420bc2f4ed91743d0ef47123d2bcd7783aebc4df7793b291'
+          ) | Set-Content -LiteralPath dist/LimbusLyric/BUILD_INFO.txt -Encoding ascii
+
+      - name: Frozen runtime smoke test
+        shell: pwsh
+        run: |
+          $smoke=(Resolve-Path installer).Path + '\PACKAGING_SMOKE_RESULT_INFRA12_RC2.txt'
+          if (Test-Path $smoke) { Remove-Item -Force $smoke }
+          $env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT=$smoke
+          $proc=Start-Process -FilePath '.\dist\LimbusLyric\LimbusLyric.exe' -ArgumentList '--packaging-smoke-test' -Wait -PassThru
+          $ec=$proc.ExitCode
+          Remove-Item Env:LIMBUSLYRIC_PACKAGING_SMOKE_RESULT -ErrorAction SilentlyContinue
+          if (!(Test-Path $smoke)) { throw 'Smoke result file missing' }
+          Get-Content $smoke
+          if ($ec -ne 0) { throw "Frozen smoke exit code $ec" }
+          if ((Get-Content $smoke -Raw) -match '(?m)^FAIL ') { throw 'Frozen smoke reported FAIL' }
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup -y --no-progress
+
+      - name: Build RC2 Setup
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path installer/release -Force | Out-Null
+          $cmd=Get-Command ISCC.exe -ErrorAction SilentlyContinue
+          $iscc=if ($cmd) { $cmd.Source } else { $null }
+          if (!$iscc) {
+            $iscc=@(
+              "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+              "${env:ProgramFiles(x86)}\Inno Setup 7\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 7\ISCC.exe",
+              "$env:ChocolateyInstall\bin\ISCC.exe"
+            ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          }
+          if (!$iscc) { throw 'ISCC.exe not found' }
+          & $iscc installer/LimbusLyric_Setup.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
+          $out='installer/release/LimbusLyric_Setup_1.8.9.137_infra12_RC2.exe'
+          if (!(Test-Path $out)) { throw 'Setup output missing' }
+          $h=(Get-FileHash -LiteralPath $out -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$h  LimbusLyric_Setup_1.8.9.137_infra12_RC2.exe" | Set-Content -LiteralPath ($out+'.sha256.txt') -Encoding ascii
+          Write-Host "SETUP_SHA256=$h"
+
+      - name: Upload RC2 installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LimbusLyric-v1.8.9.137-infra12-RC2
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            installer/release/LimbusLyric_Setup_1.8.9.137_infra12_RC2.exe
+            installer/release/LimbusLyric_Setup_1.8.9.137_infra12_RC2.exe.sha256.txt
+            installer/PACKAGING_SMOKE_RESULT_INFRA12_RC2.txt
+            dist/LimbusLyric/BUILD_INFO.txt

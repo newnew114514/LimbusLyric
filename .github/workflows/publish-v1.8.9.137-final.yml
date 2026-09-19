@@ -179,6 +179,20 @@ jobs:
               s=s.replace(marker,
                   "    # v137 infra11: strict NetEase title identity reviewed from field log.\n"
                   "    'LyricSearchEngine.search_netease',\n"+marker)
+
+          # These two functions were already explicitly reviewed in the v137 release-prep
+          # baseline; main still had the older allow-list even though the function hashes were
+          # already the newer reviewed bytes.
+          if s.count("'LyricFetcher._split_title'") == 1:
+              anchor="    'ControlPanel._refetch_loaded_track_for_mode_switch',"
+              s=s.replace(anchor, anchor+"\n"
+                  "    # V137 title parser hardening is covered by CHECK_V137_TRACK_TITLE_PARSER.py.\n"
+                  "    'LyricFetcher._split_title',")
+          if s.count("'_advance_living_shake'") == 1:
+              anchor="    '_render_song_atlas_glyph',"
+              s=s.replace(anchor, anchor+"\n"
+                  "    # v137 presentation-only shake/tremble branch is covered by its dedicated replay.\n"
+                  "    '_advance_living_shake',")
           p.write_text(s,encoding='utf-8')
 
           p=Path('installer/CHECK_MAIN_SOURCE_LOCK.py')
